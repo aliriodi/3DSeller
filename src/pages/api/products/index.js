@@ -13,18 +13,28 @@ export default async function handler(req, res) {
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     origin: '*',
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
- });
+  });
   //todo poner try catch a todos no olvidar
   const { method, body } = req
   switch (method) {
     case "GET":
-      const product = await Product.find({})
-      return res.status(200).json(product)
+      try {
+        const product = await Product.find({})
+        return res.status(200).json(product)
+      } catch (error) {
+        console.log("🚀 ~ file: index.js:25 ~ handler ~ error", error)
+      }
 
     case "POST":
-      console.log(body);
-      const data = await Product.create(body)
-      return res.status(201).json(data)
+      try {
+        console.log(body);
+        const data = await Product.create(body)
+        return res.status(201).json(data)
+      } catch (error) {
+        console.log("🚀 ~ file: index.js:33 ~ handler ~ error", error)
+
+      }
+
 
 
     default:
