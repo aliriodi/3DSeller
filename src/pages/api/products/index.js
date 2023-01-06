@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     // Options
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     origin: '*',
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+    optionsSuccessStatus: 200 || 201, // some legacy browsers (IE11, various SmartTVs) choke on 204
   });
   //todo poner try catch a todos no olvidar
   const { method, body } = req

@@ -17,7 +17,7 @@ function Nav() {
             <a href="/" className="item">Contact</a>
             <a href="/" className="item">Archive</a>
             <a href="/" className="item">Resource</a>
-            <a href="/" className="item">Help</a>
+            <a href="/createP" className="item">Crear Producto</a>
             </div>
     </div>
   )
