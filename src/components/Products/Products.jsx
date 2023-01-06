@@ -5,12 +5,13 @@ import Vcard from "../Vcard/Vcard";
 
 function Products() {
   const dispatch = useDispatch();
-  const { products } = useSelector(state => state.products);
-  
   useEffect(() => {
     dispatch(getProducts());
     // eslint-disable-next-line
   }, [dispatch]);
+  const { products } = useSelector(state => state.products);
+  
+ 
 
   const productos = () => {
     if (search !== "") {
