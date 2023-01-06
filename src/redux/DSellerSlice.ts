@@ -32,7 +32,7 @@ export const DSellerSlice = createSlice ({
     }
   }
 })
-
+ 
 export const {getAllProducts , getProductById , postCreateProductS} = DSellerSlice.actions;
 
 export default DSellerSlice.reducer 
