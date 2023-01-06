@@ -6,7 +6,7 @@ import Vcard from "../Vcard/Vcard";
 function Products() {
   const dispatch = useDispatch();
   const { products } = useSelector(state => state.products);
-  console.log(products);
+  
   useEffect(() => {
     dispatch(getProducts());
     // eslint-disable-next-line
@@ -48,7 +48,7 @@ function Products() {
                   image={product3d.image}
                   category={product3d.category}
                   rating='4.3'
-                />
+                    />
               );
             })}
         </div>

@@ -9,8 +9,7 @@ export const  getProducts=  () => async (dispatch) => {
    }
 
 export const  getProductDet=  (id) => async (dispatch) => {
-       await fetch('')  
-     await  fetch('http://127.0.0.1:3001/api/products/'+id)
+     await  fetch('http://127.0.0.1:3000/api/products/'+id)
     .then(response=> response.json() )
     .then(myJson  => dispatch(getProductById( myJson )) )
     .catch(error => console.log(error));
