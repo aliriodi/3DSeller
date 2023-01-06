@@ -10,10 +10,9 @@ export default async (req, res) => {
     // Options
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     origin: '*',
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-  });
+    optionsSuccessStatus: 201, // some legacy browsers (IE11, various SmartTVs) choke on 204
+ });
   const { method, body, query: { id } } = req
-
 
   switch (method) {
     case "GET":
@@ -44,7 +43,7 @@ export default async (req, res) => {
 
     default:
       return res.status(400).json({
-        msg: 'This method is not spported'
+        msg: 'This method is not supported'
       });
   }
 }
