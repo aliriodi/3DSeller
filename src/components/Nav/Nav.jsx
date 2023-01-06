@@ -1,14 +1,14 @@
 import React from 'react'
 import { useRouter } from 'next/router';
 import Image from 'next/image'
-
+import logo from '../../public/Logo.png'
+import home from './house.png'
 
 function Nav() {
   const router = useRouter();
   return (
 
-  
-
+    
     <>
 		<header>
         {/* <!-- Nav -->  */}
@@ -32,7 +32,7 @@ function Nav() {
                 <a className="btn" id="bell-icon">Recursos</a>
             </div>
             <div className="nav-icons">
-                <a className="btn" id="bell-icon">Ayuda</a>
+                <a className="btn" onClick={()=>router.push('/createP')} id="bell-icon">Crear Producto</a>
 
             </div>
         </div>
