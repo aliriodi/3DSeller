@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router';
 import Image from 'next/image'
-import logo from '../../public/Logo.png'
+import logo from '../../public/logo.png'
 import home from './house.png'
 
 function Nav() {
