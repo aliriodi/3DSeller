@@ -10,9 +10,11 @@ function CardDetail() {
   const {id} = router.query;
   const  productsDetail  =  useSelector(state => state.products.detail);  
   useEffect(() => {
-    dispatch(getProductDet(id));
+    if(router.isReady){ 
+      dispatch(getProductDet(id))
+    };
     // eslint-disable-next-line
-  }, [dispatch]);
+  }, [id]);
   
 
   return (
