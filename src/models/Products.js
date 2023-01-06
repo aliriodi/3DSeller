@@ -32,6 +32,15 @@ const ProductsScheme = new Schema(
     rating: {
       type: Number,
     },
+    iduser: {
+      type: Number,
+    },
+    typeo: {
+      type: String,
+    },
+    material: {
+      type: [],
+    },
   },
   {
     timestamps: true,
