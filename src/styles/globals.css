@@ -477,3 +477,71 @@ body {
 	font-size: 1.3em;
 }
 /*////////// End Home //////////*/
+
+
+/*////////// Start NavBar //////////*/
+header{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+    padding: 0 20px;
+	background-color: var(--dark-color);
+	z-index: 100;
+	box-shadow: -20px 0px 80px #1119;
+}
+/* Nav  */
+.nav{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 19px 0;
+}
+
+/*  Logo  */
+.nav-logo{
+	font-size: 1.6rem;
+	font-weight: 600;
+  align-items: center;
+	color: var(--main-color);
+	text-transform: uppercase;
+	margin: 0 auto 0 58px;
+  cursor: pointer;
+}
+.nav-logo_img{
+  width: 58px;
+  height: 58px;
+  left: 20px;
+  top: 10px;
+  position: absolute;
+}
+.nav-logo .span1{
+	color: var(--text-color);
+}
+.nav-logo .span2{
+	color: var(--light-color);
+}
+
+/* Nav Icons */
+.nav-icons{
+	display: flex;
+	align-items: center;
+	column-gap: 1rem;
+}
+.nav-icons .btn{
+	font-size: 20px;
+	font-weight: 500;
+	height: 44px;
+	padding: 0 20px;
+	display: grid;
+	place-items: center;
+	color: var(--text-color);
+	border-radius: 4px;
+	cursor: pointer;
+	transition:  0.3s;
+}
+.nav-icons .btn:hover{
+	color: var(--dark-color);
+	background-color: var(--main-color);
+}
+/*////////// End NavBar //////////*/
