@@ -1,12 +1,17 @@
 import React from 'react'
 import { useRouter } from 'next/router';
 import Image from 'next/image'
+
 import logo from '../../public/logo.png'
 import home from './house.png'
 
+
+
 function Nav() {
-  const router = useRouter();
-  return (
+    const router = useRouter();
+    return (
+
+
 
     
     <>
@@ -33,12 +38,11 @@ function Nav() {
             </div>
             <div className="nav-icons">
                 <a className="btn" onClick={()=>router.push('/createP')} id="bell-icon">Crear Producto</a>
-
-            </div>
-        </div>
+                    </div>
+                </div>
             </header>
-		</>
+        </>
         // * </div></div> 
-  )
-} 
+    )
+}
 export default Nav
