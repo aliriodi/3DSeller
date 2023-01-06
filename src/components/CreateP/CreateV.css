@@ -1,0 +1,137 @@
+.avgwrapper {
+    width: 800px;
+    margin:2% auto;
+}
+
+h1 {
+    color:rgb(8, 7, 8);
+    position: relative;
+    margin:0px;
+}
+.formarea {
+  display:flex;
+  background: rgb(13, 159, 179);
+  border-radius: 25px;
+  padding: 1.9em;
+  margin-top: 30px;
+/*  border-radius:80%; */
+  border: 3px solid rgb(12, 76, 173);
+  box-shadow:4px 3px 6px 2px rgb(41, 233, 240); 
+}
+h3{
+    margin: 0px;
+    color: #fff;
+}
+
+.msgarea{
+    display:flex;
+    flex-direction: column;
+    order: 2;
+}
+
+.msgarea > textarea {
+    flex: 1;
+    min-width: 18em;
+    background: transparent;
+    color: #fff;
+    padding: 15px;
+    border: 2px solid white;
+    font-size: 18px;
+}
+
+.detailsarea {
+    flex: 1;
+    order: 1;
+    margin-right: 2em;
+}
+
+.detailsarea input {
+    width: 100%;
+    background: transparent; 
+    color: #fff;
+    border-radius: 40px;
+    border: 2px solid white;
+    font-size: 20px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+.detailsarea input,
+
+label {
+    color: #fff;
+    line-height: 30px;
+    font-family: Audiowide;
+}
+
+ul {
+    color: #fff;
+}
+.bot {
+    background-color:olive;
+    color: whitesmoke;
+    padding-top: 1px;
+    cursor: pointer;
+    text-align: center;
+    padding: 8px 24px;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+    width: 150px;
+    align-self:flex-end;
+}
+.bot:hover {
+    background-color:rgb(190, 190, 64);
+    color: black; 
+}
+.bot2 {
+    background-color:rgb(185, 135, 28);
+    color: whitesmoke;
+    padding-top: 1px;
+    cursor: pointer;
+    text-align: center;
+    padding: 8px 24px;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+.bot2:hover {
+    background-color:rgb(238, 205, 135);
+    color: black; 
+}
+
+ul {
+    list-style-type: none;
+}
+
+.error {
+    border: 3px solid red;
+    color:rgb(145, 6, 34);
+}
+
+
+nav {
+    width: 100%;
+    max-width: 2000px;
+    height: 7vh;
+    min-height: 60px;
+    padding-top: 8px;
+    padding-bottom: 20px;
+    padding-right: 280px;
+    background-color: inherit;
+    color: rgba(255, 255, 255);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items:center;
+    background-color: rgb(8, 8, 8);
+  }
+  nav .logo2 {
+    padding-right: 422px;
+    font-size: 38px;
+    letter-spacing: 5px;
+  }
+  .navList2 {
+    font-size: 17px;
+    padding-right: 185px;
+    text-transform: uppercase;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }

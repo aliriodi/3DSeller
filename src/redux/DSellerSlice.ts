@@ -1,16 +1,18 @@
 import { createSlice} from "@reduxjs/toolkit";
-import type { PayloadAction } from '@reduxjs/toolkit'
+//import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface DSellerStateProucts {
   products: object,
   count:number,
-  detail:object
+  detail:object,
+  newProduct: object,
 }
 
 const initialState: DSellerStateProucts = {
   products:[],
   count:0,
-  detail:{}
+  detail:{},
+  newProduct: {}
 }
 export const DSellerSlice = createSlice ({
          name: "products",
@@ -24,10 +26,13 @@ export const DSellerSlice = createSlice ({
     getProductById: (state,action)=>{
         state.detail = action.payload,
         state.count = action.payload._id? 1:0;
+    },
+    postCreateProductS:(state,action)=>{
+        state.newProduct = action.payload
     }
   }
 })
 
-export const {getAllProducts , getProductById} = DSellerSlice.actions;
+export const {getAllProducts , getProductById , postCreateProductS} = DSellerSlice.actions;
 
 export default DSellerSlice.reducer 

@@ -23,14 +23,16 @@ function CardDetail() {
        
     //    </div>
        
-    //    <div className="detail-image"><img  className="imageVcard" src={productsDetail.image}  alt=""/> </div>
-    //    <div className="detail-name"><strong>Nombre:</strong> {' '+productsDetail.name} </div>
-    //    <div className="detail-stock"><strong>Rating:</strong> {productsDetail.rating?productsDetail.rating:'4.3'}</div>
-    //    <div className="detail-stock"><strong>Stock:</strong> {productsDetail.stock}</div>
-    //    <div className="detail-stock"><strong>Precio:</strong> {productsDetail.price}</div>
-    //    <div className="description"><strong>Descripcion:</strong> {' '+productsDetail.description}</div>
-    //    <div className="description"><strong>Categoria:</strong> {' '+productsDetail.category}</div>
-    // </div>
+
+       <div className="imageDetail"><img  className="imageVcard" src={productsDetail.image?productsDetail.image:'http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FLogo.1c0eb044.jpeg&w=1080&q=75'}  alt=""/> </div>
+       <div className="stockDetail"><strong>Rating:</strong> {productsDetail.rating?productsDetail.rating:'4.3'}</div>
+       <div className="stockDetail"><strong>Stock:</strong> {productsDetail.stock}</div>
+       <div className="stockDetail"><strong>Precio:</strong> {productsDetail.price}</div>
+       <div className="NameDetail"><strong>Nombre:</strong> {' '+productsDetail.name} </div>
+       <div className="Description"><strong>Descripcion:</strong> {' '+productsDetail.description}</div>
+       <div className="Description"><strong>Categoria:</strong> {' '+productsDetail.category}</div>
+    </div>
+
     <>
                        <div className={`detail-content`}>
 
@@ -80,6 +82,7 @@ function CardDetail() {
                                 </div>
                                </div>
                   </>
+
   )
 }
 

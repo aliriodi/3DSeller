@@ -2,8 +2,9 @@ import Head from 'next/head'
 // import Image from 'next/image'
 // import { Inter } from '@next/font/google'
 // import styles from '../styles/Home.module.css'
+
 import Products from '../components/Products/Products'
-function Home() {
+function Products1() {
 
   return (
     <div>
@@ -15,4 +16,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Products1
