@@ -6,19 +6,14 @@ import Product from 'models/Products'
 dbConect();
 
 export default async (req, res) => {
-  
-  const { method, body, query: { id } } = req
-
-
-  //todo poner try catch a todos no olvidar
   await NextCors(req, res, {
     // Options
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     origin: '*',
-
     optionsSuccessStatus: 201, // some legacy browsers (IE11, various SmartTVs) choke on 204
  });
   const { method, body, query: { id } } = req
+
   switch (method) {
     case "GET":
       try {
