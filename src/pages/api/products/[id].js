@@ -15,22 +15,36 @@ export default async (req, res) => {
     // Options
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     origin: '*',
+
     optionsSuccessStatus: 201, // some legacy browsers (IE11, various SmartTVs) choke on 204
  });
+  const { method, body, query: { id } } = req
   switch (method) {
     case "GET":
-      const dataId = await Product.findById(id)
-      return res.status(201).json(dataId)
+      try {
+        const dataId = await Product.findById(id)
+        return res.status(201).json(dataId)
+      } catch (error) {
+        console.log("🚀 ~ file: [id].js:26 ~ error", error)
+      }
 
     case "PUT":
-      const dataPut = await Product.findByIdAndUpdate(id, body, {
-        new: true
-      })
-      return res.status(201).json(dataPut)
+      try {
+        const dataPut = await Product.findByIdAndUpdate(id, body, { new: true })
+        return res.status(201).json(dataPut)
+      } catch (error) {
+        console.log("🚀 ~ file: [id].js:34 ~ error", error)
+      }
+
 
     case "DELETE":
-      const dataDel = await Product.deleteOne({ _id: id })
-      return res.status(201).json(dataDel)
+      try {
+        const dataDel = await Product.deleteOne({ _id: id })
+        return res.status(201).json(dataDel)
+      } catch (error) {
+        console.log("🚀 ~ file: [id].js:43 ~ error", error)
+      }
+
 
     default:
       return res.status(400).json({
