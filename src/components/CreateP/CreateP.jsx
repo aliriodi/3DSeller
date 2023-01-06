@@ -84,7 +84,7 @@ function validate(input) {
             material: '',
             //genres: ''
                  })
-                 
+                  
         // history.push('/productos')
         
       }
