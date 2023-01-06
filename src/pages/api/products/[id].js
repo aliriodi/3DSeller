@@ -15,8 +15,6 @@ export default async (req, res) => {
   const { method, body, query: { id } } = req
 
 
-  //todo poner try catch a todos no olvidar
-
   switch (method) {
     case "GET":
       try {
