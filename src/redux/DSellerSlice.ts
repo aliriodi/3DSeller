@@ -22,7 +22,8 @@ export const DSellerSlice = createSlice ({
         state.count = action.payload.length
     },
     getProductById: (state,action)=>{
-        state.detail = action.payload
+        state.detail = action.payload,
+        state.count = action.payload._id? 1:0;
     }
   }
 })
