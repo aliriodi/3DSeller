@@ -34,19 +34,19 @@ function Nav() {
                 </a>
             {/* <!-- Nav Icons --> */}
             <div className="nav-icons">
-                <a className="btn" id="bell-icon" onClick={()=>router.push('/productos')}>productos</a>
+                <a className="btn" id="bell-icon" onClick={()=>router.push('/productos')}>Productos</a>
             </div>
             <div className="nav-icons">
-                <a className="btn" id="bell-icon">Contact</a>
+                <a className="btn" id="bell-icon">Contacto</a>
             </div>
             <div className="nav-icons">
-                <a className="btn" id="bell-icon">Archive</a>
+                <a className="btn" id="bell-icon">Archivo</a>
             </div>
             <div className="nav-icons">
-                <a className="btn" id="bell-icon">Resource</a>
+                <a className="btn" id="bell-icon">Recursos</a>
             </div>
             <div className="nav-icons">
-                <a className="btn" id="bell-icon">Help</a>
+                <a className="btn" id="bell-icon">Ayuda</a>
             </div>
         </div>
             </header>
