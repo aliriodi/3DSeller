@@ -3,9 +3,12 @@ import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 //import {  useHistory } from 'react-router-dom';
 import {postCreateProduct,getProducts } from '../../redux/DSellerActions';
-
+import { useRouter } from 'next/router';
 
 export default function CreateP() {
+   
+
+
     const dispatch = useDispatch()
     //const history = useHistory()
     const [input,setInput] = useState({
