@@ -8,7 +8,8 @@
       3. Redux + @reduxjs/toolkit
       4. Nextjs 
       5. MongoDB
-      6. 
+      6. Deplyment con vercel      
+      https://3dseller.vercel.app
       
 ## Boilerplate
 
