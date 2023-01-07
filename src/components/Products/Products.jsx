@@ -49,7 +49,7 @@ function Products() {
             value={search}
             onChange={onSearchChange}
              />
-             <button>BUSCAR</button>
+             {/* <button>BUSCAR</button> */}
             </div>
         </div>
 
