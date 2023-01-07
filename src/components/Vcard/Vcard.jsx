@@ -2,6 +2,8 @@ import React  from 'react'
 
 export default function Vcard(props) {
   return (
+    /// Anterior version de la Card ///
+    //
     // <div className="card">
     //    <h4 className="cardTitle">{props.name}</h4>
     //    {props.image?<a href={`/productos/${props.id}`}>
@@ -12,16 +14,13 @@ export default function Vcard(props) {
 
     <a a href={`/productos/${props.id}`}>
       <div className="card" key={props.key}>
-    <img src ={!props.image?null:props.image}/>
-    <div className="card_text">
-    <h3>{props.name}</h3>
-    <b>Rating: {props.rating}</b>
-    <b>Categoria: {props.category}</b>
-    {/* <div className="card_text-type">
-      <p>{props.category}</p>
-    </div> */}
-    </div>
-    </div>
+        <img src ={!props.image?null:props.image}/>
+        <div className="card_text">
+          <h3>{props.name}</h3>
+          <b>Rating: {props.rating}</b>
+          <b>Categoria: {props.category}</b>
+        </div>
+      </div>
     </a>
   )
 }
