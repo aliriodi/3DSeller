@@ -28,8 +28,10 @@ function Products() {
   };
 
   return (
-    <div>
-      <div className="container0">
+    <>
+      <div className="products-container">
+        {/*
+        ///Anterior version de la Search Bar///
         <div>
           <input
             type="text"
@@ -37,10 +39,26 @@ function Products() {
             value={search}
             onChange={onSearchChange}
           />
+        </div> */}
+
+        <div className={`input-container`}>
+            <div className="input-box">
+             <input 
+            type="text"
+            placeholder="Busca tu producto"
+            value={search}
+            onChange={onSearchChange}
+             />
+             {/* <button>BUSCAR</button> */}
+            </div>
         </div>
-        <div className="flex-container">
+
+
+        {/* Cards Container */}
+        <div className="container-cards">
+          {/* Cards */}
           {productos() &&
-            productos().map((product3d) => {
+          productos().map((product3d) => {
               return (
                 <Vcard
                   key={product3d.name}
@@ -48,13 +66,13 @@ function Products() {
                   name={product3d.name}
                   image={product3d.image}
                   category={product3d.category}
-                  rating='4.3'
+                  rating={product3d.category}
                     />
               );
             })}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
