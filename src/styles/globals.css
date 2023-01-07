@@ -636,3 +636,126 @@ header{
   border-radius: 10px;
 }
 /*////////// End Detail //////////*/
+
+
+/*////////// Start Products //////////*/
+.products-container{
+	margin-top: 150px;
+}
+
+/* Search Bar */
+.input-container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 50px 0;
+}
+.input-box{
+	position: relative;
+	height: 76px;
+	max-width: 900px;
+	width: 100%;
+	background: #fff;
+	border-radius: 50px;
+	box-shadow: 5px 5px 20px #1116;
+}
+.input-box input{
+	height: 100%;
+	width: 100%;
+	outline: none;
+  color: var(--dark-color);
+	font-size: 18px;
+	font-weight: 400;
+	border: none;
+	padding: 0 155px 0 65px;
+	background-color: transparent;
+}
+.input-box button{
+	position: absolute;
+	cursor: pointer;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 20px;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 12px 30px;
+	border-radius: 50px;
+	color: var(--text-color);
+	border:none;
+	background-color: var(--main-color);
+}
+
+/* Gallery */
+.container-cards{
+	display: flex;
+	width: 90%;
+	margin: 9px auto;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.card{
+	position:relative;
+	height: 300px;
+	max-width: 300px;
+	margin: 30px;
+	overflow: hidden;
+	display: block;
+	flex-basis: 100%;
+	box-shadow: 5px 5px 20px #1116;
+	border-radius: 10px;
+    background-color: var(--main-color);
+}
+
+.card img{
+  height: 100%;
+object-fit: fill;
+}
+.card_text{
+height: 200px;
+width: 300px;
+padding:  18px;
+background-color: #1119;
+box-sizing: border-box;
+position: absolute;
+top: 248px;
+transition: 0.3s;
+}
+
+.card_text h3{
+text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.card_text b{
+  color: var(--main-color);
+  display: block;
+  padding: 0 0 2px 0;
+}
+.card_text .card_text-type{
+display: flex;
+  width: 90%;
+  margin: 0 9px;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+.card_text .card_text-type p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--dark-color);
+  padding: 0.2rem 0.4rem;
+  margin: 0.2rem 0.2rem 0 0;
+  font-weight: 500;
+  border-radius: 9999px;
+}
+.card_text span{
+color: var(--light-color);
+}
+
+.card:hover{
+cursor: pointer;
+}
+
+.card:hover .card_text{
+top: 150px;
+}
