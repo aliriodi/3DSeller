@@ -8,7 +8,7 @@ import home from './house.png'
 
 function Nav() {
     return (
-            
+
     <>
 		<header>
         {/* <!-- Nav -->  */}
@@ -37,7 +37,7 @@ function Nav() {
                 </Link>
             </div>
             <div className="nav-icons">
-                <Link href={"/recursos"}>
+                <Link href={"/recursos"} legacyBehavior>
                 <a className="btn" id="bell-icon">Recursos</a>
                 </Link>
             </div>
