@@ -23,8 +23,8 @@ function Products() {
   };
 
   const [search, setSearch] = useState("");
-  const onSearchChange = ({ target }) => {
-    setSearch(target.value);
+  const onSearchChange = () => {
+    setSearch(document.getElementById("sBar").value);
   };
 
   return (
@@ -33,10 +33,15 @@ function Products() {
         <div>
           <input
             type="text"
-            placeholder="Busca tu producto"
-            value={search}
-            onChange={onSearchChange}
+            placeholder="Ingeresa el nombre del producto"
+            id="sBar"
           />
+          <input type={"button"}
+          value={"Buscar"}
+          onClick={onSearchChange}
+          
+          />
+
         </div>
         <div className="flex-container">
           {productos() &&
