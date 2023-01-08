@@ -11,7 +11,8 @@ function Products() {
     // eslint-disable-next-line
   }, [dispatch]);
   const { products } = useSelector(state => state.products);
-   console.log(products)
+
+//console.log(objetos(set))
     
   const productos = () => {
     if(orden === 2) return render
@@ -23,21 +24,40 @@ function Products() {
     } else return products;
   };
 
+  // El orden 0 es el que tiene la pagina por default al entrar en el componente, habilitarlo permite realizar un "reset" 
+  //comodo para el usuario
   const [orden, setOrden] = useState(0);
-
-  const [render,setRender]= useState("")
-
+  const resetRqst = () =>{
+    setOrden(0)
+  }
+    
+  // Estos son los estados locales que guardan la informacion de la Search Bar
   const [search, setSearch] = useState("");
   const onSearchChange = () => {
     setOrden(0)
     setSearch(document.getElementById("sBar").value);
   };
-
+  
+  // Este es el manejador de Set que controla el Render cuando se hace algun filtro
+const [render,setRender]= useState("")
 const handleSelectChanges = ({value}) =>{
-   const filtrados = products.filter((item)=> item.category.includes(value[0]))
+   const filtrados = products.filter((item)=> item.category.includes(value))
    setOrden(2)
    setRender(filtrados)
 }
+
+// Las siguientes lineas de codigo dan el formato para las opciones del Select
+const oneArray = products.reduce(function (allCategories, item){return [...allCategories, ...item.category]},[])
+const set = Array.from(new Set(oneArray))
+const objetos = function(arr){
+  let newarr = []
+  for (let i = 0; i < arr.length;i++){
+    newarr.push({label:arr[i],value:arr[i]})
+  }
+  return newarr
+}
+//________________________________________________________________________________________
+
 
   return (
     <>
@@ -99,12 +119,15 @@ const handleSelectChanges = ({value}) =>{
             </div>
         </div>
 
+<div>
+  <button onClick={resetRqst}>Reset</button>
+</div>
         {/* Filter */}
         <div>            
           <Select
           className="react-select-container"
           classNamePrefix="react-select"
-          options={products.map((p)=>({label: p.category, value: p.category}))}
+          options={objetos(set)}
           onChange={ handleSelectChanges}/>
         </div>
 
