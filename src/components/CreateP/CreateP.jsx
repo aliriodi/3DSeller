@@ -5,6 +5,7 @@ import { useDispatch, useSelector  } from 'react-redux';
 import {postCreateProduct,getProducts } from '../../redux/DSellerActions';
 import { useRouter } from 'next/router';
 
+
 export default function CreateP() {
    
 
