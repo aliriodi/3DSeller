@@ -675,7 +675,7 @@ header{
 .react-select-container{
 	justify-content: center;
 	box-shadow: 5px 5px 20px #1116;
-  margin: 0 auto;
+  margin: 30px auto;
   border: none;
 	width: 25%;
 }

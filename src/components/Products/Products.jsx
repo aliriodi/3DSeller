@@ -87,7 +87,8 @@ const handleSelectChanges = ({value}) =>{
       </div>
     </div> */}
 
-    {/* /////////////// */}
+    <div className={"products-container"}>
+
     {/* Search bar */}
     <div className={`input-container`}>
             <div className="input-box">
@@ -132,7 +133,7 @@ const handleSelectChanges = ({value}) =>{
             alt="imagen de carga"
             />}
         </div>
-      
+    </div>
     </>
   );
 }
