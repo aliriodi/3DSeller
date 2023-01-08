@@ -50,7 +50,7 @@ function Products() {
             <div className="input-box">
           <input
             type="text"
-            placeholder="Ingeresa el nombre del producto"
+            placeholder="Ingresa el nombre del producto"
             id="sBar"
           />
              <button onClick={onSearchChange}>BUSCAR</button> 
