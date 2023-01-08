@@ -72,7 +72,7 @@ const handleSelectChanges = ({value}) =>{
                   name={product3d.name}
                   image={product3d.image}
                   category={product3d.category}
-                  rating='4.3'
+                  rating={product3d.rating}
                     />
               );
             }):
