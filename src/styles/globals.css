@@ -466,31 +466,6 @@ body {
 /*////////// End Home //////////*/
 
 
-/* Start FORM    */
-.addProduct{
-  color: white;
-}
-.NombreF{
-  color: black;
-}
-.DescriptionF{
-  color: black;
-}
-.RatingF{
-  color: black;
-}
-.MaterialF{
-  color: black;
-}
-.MaterialF1{
-  color:white;
-}
-.ButtonF{
-  color: black;
-}
-/*////////  END FORM ///////////*/
-
-
 /*////////// Start NavBar //////////*/
 header{
 	position: fixed;
@@ -573,7 +548,6 @@ header{
 .detail-item{
   position: relative;
   overflow: hidden;
-  min-width: 475px;
   border-radius:12px;
 }
 
