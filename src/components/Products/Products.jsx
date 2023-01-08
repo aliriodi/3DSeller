@@ -31,7 +31,7 @@ function Products() {
     <>
       <div className="products-container">
         {/*
-        ///Anterior version de la Search Bar///
+        ///Anterior version de la Search Bar///*}
         <div>
           <input
             type="text"
