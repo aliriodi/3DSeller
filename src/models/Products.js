@@ -5,16 +5,16 @@ const ProductsScheme = new Schema(
   {
     name: {
       type: String,
-      requires: [true, 'Title is required'],
-      unique: true,
-      trim: true,
-      maxLength: [40, 'Title must be less than 40 characters']
+      // requires: [true, 'Title is required'],
+      // unique: true,
+      // trim: true,
+      // maxLength: [40, 'Title must be less than 40 characters']
     },
     description: {
       type: String,
-      required: true,
-      trim: true,
-      maxLength: [200, 'Title must be less than 200 characters']
+      // required: true,
+      // trim: true,
+      // maxLength: [200, 'Title must be less than 200 characters']
     },
     price: {
       type: Number,
