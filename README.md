@@ -2,13 +2,25 @@
 
 # 3DSeller 
 
+Esta es una aplicacion para administracion y ventas de articulos impresos en 3D, con base de datos de productos y administracion de equipos 3D con materiales y control de ventas, desarrollado por:
+
+1. Jose Valbuena    ( https://github.com/JoseVal25 )
+2. Mateo Cava       ( https://github.com/Matecava )
+3. Nahuel Escujuri  ( https://github.com/NahuelEscujuri )
+4. Hugo Reyes       ( https://github.com/Proteinovich )
+5. Hans Trauwitz    ( https://github.com/Vontrauwitz ) 
+6. Alirio Diaz      ( https://github.com/aliriodi )
+
+
 ### Tecnologias implementadas:
       1. Javascript + typescript
       2. React
       3. Redux + @reduxjs/toolkit
       4. Nextjs 
-      5. MongoDB
-      6. 
+      5. MongoDB + mongoose
+      6. Deployment con vercel
+      
+ ## https://3dseller.vercel.app
       
 ## Boilerplate
 

@@ -3,12 +3,25 @@ import imghc from '../../public/model3d.png';
 
 export default function Vcard(props) {
   return (
-    <div className="card">
-       <h4 className="cardTitle">{props.name}</h4>
-       {props.id?<a href={`/productos/${props.id}`}>
-      <img  className={props.name==="Alberto Presto Pronta"||props.name==="La Copa del Mundo"?'imageVcardAlberto':"imageVcard"} src={props.image?props.image:'http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FLogo.1c0eb044.jpeg&w=1080&q=75'}  alt=""/>  </a>:null}
-      <div className="cardRating">Rating ={' '+props.rating}</div>
-      <div className="cardCategory">Categoria ={' '+props.category}</div>
-    </div>
+    /// Anterior version de la Card ///
+    //
+    // <div className="card">
+    //    <h4 className="cardTitle">{props.name}</h4>
+    //    {props.image?<a href={`/productos/${props.id}`}>
+    //   <img  className={props.name==="Alberto Presto Pronta"||props.name==="La Copa del Mundo"?'imageVcardAlberto':"imageVcard"} src={props.image}  alt=""/>  </a>:null}
+    //   <div className="cardRating">Rating ={' '+props.rating}</div>
+    //   <div className="cardCategory">Categoria ={' '+props.category}</div>
+    // </div>
+
+    <a a href={`/productos/${props.id}`}>
+      <div className="card" key={props.key}>
+        <img src ={!props.image?null:props.image}/>
+        <div className="card_text">
+          <h3>{props.name}</h3>
+          <b>Rating: {props.rating}</b>
+          <b>Categoria: {props.category}</b>
+        </div>
+      </div>
+    </a>
   )
 }

@@ -96,27 +96,12 @@ body {
   overflow-x: hidden;
 }
 
-/* body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
-
-/* a {
-  color: inherit;
-  text-decoration: none;
-} */
-
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 }
-/**/
+
 .container0{
   display: flex;
   padding-top: 200px;
@@ -187,6 +172,9 @@ body {
   align-content: space-around;
   gap: 40px 10px;
 }
+
+
+/* Version anterior de Cards
 .card {
   display: block;
   border-radius: 10px;
@@ -198,18 +186,17 @@ body {
   border: 2px solid transparent;
   overflow: hidden;
 
-    }
-    .card:hover {
-      transition: all 0.1s ease-out;
-      box-shadow: 4px 4px 8px rgba(38, 38, 38, 0.2);
-      top: 4px;
-      border: 2px solid #cccccc;
-      /* background-image: radial-gradient(circle farthest-corner at center, rgba(36, 160, 237, 1) 10%, rgba(0, 134, 208, 1) 20%, rgba(0, 109, 181, 1) 30%, rgba(0, 85, 154, 1) 40%, rgba(0, 62, 127, 1) 50%, rgba(0, 41, 102, 1) 60%, rgba(0, 21, 77, 1) 70%, rgba(0, 5, 54, 1) 80%, rgba(0, 2, 31, 1) 90%, rgba(0, 0, 3, 1) 100%); */
-      /* background-image: radial-gradient(circle farthest-corner at center, rgba(255, 255, 0, 1) 10%, rgba(255, 255, 0, 1) 20%, rgba(255, 255, 0, 1) 30%, rgba(100, 180, 0, 1) 40%, rgba(140, 180, 0, 1) 50%, rgba(0, 41, 102, 1) 60%, rgba(0, 21, 77, 1) 70%, rgba(0, 5, 54, 1) 80%, rgba(0, 2, 31, 1) 90%, rgb(189, 228, 12) 100%); */
-      background-image: radial-gradient(closest-corner at 50% 50%, white, yellow, white);
-      background-color: rgba(250, 255, 100, 0.995); 
-      /* background-color: yellow;  */
-          }
+} 
+
+.card:hover {
+  transition: all 0.1s ease-out;
+  box-shadow: 4px 4px 8px rgba(38, 38, 38, 0.2);
+  top: 4px;
+  border: 2px solid #cccccc;
+  
+  background-image: radial-gradient(closest-corner at 50% 50%, white, yellow, white);
+  background-color: rgba(250, 255, 100, 0.995); 
+} */
          
 .cardTitle{
   text-align: center;
@@ -662,3 +649,126 @@ header{
 }
 /*////////// End Detail //////////*/
 
+
+/*////////// Start Products //////////*/
+.products-container{
+	margin-top: 150px;
+}
+
+/* Search Bar */
+.input-container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 50px 0;
+}
+.input-box{
+	position: relative;
+	height: 76px;
+	max-width: 900px;
+	width: 100%;
+	background: #fff;
+	border-radius: 50px;
+	box-shadow: 5px 5px 20px #1116;
+}
+.input-box input{
+	height: 100%;
+	width: 100%;
+	outline: none;
+  color: var(--dark-color);
+	font-size: 18px;
+	font-weight: 400;
+	border: none;
+	padding: 0 155px 0 65px;
+	background-color: transparent;
+}
+.input-box button{
+	position: absolute;
+	cursor: pointer;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 20px;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 12px 30px;
+	border-radius: 50px;
+	color: var(--text-color);
+	border:none;
+	background-color: var(--main-color);
+}
+
+/* Gallery */
+.container-cards{
+	display: flex;
+	width: 90%;
+	margin: 9px auto;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.card{
+	position:relative;
+	height: 300px;
+	width: 300px;
+	margin: 30px;
+	overflow: hidden;
+	display: block;
+	flex-basis: 100%;
+	box-shadow: 5px 5px 20px #1116;
+	border-radius: 10px;
+    background-color: var(--main-color);
+}
+
+.card img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.card_text{
+height: 200px;
+width: 100%;
+padding:  18px;
+background-color: #1119;
+box-sizing: border-box;
+position: absolute;
+top: 248px;
+transition: 0.3s;
+}
+
+.card_text h3{
+text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.card_text b{
+  color: var(--main-color);
+  display: block;
+  padding: 0 0 2px 0;
+}
+.card_text .card_text-type{
+display: flex;
+  width: 90%;
+  margin: 0 9px;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+.card_text .card_text-type p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--dark-color);
+  padding: 0.2rem 0.4rem;
+  margin: 0.2rem 0.2rem 0 0;
+  font-weight: 500;
+  border-radius: 9999px;
+}
+.card_text span{
+color: var(--light-color);
+}
+
+.card:hover{
+cursor: pointer;
+}
+
+.card:hover .card_text{
+top: 150px;
+}
