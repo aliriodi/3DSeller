@@ -671,6 +671,51 @@ header{
 	background-color: var(--main-color);
 }
 
+/* Selects */
+.react-select-container{
+	justify-content: center;
+	box-shadow: 5px 5px 20px #1116;
+  margin: 0 auto;
+  border: none;
+	width: 25%;
+}
+
+.react-select__control{
+  border-radius: 30px;
+  background-color: #f00;
+}
+
+.react-select__indicator{
+  background-color: var(--main-color);
+}
+
+.react-select__menu{
+	width: 25%;
+}
+.react-select__menu-list{
+  color: var(--dark-color);
+}
+.select-container{
+	margin-top: 20px;
+	justify-content: center;
+	display:flex;
+}
+
+.select{
+    display: flex;
+	border-radius: 5px;
+    background-color: var(--text-color);
+	margin: 50px 50px ;
+	justify-content: center;
+	padding: 10px;
+	border: none;
+	font-size: 15px;
+	box-shadow: 5px 5px 20px #1116;
+	-webkit-appearance: button;
+	outline: none;
+	cursor: pointer;
+}
+
 /* Gallery */
 .container-cards{
 	display: flex;

@@ -42,6 +42,8 @@ const handleSelectChanges = ({value}) =>{
 }
 
   return (
+    <>
+    {/* ANTERIOIR ESTRUCTURA DE PRODUCTS 
     <div>
       <div className="container0">
         <div>
@@ -83,7 +85,55 @@ const handleSelectChanges = ({value}) =>{
             />}
         </div>
       </div>
-    </div>
+    </div> */}
+
+    {/* /////////////// */}
+    {/* Search bar */}
+    <div className={`input-container`}>
+            <div className="input-box">
+          <input
+            type="text"
+            placeholder="Ingeresa el nombre del producto"
+            id="sBar"
+          />
+             <button onClick={onSearchChange}>BUSCAR</button> 
+            </div>
+        </div>
+
+        {/* Filter */}
+        <div>            
+          <Select
+          className="react-select-container"
+          classNamePrefix="react-select"
+          options={products.map((p)=>({label: p.category, value: p.category}))}
+          onChange={ handleSelectChanges}/>
+        </div>
+
+        {/* Cards Container */}
+        <div className="container-cards">
+
+          {/* Cards */}
+          {products.length > 0 ?
+            productos().map((product3d) => {
+              return (
+                <Vcard
+                  key={product3d.name}
+                  id={product3d._id}
+                  name={product3d.name}
+                  image={product3d.image}
+                  category={product3d.category}
+                  rating={product3d.rating}
+                    />
+              );
+            }):
+            <img
+            className="imagendecarga"
+            src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-18-223_512.gif"
+            alt="imagen de carga"
+            />}
+        </div>
+      
+    </>
   );
 }
 
