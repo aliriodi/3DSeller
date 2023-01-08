@@ -17,36 +17,49 @@ export default function CreateP() {
         description: '',
         rating:'',
         material:'',
-        image:'http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FLogo.1c0eb044.jpeg&w=1080&q=75'
+        image:'',
+        category:'',
+        stock:'',
+        price:200,
          })
     let [errors,setErrors] =  useState({name:true,
                                           description:true,
                                           rating:true,
-                                          material:true})
+                                          material:true,
+                                          category:true,
+                                          image:true,
+                                        stock:true,
+                                        price:true})
                             
     useEffect (() => { 
         dispatch(getProducts()); 
        // eslint-disable-next-line react-hooks/exhaustive-deps
         },[dispatch]);    
 
-
       
 function validate(input) {
     
-    input.name.length<5?errors.name = 'Nombre de producto requerido al menos 5 caracteres':
-    products.filter(product => product.name.toLowerCase()==input.name.toLowerCase()?errors.name='Producto Existe, cambie nombre':errors.name=false);
+    input.name.length<5?errors.name = 'Nombre de producto requerido al menos 5 caracteres':products.filter(product => product.name.toLowerCase()==input.name.toLowerCase()?errors.name='Producto Existe, cambie nombre':errors.name=false);
     //? errors.name=input.name:errors.name=console.log(input.name+' '+errors.name);
     input.description.length<10?
     errors.description = 'Descripcion es requerida al menos 10 caracteres':errors.description=false;
     (!input.rating || input.rating<0 || input.rating >5)?
      errors.rating = 'Rating debe ser un numero entre 0-5':errors.rating=false;
-    input.material.length===0?
+     (!input.stock || input.stock<1 || input.stock >10)?
+     errors.stock = 'Stock debe ser un numero entre 1-10 si desea incremenar este rango dirijase con Administracion de la empresa para autorizar requerimiento.':
+     errors.stock=false;
+     (!input.price || input.price<200 )?
+     errors.price = 'Precio debe ser un numero mayor de 200$ Arg' :
+     errors.price=false;
+     input.material.length===0?
     errors.material = 'Al menos un Material es requerido: ': errors.material=false;
-   
+    input.category.length===0?errors.category= 'Seleccione una categoria' : errors.category=false;
+    input.image.length<10? errors.image='No es una imagen URL':errors.image=false;
      return errors 
 }
  const products =  useSelector((state) => state.products.products)
- let materials = ["PLA","PETG", "HIPS","Nylon","TPE","Filamento Fibra de Carbono"]
+ let materials = ["PLA","PETG", "HIPS","Nylon","TPE","Filamento Fibra de Carbono"];
+ let category = ["Muneco","Mate","Accesorio","Ropa","Qatar 2022","Anime","other"]
      function handleOnChange(e) {
         setInput({
           ...input,
@@ -56,14 +69,29 @@ function validate(input) {
             ...input,[e.target.name]:e.target.value
         }))
      }
+
+     function handleOnChangeI(e) {
+        setInput({
+          ...input,
+          image:e.target.value
+            })
+      
+     }
      
      function handleMaterial(e) {
-        if(e.target.value!=0&& !input.material.includes(e.target.value)){
+        if(e.target.value!=0 && !input.material.includes(e.target.value)){
           setInput({
           ...input,
           material: input.material.length>0?input.material.concat(','+e.target.value):e.target.value
         })}
         } 
+        function handleCategory(e) {
+            if(e.target.value!=0 && !input.category.includes(e.target.value)){
+              setInput({
+              ...input,
+              category: e.target.value
+            })}
+            } 
 
  
     
@@ -86,7 +114,8 @@ function validate(input) {
             stock:'',
             category:'',
             material: '',
-            //genres: ''
+            image:'http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FLogo.1c0eb044.jpeg&w=1080&q=75',
+            price: 200
                  })
                   
         // history.push('/productos')
@@ -98,25 +127,42 @@ function validate(input) {
         <div  className="container0">
         <h1 className="addProduct">Agrega Nuevo Producto 3DSeller</h1>
             <form className="{stl.formarea}" onSubmit={handleSubmit}>
-           
+         <div className="Form">
             <div className="NombreF">
                     <label>Nombre:</label>
                     <input className="NombreF" onChange={handleOnChange} onBlur={handleOnChange} 
                         type='text' name='name' value={input.name}/>
                     {errors.name && ( <p className="{stl.error}"> {errors.name} </p> )}
-
+            </div>  
+            
+            <div className="ImageF">
+                    <label>Imagen:</label>
+                    <input className="ImagenF" onChange={handleOnChangeI} onBlur={handleOnChangeI} 
+                        type='text' name='image' value={input.image}/>
+                    {errors.image && ( <p className="{stl.error}"> {errors.image} </p> )}
+            </div>  
+            
                 <div className="{stl.msgarea}">
                     <label>Descripcion:</label>
                     <textarea  className="DescriptionF" onChange={handleOnChange} onBlur={handleOnChange} onFocus={handleOnChange}
                     type='text' name='description' value={input.description} />
                     {errors.description && ( <p className="{stl.error}"> {errors.description} </p> )}
                 </div>
-              
-           
+        
                     <label>Indice de Rating:</label>
                     <input  className="RatingF" onChange={handleOnChange} onBlur={handleOnChange} onFocus={handleOnChange}
                         type='number'  min="0" max="5" step="0.1" name='rating' value={input.rating} placeholder='ex 4.3'/>
-                    {errors.rating && ( <p className="{stl.error}"> {errors.rating} </p> )}     
+                    {errors.rating && ( <p className="{stl.error}"> {errors.rating} </p> )}    
+                    
+                    <label>Stock:</label>
+                    <input  className="StockF" onChange={handleOnChange} onBlur={handleOnChange} onFocus={handleOnChange}
+                        type='number'  min="1" max="10" step="1" name='stock' value={input.stock} placeholder='ex 1'/>
+                    {errors.stock && ( <p className="{stl.error}"> {errors.stock} </p> )}  
+
+                    <label>Precio en $Arg:</label>
+                    <input  className="PrecioF" onChange={handleOnChange} onBlur={handleOnChange} onFocus={handleOnChange}
+                        type='number'  min="100" step="100" name='price' value={input.price} placeholder='ex 3100'/>
+                    {errors.price && ( <p className="{stl.error}"> {errors.price} </p> )}   
 
                     <label>Materiales Posibles:</label>   
                     <select onChange={handleMaterial}  className="MaterialF" onBlur={handleOnChange} onFocus={handleOnChange}>
@@ -125,8 +171,15 @@ function validate(input) {
                            return  <option key={p} className="MaterialF" value={p}>{p}</option>
                         })}
                     </select >
-                    <ul  className="ul"><li >{input.material}</li></ul>
-                    {errors.material && ( <p className="MaterialF1"> {errors.material} </p> )}
+                    <label>Categoria:</label>   
+                    <select onChange={handleCategory}  className="CategoryF" onBlur={handleOnChange} onFocus={handleOnChange}>
+                         <option key='Category'  className="CategoryF" value={0}>==Categoria== </option>
+                        {category.sort().map(p => {
+                           return  <option key={p} className="CategoryF" value={p}>{p}</option>
+                        })}
+                    </select >
+                    <ul  className="ul"><li >{input.category}</li></ul>
+                    {errors.category && ( <p className="MaterialF1"> {errors.category} </p> )}
                     {console.log('input')}
                     {console.log(input)}
                     {console.log('error')}
@@ -135,7 +188,11 @@ function validate(input) {
                                        errors.platforms?true:false ||
                                        errors.description?true:false ||
                                        errors.rating?true:false||
-                                       errors.material?true:false
+                                       errors.material?true:false||
+                                       errors.category?true:false||
+                                       errors.image?true:false||
+                                       errors.stock?true:false ||
+                                       errors.precio?true:false
                                        } className="ButtonF" type='submit'>Agregar Producto</button> 
                     </div>
             </form>

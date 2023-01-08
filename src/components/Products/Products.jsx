@@ -11,10 +11,8 @@ function Products() {
     // eslint-disable-next-line
   }, [dispatch]);
   const { products } = useSelector(state => state.products);
-  console.log(products)
-  
- 
-
+   console.log(products)
+    
   const productos = () => {
     if(orden === 2) return render
     if (search !== "") {
@@ -67,12 +65,12 @@ const handleSelectChanges = ({value}) =>{
             productos().map((product3d) => {
               return (
                 <Vcard
-                  key={product3d.name}
+                  key={product3d._id}
                   id={product3d._id}
                   name={product3d.name}
                   image={product3d.image}
                   category={product3d.category}
-                  rating='4.3'
+                  rating={product3d.rating}
                     />
               );
             }):
