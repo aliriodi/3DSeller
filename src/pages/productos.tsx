@@ -8,7 +8,7 @@ function Products1() {
 
   return (
     <div>
-      <Head><title>3DSeller</title></Head>
+     
       
       <Products />
      
