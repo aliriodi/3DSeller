@@ -19,7 +19,7 @@ function Home() {
             <p>
                 Es su centro de producción de fabricación aditiva de piezas impresas en 3D. Con más de 30 materiales para cualquier aplicación, obtendrá las piezas que necesita con solo contratarnos.
             </p>
-            <a href={"#row-1"} className="btn-start">EMEPECEMOS</a>
+            <a href={"#row-1"} className="btn-start">EMPECEMOS</a>
         </div>
 
         {/* <!-- Banner Img --> */}
