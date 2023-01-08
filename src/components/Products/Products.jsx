@@ -32,23 +32,30 @@ function Products() {
       <div className="products-container">
         {/*
         Anterior version de la Search Bar
-        */}
+        
         <div>
           <input
             type="text"
             placeholder="Ingeresa el nombre del producto"
             id="sBar"
           />
-
           <input type={"button"}
           value={"Buscar"}
           onClick={onSearchChange}
-          
           />
-
-
         </div>
+        */}
 
+<div className={`input-container`}>
+            <div className="input-box">
+          <input
+            type="text"
+            placeholder="Ingeresa el nombre del producto"
+            id="sBar"
+          />
+             <button onClick={onSearchChange}>BUSCAR</button> 
+            </div>
+        </div>
 
         {/* Cards Container */}
         <div className="container-cards">
