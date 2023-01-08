@@ -89,6 +89,10 @@ list-style: none;
 text-decoration: none;
 }
 
+input{
+	color: var(--dark-color);
+}
+
 html,
 body {
   background-color: var(--dark-color);
