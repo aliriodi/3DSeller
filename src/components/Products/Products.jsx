@@ -144,25 +144,35 @@ const objetos = function(arr){
             </div>
         </div>
 
-<div className="react-Container-reset">
-  <button  className="react-select-reset" onClick={resetRqst}>Reset</button>
-</div>
-{/*Ordenamiento */}
-{/* <div className="order-container"> 
-<Select className="react-select-order"  onChange={e => {order1(e.value)}}  defaultValue={{label:'Ordenamientos...'}} options={[{label:'Asc. Nombre',value:'asc0'},{label:'Desc. Nombre',value:'desc0'},
-                                                                       {label:'Asc. Rating', value:'asc1'},{label:'Desc. Rating', value:'desc1'},
-                                                                       {label:'Asc. Precio', value:'asc2'},{label:'Desc. Precio', value:'desc2'}]} />
-                  
-</div> */}
-        {/* Filter */}
-        <div className="react-Container-reset2">            
+    {/* Selects */}
+        <div className="selects-container">
+
+          {/*Ordenamiento */}
+          <Select
+          className="react-select-container"
+          classNamePrefix="react-select"
+          onChange={e => {order1(e.value)}}
+          defaultValue={{label:'Ordenamientos...'}}
+          options={[{label:'Asc. Nombre',value:'asc0'},
+          {label:'Desc. Nombre',value:'desc0'},
+          {label:'Asc. Rating', value:'asc1'},
+          {label:'Desc. Rating', value:'desc1'},
+          {label:'Asc. Precio', value:'asc2'},
+          {label:'Desc. Precio', value:'desc2'}]}/>
+
+          {/* Filter */}
           <Select
           className="react-select-container"
           classNamePrefix="react-select"
           defaultValue={{label:'Filtro...'}}
           options={objetos(set)}
           onChange={ handleSelectChanges}/>
+          {/* btn-reset */}
+          <div className="btn-reset">
+            <button onClick={resetRqst}>Reset</button>
+          </div>
         </div>
+
 
         {/* Cards Container */}
         <div className="container-cards">
