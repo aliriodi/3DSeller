@@ -361,7 +361,17 @@ function validate(input) {
                                errors.stock?true:false ||
                                errors.precio?true:false
                             }
-                            className="btn-submit"
+                            className={`btn-submit ${
+                                errors.name?true:false ||
+                               errors.platforms?true:false ||
+                               errors.description?true:false ||
+                               errors.rating?true:false||
+                               errors.material?true:false||
+                               errors.category?true:false||
+                               errors.image?true:false||
+                               errors.stock?true:false ||
+                               errors.precio?true:false == true?"btn-disabled":null
+                            }`}
                             type='submit'>Agregar Producto</button>
 
 

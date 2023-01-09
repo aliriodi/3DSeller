@@ -984,6 +984,13 @@ border-color: var(--main-color);
   justify-content: center;
   align-items: center;
 }
+
+.true{
+  background-color: var(--light-color);
+  border-color: var(--light-color);
+  pointer-events: none;
+}
+
 .error-text{
   color: #f00;
   margin: 8px 0;
