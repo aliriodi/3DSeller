@@ -120,7 +120,7 @@ const objetos = function(arr){
         </div>
 
 <div>
-  <button  className="react-select-container" onClick={resetRqst}>Reset</button>
+  <button  className="react-select-reset" onClick={resetRqst}>Reset</button>
 </div>
         {/* Filter */}
         <div>            
