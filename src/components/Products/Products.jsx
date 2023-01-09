@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
-import { getProducts } from "../../redux/DSellerActions";
+import { getProducts , getRender} from "../../redux/DSellerActions";
 import Vcard from "../Vcard/Vcard";
 
 function Products() {
@@ -57,7 +57,32 @@ const objetos = function(arr){
   return newarr
 }
 //________________________________________________________________________________________
-
+ /* Ordenamiento con cb*/
+ function order1 (typeorder){
+  if(products && products.length>1){
+    let a =[];
+    products.map(b=>a.push(b));
+           if(typeorder==='asc0'){
+             dispatch(getRender(a.sort(function(a,b){return a.name.localeCompare(b.name,'en',{numeric:true})})))
+          }
+       if(typeorder==='desc0'){
+        dispatch(getRender(a.sort(function(b,a){return a.name.localeCompare(b.name,'en',{numeric:true})})))
+          }
+       if(typeorder==='asc1'){
+        dispatch(getRender(a.sort(function(b,a){return a.rating-b.rating})))
+          }
+      if(typeorder==='desc1'){
+        dispatch(getRender(a.sort(function(a,b){return a.rating - b.rating})))
+          }
+          if(typeorder==='asc2'){
+            dispatch(getRender(a.sort(function(b,a){return a.price-b.price})))
+              }
+          if(typeorder==='desc2'){
+            dispatch(getRender(a.sort(function(a,b){return a.price - b.price})))
+              }}
+          else{return alert('No se requiere ordenar')}
+  
+            };
 
   return (
     <>
@@ -121,6 +146,13 @@ const objetos = function(arr){
 
 <div className="react-Container-reset">
   <button  className="react-select-reset" onClick={resetRqst}>Reset</button>
+</div>
+{/*Ordenamiento */}
+<div className="order-container"> 
+<Select className="react-select-order"  onChange={e => {order1(e.value)}}  defaultValue={{label:'Ordenamientos...'}} options={[{label:'Asc. Nombre',value:'asc0'},{label:'Desc. Nombre',value:'desc0'},
+                                                                       {label:'Asc. Rating', value:'asc1'},{label:'Desc. Rating', value:'desc1'},
+                                                                       {label:'Asc. Precio', value:'asc2'},{label:'Desc. Precio', value:'desc2'}]} />
+                  
 </div>
         {/* Filter */}
         <div className="react-Container-reset2">            
