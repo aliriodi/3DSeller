@@ -159,6 +159,7 @@ const objetos = function(arr){
           {label:'Desc. Rating', value:'desc1'},
           {label:'Asc. Precio', value:'asc2'},
           {label:'Desc. Precio', value:'desc2'}]}/>
+          
 
           {/* Filter */}
           <Select
