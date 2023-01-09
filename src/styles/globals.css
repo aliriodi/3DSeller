@@ -812,3 +812,180 @@ cursor: pointer;
 .card:hover .card_text{
 top: 150px;
 }
+/*////////// End Products //////////*/
+
+
+/*////////// Start CreateP //////////*/
+.marginTop{
+  position: relative;
+  margin: 250px 0 0 0;
+  top: 300px;
+}
+
+/*Body Form*/
+.center{
+padding: 20px 0;
+position: relative;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 500px;
+box-shadow: 5px 5px 20px #1116;
+background-color: var(--dark-color);
+border-radius: 10px;
+  margin: 200px 0;
+}
+
+.center h1{
+text-align: center;
+padding: 0 0 20px 0;
+border-radius: 1px solid silver;
+border-bottom: 2px solid #adadad;
+color: var(--main-color);
+}
+.center h1 span{
+color: var(--main-color);
+}
+
+.center form{
+padding: 0 40px;
+box-sizing: border-box;
+}
+
+.center form .txt_field{
+position: relative;
+/* border-bottom: 2px solid #adadad; */
+margin: 30px 0;
+}
+
+.center form .txt_field textarea,
+.center form .txt_field input{
+width: 100%;
+padding: 0 5px;
+height: 40px;
+font-size: 16px;
+border-bottom: 2px solid;
+color: var(--text-color);
+border: none;
+background: none;
+outline: none;
+}
+
+.center form .txt_field textarea{
+  margin-top: 10px;
+  max-width: 100%;
+  min-width: 100%;
+  background-color: var(--light-color);
+  border-bottom: var(--main-color) 2px solid;
+}
+
+
+.center form .txt_field label{
+position: absolute;
+left: 5px;
+  top: -5px;
+color: var(--main-color);
+transform: translateY(-50%);
+font-size: 16px;
+pointer-events: none;
+transition: 0.5s;
+}
+
+
+.title{
+  color: var(--main-color);
+  padding-bottom: 9px;
+}
+
+.css-b62m3t-container{
+  margin-top: 50px;
+}
+
+.center form .txt_field span::before {
+content: "";
+  width: 100%;
+position: absolute;
+top: 40px;
+left: 0;
+width: 0%;
+height: 2px;
+background-color: var(--main-color);
+transition: .3s;
+}
+
+.center form .txt_field input:focus ~ label,
+.center form .txt_field input:valid ~ label{
+top: -5px;
+color: var(--main-color);
+}
+
+.center form .txt_field input:focus ~ span::before,
+.center form .txt_field input:valid ~ span::before{
+width: 100%;
+}
+/* Select */
+.txt_field select{
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: var(--light-color);
+  border: none;
+}
+
+.txt_field select option{
+  padding: 10px;  
+  background-color: var(--light-color);
+}
+
+.typesSelect{
+  background-color: var(--dark-color);
+}
+
+.category-container{
+  margin-bottom: 30px;
+}
+.category-container li{
+  display: inline;
+  padding: 4px 8px;
+  /* background-color: var(--main-color); */
+  /* border-radius: 20px; */
+  border-right: var(--main-color) 2px solid;
+  color: var(--text-color);
+}
+
+
+/* Btns */
+.btn-submit{
+width: 100%;
+height: 50px;
+border: var(--main-color) 1px solid;
+background-color: var(--main-color);
+border-radius: 25px;
+font-size: 18px;
+color: var(--dark-color);
+font-weight: 700;
+cursor: pointer;
+outline: none;
+transition: .2s;
+}
+.btn-submit:hover{
+color: var(--main-color);
+background-color: transparent;
+border-color: var(--main-color);
+}
+
+.btn-container{
+  display: flex;
+  margin-bottom: 30px;
+}
+.btn-container li{
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error-text{
+  color: #f00;
+  margin: 8px 0;
+}
+/*////////// End CreateP //////////*/
