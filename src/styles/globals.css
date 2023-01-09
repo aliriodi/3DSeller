@@ -695,6 +695,7 @@ header{
   font-size: 1.2em;
   background-color: var(--main-color);
   color: var(--text-color);
+  transition: .3s;
 }
 .btn-reset button:hover{
   background-color: var(--text-color);
