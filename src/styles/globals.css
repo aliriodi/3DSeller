@@ -676,15 +676,7 @@ header{
 }
 
 /* Selects */
-.order-container{
- color:transparent;
- padding-right: 15%;
- padding-left: 35%;
-}
-.react-select-order{
-  box-shadow: 5px 5px 20px #1116;
 
-}
 .react-Container-reset{
   padding-right: 36%;
 }
