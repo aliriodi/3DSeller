@@ -112,7 +112,7 @@ const objetos = function(arr){
             <div className="input-box">
           <input
             type="text"
-            placeholder="Ingeresa el nombre del producto"
+            placeholder="Ingresa el nombre del producto"
             id="sBar"
           />
              <button onClick={onSearchChange}>BUSCAR</button> 
@@ -120,7 +120,7 @@ const objetos = function(arr){
         </div>
 
 <div>
-  <button onClick={resetRqst}>Reset</button>
+  <button  className="react-select-container" onClick={resetRqst}>Reset</button>
 </div>
         {/* Filter */}
         <div>            
