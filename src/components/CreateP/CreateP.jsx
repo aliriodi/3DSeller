@@ -320,6 +320,9 @@ function validate(input) {
                            return  <option key={p} className="MaterialF" value={p}>{p}</option>
                         })}
                     </select >
+                    <ul  className="category-container">
+                       {input.material? <span >Materiales: {input.material}</span>:null}
+                    </ul>
                 </div>
 
                 {/* Categoria */}
@@ -340,7 +343,7 @@ function validate(input) {
                     </select >
                 </div>
                     <ul  className="category-container">
-                        <li >{input.category}</li>
+                       {input.category? <span >Categoria: {input.category}</span>:null}
                     </ul>
                     {errors.category && ( <p className="error-text"> {errors.category} </p> )}
                     {console.log('input')}
