@@ -676,6 +676,23 @@ header{
 }
 
 /* Selects */
+
+.react-Container-reset{
+  padding-right: 36%;
+}
+.react-Container-reset2{
+  padding-right: 10%;
+}
+.react-select-reset{
+  font-size: 20px;
+  display:flex;
+  float:right;
+  background-color:  #F6C90E;
+  width: 10%;
+  padding: 6px;
+  border-radius: 5%;
+  
+}
 .react-select-container{
 	justify-content: center;
 	box-shadow: 5px 5px 20px #1116;
