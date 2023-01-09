@@ -124,6 +124,8 @@ function validate(input) {
 
     return (
         <>
+        {/* VERSION ANTERIOR
+
         <div  className="container0">
         <h1 className="addProduct">Agrega Nuevo Producto 3DSeller</h1>
             <form className="{stl.formarea}" onSubmit={handleSubmit}>
@@ -197,7 +199,174 @@ function validate(input) {
                     </div>
             </form>
         </div>
-        <div/>
+        <div/> */}
+
+
+
+
+<div className="marginTop">
+        <div className="center">
+
+            <h1>Agrega Nuevo Producto</h1>
+
+            <form onSubmit={e=>handleSubmit(e)}>
+
+                {/* Name */}
+                <div className="txt_field">
+                        <input 
+                        onChange={handleOnChange}
+                        onBlur={handleOnChange} 
+                        type='text'
+                        name='name'
+                        value={input.name}/>
+                         <span></span>
+                         <label>Nombre</label>
+                         {errors.name && ( <p className="error-text"> {errors.name} </p> )}
+                </div>
+                
+                {/* Imagen */}
+                <div className="txt_field">
+                        <input
+                         onChange={handleOnChangeI}
+                         onBlur={handleOnChangeI} 
+                         type='text'
+                         name='image'
+                         value={input.image}
+                         />
+                         <span></span>
+                         <label>Imagen</label>
+                         {errors.image && ( <p className="error-text"> {errors.image} </p> )}
+                </div>
+
+                {/* Description */}
+                <div className="txt_field">
+                        <textarea
+                        className="DescriptionF"
+                        onChange={handleOnChange}
+                        onBlur={handleOnChange}
+                        onFocus={handleOnChange}
+                        type='text'
+                        name='description'
+                        value={input.description}/>
+                         <span></span>
+                         <label>Descripcion</label>
+                         {errors.description && ( <p className="error-text"> {errors.description} </p> )}
+                </div>
+
+                {/* Indice de Rating */}
+                <div className="txt_field">
+                         <input
+                         onChange={handleOnChange}
+                         onBlur={handleOnChange}
+                         onFocus={handleOnChange}
+                         type='number'
+                         min="0"
+                         max="5"
+                         step="0.1"
+                         name='rating'
+                         value={input.rating}
+                         placeholder='ex 4.3'/>
+                         <span></span>
+                         <label>Indice de Rating</label>
+                         {errors.rating && ( <p className="error-text"> {errors.rating} </p> )}
+                </div>
+
+                {/* Stock */}
+                <div className="txt_field">
+                        <input
+                        onChange={handleOnChange}
+                        onBlur={handleOnChange}
+                        onFocus={handleOnChange}
+                        type='number'
+                        min="1"
+                        max="10"
+                        step="1"
+                        name='stock'
+                        value={input.stock}
+                        placeholder='ex 1'/>
+                         <span></span>
+                         <label>Stock</label>
+                         {errors.name && ( <p className="error-text"> {errors.stock} </p> )}
+                </div>
+                
+                {/* Precio */}
+                <div className="txt_field">
+                        <input
+                        onChange={handleOnChange}
+                        onBlur={handleOnChange}
+                        onFocus={handleOnChange}
+                        type='number'
+                        min="100"
+                        step="100"
+                        name='price'
+                        value={input.price}
+                        placeholder='ex 3100'/>
+                         <span></span>
+                         <label>Precio en $Arg</label>
+                         {errors.name && ( <p className="error-text"> {errors.price} </p> )}
+                </div>
+
+                {/* Materiales Posibles */}
+                <div className="txt_field">
+                   <label className="title">Materiales Posibles</label>
+                   <select
+                   onChange={handleMaterial}
+                   onBlur={handleOnChange}
+                   onFocus={handleOnChange}>
+                    <option
+                    key='Materials'
+                    value={0}>Material</option>
+                        {materials.sort().map(p => {
+                           return  <option key={p} className="MaterialF" value={p}>{p}</option>
+                        })}
+                    </select >
+                </div>
+
+                {/* Categoria */}
+                <div className="txt_field">
+                   <label className="title">Categoria</label>
+                   <select
+                   onChange={handleCategory}
+                   className="CategoryF"
+                   onBlur={handleOnChange}
+                   onFocus={handleOnChange}>
+                    <option
+                    key='Category'
+                    className="CategoryF"
+                    value={0}>Categoria</option>
+                        {category.sort().map(p => {
+                           return  <option key={p} className="CategoryF" value={p}>{p}</option>
+                        })}
+                    </select >
+                </div>
+                    <ul  className="category-container">
+                        <li >{input.category}</li>
+                    </ul>
+                    {errors.category && ( <p className="error-text"> {errors.category} </p> )}
+                    {console.log('input')}
+                    {console.log(input)}
+                    {console.log('error')}
+                    {console.log(errors)}
+                     <button
+                     disabled={errors.name?true:false ||
+                               errors.platforms?true:false ||
+                               errors.description?true:false ||
+                               errors.rating?true:false||
+                               errors.material?true:false||
+                               errors.category?true:false||
+                               errors.image?true:false||
+                               errors.stock?true:false ||
+                               errors.precio?true:false
+                            }
+                            className="btn-submit"
+                            type='submit'>Agregar Producto</button>
+
+
+                {/* <input type="submit" value="CREATE" className="btn-submit"/> */}
+            </form>
+        </div>
+        </div>
+        
         </>
     )
 }
