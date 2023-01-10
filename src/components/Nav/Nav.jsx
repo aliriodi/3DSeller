@@ -3,10 +3,15 @@ import Image from 'next/image'
 import logo from '../../public/logo.png'
 import Link from 'next/link';
 import home from './house.png'
-
+import LogButton from '../LogButton/LogButton'
+import { useRouter } from 'next/router'
 
 
 function Nav() {
+
+    const { push } = useRouter()
+    const handleLogin = () => push('/api/auth/login')
+
     return (
 
     <>
@@ -21,6 +26,9 @@ function Nav() {
                 </a>
             </Link>
             {/* <!-- Nav Icons --> */}
+            <div className="nav-icons">
+                <LogButton handleLogin={handleLogin} className='btn' id='bell-icon' />
+            </div>
             <div className="nav-icons">
                 <Link href={"/productos"} legacyBehavior>
                 <a className="btn" id="bell-icon" >Productos</a>
