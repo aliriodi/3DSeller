@@ -15,7 +15,9 @@ function Products() {
   const {searchS} = useSelector(state => state.products)
   //console.log("Estado SEarch",searchS)
 
-if(cFO===0 && count!==0) {dispatch(getRender(products))}
+if(cFO===0 && count!==0) {dispatch(getRender(products));
+                          dispatch(resetState(1,[]));
+                          }
 //console.log(objetos(set))
  
   function resetRqst (){handleSelectChanges2([]);
