@@ -19,6 +19,8 @@ Esta es una aplicacion para administracion y ventas de articulos impresos en 3D,
       4. Nextjs 
       5. MongoDB + mongoose
       6. Deployment con vercel
+      7. Nodemailer 
+      8. Auth0 + AuthLocal con BD
       
  ## https://3dseller.vercel.app
       
