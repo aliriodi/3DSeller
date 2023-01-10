@@ -24,10 +24,14 @@ export const DSellerSlice = createSlice ({
          name: "products",
          initialState,
   reducers:{ 
+    resetRqstS: (state,action) => {
+      state.cFO         = action.payload[0],
+      state.filtersAord = action.payload[1]
+    },
 
     getRenderS: (state,action)=> {
-      state.products = action.payload,
-      state.count = action.payload.length
+      state.productsR = action.payload
+      
     },  
 
     getAllProducts: (state,action)=>{
@@ -46,6 +50,6 @@ export const DSellerSlice = createSlice ({
   }
 })
  
-export const {getAllProducts , getProductById , postCreateProductS, getRenderS} = DSellerSlice.actions;
+export const {getAllProducts , getProductById , postCreateProductS, getRenderS, resetRqstS} = DSellerSlice.actions;
 
 export default DSellerSlice.reducer 

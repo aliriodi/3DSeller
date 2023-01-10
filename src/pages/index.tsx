@@ -5,10 +5,7 @@ function Home() {
 
   return (
     <div>
-    
-    
     <div >
-  
     <div>
      <Home2 />
      </div>

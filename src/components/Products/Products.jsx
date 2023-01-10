@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
-import { getProducts , getRender} from "../../redux/DSellerActions";
+import { getProducts , getRender, resetState} from "../../redux/DSellerActions";
 import Vcard from "../Vcard/Vcard";
 
 function Products() {
@@ -10,26 +10,27 @@ function Products() {
     dispatch(getProducts());
     // eslint-disable-next-line
   }, [dispatch]);
-  const { products } = useSelector(state => state.products);
-
+  const { products , count , cFO , filtersAord, productsR} = useSelector(state => state.products);
+  
+ if((cFO===0 && count!==0) && productsR.length!==count) {dispatch(getRender(products))}
 //console.log(objetos(set))
     
   const productos = () => {
     if(orden === 2) return render
     if (search !== "") {
-      const busqueda = products.filter((item) =>
+      const busqueda = productsR.filter((item) =>
         item.name.toLowerCase().includes(search.toLocaleLowerCase())
       );
-      return busqueda;
-    } else return products;
+      dispatch(getRender(busqueda)) ;
+    } else return productsR;
   };
 
+  function resetRqst (){dispatch(resetState(0,[]));
+                        dispatch(getRender(products))};
   // El orden 0 es el que tiene la pagina por default al entrar en el componente, habilitarlo permite realizar un "reset" 
   //comodo para el usuario
   const [orden, setOrden] = useState(0);
-  const resetRqst = () =>{
-    setOrden(0)
-  }
+  
     
   // Estos son los estados locales que guardan la informacion de la Search Bar
   const [search, setSearch] = useState("");
@@ -39,18 +40,43 @@ function Products() {
   };
   
   // Este es el manejador de Set que controla el Render cuando se hace algun filtro
-const [render,setRender]= useState("")
+ const [render,setRender]= useState("")
 const handleSelectChanges = ({value}) =>{
-   const filtrados = products.filter((item)=> item.category.includes(value))
-   setOrden(2)
-   setRender(filtrados)
+  console.log('value')
+  console.log(value)
+   const filtrados = productsR.filter((item)=> item.category.includes(value))
+   console.log('filtrados')
+   console.log(filtrados)
+   dispatch(getRender(filtrados))
+   dispatch(resetState(1,[{category:value}]))
+}
+const handleSelectChanges2 = (selectedOption)=>{
+  //console.log(selectedOption)
+let nuevorender =[];
+if(selectedOption.length>0){
+productsR.map(product => product.material.includes(selectedOption[0].value)?console.log('1'+product.material):console.log(product.material))
+dispatch(getRender(nuevorender))
+}
 }
 
 // Las siguientes lineas de codigo dan el formato para las opciones del Select
-const oneArray = products.reduce(function (allCategories, item){return [...allCategories, ...item.category]},[])
+const oneArray = productsR.reduce(function (allCategories, item){return [...allCategories, ...item.category]},[])
 const set = Array.from(new Set(oneArray))
 const objetos = function(arr){
+   let newarr = []
+    for (let i = 0; i < arr.length;i++){
+    newarr.push({label:arr[i],value:arr[i]})
+  } 
+  return newarr
+}
+// Las siguientes lineas de codigo dan el formato para las opciones del Select Multi Materiales
+const oneArray2 = products.reduce(function (allMAterials, item){return [...allMAterials, ...item.material]},[])
+const set2 = Array.from(new Set(oneArray2))
+const objetos2 = function(arr){
   let newarr = []
+  const result = arr.toString().split(',').reduce((acc,item)=>{if(!acc.includes(item)){acc.push(item); } return acc;
+  },[])
+   arr=result;
   for (let i = 0; i < arr.length;i++){
     newarr.push({label:arr[i],value:arr[i]})
   }
@@ -59,9 +85,9 @@ const objetos = function(arr){
 //________________________________________________________________________________________
  /* Ordenamiento con cb*/
  function order1 (typeorder){
-  if(products && products.length>1){
+  if(productsR && productsR.length>1){
     let a =[];
-    products.map(b=>a.push(b));
+    productsR.map(b=>a.push(b));
            if(typeorder==='asc0'){
              dispatch(getRender(a.sort(function(a,b){return a.name.localeCompare(b.name,'en',{numeric:true})})))
           }
@@ -168,6 +194,15 @@ const objetos = function(arr){
           defaultValue={{label:'Filtro...'}}
           options={objetos(set)}
           onChange={ handleSelectChanges}/>
+          <Select 
+          className="react-select-container"
+          classNamePrefix="react-select"
+          
+          options={objetos2(set2)}
+          onChange={ handleSelectChanges2}
+          isMulti
+          />
+
           {/* btn-reset */}
           <div className="btn-reset">
             <button onClick={resetRqst}>Reset</button>
@@ -179,8 +214,8 @@ const objetos = function(arr){
         <div className="container-cards">
 
           {/* Cards */}
-          {products.length > 0 ?
-            productos().map((product3d) => {
+          {productsR.length > 0 ?
+            productsR.map((product3d) => {
               return (
                 <Vcard
                   key={product3d.name}
