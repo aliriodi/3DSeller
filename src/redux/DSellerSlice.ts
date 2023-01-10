@@ -49,14 +49,11 @@ export const DSellerSlice = createSlice ({
 
     postCreateProductS:(state,action)=>{
         state.newProduct = action.payload
-    },
-
-    serchRender:(state,action)=>{
-      state.searchS = action.payload
     }
+    
   }
 })
  
-export const {getAllProducts , getProductById , postCreateProductS, getRenderS, resetRqstS , serchRender} = DSellerSlice.actions;
+export const {getAllProducts , getProductById , postCreateProductS, getRenderS, resetRqstS } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer 

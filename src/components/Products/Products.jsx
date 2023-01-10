@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { getProducts , getRender, resetState,} from "../../redux/DSellerActions";
-import {serchRender} from "../../redux/DSellerSlice"
 import Vcard from "../Vcard/Vcard";
 
 function Products() {
@@ -14,22 +13,24 @@ function Products() {
   const { products , count , cFO , filtersAord, productsR} = useSelector(state => state.products);
   //console.log(products)
   const {searchS} = useSelector(state => state.products)
-  console.log("Estado SEarch",searchS)
+  //console.log("Estado SEarch",searchS)
 
-if((cFO===0 && count!==0) && productsR.length!==count) {dispatch(getRender(products))}
+if(cFO===0 && count!==0) {dispatch(getRender(products))}
 //console.log(objetos(set))
  
-  function resetRqst (){dispatch(resetState(0,[]));
+  function resetRqst (){handleSelectChanges2([]);
+                        dispatch(resetState(0,[]));
                         dispatch(getRender(products))};
     
   // Estos son los estados locales que guardan la informacion de la Search Bar
   const onSearchChange = () => {
      const sItem = document.getElementById("sBar").value
-     const busqueda = productsR.filter((item) =>
+     const busqueda = products.filter((item) =>
         item.name.toLowerCase().includes(sItem.toLocaleLowerCase())
       );
       console.log("busqueda ", busqueda)
-      dispatch(serchRender(busqueda))
+      dispatch(resetState(1,[]))
+      dispatch(getRender(busqueda))
   };
   
   // Este es el manejador de Set que controla el Render cuando se hace algun filtro
@@ -38,17 +39,30 @@ if((cFO===0 && count!==0) && productsR.length!==count) {dispatch(getRender(produ
   console.log("value",value)
    const filtrados = productsR.filter((item)=> item.category.includes(value))
    console.log("filtrados",filtrados)
+   dispatch(resetState(1,[]))
    dispatch(getRender(filtrados))
-   dispatch(resetState(1,[{category:value}]))
+  
 }
 
 const handleSelectChanges2 = (selectedOption)=>{
   //console.log(selectedOption)
-let nuevorender =[];
+
+console.log(selectedOption)
   if(selectedOption.length>0){
-    productsR.map(product => product.material.includes(selectedOption[0].value)?console.log('1'+product.material):console.log(product.material))
+    for(let i=0;i<selectedOption.length;i++){
+      //array.indexOf(searchElement[fromIndex])
+      let nuevorender =[]; 
+    productsR.map(
+      productR =>{ if(productR.material.indexOf(selectedOption[i].value))
+                     {nuevorender.push(productR)
+                      console.log(selectedOption[i].value)
+                      console.log(nuevorender)}
+                 }
+                 )
+    dispatch(resetState(1,[]))                 
     dispatch(getRender(nuevorender))
-  }
+  //  nuevorender=[];
+  }}
 }
 
 // Las siguientes lineas de codigo dan el formato para las opciones del Select
@@ -62,7 +76,7 @@ const objetos = function(arr){
   return newarr
 }
 // Las siguientes lineas de codigo dan el formato para las opciones del Select Multi Materiales
-const oneArray2 = products.reduce(function (allMAterials, item){return [...allMAterials, ...item.material]},[])
+const oneArray2 = productsR.reduce(function (allMAterials, item){return [...allMAterials, ...item.material]},[])
 const set2 = Array.from(new Set(oneArray2))
 const objetos2 = function(arr){
   let newarr = []
@@ -104,50 +118,7 @@ const objetos2 = function(arr){
 
   return (
     <>
-    {/* ANTERIOIR ESTRUCTURA DE PRODUCTS 
-    <div>
-      <div className="container0">
-        <div>
-          <input
-            type="text"
-            placeholder="Ingeresa el nombre del producto"
-            id="sBar"
-          />
-          <input type={"button"}
-          value={"Buscar"}
-          onClick={onSearchChange}          
-          />
-          <br/>
-
-        </div>
-        <br/>
-        <div>            
-          <Select options={products.map((p)=>({label: p.category, value: p.category})) }
-          onChange={ handleSelectChanges}/>
-        </div>
-        <div className="flex-container">
-          {products.length > 0 ?
-            productos().map((product3d) => {
-              return (
-                <Vcard
-                  key={product3d._id}
-                  id={product3d._id}
-                  name={product3d.name}
-                  image={product3d.image}
-                  category={product3d.category}
-                  rating={product3d.rating}
-                    />
-              );
-            }):
-            <img
-            className="imagendecarga"
-            src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-18-223_512.gif"
-            alt="imagen de carga"
-            />}
-        </div>
-      </div>
-    </div> */}
-
+    
     <div className={"products-container"}>
 
     {/* Search bar */}
@@ -206,14 +177,7 @@ const objetos2 = function(arr){
         <div className="container-cards">
 
           {/* Cards */}
-          {searchS.length > 0 ? searchS.map((product3d)=>{return <Vcard
-                  key={product3d.name}
-                  id={product3d._id}
-                  name={product3d.name}
-                  image={product3d.image}
-                  category={product3d.category}
-                  rating={product3d.rating}
-                    />}):productsR.length > 0 ?
+          {productsR && productsR.length >0 ?
             productsR.map((product3d) => {
               return (
                 <Vcard
