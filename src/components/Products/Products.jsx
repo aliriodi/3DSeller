@@ -27,7 +27,7 @@ if(cFO===0 && count!==0) {dispatch(getRender(products));
   // Estos son los estados locales que guardan la informacion de la Search Bar
   const onSearchChange = () => {
      const sItem = document.getElementById("sBar").value
-     const busqueda = products.filter((item) =>
+     const busqueda = productsR.filter((item) =>
         item.name.toLowerCase().includes(sItem.toLocaleLowerCase())
       );
       console.log("busqueda ", busqueda)
@@ -50,10 +50,10 @@ const handleSelectChanges2 = (selectedOption)=>{
   //console.log(selectedOption)
 
 console.log(selectedOption)
-  if(selectedOption.length>0){
+  if(selectedOption.length>0){let nuevorender =[]; 
     for(let i=0;i<selectedOption.length;i++){
       //array.indexOf(searchElement[fromIndex])
-      let nuevorender =[]; 
+      
     productsR.map(
       productR =>{ if(productR.material.indexOf(selectedOption[i].value))
                      {nuevorender.push(productR)
