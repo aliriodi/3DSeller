@@ -47,25 +47,72 @@ if(cFO===0 && count!==0) {dispatch(getRender(products));
 }
 
 const handleSelectChanges2 = (selectedOption)=>{
-  //console.log(selectedOption)
+  // Se Obtienen los nombres de los materiales 
+  let newOptions = selectedOption.map(
+    option =>{
+      return option.value; 
+  })
+  console.log(newOptions)
 
-console.log(selectedOption)
-  if(selectedOption.length>0){let nuevorender =[]; 
-    for(let i=0;i<selectedOption.length;i++){
-      //array.indexOf(searchElement[fromIndex])
-      
-    productsR.map(
-      productR =>{ if(productR.material.indexOf(selectedOption[i].value))
-                     {nuevorender.push(productR)
-                      console.log(selectedOption[i].value)
-                      console.log(nuevorender)}
-                 }
-                 )
+  //Si no hay materiales selecionados se muestra los productos originales 
+  if(newOptions.length == 0){
     dispatch(resetState(1,[]))                 
-    dispatch(getRender(nuevorender))
-  //  nuevorender=[];
-  }}
+    dispatch(getRender(products))
+    return;
+  }
+  
+  //Se filtran los productos segun los materiales elegidos 
+  let newRender = productsR.filter(product =>{
+
+    //Filter se queda con los valores que valgan true
+    let result = false;
+
+          //Va a buscar si el producto tiene todos los materiales elegidos
+          for(let option of newOptions){
+
+            //En el caso que no se encuentre alguno de los materiales,
+            //El producto nose agrega
+              if(product.material[0].indexOf(option) == -1){
+                  result = false
+                  break
+              }
+            
+            //De lo contrario si se hace
+              else if(product.material[0].indexOf(option) !== -1){
+                  result = true
+              }
+              
+          }
+
+          console.log("Result",result)
+          return result;
+  });
+
+  console.log(newRender)
+
+  //Y por ultimo se asignan los nuevos Productos
+  dispatch(resetState(1,[]))                 
+  dispatch(getRender(newRender))
+
+  //#region Prototype
+  // if(selectedOption.length>0){
+  //   for(let i=0;i<selectedOption.length;i++){
+  //     let nuevorender =[]; 
+  //   productsR.map(
+  //     productR =>{ if(productR.material.indexOf(selectedOption[i].value))
+  //                    {nuevorender.push(productR)
+  //                     console.log(selectedOption[i].value)
+  //                     console.log(nuevorender)
+  //                   }
+  //                }
+  //                )
+  //   dispatch(resetState(1,[]))                 
+  //   dispatch(getRender(nuevorender))
+  // //  nuevorender=[];
+  // }}
+  //#endregion
 }
+
 
 // Las siguientes lineas de codigo dan el formato para las opciones del Select
 const oneArray = productsR.reduce(function (allCategories, item){return [...allCategories, ...item.category]},[])
@@ -77,6 +124,10 @@ const objetos = function(arr){
   } 
   return newarr
 }
+
+
+//#region Filtro de Materiales
+
 // Las siguientes lineas de codigo dan el formato para las opciones del Select Multi Materiales
 const oneArray2 = productsR.reduce(function (allMAterials, item){return [...allMAterials, ...item.material]},[])
 const set2 = Array.from(new Set(oneArray2))
@@ -90,6 +141,8 @@ const objetos2 = function(arr){
   }
   return newarr
 }
+//#endregion
+
 //________________________________________________________________________________________
  /* Ordenamiento con cb*/
  function order1 (typeorder){
@@ -143,7 +196,7 @@ const objetos2 = function(arr){
           className="react-select-container"
           classNamePrefix="react-select"
           onChange={e => {order1(e.value)}}
-          defaultValue={{label:'Ordenamientos...'}}
+          placeholder="Ordenamientos..."
           options={[{label:'Asc. Nombre',value:'asc0'},
           {label:'Desc. Nombre',value:'desc0'},
           {label:'Asc. Rating', value:'asc1'},
@@ -151,20 +204,21 @@ const objetos2 = function(arr){
           {label:'Asc. Precio', value:'asc2'},
           {label:'Desc. Precio', value:'desc2'}]}/>
           
-
-          {/* Filter */}
+          {/* Filter Category*/}
           <Select
           className="react-select-container"
           classNamePrefix="react-select"
-          defaultValue={{label:'Filtro...'}}
+          placeholder="Categoria..."
           options={objetos(set)}
           onChange={ handleSelectChanges}/>
+
+          {/* Filter Material*/}
           <Select 
           className="react-select-container"
           classNamePrefix="react-select"
-          
+          placeholder="Material..."          
           options={objetos2(set2)}
-          onChange={ handleSelectChanges2}
+          onChange={handleSelectChanges2}
           isMulti
           />
 
