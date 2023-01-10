@@ -1,7 +1,11 @@
-import {getAllProducts , getProductById, postCreateProductS, getRenderS} from "./DSellerSlice";
+import {getAllProducts , getProductById, postCreateProductS, getRenderS, resetRqstS} from "./DSellerSlice";
 
 export const  getRender=  (state) => async (dispatch) => {
     dispatch(getRenderS(state));
+   }
+
+export const  resetState=  (cFO,filtersAord) => async (dispatch) => {
+    dispatch(resetRqstS([cFO,filtersAord]));
    } 
 
 export const  getProducts=  () => async (dispatch) => {
