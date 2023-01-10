@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
-import { getProducts , getRender, resetState} from "../../redux/DSellerActions";
+import { getProducts , getRender, resetState,} from "../../redux/DSellerActions";
+import {serchRender} from "../../redux/DSellerSlice"
 import Vcard from "../Vcard/Vcard";
 
 function Products() {
@@ -11,52 +12,43 @@ function Products() {
     // eslint-disable-next-line
   }, [dispatch]);
   const { products , count , cFO , filtersAord, productsR} = useSelector(state => state.products);
-  
- if((cFO===0 && count!==0) && productsR.length!==count) {dispatch(getRender(products))}
-//console.log(objetos(set))
-    
-  const productos = () => {
-    if(orden === 2) return render
-    if (search !== "") {
-      const busqueda = productsR.filter((item) =>
-        item.name.toLowerCase().includes(search.toLocaleLowerCase())
-      );
-      dispatch(getRender(busqueda)) ;
-    } else return productsR;
-  };
+  //console.log(products)
+  const {searchS} = useSelector(state => state.products)
+  console.log("Estado SEarch",searchS)
 
+if((cFO===0 && count!==0) && productsR.length!==count) {dispatch(getRender(products))}
+//console.log(objetos(set))
+ 
   function resetRqst (){dispatch(resetState(0,[]));
                         dispatch(getRender(products))};
-  // El orden 0 es el que tiene la pagina por default al entrar en el componente, habilitarlo permite realizar un "reset" 
-  //comodo para el usuario
-  const [orden, setOrden] = useState(0);
-  
     
   // Estos son los estados locales que guardan la informacion de la Search Bar
-  const [search, setSearch] = useState("");
   const onSearchChange = () => {
-    setOrden(0)
-    setSearch(document.getElementById("sBar").value);
+     const sItem = document.getElementById("sBar").value
+     const busqueda = productsR.filter((item) =>
+        item.name.toLowerCase().includes(sItem.toLocaleLowerCase())
+      );
+      console.log("busqueda ", busqueda)
+      dispatch(serchRender(busqueda))
   };
   
   // Este es el manejador de Set que controla el Render cuando se hace algun filtro
- const [render,setRender]= useState("")
-const handleSelectChanges = ({value}) =>{
-  console.log('value')
-  console.log(value)
+
+  const handleSelectChanges = ({value}) =>{
+  console.log("value",value)
    const filtrados = productsR.filter((item)=> item.category.includes(value))
-   console.log('filtrados')
-   console.log(filtrados)
+   console.log("filtrados",filtrados)
    dispatch(getRender(filtrados))
    dispatch(resetState(1,[{category:value}]))
 }
+
 const handleSelectChanges2 = (selectedOption)=>{
   //console.log(selectedOption)
 let nuevorender =[];
-if(selectedOption.length>0){
-productsR.map(product => product.material.includes(selectedOption[0].value)?console.log('1'+product.material):console.log(product.material))
-dispatch(getRender(nuevorender))
-}
+  if(selectedOption.length>0){
+    productsR.map(product => product.material.includes(selectedOption[0].value)?console.log('1'+product.material):console.log(product.material))
+    dispatch(getRender(nuevorender))
+  }
 }
 
 // Las siguientes lineas de codigo dan el formato para las opciones del Select
@@ -214,7 +206,14 @@ const objetos2 = function(arr){
         <div className="container-cards">
 
           {/* Cards */}
-          {productsR.length > 0 ?
+          {searchS.length > 0 ? searchS.map((product3d)=>{return <Vcard
+                  key={product3d.name}
+                  id={product3d._id}
+                  name={product3d.name}
+                  image={product3d.image}
+                  category={product3d.category}
+                  rating={product3d.rating}
+                    />}):productsR.length > 0 ?
             productsR.map((product3d) => {
               return (
                 <Vcard
