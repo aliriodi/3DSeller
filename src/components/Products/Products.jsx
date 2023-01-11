@@ -5,9 +5,6 @@ import { getProducts , getRender, resetState,} from "../../redux/DSellerActions"
 import Vcard from "../Vcard/Vcard";
 
 function Products() {
-  const [currentFilterCategory, setCurrentFilterCategory] = useState("")
-  const [currentFilterMaterial, setCurrentFilterMaterial] = useState([])
-  const [currentFilterOrder, setCurrentFilterOrder] = useState("")
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -23,25 +20,30 @@ if(cFO===0 && count!==0) {dispatch(getRender(products));
                           dispatch(resetState(1,[]));
                           }
 //console.log(objetos(set))
- 
-  function resetRqst(){
-    handleMaterialChange([]);
-    dispatch(resetState(0,[]));
-    dispatch(getRender(products))
-  };
-    
-  // Estos son los estados locales que guardan la informacion de la Search Bar
-  const onSearchChange = () => {
-     const sItem = document.getElementById("sBar").value
-     const busqueda = productsR.filter((item) =>
-        item.name.toLowerCase().includes(sItem.toLocaleLowerCase())
-      );
-      console.log("busqueda ", busqueda)
-      dispatch(resetState(1,[]))
-      dispatch(getRender(busqueda))
-  };
 
-//#region Filtros
+
+//#region SearchBar y Filtros
+const [currentFilterCategory, setCurrentFilterCategory] = useState("")
+const [currentFilterMaterial, setCurrentFilterMaterial] = useState([])
+const [currentFilterOrder, setCurrentFilterOrder] = useState("")
+
+//Boton para recetar Filtros y SearchBar
+function resetRqst(){
+  handleMaterialChange([]);
+  dispatch(resetState(0,[]));
+  dispatch(getRender(products))
+};    
+
+//SearchBar
+const onSearchChange = () => {
+  const sItem = document.getElementById("sBar").value
+  const busqueda = productsR.filter((item) =>
+     item.name.toLowerCase().includes(sItem.toLocaleLowerCase())
+   );
+   console.log("busqueda ", busqueda)
+   dispatch(resetState(1,[]))
+   dispatch(getRender(busqueda))
+};
 
 //Filtro por Categoria
 const handleSelectChanges = ({value}) =>{
@@ -159,6 +161,26 @@ useEffect(()=>{
 
 //#endregion
 
+//#region Scroll infinito code
+
+const [current, setCurrent] = useState(0);
+
+const nextPage = () => {
+  if (productsR.length > current + 8) setCurrent(current + 8);
+};
+
+const prevPage = () => {
+  if (current > 0) setCurrent(current - 8);
+};
+
+// Esta funcion va a controlar el numero de elementos que se ven al cargar la pagina por primera vez
+
+const tarjetasXPag = () => {
+  return productsR.slice(current, current + 8);
+};
+
+//#endregion
+
 // Las siguientes lineas de codigo dan el formato para las opciones del Select
 const oneArray = products.reduce(function (allCategories, item){return [...["Todas"],...allCategories, ...item.category]},[])
 const set = Array.from(new Set(oneArray))
@@ -272,29 +294,51 @@ const objetos2 = function(arr){
           </div>
         </div>
 
+        {/* btn-paginado */}
+        <div id="contenedor_botones">
+          <button className="anterior" onClick={prevPage}>
+            Pagina Anterior
+          </button>
+          <button className="siguiente" onClick={nextPage}>
+            Pagina Siguiente
+          </button>
+        </div>
 
         {/* Cards Container */}
         <div className="container-cards">
 
           {/* Cards */}
-          {productsR && productsR.length >0 ?
-            productsR.map((product3d) => {
+          {productsR && productsR.length > 0 ? (
+            tarjetasXPag().map((product3d) => {
               return (
                 <Vcard
+                  className="productoclass"
                   key={product3d.name}
                   id={product3d._id}
                   name={product3d.name}
                   image={product3d.image}
                   category={product3d.category}
                   rating={product3d.rating}
-                    />
+                />
               );
-            }):
+            })
+          ) : (
             <img
-            className="imagendecarga"
-            src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-18-223_512.gif"
-            alt="imagen de carga"
-            />}
+              className="imagendecarga"
+              src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-18-223_512.gif"
+              alt="imagen de carga"
+            />
+          )}
+        </div>
+
+        {/* btn-paginado */}
+        <div id="contenedor_botones">
+          <button className="anterior" onClick={prevPage}>
+            Pagina Anterior
+          </button>
+          <button className="siguiente" onClick={nextPage}>
+            Pagina Siguiente
+          </button>
         </div>
     </div>
     </>
