@@ -26,9 +26,10 @@ function Nav() {
                 </a>
             </Link>
             {/* <!-- Nav Icons --> */}
-            <div className="nav-icons">
-                <LogButton handleLogin={handleLogin} className='btn' id='bell-icon' />
-            </div>
+                <LogButton 
+                handleLogin={handleLogin}
+                className='btn-logIn'
+                id='bell-icon'/>
             <div className="nav-icons">
                 <Link href={"/productos"} legacyBehavior>
                 <a className="btn" id="bell-icon" >Productos</a>
