@@ -27,7 +27,7 @@ if(cFO===0 && count!==0) {dispatch(getRender(products));
   // Estos son los estados locales que guardan la informacion de la Search Bar
   const onSearchChange = () => {
      const sItem = document.getElementById("sBar").value
-     const busqueda = products.filter((item) =>
+     const busqueda = productsR.filter((item) =>
         item.name.toLowerCase().includes(sItem.toLocaleLowerCase())
       );
       console.log("busqueda ", busqueda)
@@ -115,7 +115,7 @@ const handleSelectChanges2 = (selectedOption)=>{
 
 
 // Las siguientes lineas de codigo dan el formato para las opciones del Select
-const oneArray = productsR.reduce(function (allCategories, item){return [...allCategories, ...item.category]},[])
+const oneArray = products.reduce(function (allCategories, item){return [...allCategories, ...item.category]},[])
 const set = Array.from(new Set(oneArray))
 const objetos = function(arr){
    let newarr = []
@@ -129,7 +129,7 @@ const objetos = function(arr){
 //#region Filtro de Materiales
 
 // Las siguientes lineas de codigo dan el formato para las opciones del Select Multi Materiales
-const oneArray2 = productsR.reduce(function (allMAterials, item){return [...allMAterials, ...item.material]},[])
+const oneArray2 = products.reduce(function (allMAterials, item){return [...allMAterials, ...item.material]},[])
 const set2 = Array.from(new Set(oneArray2))
 const objetos2 = function(arr){
   let newarr = []
