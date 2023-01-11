@@ -5,12 +5,17 @@ import Link from 'next/link';
 import home from './house.png'
 import LogButton from '../LogButton/LogButton'
 import { useRouter } from 'next/router'
-
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 function Nav() {
 
     const { push } = useRouter()
+    const { isLoading, user, error } = useUser()
+
+    if(isLoading) return <h1>Loading...</h1>
+
     const handleLogin = () => push('/api/auth/login')
+    const handleLogout = () => push('/api/auth/logout')
 
     return (
 
@@ -26,9 +31,17 @@ function Nav() {
                 </a>
             </Link>
             {/* <!-- Nav Icons --> */}
-            <div className="nav-icons">
-                <LogButton handleLogin={handleLogin} className='btn' id='bell-icon' />
-            </div>
+            {user ? (
+                <>
+                    <h1>{user.name}</h1>
+                    <LogButton handleLogin={handleLogout} className='btn' id="bell-icon" />
+                </>
+            ) : (
+               <div className="nav-icons">
+                    <LogButton handleLogin={handleLogin} className='btn' id='bell-icon' />
+                </div> 
+            )}
+            
             <div className="nav-icons">
                 <Link href={"/productos"} legacyBehavior>
                 <a className="btn" id="bell-icon" >Productos</a>
