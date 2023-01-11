@@ -536,6 +536,24 @@ header{
 	color: var(--dark-color);
 	background-color: var(--main-color);
 }
+
+.nav-icons_logIn{
+  font-size: 20px;
+	font-weight: 500;
+  max-width: 50px;
+  max-height: 50px;
+	display: grid;
+	place-items: center;
+	color: var(--text-color);
+	border-radius: 4px;
+	cursor: pointer;
+	transition:  0.3s;
+}
+
+.nav-icons .btn-logIn{
+  width: 100%;
+  height: 100%;
+}
 /*////////// End NavBar //////////*/
 
 
