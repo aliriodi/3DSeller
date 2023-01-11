@@ -1,10 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { getProducts , getRender, resetState,} from "../../redux/DSellerActions";
 import Vcard from "../Vcard/Vcard";
 
 function Products() {
+  const [currentFilterCategory, setCurrentFilterCategory] = useState("")
+  const [currentFilterMaterial, setCurrentFilterMaterial] = useState([])
+  const [currentFilterOrder, setCurrentFilterOrder] = useState([])
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
@@ -20,9 +24,11 @@ if(cFO===0 && count!==0) {dispatch(getRender(products));
                           }
 //console.log(objetos(set))
  
-  function resetRqst (){handleSelectChanges2([]);
-                        dispatch(resetState(0,[]));
-                        dispatch(getRender(products))};
+  function resetRqst(){
+    handleMaterialChange([]);
+    dispatch(resetState(0,[]));
+    dispatch(getRender(products))
+  };
     
   // Estos son los estados locales que guardan la informacion de la Search Bar
   const onSearchChange = () => {
@@ -35,84 +41,92 @@ if(cFO===0 && count!==0) {dispatch(getRender(products));
       dispatch(getRender(busqueda))
   };
   
-  // Este es el manejador de Set que controla el Render cuando se hace algun filtro
-
-  const handleSelectChanges = ({value}) =>{
+// Este es el manejador de Set que controla el Render cuando se hace algun filtro
+const handleSelectChanges = ({value}) =>{
   console.log("value",value)
-   const filtrados = productsR.filter((item)=> item.category.includes(value))
-   console.log("filtrados",filtrados)
-   dispatch(resetState(1,[]))
-   dispatch(getRender(filtrados))
-  
+  setCurrentFilterCategory(value)
+  //  const filtrados = productsR.filter((item)=> item.category.includes(value))
+  //  console.log("filtrados",filtrados)
+  //  dispatch(resetState(1,[]))
+  //  dispatch(getRender(filtrados))  
+}
+const filterCategory = (products,options)=>{
+  if(options == "")return products
+
+  let newRender = products.filter((product)=> product.category.includes(options))
+
+  return newRender;
 }
 
-const handleSelectChanges2 = (selectedOption)=>{
-  // Se Obtienen los nombres de los materiales 
+//Filtro por Material
+const handleMaterialChange = (selectedOption)=>{
   let newOptions = selectedOption.map(
     option =>{
       return option.value; 
   })
-  console.log(newOptions)
+  setCurrentFilterMaterial(newOptions)
 
-  //Si no hay materiales selecionados se muestra los productos originales 
-  if(newOptions.length == 0){
-    dispatch(resetState(1,[]))                 
-    dispatch(getRender(products))
-    return;
-  }
-  
-  //Se filtran los productos segun los materiales elegidos 
-  let newRender = productsR.filter(product =>{
+  // if(newOptions.length == 0){
+  //   dispatch(resetState(1,[]))                 
+  //   dispatch(getRender(products))
+  //   return;
+  // }
+   
+  // let newRender = productsR.filter(product =>{
+  //   let result = false;
+  //         for(let option of newOptions){
+  //             if(product.material[0].indexOf(option) == -1){
+  //                 result = false
+  //                 break
+  //             }
+            
+  //             else if(product.material[0].indexOf(option) !== -1){
+  //                 result = true
+  //             }
+              
+  //         }
 
-    //Filter se queda con los valores que valgan true
+  //         console.log("Result",result)
+  //         return result;
+  // });
+
+  // dispatch(resetState(1,[]))                 
+  // dispatch(getRender(newRender))
+}
+const filterMaterial = (products,options)=>{
+
+  if(options.length == 0)return products; 
+
+  let newRender = products.filter(product =>{
     let result = false;
-
-          //Va a buscar si el producto tiene todos los materiales elegidos
-          for(let option of newOptions){
-
-            //En el caso que no se encuentre alguno de los materiales,
-            //El producto nose agrega
+          for(let option of options){
               if(product.material[0].indexOf(option) == -1){
                   result = false
                   break
               }
             
-            //De lo contrario si se hace
               else if(product.material[0].indexOf(option) !== -1){
                   result = true
               }
-              
           }
-
-          console.log("Result",result)
           return result;
   });
 
-  console.log(newRender)
-
-  //Y por ultimo se asignan los nuevos Productos
-  dispatch(resetState(1,[]))                 
-  dispatch(getRender(newRender))
-
-  //#region Prototype
-  // if(selectedOption.length>0){
-  //   for(let i=0;i<selectedOption.length;i++){
-  //     let nuevorender =[]; 
-  //   productsR.map(
-  //     productR =>{ if(productR.material.indexOf(selectedOption[i].value))
-  //                    {nuevorender.push(productR)
-  //                     console.log(selectedOption[i].value)
-  //                     console.log(nuevorender)
-  //                   }
-  //                }
-  //                )
-  //   dispatch(resetState(1,[]))                 
-  //   dispatch(getRender(nuevorender))
-  // //  nuevorender=[];
-  // }}
-  //#endregion
+  return newRender;
 }
 
+useEffect(()=>{
+  //Se declara la variable que va a ser el resultado final
+  let resultProducts = products;
+
+  //Se le aplican los filtros
+  resultProducts = filterCategory(resultProducts,currentFilterCategory)
+  resultProducts = filterMaterial(resultProducts,currentFilterMaterial);
+
+  console.log("FILTRO DE MATERIAL", resultProducts)
+  dispatch(resetState(1,[]))
+  dispatch(getRender(resultProducts))  
+},[currentFilterMaterial, currentFilterCategory])
 
 // Las siguientes lineas de codigo dan el formato para las opciones del Select
 const oneArray = productsR.reduce(function (allCategories, item){return [...allCategories, ...item.category]},[])
@@ -143,8 +157,7 @@ const objetos2 = function(arr){
 }
 //#endregion
 
-//________________________________________________________________________________________
- /* Ordenamiento con cb*/
+//#region Ordenamiento con cb
  function order1 (typeorder){
   if(productsR && productsR.length>1){
     let a =[];
@@ -170,7 +183,7 @@ const objetos2 = function(arr){
           else{return alert('No se requiere ordenar')}
   
             };
-
+//#endregion
   return (
     <>
     
@@ -218,7 +231,7 @@ const objetos2 = function(arr){
           classNamePrefix="react-select"
           placeholder="Material..."          
           options={objetos2(set2)}
-          onChange={handleSelectChanges2}
+          onChange={handleMaterialChange}
           isMulti
           />
 
