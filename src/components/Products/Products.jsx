@@ -7,7 +7,7 @@ import Vcard from "../Vcard/Vcard";
 function Products() {
   const [currentFilterCategory, setCurrentFilterCategory] = useState("")
   const [currentFilterMaterial, setCurrentFilterMaterial] = useState([])
-  const [currentFilterOrder, setCurrentFilterOrder] = useState([])
+  const [currentFilterOrder, setCurrentFilterOrder] = useState("")
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -40,8 +40,10 @@ if(cFO===0 && count!==0) {dispatch(getRender(products));
       dispatch(resetState(1,[]))
       dispatch(getRender(busqueda))
   };
-  
-// Este es el manejador de Set que controla el Render cuando se hace algun filtro
+
+//#region Filtros
+
+//Filtro por Categoria
 const handleSelectChanges = ({value}) =>{
   console.log("value",value)
   setCurrentFilterCategory(value)
@@ -51,7 +53,7 @@ const handleSelectChanges = ({value}) =>{
   //  dispatch(getRender(filtrados))  
 }
 const filterCategory = (products,options)=>{
-  if(options == "")return products
+  if(options == "" || options == "Todas")return products
 
   let newRender = products.filter((product)=> product.category.includes(options))
 
@@ -65,33 +67,6 @@ const handleMaterialChange = (selectedOption)=>{
       return option.value; 
   })
   setCurrentFilterMaterial(newOptions)
-
-  // if(newOptions.length == 0){
-  //   dispatch(resetState(1,[]))                 
-  //   dispatch(getRender(products))
-  //   return;
-  // }
-   
-  // let newRender = productsR.filter(product =>{
-  //   let result = false;
-  //         for(let option of newOptions){
-  //             if(product.material[0].indexOf(option) == -1){
-  //                 result = false
-  //                 break
-  //             }
-            
-  //             else if(product.material[0].indexOf(option) !== -1){
-  //                 result = true
-  //             }
-              
-  //         }
-
-  //         console.log("Result",result)
-  //         return result;
-  // });
-
-  // dispatch(resetState(1,[]))                 
-  // dispatch(getRender(newRender))
 }
 const filterMaterial = (products,options)=>{
 
@@ -115,21 +90,77 @@ const filterMaterial = (products,options)=>{
   return newRender;
 }
 
+//Filtro de Ordenamiento 
+const handleOrderChange = ({value})=>{
+  setCurrentFilterOrder(value)
+}
+const filterOrder = (products,options)=>{
+  if(options.length == 0)return products
+
+  let newRender;
+
+  switch(options){
+
+    case 'asc0':{
+      newRender = products.slice().sort(function(a,b){return a.name.localeCompare(b.name,'en',{numeric:true})})
+      break
+    }
+
+    case 'desc0':{
+      newRender = products.slice().sort(function(b,a){return a.name.localeCompare(b.name,'en',{numeric:true})})
+      break
+    }
+
+    case 'asc1':{
+      newRender = products.slice().sort(function(b,a){return a.rating-b.rating})
+      break
+    }
+
+    case 'desc1':{
+      newRender = products.slice().sort(function(a,b){return a.rating - b.rating})
+      break
+    }
+
+    case 'asc2':{
+      newRender = products.slice().sort(function(b,a){return a.price-b.price})
+      break
+    }
+
+    case 'desc2':{
+      newRender = products.slice().sort(function(a,b){return a.price - b.price})
+      break
+    }
+
+    default:{
+      return alert('No se requiere ordenar')
+    }
+  }
+  return newRender
+}
+
+//Concatenacion de Filtros
 useEffect(()=>{
   //Se declara la variable que va a ser el resultado final
   let resultProducts = products;
 
   //Se le aplican los filtros
-  resultProducts = filterCategory(resultProducts,currentFilterCategory)
+  resultProducts = filterCategory(resultProducts,currentFilterCategory);
   resultProducts = filterMaterial(resultProducts,currentFilterMaterial);
+  resultProducts = filterOrder(resultProducts,currentFilterOrder);
 
-  console.log("FILTRO DE MATERIAL", resultProducts)
-  dispatch(resetState(1,[]))
+  console.log("FILTRO DE ORDER", filterOrder(resultProducts,currentFilterOrder))
+  // dispatch(resetState(1,[]))
   dispatch(getRender(resultProducts))  
-},[currentFilterMaterial, currentFilterCategory])
+},[
+  currentFilterMaterial,
+  currentFilterCategory,
+  currentFilterOrder
+])
+
+//#endregion
 
 // Las siguientes lineas de codigo dan el formato para las opciones del Select
-const oneArray = products.reduce(function (allCategories, item){return [...allCategories, ...item.category]},[])
+const oneArray = products.reduce(function (allCategories, item){return [...["Todas"],...allCategories, ...item.category]},[])
 const set = Array.from(new Set(oneArray))
 const objetos = function(arr){
    let newarr = []
@@ -140,7 +171,7 @@ const objetos = function(arr){
 }
 
 
-//#region Filtro de Materiales
+//#region Declaracion de Filtro por Materiales
 
 // Las siguientes lineas de codigo dan el formato para las opciones del Select Multi Materiales
 const oneArray2 = products.reduce(function (allMAterials, item){return [...allMAterials, ...item.material]},[])
@@ -208,7 +239,7 @@ const objetos2 = function(arr){
           <Select
           className="react-select-container"
           classNamePrefix="react-select"
-          onChange={e => {order1(e.value)}}
+          onChange={handleOrderChange}
           placeholder="Ordenamientos..."
           options={[{label:'Asc. Nombre',value:'asc0'},
           {label:'Desc. Nombre',value:'desc0'},
