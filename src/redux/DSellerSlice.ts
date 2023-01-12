@@ -9,7 +9,8 @@ export interface DSellerStateProducts {
   newProduct: object,
   cFO:number,
   filtersAord:object,
-  searchS:object
+  searchS:object,
+  user:object
 }
 
 const initialState: DSellerStateProducts = {
@@ -20,7 +21,8 @@ const initialState: DSellerStateProducts = {
   detail:{},
   newProduct: {},
   cFO:0,
-  filtersAord:[]
+  filtersAord:[],
+  user:{}
 }
 export const DSellerSlice = createSlice ({
          name: "products",
@@ -31,6 +33,11 @@ export const DSellerSlice = createSlice ({
       state.filtersAord = action.payload[1]
       state.searchS = []
     },
+
+    getUserS: (state,action)=> {
+      state.user = action.payload
+      
+    }, 
 
     getRenderS: (state,action)=> {
       state.productsR = action.payload
@@ -54,6 +61,6 @@ export const DSellerSlice = createSlice ({
   }
 })
  
-export const {getAllProducts , getProductById , postCreateProductS, getRenderS, resetRqstS } = DSellerSlice.actions;
+export const {getAllProducts , getProductById , postCreateProductS, getRenderS, resetRqstS, getUserS } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer 
