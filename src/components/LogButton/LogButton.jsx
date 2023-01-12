@@ -4,6 +4,7 @@ import { getUser} from "../../redux/DSellerActions";
 import perfilIcon from "./perfil-icon_default.png"
 import Image from 'next/image'
 import Link from 'next/link';
+require('dotenv').config();
 
 export default function LogButton({ handleLogin }) {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export default function LogButton({ handleLogin }) {
           className='btn-logIn'
           id='bell-icon'/>
          <h6> {user.given_name?user.given_name:user.nickname?user.nickname:'Invitado' }</h6>
-        {user.given_name || user.nickname?   <Link href={"https://3dseller.vercel.app/api/auth/logout"} legacyBehavior>
+        {user.given_name || user.nickname?   <Link href={process.env.AUTH0_BASE_UR+"/api/auth/logout"} legacyBehavior>
                                                   <div className="container-logout" ><div className="logout-item"> x</div></div>
                                               </Link>:null}
         </div>
