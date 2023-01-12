@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser} from "../../redux/DSellerActions";
 import Image from 'next/image'
 import logo from '../../public/logo.png'
 import Link from 'next/link';
@@ -7,6 +9,12 @@ import { useRouter } from 'next/router'
 
 
 function Nav() {
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(getUser());
+      // eslint-disable-next-line
+    }, [dispatch]);
+    const { user} = useSelector(state => state.products);
 
     const { push } = useRouter()
     const handleLogin = () => push('/api/auth/login')
@@ -25,10 +33,7 @@ function Nav() {
                 </a>
             </Link>
             {/* <!-- Nav Icons --> */}
-                <LogButton 
-                handleLogin={handleLogin}
-                className='btn-logIn'
-                id='bell-icon'/>
+             
             <div className="nav-icons">
                 <Link href={"/productos"} legacyBehavior>
                 <a className="btn" id="bell-icon" >Productos</a>
@@ -54,7 +59,11 @@ function Nav() {
                 <a className="btn" id="bell-icon">Crear Producto</a>
                 </Link>
                     </div>
-                </div>
+                    <LogButton 
+                handleLogin={user.given_name?null:user.nickname?null:handleLogin }          
+                className='btn-logIn'
+                id='bell-icon'/>
+                </div>   
             </header>
         </>
     )
