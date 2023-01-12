@@ -25,7 +25,7 @@ export default function LogButton({ handleLogin }) {
           className='btn-logIn'
           id='bell-icon'/>
          <h6> {user.given_name?user.given_name:user.nickname?user.nickname:'Invitado' }</h6>
-        {user.given_name || user.nickname?   <Link href={process.env.AUTH0_BASE_URL+"api/auth/logout"} legacyBehavior>
+        {user.given_name || user.nickname?   <Link href={"https://3dseller.vercel.app/api/auth/logout"} legacyBehavior>
                                                   <div className="container-logout" ><div className="logout-item"> x</div></div>
                                               </Link>:null}
         </div>
