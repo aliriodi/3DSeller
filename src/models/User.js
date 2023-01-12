@@ -20,6 +20,9 @@ const UserScheme = new Schema(
         type: String,
         default:'client'
       },
+      image:{
+        type: String,
+       },
       
 },
     {
