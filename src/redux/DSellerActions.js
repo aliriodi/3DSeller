@@ -1,3 +1,4 @@
+
 import {
   getAllProducts,
   getProductById,
@@ -5,6 +6,7 @@ import {
   getRenderS,
   resetRqstS,
   addFavoritos,
+   getUserS
 } from "./DSellerSlice";
 
 export const setFavoritos = (props) => (dispatch) => {
@@ -15,9 +17,24 @@ export const getRender = (state) => async (dispatch) => {
   dispatch(getRenderS(state));
 };
 
+
 export const resetState = (cFO, filtersAord) => async (dispatch) => {
   dispatch(resetRqstS([cFO, filtersAord]));
 };
+
+export const  getUser=  () => async (dispatch) => {
+        // await  fetch('http://localhost:3000/api/auth/me',
+        // { 'mode': 'cors',
+	      //   'headers': {'Access-Control-Allow-Origin': '*',}
+        // }          )
+        await  fetch('https://3dseller.vercel.app/api/auth/me',
+        { 'mode': 'cors',
+        'headers': {'Access-Control-Allow-Origin': '*',}
+      }          )
+       .then(response=> response.json() )
+       .then(myJson  => dispatch(getUserS( myJson )) )
+       .catch(error => console.log(error));
+      } 
 
 export const getProducts = () => async (dispatch) => {
   // await  fetch('http://localhost:3000/api/products')

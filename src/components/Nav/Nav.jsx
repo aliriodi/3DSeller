@@ -2,7 +2,6 @@ import React from 'react'
 import Image from 'next/image'
 import logo from '../../public/logo.png'
 import Link from 'next/link';
-import home from './house.png'
 import LogButton from '../LogButton/LogButton'
 import { useRouter } from 'next/router'
 
