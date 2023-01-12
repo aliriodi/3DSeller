@@ -1,5 +1,6 @@
 import {getAllProducts , getProductById, postCreateProductS, getRenderS, resetRqstS, getUserS} from "./DSellerSlice";
 
+
 export const  getRender=  (state) => async (dispatch) => {
     dispatch(getRenderS(state));
    }
@@ -14,7 +15,7 @@ export const  getUser=  () => async (dispatch) => {
         // { 'mode': 'cors',
 	      //   'headers': {'Access-Control-Allow-Origin': '*',}
         // }          )
-       await  fetch('https://3dseller.vercel.app/api/auth/me',
+       await  fetch(process.env.AUTH0_BASE_UR+'/api/auth/me',
         { 'mode': 'cors',
         'headers': {'Access-Control-Allow-Origin': '*',}
       }          )
