@@ -11,7 +11,7 @@ export default function LogButton({ handleLogin }) {
     // eslint-disable-next-line
   }, [dispatch]);
   const { user} = useSelector(state => state.products);
-  
+  console.log(user)
     
   return (
     <>
