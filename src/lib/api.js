@@ -10,3 +10,4 @@ export const sendContactForm = async (data) =>
             Accept: "application/json"
         }
     })
+    
