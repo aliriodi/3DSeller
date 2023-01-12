@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ObjectType } from "typescript";
+
 //import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface DSellerStateProducts {
@@ -11,6 +12,7 @@ export interface DSellerStateProducts {
   cFO: number;
   filtersAord: object;
   searchS: object;
+  user: object;
   favoritos: Array<ObjectType>;
 }
 
@@ -23,6 +25,7 @@ const initialState: DSellerStateProducts = {
   newProduct: {},
   cFO: 0,
   filtersAord: [],
+  user: {},
   favoritos: [],
 };
 export const DSellerSlice = createSlice({
@@ -32,6 +35,10 @@ export const DSellerSlice = createSlice({
     resetRqstS: (state, action) => {
       (state.cFO = action.payload[0]), (state.filtersAord = action.payload[1]);
       state.searchS = [];
+    },
+
+    getUserS: (state, action) => {
+      state.user = action.payload;
     },
 
     getRenderS: (state, action) => {
@@ -62,13 +69,14 @@ export const DSellerSlice = createSlice({
 });
 
 export const {
+  addFavoritos,
   replaceFavoritos,
   getAllProducts,
   getProductById,
   postCreateProductS,
   getRenderS,
   resetRqstS,
-  addFavoritos,
+  getUserS,
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;
