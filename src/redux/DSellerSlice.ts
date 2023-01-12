@@ -4,17 +4,17 @@ import { ObjectType } from "typescript";
 //import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface DSellerStateProducts {
-  products: object;
-  productsR: object;
+  products: Array<ObjectType>;
+  productsR: Array<ObjectType>;
   count: number;
   detail: object;
   newProduct: object;
   cFO: number;
-  filtersAord: object;
-  searchS: object;
+  filtersAord: Array<ObjectType>;
+  searchS: Array<ObjectType>;
   user: object;
-  favoritos: Array<ObjectType>;
-}
+  favorites: Array<ObjectType>;
+  }
 
 const initialState: DSellerStateProducts = {
   products: [],
@@ -26,8 +26,8 @@ const initialState: DSellerStateProducts = {
   cFO: 0,
   filtersAord: [],
   user: {},
-  favoritos: [],
-};
+  favorites: [],
+  };
 export const DSellerSlice = createSlice({
   name: "products",
   initialState,
@@ -59,12 +59,13 @@ export const DSellerSlice = createSlice({
     },
 
     addFavoritos: (state, action) => {
-      state.favoritos = [...state.favoritos, action.payload];
+      state.favorites = [...state.favorites, action.payload];
     },
 
     replaceFavoritos: (state, action) => {
-      state.favoritos = action.payload;
+      state.favorites = action.payload;
     },
+   
   },
 });
 
@@ -77,6 +78,7 @@ export const {
   getRenderS,
   resetRqstS,
   getUserS,
+  
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;
