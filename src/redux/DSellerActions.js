@@ -30,7 +30,7 @@ export const getUser = () => async (dispatch) => {
   // { 'mode': 'cors',
   //   'headers': {'Access-Control-Allow-Origin': '*',}
   // }          )
-  await fetch("https://3dseller.vercel.app/api/auth/me", {
+  await fetch("/api/auth/me", {
     mode: "cors",
     headers: { "Access-Control-Allow-Origin": "*" },
   })
