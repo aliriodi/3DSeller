@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser} from "../../redux/DSellerActions";
 import perfilIcon from "./perfil-icon_default.png"
 import Image from 'next/image'
+import Link from 'next/link';
 
 export default function LogButton({ handleLogin }) {
   const dispatch = useDispatch();
@@ -22,7 +23,10 @@ export default function LogButton({ handleLogin }) {
           alt="perfil" 
           className='btn-logIn'
           id='bell-icon'/>
-          {user.given_name?user.given_name:user.nickname?user.nickname:'invitado' }
+         <h6> {user.given_name?user.given_name:user.nickname?user.nickname:'Invitado' }</h6>
+        {user.given_name || user.nickname?   <Link href={"http://localhost:3000//api/auth/logout"} legacyBehavior>
+                                                  <div className="container-logout" ><div className="logout-item"> x</div></div>
+                                              </Link>:null}
         </div>
     </>
   )

@@ -303,7 +303,21 @@ body {
 .wrapper h2{
 	font-weight: 950;
 }
-
+/*Logout*/
+.locontainer-logout{
+    display:flex;
+    
+}
+.logout-item{
+  background-color:  #F6C90E;
+  left: 26px;
+  top: -60px;
+  border-radius: 20px;
+  position: relative;
+  
+  width:120%;
+  height:20px;
+}
 /* HOME-Banner */
 .banner-container{
 	margin-top: 80px;
