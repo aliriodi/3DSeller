@@ -9,14 +9,14 @@ export const  resetState=  (cFO,filtersAord) => async (dispatch) => {
    } 
 
 export const  getUser=  () => async (dispatch) => {
-        await  fetch('http://localhost:3000/api/auth/me',
-        { 'mode': 'cors',
-	        'headers': {'Access-Control-Allow-Origin': '*',}
-        }          )
-      //  await  fetch('https://3dseller.vercel.app/api/auth/me',
-      //   { 'mode': 'cors',
-      //   'headers': {'Access-Control-Allow-Origin': '*',}
-      // }          )
+    //    await  fetch('http://localhost:3000/api/auth/me',
+    //    { 'mode': 'cors',
+//	        'headers': {'Access-Control-Allow-Origin': '*',}
+ //       }          )
+        await  fetch('https://3dseller.vercel.app/api/auth/me',
+         { 'mode': 'cors',
+         'headers': {'Access-Control-Allow-Origin': '*',}
+       }          )
        .then(response=> response.json() )
        .then(myJson  => dispatch(getUserS( myJson )) )
        .catch(error => console.log(error));
