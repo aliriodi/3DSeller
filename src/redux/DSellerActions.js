@@ -7,14 +7,32 @@ import {
   getUserS,
   addFavoritos,
   replaceFavoritos,
-} from "./DSellerSlice";
+  } from "./DSellerSlice";
 
 export const setFavoritos = (props) => (dispatch) => {
   dispatch(addFavoritos(props));
-};
+ };
 
 export const chngFavoritos = (props) => (dispatch) => {
   dispatch(replaceFavoritos(props));
+};
+
+export const PutFavorite = (sendDb) => async (dispatch) => {
+  console.log(sendDb)
+  console.log({favorites:sendDb.favorites, email:'aliriodi@gmail.com', name:'Alirio Diaz'})
+
+   await  fetch('/api/user/'+sendDb.user.email, {
+  //await fetch("https://3dseller.vercel.app/api/user/"+email, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({favorites:sendDb.favorites, email:'aliriodi@gmail.com', name:'Alirio Diaz'}),
+  })
+    .then((response) => response.json())
+ //  .then((myJson) => dispatch(replaceFavoritos(myJson)))
+    .catch((error) => console.log(error));
 };
 
 export const getRender = (state) => async (dispatch) => {
@@ -26,15 +44,15 @@ export const resetState = (cFO, filtersAord) => async (dispatch) => {
 };
 
 export const getUser = () => async (dispatch) => {
-  // await  fetch('http://localhost:3000/api/auth/me',
-  // { 'mode': 'cors',
-  //   'headers': {'Access-Control-Allow-Origin': '*',}
-  // }          )
-  await fetch("https://3dseller.vercel.app/api/auth/me", {
-    mode: "cors",
-    headers: { "Access-Control-Allow-Origin": "*" },
-  })
-    .then((response) => response.json())
+  await  fetch('/api/auth/me',
+  { 'mode': 'cors',
+    'headers': {'Access-Control-Allow-Origin': '*',}
+  }          )
+  // await fetch("https://3dseller.vercel.app/api/auth/me", {
+  //   mode: "cors",
+  //   headers: { "Access-Control-Allow-Origin": "*" },
+  // })
+     .then((response) => response.json())
     .then((myJson) => dispatch(getUserS(myJson)))
     .catch((error) => console.log(error));
 };
