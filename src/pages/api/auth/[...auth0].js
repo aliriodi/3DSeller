@@ -1,7 +1,10 @@
 import { handleAuth , handleLogin } from '@auth0/nextjs-auth0';
+import NextCors from 'nextjs-cors';
 
-export default handleAuth({
-    signup: handleLogin({
+export  default  handleAuth({
+    
+    signup: 
+     handleLogin({
       authorizationParams: { screen_hint: 'signup' }
     })
   });
