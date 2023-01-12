@@ -1,5 +1,5 @@
 import {getAllProducts , getProductById, postCreateProductS, getRenderS, resetRqstS, getUserS} from "./DSellerSlice";
-require('dotenv').config();
+
 
 export const  getRender=  (state) => async (dispatch) => {
     dispatch(getRenderS(state));
@@ -10,14 +10,14 @@ export const  resetState=  (cFO,filtersAord) => async (dispatch) => {
    } 
 
 export const  getUser=  () => async (dispatch) => {
-        // await  fetch('http://localhost:3000/api/auth/me',
-        // { 'mode': 'cors',
-	      //   'headers': {'Access-Control-Allow-Origin': '*',}
-        // }          )
-       await  fetch(process.env.AUTH0_BASE_UR+'/api/auth/me',
+        await  fetch('http://localhost:3000/api/auth/me',
         { 'mode': 'cors',
-        'headers': {'Access-Control-Allow-Origin': '*',}
-      }          )
+	        'headers': {'Access-Control-Allow-Origin': '*',}
+        }          )
+      //  await  fetch(process.env.AUTH0_BASE_UR+'/api/auth/me',
+      //   { 'mode': 'cors',
+      //   'headers': {'Access-Control-Allow-Origin': '*',}
+      // }          )
        .then(response=> response.json() )
        .then(myJson  => dispatch(getUserS( myJson )) )
        .catch(error => console.log(error));
