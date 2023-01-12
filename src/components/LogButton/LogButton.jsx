@@ -11,15 +11,13 @@ export default function LogButton({ handleLogin }) {
     // eslint-disable-next-line
   }, [dispatch]);
   const { user} = useSelector(state => state.products);
-  if(user.picture){
-    perfilIcon=user.picture;
-    return perfilIcon;}
+  
     
   return (
     <>
         <div onClick={handleLogin} className="nav-icons nav-icons_logIn">
           <Image
-          src={perfilIcon} 
+          src={user.picture?user.picture:perfilIcon} 
           alt="perfil" 
           className='btn-logIn'
           id='bell-icon'/>
