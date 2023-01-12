@@ -27,8 +27,8 @@ console.log(req)
 
     case "PUT":
       try {
-        const dataPut = await User.findOneAndUpdate({ email: email }, body, { new: true })
-        return res.status(201).json(dataPut)
+        const dataPut = await User.findOneAndReplace({ email: email }, body,{})
+             return res.status(201).json(dataPut)
       } catch (error) {
         console.log("🚀 ~ file: [id].js:34 ~ error", error)
       }

@@ -14,7 +14,7 @@ const UserScheme = new Schema(
         type: String,
       },
       favorites:{
-        type: Array,
+        type: String,
       },
       rol:{
         type: String,
