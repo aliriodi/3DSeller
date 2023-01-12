@@ -9,6 +9,7 @@ export const  resetState=  (cFO,filtersAord) => async (dispatch) => {
    } 
 
 export const  getUser=  () => async (dispatch) => {
+
         // await  fetch('http://localhost:3000/api/auth/me',
         // { 'mode': 'cors',
 	      //   'headers': {'Access-Control-Allow-Origin': '*',}
@@ -17,6 +18,7 @@ export const  getUser=  () => async (dispatch) => {
         { 'mode': 'cors',
         'headers': {'Access-Control-Allow-Origin': '*',}
       }          )
+
        .then(response=> response.json() )
        .then(myJson  => dispatch(getUserS( myJson )) )
        .catch(error => console.log(error));
