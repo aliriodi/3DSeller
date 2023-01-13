@@ -2,7 +2,6 @@
 import NextCors from 'nextjs-cors';
 import { dbConect } from 'utils/mongoose'
 import Product from 'models/Products'
-import { withApiAuthRequired } from '@auth0/nextjs-auth0';
 
 dbConect();
 
@@ -49,4 +48,4 @@ const handler = async (req, res) => {
   }
 }
 
-export default withApiAuthRequired(handler)
+export default handler
