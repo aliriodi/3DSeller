@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, GetUserBDL, PutFavorite} from "../../redux/DSellerActions";
+import { getUser, GetUserBDL, postCreateUser} from "../../redux/DSellerActions";
 import perfilIcon from "./perfil-icon_default.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,18 +18,22 @@ export default function LogButton({ handleLogin }) {
     let email;
     user.email? email=user.email : email='invitado'
         dispatch(GetUserBDL(email));
-    // eslint-disable-next-line
-  }, [user]);
-  
-  
-  const sendDB = { favorites: userL.favorites?userL.favorites: [], user: user.email?user.email:'invitado' };
+       if((user.email!==userL.userL.email)||userL===null) 
+       {dispatch(postCreateUser(user))
+              
+        console.log('UserL.userL')  
+        console.log(userL.userL)
 
-  useEffect(() => {
-    dispatch(PutFavorite(sendDB));
-    // eslint-disable-next-line
-    console.log("sendDB", sendDB.favorites);
-  }, [user]);
+        console.log('user')  
+        console.log(user)
 
+    }
+    
+    // eslint-disable-next-line
+  }, [user.name]);
+  
+  //postCreateUser
+  
 
   return (
     <>

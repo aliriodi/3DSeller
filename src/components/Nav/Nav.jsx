@@ -9,11 +9,12 @@ import { useRouter } from "next/router";
 
 function Nav() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUser());
-    // eslint-disable-next-line
-  }, [dispatch]);
   const { user } = useSelector((state) => state.products);
+  
+  //useEffect(() => {
+  //   if(!user.name){dispatch(getUser());}
+  //    // eslint-disable-next-line
+  //  }, [dispatch]);
 
   const { push } = useRouter();
   const handleLogin = () => push("/api/auth/login");

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ObjectType } from "typescript";
 
-//import type { PayloadAction } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface DSellerStateProducts {
   products: Array<ObjectType>;
@@ -62,6 +62,10 @@ export const DSellerSlice = createSlice({
       (state.count = action.payload._id ? 1 : 0);
     },
 
+    postCreateUserS: (state, action) => {
+      state.userL = action.payload
+    },
+
     postCreateProductS: (state, action) => {
       state.newProduct = action.payload;
     },
@@ -87,6 +91,7 @@ export const {
   resetRqstS,
   getUserS,
   getUserBDLS,
+  postCreateUserS
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;
