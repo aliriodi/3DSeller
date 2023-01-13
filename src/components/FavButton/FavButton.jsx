@@ -4,15 +4,16 @@ import {
   setFavoritos,
   chngFavoritos,
   PutFavorite,
-  getUser,
-} from "../../redux/DSellerActions";
+  } from "../../redux/DSellerActions";
 
 export default function FavButton(props) {
+ 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUser());
-    // eslint-disable-next-line
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getUser());
+  //   // eslint-disable-next-line
+  // }, [dispatch]);
+ 
   const { favorites } = useSelector((state) => state.products);
   const { user } = useSelector((state) => state.products);
   const [active, setActive] = useState(false);
@@ -24,7 +25,7 @@ export default function FavButton(props) {
     dispatch(PutFavorite(sendDB));
     // eslint-disable-next-line
     console.log("sendDB", sendDB.favorites);
-  }, [user,favorites]);
+  }, [favorites]);
 
   //#region Manejadores de los botones "Fav"
   const agregarFAv = () => {

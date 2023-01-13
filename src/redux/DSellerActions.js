@@ -7,7 +7,8 @@ import {
   getUserS,
   addFavoritos,
   replaceFavoritos,
-  getUserBDLS
+  getUserBDLS,
+  postCreateUserS
 } from "./DSellerSlice";
 
 export const setFavoritos = (props) => (dispatch) => {
@@ -32,7 +33,6 @@ export const PutFavorite = (sendDb) => async () => {
 };
 
 export const GetUserBDL = (email) => async (dispatch) => {
-  console.log(email)
      await  fetch('/api/user/'+email)
     .then((response) => response.json())
     .then(json => dispatch(getUserBDLS(json)))
@@ -52,34 +52,27 @@ export const getUser = () => async (dispatch) => {
     mode: "cors",
     headers: { "Access-Control-Allow-Origin": "*" },
   })
-    // await fetch("https://3dseller.vercel.app/api/auth/me", {
-    //   mode: "cors",
-    //   headers: { "Access-Control-Allow-Origin": "*" },
-    // })
-    .then((response) => response.json())
+      .then((response) => response.json())
     .then((myJson) => dispatch(getUserS(myJson)))
     .catch((error) => console.log(error));
 };
 
 export const getProducts = () => async (dispatch) => {
-  // await  fetch('http://localhost:3000/api/products')
-  await fetch("https://3dseller.vercel.app/api/products")
+  await fetch("/api/products")
     .then((response) => response.json())
     .then((myJson) => dispatch(getAllProducts(myJson)))
     .catch((error) => console.log(error));
 };
 
 export const getProductDet = (id) => async (dispatch) => {
-  // await  fetch('http://localhost:3000/api/products/'+id)
-  await fetch("https://3dseller.vercel.app/api/products/" + id)
+  await fetch("/api/products/" + id)
     .then((response) => response.json())
     .then((myJson) => dispatch(getProductById(myJson)))
     .catch((error) => console.log(error));
 };
 
 export const postCreateProduct = (product) => async (dispatch) => {
-  // await  fetch('http://localhost:3000/api/products',
-  await fetch("https://3dseller.vercel.app/api/products/", {
+  await fetch("/api/products/", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -89,5 +82,19 @@ export const postCreateProduct = (product) => async (dispatch) => {
   })
     .then((response) => response.json())
     .then((myJson) => dispatch(postCreateProductS(myJson)))
+    .catch((error) => console.log(error));
+};
+
+export const postCreateUser = (user) => async (dispatch) => {
+  await fetch("/api/user/", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+    .then((response) => response.json())
+    .then((myJson) => dispatch(postCreateUserS(myJson)))
     .catch((error) => console.log(error));
 };
