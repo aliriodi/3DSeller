@@ -1,18 +1,35 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../redux/DSellerActions";
+import { getUser, GetUserBDL, PutFavorite} from "../../redux/DSellerActions";
 import perfilIcon from "./perfil-icon_default.png";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function LogButton({ handleLogin }) {
   const dispatch = useDispatch();
+  const  userL  = useSelector((state) => state.products);
+  const { user } = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(getUser());
     // eslint-disable-next-line
   }, [dispatch]);
-  const { user } = useSelector((state) => state.products);
-  //console.log(user)
+  
+  useEffect(() => {
+    let email;
+    user.email? email=user.email : email='invitado'
+        dispatch(GetUserBDL(email));
+    // eslint-disable-next-line
+  }, [user]);
+  
+  
+  const sendDB = { favorites: userL.favorites?userL.favorites: [], user: user.email?user.email:'invitado' };
+
+  useEffect(() => {
+    dispatch(PutFavorite(sendDB));
+    // eslint-disable-next-line
+    console.log("sendDB", sendDB.favorites);
+  }, [user]);
+
 
   return (
     <>
@@ -32,7 +49,7 @@ export default function LogButton({ handleLogin }) {
         </h6>
         {user.given_name || user.nickname ? (
           <Link
-            href={"https://3dseller.vercel.app/api/auth/logout"}
+            href={"/api/auth/logout"}
             legacyBehavior
           >
             <div className="container-logout">
