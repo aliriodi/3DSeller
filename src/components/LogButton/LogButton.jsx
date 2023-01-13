@@ -7,32 +7,12 @@ import Link from "next/link";
 
 export default function LogButton({ handleLogin }) {
   const dispatch = useDispatch();
-  const  userL  = useSelector((state) => state.products);
   const { user } = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(getUser());
     // eslint-disable-next-line
   }, [dispatch]);
   
-  useEffect(() => {
-    let email;
-    user.email? email=user.email : email='invitado'
-        dispatch(GetUserBDL(email));
-       if((user.email!==userL.userL.email)||userL===null) 
-       {dispatch(postCreateUser(user))
-              
-        console.log('UserL.userL')  
-        console.log(userL.userL)
-
-        console.log('user')  
-        console.log(user)
-
-    }
-    
-    // eslint-disable-next-line
-  }, [user.name]);
-  
-  //postCreateUser
   
 
   return (

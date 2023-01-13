@@ -42,11 +42,13 @@ export const DSellerSlice = createSlice({
     },
 
     getUserS: (state, action) => {
+      state.userL = action.payload;
       state.user = action.payload;
     },
 
     getUserBDLS:(state,action)=>{
       state.userL = action.payload;
+     
     },
 
     getRenderS: (state, action) => {

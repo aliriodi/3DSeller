@@ -53,7 +53,7 @@ export const getUser = () => async (dispatch) => {
     headers: { "Access-Control-Allow-Origin": "*" },
   })
       .then((response) => response.json())
-    .then((myJson) => dispatch(getUserS(myJson)))
+    .then((myJson) => {dispatch(getUserS(myJson)); dispatch(postCreateUser(myJson))})
     .catch((error) => console.log(error));
 };
 
