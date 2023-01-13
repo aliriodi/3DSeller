@@ -186,4 +186,4 @@ const handler = async (req, res) => {
     })
 }
 
-export default withApiAuthRequired(handler)
+export default handler
