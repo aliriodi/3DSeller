@@ -25,10 +25,10 @@ export const PutFavorite = (sendDb) => async (dispatch) => {
   //await fetch("https://3dseller.vercel.app/api/user/"+email, {
     method: "PUT",
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({favorites:[2,2,3].toString(),
-                           name:'Aliriod Diaz', 
-                           rol:'client', 
-                           email:'aliriodi@gmail.com'}),
+    body: JSON.stringify({favorites:sendDb.favorites,
+                           name:sendDb.user.name, 
+                           rol:sendDb.user.client, 
+                           email:sendDb.user.email}),
   })
     .then((response) => response.json())
  //  .then((myJson) => dispatch(replaceFavoritos(myJson)))
