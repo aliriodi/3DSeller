@@ -1054,3 +1054,147 @@ border-color: var(--main-color);
   margin: 8px 0;
 }
 /*////////// End CreateP //////////*/
+
+
+/*////////// Start Panel Admin //////////*/
+
+/* Secion Superior */
+.dashboard-container{
+  margin-top: 130px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+}
+
+.dashboard-container_stats{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px
+}
+
+.stats-total{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 400px;
+  height: 200px;
+  border-radius: 20px;
+  box-shadow: 0 5px 25px -10px #111;
+}
+
+.stats-total_text h3{
+  color: var(--main-color);
+  font-size: 3em;
+}
+
+.stats-total_icon{
+  width: 160px;
+  height: 160px;
+}
+.stats-total_icon img{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Secion Inferior */
+
+.stats-recent{
+  width: 48%;
+  box-shadow: 0 5px 35px -10px #111;
+  border-radius: 20px;
+  padding: 10px 0;
+  justify-content: center;
+}
+
+.stats-recent_text{
+  display: flex;
+  justify-content: left;
+  margin-bottom: 10px;
+}
+.stats-recent_text h3{
+  width: 50%;
+  padding: 20px 0 0 20px;
+  color: var(--main-color);
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.stats-recent_text .btn-container{
+  margin: 10px 20px 0 0;
+  justify-content: right;
+}
+.stats-recent_text .btn-container .btn{
+  width: 100px;
+}
+
+
+.stats-recent_list{
+  display: flex;
+  position: relative;
+  padding: 10px 0;
+  border-bottom: 2px solid #adadad55;
+  margin: 0 20px;
+}
+.title{
+  border: none;
+}
+.title .stats-recent_list-item span{
+  color: var(--main-color);
+  font-weight: 700;
+}
+
+
+.stats-recent_list-item{
+  padding-left: 5px;
+  text-align: right;
+  width: 33%;
+}
+.text-left{
+  text-align: left;
+}
+
+/* Drop Down */
+.dropdown{
+  position: absolute;
+  left: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 150px;
+  background-color: var(--dark-color);
+  justify-content: center;
+  box-shadow: 0 5px 35px -10px #111;
+}
+.dropdown-icon{
+  width: 10%;
+  padding: 0 7px;
+  cursor: pointer;
+}
+.dropdown-icon img{
+}
+
+.dropdown-option{
+  cursor: pointer;
+  padding: 8px 8px;
+  display: block;
+  text-align: center;
+  background-color: var(--dark-color);
+  width: 200px;
+  transition: background .3s;
+}
+.dropdown-option:hover{
+  background-color: var(--main-color);
+}
+
+.desactive{
+  display: none;
+}
+
+/* Not Found Text */
+.notFound-text{
+  color: #adadad55;
+  margin: 40px 0;
+  text-align: center;
+}
+
+/*////////// End Panel Admin //////////*/
