@@ -32,7 +32,7 @@ export default function LogButton({ handleLogin }) {
         </h6>
         {user.given_name || user.nickname ? (
           <Link
-            href={"/api/auth/logout"}
+            href={"https://3dseller.vercel.app/api/auth/logout"}
             legacyBehavior
           >
             <div className="container-logout">

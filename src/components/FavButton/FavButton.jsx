@@ -1,6 +1,11 @@
-import React, { useState,  useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setFavoritos, chngFavoritos , PutFavorite, getUser} from "../../redux/DSellerActions";
+import {
+  setFavoritos,
+  chngFavoritos,
+  PutFavorite,
+  getUser,
+} from "../../redux/DSellerActions";
 
 export default function FavButton(props) {
   const dispatch = useDispatch();
@@ -9,23 +14,21 @@ export default function FavButton(props) {
     // eslint-disable-next-line
   }, [dispatch]);
   const { favorites } = useSelector((state) => state.products);
-  const  {user }  = useSelector(state => state.products);
-    const [active, setActive] = useState(false);
+  const { user } = useSelector((state) => state.products);
+  const [active, setActive] = useState(false);
   //console.log("favoritos", favoritos);
-  
-  const sendDB = { favorites: favorites, user: user }
-    
-  useEffect(() => {
-    dispatch((PutFavorite(sendDB)));
-    // eslint-disable-next-line
-  }, [ favorites]);
 
+  const sendDB = { favorites: favorites, user: user };
+
+  useEffect(() => {
+    //dispatch(PutFavorite(sendDB));
+    // eslint-disable-next-line
+    console.log("sendDB", sendDB.favorites);
+  }, [favorites]);
 
   //#region Manejadores de los botones "Fav"
   const agregarFAv = () => {
     dispatch(setFavoritos(props));
-
-    
 
     setActive(true);
   };
