@@ -17,7 +17,7 @@ export const chngFavoritos = (props) => (dispatch) => {
   dispatch(replaceFavoritos(props));
 };
 
-export const PutFavorite = (sendDb) => async (dispatch) => {
+export const PutFavorite = async (sendDb) => {
   console.log(sendDb);
   console.log({
     favorites: sendDb.favorites,
