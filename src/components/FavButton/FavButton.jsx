@@ -21,7 +21,7 @@ export default function FavButton(props) {
   const sendDB = { favorites: favorites, user: user };
 
   useEffect(() => {
-    //dispatch(PutFavorite(sendDB));
+    dispatch(PutFavorite(sendDB));
     // eslint-disable-next-line
     console.log("sendDB", sendDB.favorites);
   }, [favorites]);
