@@ -27,10 +27,15 @@ export default async function handler(req, res) {
 
     case "POST":
       try {
-        console.log(body);
-        const data = await User.create(body)
-        return res.status(201).json(data)
-      } catch (error) {
+          const user = await User.find({email: body.email})
+          if(user.length===1){
+            console.log('usuario existe no se crea');
+            return res.status(201).json('Usuario existe no se crea') }
+          else{
+          const data = await User.create(body)
+          console.log('usuario creado') 
+          return res.status(201).json(data)
+      }} catch (error) {
         console.log("🚀 ~ file: index.js:33 ~ handler ~ error", error)
 
       }
