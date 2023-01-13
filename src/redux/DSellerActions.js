@@ -7,6 +7,7 @@ import {
   getUserS,
   addFavoritos,
   replaceFavoritos,
+  getUserBDLS
 } from "./DSellerSlice";
 
 export const setFavoritos = (props) => (dispatch) => {
@@ -17,13 +18,9 @@ export const chngFavoritos = (props) => (dispatch) => {
   dispatch(replaceFavoritos(props));
 };
 
-export const PutFavorite = (sendDb) => async (dispatch) => {
-  console.log(sendDb)
-  console.log({favorites:sendDb.favorites, email:'aliriodi@gmail.com', name:'Alirio Diaz'})
-
+export const PutFavorite = (sendDb) => async () => {
    await  fetch('/api/user/'+sendDb.user.email, {
-  //await fetch("https://3dseller.vercel.app/api/user/"+email, {
-    method: "PUT",
+   method: "PUT",
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({favorites:sendDb.favorites,
                            name:sendDb.user.name, 
@@ -31,7 +28,14 @@ export const PutFavorite = (sendDb) => async (dispatch) => {
                            email:sendDb.user.email}),
   })
     .then((response) => response.json())
- //  .then((myJson) => dispatch(replaceFavoritos(myJson)))
+    .catch((error) => console.log(error));
+};
+
+export const GetUserBDL = (email) => async (dispatch) => {
+  console.log(email)
+     await  fetch('/api/user/'+email)
+    .then((response) => response.json())
+    .then(json => dispatch(getUserBDLS(json)))
     .catch((error) => console.log(error));
 };
 

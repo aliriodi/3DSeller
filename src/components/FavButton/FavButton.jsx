@@ -24,7 +24,7 @@ export default function FavButton(props) {
     dispatch(PutFavorite(sendDB));
     // eslint-disable-next-line
     console.log("sendDB", sendDB.favorites);
-  }, [favorites]);
+  }, [user,favorites]);
 
   //#region Manejadores de los botones "Fav"
   const agregarFAv = () => {

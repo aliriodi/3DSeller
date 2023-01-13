@@ -14,6 +14,7 @@ export interface DSellerStateProducts {
   searchS: Array<ObjectType>;
   user: object;
   favorites: Array<ObjectType>;
+  userL:object;
   }
 
 const initialState: DSellerStateProducts = {
@@ -27,7 +28,10 @@ const initialState: DSellerStateProducts = {
   filtersAord: [],
   user: {},
   favorites: [],
+  userL:{name:'Invitado', rol:'invitado', email:'invitado'}
+
   };
+
 export const DSellerSlice = createSlice({
   name: "products",
   initialState,
@@ -41,6 +45,10 @@ export const DSellerSlice = createSlice({
       state.user = action.payload;
     },
 
+    getUserBDLS:(state,action)=>{
+      state.userL = action.payload;
+    },
+
     getRenderS: (state, action) => {
       state.productsR = action.payload;
     },
@@ -51,7 +59,7 @@ export const DSellerSlice = createSlice({
 
     getProductById: (state, action) => {
       (state.detail = action.payload),
-        (state.count = action.payload._id ? 1 : 0);
+      (state.count = action.payload._id ? 1 : 0);
     },
 
     postCreateProductS: (state, action) => {
@@ -78,7 +86,7 @@ export const {
   getRenderS,
   resetRqstS,
   getUserS,
-  
+  getUserBDLS,
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;
