@@ -1,4 +1,5 @@
 import { transporter, mailOptions } from "../../utils/nodemailer"
+import { withApiAuthRequired } from "@auth0/nextjs-auth0";
 
 const CONTACT_MESSAGE_FIELDS = {
     nombre: "Nombre",
@@ -185,4 +186,4 @@ const handler = async (req, res) => {
     })
 }
 
-export default handler
+export default withApiAuthRequired(handler)
