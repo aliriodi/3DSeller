@@ -17,22 +17,18 @@ export const chngFavoritos = (props) => (dispatch) => {
   dispatch(replaceFavoritos(props));
 };
 
-export const PutFavorite = (sendDb) => async (dispatch) => {
-  console.log(sendDb)
-  console.log({favorites:sendDb.favorites, email:'aliriodi@gmail.com', name:'Alirio Diaz'})
-
-   await  fetch('/api/user/'+sendDb.user.email, {
-  //await fetch("https://3dseller.vercel.app/api/user/"+email, {
+export const PutFavorite = (sendDb) => async () => {
+  console.log(sendDb.favorites) 
+  await  fetch('/api/user/'+sendDb.user.email, {
     method: "PUT",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({favorites:sendDb.favorites, email:'aliriodi@gmail.com', name:'Alirio Diaz'}),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({favorites:[2,2,3].toString(),
+                           name:'Aliriod Diaz', 
+                           rol:'client', 
+                           email:'aliriodi@gmail.com'}),
   })
     .then((response) => response.json())
- //  .then((myJson) => dispatch(replaceFavoritos(myJson)))
-    .catch((error) => console.log(error));
+     .catch((error) => console.log(error));
 };
 
 export const getRender = (state) => async (dispatch) => {
