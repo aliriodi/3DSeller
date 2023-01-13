@@ -1,15 +1,15 @@
-import { transporter, mailOptions } from "../../utils/nodemailer"
-import { withApiAuthRequired } from "@auth0/nextjs-auth0";
+import { transporter, mailOptions } from "../../../utils/nodemailer"
 
 const CONTACT_MESSAGE_FIELDS = {
-    nombre: "Nombre",
-    email: "Email",
-    asunto: "Asunto",
-    mensaje: "Mensaje"
+    material: "Material",
+    color: "Color",
+    relleno_inferior: "Relleno Inferior",
+    acabado_superficial: "Acabado Superficial",
+    escala: "Escala",
 }
 
 
-const generateEmailContent = (data) => {
+const generateEmailContent = (data, url) => {
     const stringData = Object.entries(data).reduce(
         (str, [key, val]) =>
             (str += `${CONTACT_MESSAGE_FIELDS[key]}: \n${val} \n \n`)
@@ -141,8 +141,9 @@ const generateEmailContent = (data) => {
                                     "
                                     class="padding message-content"
                                   >
-                                    <h2>New Contact Message</h2>
+                                    <h2>Gracias Por tu Compra!</h2>
                                     <div class="form-container">${htmlData}</div>
+                                    <a href=${url}><strong>Ver Producto</strong></a>
                                   </td>
                                 </tr>
                               </table>
@@ -163,15 +164,20 @@ const generateEmailContent = (data) => {
 const handler = async (req, res) => {
 
     if (req.method === "POST") {
+        const { query: { comprar } } = req
         const data = req.body
-        if (!data.nombre || !data.email || !data.asunto || !data.mensaje) {
-            return res.status(400).json({ status: 'error' })
+
+        if (!data.material || !data.color || !data.relleno_inferior || !data.acabado_superficial || !data.escala) {
+            return res.status(400).json({ status: 'error', msg: 'Faltan datos por enviar' })
         }
         try {
+            // let dbProduct = await Product.findById(comprar[1])
             await transporter.sendMail({
-                ...mailOptions,
-                ...generateEmailContent(data),
-                subject: data.asunto,
+                from: mailOptions.from,
+                to: comprar[0],
+                ...generateEmailContent(data, `https://3dseller.vercel.app/productos/${comprar[1]}`),
+                subject: "3DSeller | 3DP Printing Solutions",
+                // attachments: [{path: ``}]
             })
 
             return res.status(200).json({ status: 'success' })
@@ -186,4 +192,4 @@ const handler = async (req, res) => {
     })
 }
 
-export default withApiAuthRequired(handler)
+export default handler
