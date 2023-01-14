@@ -1,16 +1,19 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts , getUser, getAllUser, GetUserBDL} from "../../redux/DSellerActions";
+import { getProducts , getUser, GetUserBDL, getAllUser} from "../../redux/DSellerActions";
 import ListPrducts from './ListProducts';
 import ListUsers from './ListUsers';
 import img from "../LogButton/perfil-icon_default.png"
+import productsImg from "./products-icon.png"
+import cartImg from "./cart-icon.png"
+import Link from "next/link";
 
 function PanelAdmin(){
     const [currentPurchases, setCurrentPurchases] = useState(0)
 
-    // se trae los usuarios de api/user
     const dispatch = useDispatch();
+
     const { 
         products,
         count,
@@ -19,38 +22,15 @@ function PanelAdmin(){
         allUsers
     } = useSelector(state => state.products);
 
-    
     useEffect(()=>{
         if(allUsers.length === 0)dispatch(getAllUser())
         if(products.length === 0)dispatch(getProducts())
+        if(user.email != undefined)dispatch(GetUserBDL(user.email))
     })
-
-    //#region Etadisticas Totales
-
-    //Se Asignan valores
-    useEffect(()=>{
-        console.log(allUsers)
-    },[
-        products
-    ])
-
-    //#endregion
-
-
-    //#region Estadistica Recientes
-
-    //Se Asignan valores
-    // useEffect(()=>{
-    //     setRecentPurchases(products)
-    // },[
-    //     products
-    // ])
-    
-    //#endregion
 
     return(
         <>
-        <div>
+        {userL.rol == "admin"?<div>
             {/* Tablero */}
             <div className='dashboard-container'>
 
@@ -84,7 +64,7 @@ function PanelAdmin(){
 
                         {/* Icono */}
                         <div className='stats-total_icon'>
-                            <Image src={img} alt="img"/>
+                            <Image src={productsImg} alt="img"/>
                         </div>
 
                     </div>
@@ -100,7 +80,7 @@ function PanelAdmin(){
 
                         {/* Icono */}
                         <div className='stats-total_icon'>
-                            <Image src={img} alt="img"/>
+                            <Image src={cartImg} alt="img"/>
                         </div>
 
                     </div>
@@ -124,12 +104,13 @@ function PanelAdmin(){
                             <li className="stats-recent_list-item text-left">
                                 <span>Nombre</span>
                             </li>
-                            <li className="stats-recent_list-item">
+                            <li className="stats-recent_list-item text-right">
                                 <span>Precio</span>
                             </li>
                             <li className="stats-recent_list-item">
                                 <span>Stock</span>
                             </li>
+                            <span className="space"></span>
                         </ul>
 
                         {/* Listado de Productos */}
@@ -164,12 +145,13 @@ function PanelAdmin(){
                             <li className="stats-recent_list-item text-left">
                                 <span>Email</span>
                             </li>
-                            <li className="stats-recent_list-item">
+                            <li className="stats-recent_list-item text-left">
                                 <span>Nombre</span>
                             </li>
                             <li className="stats-recent_list-item">
                                 <span>Rol</span>
                             </li>
+                            <span className="space"></span>
                         </ul>
 
                         {/* Listado de Usuarios */}
@@ -181,17 +163,28 @@ function PanelAdmin(){
                             <ListUsers
                             key = {user._id}
                             name = {user.name}
+                            favorites = {user.favorites}
                             img = {user.picture}
                             email = {user.email}
                             rol = {user.rol}
                             id = {user._id}
+                            user={user}
                             />)
                         })
                         ):<p className="notFound-text">No se encontraron Usuarios</p>}
                     </div>
                 </div>
             </div>
+        </div>:
+        <div className="permissions-denied">
+            <div className="permissions-denied-text">
+            <h1>No Tiene Autorización Para Acceder a Esta Página</h1>
+            <div className="btn-container">
+                <Link className="btn" href={"/"} >Pagina Pricipal</Link>
+            </div>
+            </div>
         </div>
+        }
         </>
     )
 }
