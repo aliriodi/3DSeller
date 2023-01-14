@@ -9,11 +9,6 @@ const ListUsers = (props)=>{
 
     const dispatch = useDispatch();
     
-    const handleDropdown = ()=>{
-        if(dropdownActive == false)setDropdownActive(true);
-        if(dropdownActive == true)setDropdownActive(false);
-    }
-    
     const changeRolUser = ()=>{
         alert(`${props.name}`)
     }
@@ -21,6 +16,18 @@ const ListUsers = (props)=>{
     const banUser = ()=>{
         alert(`${props.name}`)
     }
+
+    //#region Dropdown
+    window.addEventListener('click', function(event){
+        if(event.target.id != `dropdown-${props.id}`)setDropdownActive(false)
+        else return
+    })
+    
+    const handleDropdown = ()=>{
+        if(dropdownActive == false)setDropdownActive(true);
+        if(dropdownActive == true)setDropdownActive(false);
+    }
+    //#endregion
     
     return(
          <ul className="stats-recent_list">
@@ -28,7 +35,7 @@ const ListUsers = (props)=>{
                 <span>{props.email}</span>
             </li>
                                 
-            <li className="stats-recent_list-item text-left">
+            <li className="stats-recent_list-item">
                 <span>{props.name}</span>
             </li>
 
@@ -36,9 +43,9 @@ const ListUsers = (props)=>{
                 <span>{props.rol}</span>
             </li>
             <li className={`dropdown-container`}>
-                <span className="dropdown-icon" onClick={handleDropdown}>
+                <span className="dropdown-icon" onClick={handleDropdown} id={`dropdown-${props.id}`}>
                     .
-                    {/* <Image src={menuImg}/> */}
+                    {/* <Image src={props.img}/> */}
                 </span>
             <li className={`dropdown ${dropdownActive == true?"":"desactive"}`}>
                 <a  href={`/user/${props.id}`} className="dropdown-option">

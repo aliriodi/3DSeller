@@ -1100,6 +1100,9 @@ border-color: var(--main-color);
 /* Secion Inferior */
 
 .stats-recent{
+  display: block;
+  /* grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr; */
   width: 48%;
   box-shadow: 0 5px 35px -10px #111;
   border-radius: 20px;
@@ -1157,10 +1160,11 @@ border-color: var(--main-color);
 /* Drop Down */
 .dropdown{
   position: absolute;
-  left: 100%;
+  right: 0%;
   border-radius: 10px;
   overflow: hidden;
   min-width: 150px;
+  z-index: 10;
   background-color: var(--dark-color);
   justify-content: center;
   box-shadow: 0 5px 35px -10px #111;
@@ -1171,7 +1175,10 @@ border-color: var(--main-color);
   cursor: pointer;
 }
 .dropdown-icon img{
-  cursor: pointer;
+
+  width: 100px;
+  height: 100%;
+
 }
 
 .dropdown-option{
@@ -1197,5 +1204,3 @@ border-color: var(--main-color);
   margin: 40px 0;
   text-align: center;
 }
-
-/*////////// End Panel Admin //////////*/
