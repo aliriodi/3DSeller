@@ -79,10 +79,12 @@ export const DSellerSlice = createSlice({
 
     addFavoritos: (state, action) => {
       state.favorites = [...state.favorites, action.payload];
+      localStorage.setItem("favorites", JSON.stringify(state.favorites));
     },
 
     replaceFavoritos: (state, action) => {
       state.favorites = action.payload;
+      localStorage.setItem("favorites", JSON.stringify(action.payload));
     },
   },
 });
