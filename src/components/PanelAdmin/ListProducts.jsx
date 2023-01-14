@@ -1,4 +1,4 @@
-import { getProducts, getUser} from "../../redux/DSellerActions";
+import { getProducts, GetUserBDL} from "../../redux/DSellerActions";
 import { useDispatch } from "react-redux"
 import { useState } from "react";
 import Image from "next/image";
@@ -10,7 +10,8 @@ const ListProducts = (props)=>{
     const dispatch = useDispatch();
     
     const deleteProducts = ()=>{
-        alert(`${props.name} Eliminado`)
+        // alert(`${props.name} Eliminado`)
+        console.log()
         dispatch(getProducts);
     }
     
@@ -32,7 +33,7 @@ const ListProducts = (props)=>{
                 <span>{props.name}</span>
             </li>
                                 
-            <li className="stats-recent_list-item">
+            <li className="stats-recent_list-item text-right">
                 <span>{props.price}</span>
             </li>
 
@@ -41,7 +42,7 @@ const ListProducts = (props)=>{
             </li>
             <li className={`dropdown-container`}>
                 <span className="dropdown-icon" onClick={handleDropdown} id={`dropdown-${props.id}`}>
-                    .
+                    ...
                     {/* <Image src={menuImg}/> */}
                 </span>
             <li className={`dropdown ${dropdownActive == true?"":"desactive"}`}>

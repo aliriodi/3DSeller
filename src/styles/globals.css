@@ -1053,6 +1053,9 @@ border-color: var(--main-color);
   color: #f00;
   margin: 8px 0;
 }
+.error{
+  color: #f00;
+}
 /*////////// End CreateP //////////*/
 
 
@@ -1139,6 +1142,9 @@ border-color: var(--main-color);
   border-bottom: 2px solid #adadad55;
   margin: 0 20px;
 }
+.stats-recent_list:last-child{
+  border-bottom: none;
+}
 .title{
   border: none;
 }
@@ -1146,15 +1152,22 @@ border-color: var(--main-color);
   color: var(--main-color);
   font-weight: 700;
 }
-
+.space{
+  width: 6%;
+}
 
 .stats-recent_list-item{
   padding-left: 5px;
   text-align: right;
-  width: 33%;
+  width: 20%;
 }
 .text-left{
+  width: 40%;
   text-align: left;
+}
+.text-right{
+  width: 40%;
+  text-align: right;
 }
 
 /* Drop Down */
@@ -1172,7 +1185,17 @@ border-color: var(--main-color);
 .dropdown-icon{
   width: 10%;
   padding: 0 7px;
+  color: var(--text-color);
+  justify-content: left;
+  transform: rotate(180deg);
+  font-weight: 600;
+  writing-mode: vertical-rl;
   cursor: pointer;
+  /* position: absolute; */
+  right: 0;
+}
+.dropdown-icon:hover{
+  color: var(--main-color);
 }
 .dropdown-icon img{
 
@@ -1203,4 +1226,29 @@ border-color: var(--main-color);
   color: #adadad55;
   margin: 40px 0;
   text-align: center;
+}
+
+/* Permissions Denied */
+
+body{
+  height: 100%;
+}
+.permissions-denied{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+.permissions-denied-text{
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+}
+.permissions-denied-text h1{
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 30px;
 }
