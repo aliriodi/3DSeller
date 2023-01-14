@@ -25,7 +25,8 @@ export const PutFavorite = (sendDb) => async () => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({favorites:sendDb.favorites,
                            name:sendDb.user.name, 
-                           rol:sendDb.user.client, 
+                           rol:sendDb.user.rol,
+                           picture:sendDb.user.picture, 
                            email:sendDb.user.email}),
   })
     .then((response) => response.json())
@@ -95,6 +96,6 @@ export const postCreateUser = (user) => async (dispatch) => {
     body: JSON.stringify(user),
   })
     .then((response) => response.json())
-    .then((myJson) => dispatch(postCreateUserS(myJson)))
+    .then((myJson) =>postCreateUserS(myJson))
     .catch((error) => console.log(error));
 };

@@ -9,9 +9,10 @@ export default function LogButton({ handleLogin }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.products);
   useEffect(() => {
-    dispatch(getUser());
+    if(!user.name){
+    dispatch(getUser());}
     // eslint-disable-next-line
-  }, [dispatch]);
+  }, [false]);
   
   
 

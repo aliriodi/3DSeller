@@ -1,6 +1,6 @@
 // const mongoose = require('mongoose')
 import { Schema, model, models } from 'mongoose';
-
+import uniqueValidator from 'mongoose-unique-validator'
 const UserScheme = new Schema(
     {
       name: {
@@ -12,6 +12,9 @@ const UserScheme = new Schema(
       },
       email:{
         type: String,
+        unique: true,
+        dropDups: true,
+        required: true
       },
       favorites:{
         type: Array,
@@ -20,7 +23,7 @@ const UserScheme = new Schema(
         type: String,
         default:'client'
       },
-      image:{
+      picture:{
         type: String,
        },
       
@@ -30,5 +33,5 @@ const UserScheme = new Schema(
       versionKey: false
     }
   )
-
+  UserScheme.plugin(uniqueValidator)
   export default models.User || model('User', UserScheme)
