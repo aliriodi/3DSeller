@@ -790,7 +790,7 @@ header{
 	border: none;
 	font-size: 15px;
 	box-shadow: 5px 5px 20px #1116;
-	-webkit-appearance: button;
+	
 	outline: none;
 	cursor: pointer;
 }
@@ -1175,8 +1175,10 @@ border-color: var(--main-color);
   cursor: pointer;
 }
 .dropdown-icon img{
+
   width: 100px;
   height: 100%;
+
 }
 
 .dropdown-option{
@@ -1202,5 +1204,3 @@ border-color: var(--main-color);
   margin: 40px 0;
   text-align: center;
 }
-
-/*////////// End Panel Admin //////////*/

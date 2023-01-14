@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ObjectType } from "typescript";
 
-import type { PayloadAction } from '@reduxjs/toolkit'
-
 export interface DSellerStateProducts {
   products: Array<ObjectType>;
   productsR: Array<ObjectType>;
