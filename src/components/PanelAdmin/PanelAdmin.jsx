@@ -1,46 +1,43 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts , getUser} from "../../redux/DSellerActions";
+import { getProducts , getUser, getAllUser, GetUserBDL} from "../../redux/DSellerActions";
 import ListPrducts from './ListProducts';
 import ListUsers from './ListUsers';
 import img from "../LogButton/perfil-icon_default.png"
 
 function PanelAdmin(){
+    const [currentPurchases, setCurrentPurchases] = useState(0)
 
     // se trae los usuarios de api/user
     const dispatch = useDispatch();
-
-    useEffect(()=>{
-        // dispatch(getUser())
-        dispatch(getProducts())
-    })
-
     const { 
         products,
         count,
-        user
+        user,
+        userL,
+        allUsers
     } = useSelector(state => state.products);
 
+    
+    useEffect(()=>{
+        if(allUsers.length === 0)dispatch(getAllUser())
+        if(products.length === 0)dispatch(getProducts())
+    })
+
     //#region Etadisticas Totales
-    const [currentCantProducts, setCurrentCantProducts] = useState(0)
-    const [currentCantUsers, setCurrentCantUsers] = useState(0)
-    const [currentPurchases, setCurrentPurchases] = useState(0)
 
     //Se Asignan valores
     useEffect(()=>{
-        setCurrentCantProducts(count)
+        console.log(allUsers)
     },[
-        count,
-        user
+        products
     ])
 
     //#endregion
 
 
     //#region Estadistica Recientes
-    const [currentProducts, setCurrentProducts] = useState([]);
-    const [currentUsers, setCurrentUsers] = useState([]);
 
     //Se Asignan valores
     // useEffect(()=>{
@@ -48,6 +45,7 @@ function PanelAdmin(){
     // },[
     //     products
     // ])
+    
     //#endregion
 
     return(
@@ -64,7 +62,7 @@ function PanelAdmin(){
 
                         {/* Cantidad */}
                         <div className='stats-total_text'>
-                            <h3>{currentCantUsers}</h3>
+                            <h3>{allUsers.length}</h3>
                             <p>Usuarios</p>
                         </div>
 
@@ -80,7 +78,7 @@ function PanelAdmin(){
 
                         {/* Cantidad */}
                         <div className='stats-total_text'>
-                            <h3>{currentCantProducts}</h3>
+                            <h3>{products.length}</h3>
                             <p>Productos</p>
                         </div>
 
@@ -111,7 +109,7 @@ function PanelAdmin(){
                 {/* Estadisticas Recientes */}
                 <div className='dashboard-container_stats'>
 
-                    {/* Compras Recientes */}
+                    {/* Productos */}
                     <div className='stats-recent'>
                         <div className="stats-recent_text">
                             <h3>Productos</h3>
@@ -151,7 +149,7 @@ function PanelAdmin(){
                         ):<p className="notFound-text">No se encontraron productos</p>}
                     </div>
 
-                    {/* Usuarios recientes */}
+                    {/* Usuarios */}
                     <div className='stats-recent'>
                         <div className="stats-recent_text">
                             <h3>Usuarios</h3>
@@ -166,7 +164,7 @@ function PanelAdmin(){
                             <li className="stats-recent_list-item text-left">
                                 <span>Email</span>
                             </li>
-                            <li className="stats-recent_list-item text-left">
+                            <li className="stats-recent_list-item">
                                 <span>Nombre</span>
                             </li>
                             <li className="stats-recent_list-item">
@@ -176,14 +174,14 @@ function PanelAdmin(){
 
                         {/* Listado de Usuarios */}
                         {
-                        currentUsers && currentUsers.length > 0 ? (
-                        currentUsers.map((user) => {
+                        allUsers && allUsers.length > 0 ? (
+                        allUsers.map((user) => {
                             //Productos
                             return (
                             <ListUsers
                             key = {user._id}
                             name = {user.name}
-                            img = {user.img}
+                            img = {user.picture}
                             email = {user.email}
                             rol = {user.rol}
                             id = {user._id}

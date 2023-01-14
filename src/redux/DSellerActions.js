@@ -5,6 +5,7 @@ import {
   getRenderS,
   resetRqstS,
   getUserS,
+  getAllUserS,
   addFavoritos,
   replaceFavoritos,
   getUserBDLS,
@@ -56,6 +57,13 @@ export const getUser = () => async (dispatch) => {
       .then((response) => response.json())
     .then((myJson) => {dispatch(getUserS(myJson)); dispatch(postCreateUser(myJson))})
     .catch((error) => console.log(error));
+};
+
+export const getAllUser = () => async (dispatch) => {
+  await  fetch('/api/user')
+ .then((response) => response.json())
+ .then(json => dispatch(getAllUserS(json)))
+ .catch((error) => console.log(error));
 };
 
 export const getProducts = () => async (dispatch) => {
