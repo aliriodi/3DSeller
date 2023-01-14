@@ -11,10 +11,10 @@ export default function FavButton(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUser());
-    // eslint-disable-next-line
-  }, [dispatch]);
-  const { favorites } = useSelector((state) => state.products);
+  }, []);
+
   const { user } = useSelector((state) => state.products);
+  const { favorites } = useSelector((state) => state.products);
   const [active, setActive] = useState(false);
   //console.log("favoritos", favoritos);
 
@@ -24,12 +24,11 @@ export default function FavButton(props) {
     dispatch(PutFavorite(sendDB));
     // eslint-disable-next-line
     console.log("sendDB", sendDB.favorites);
-  }, [user,favorites]);
+  }, [favorites]);
 
   //#region Manejadores de los botones "Fav"
   const agregarFAv = () => {
     dispatch(setFavoritos(props));
-
     setActive(true);
   };
 
