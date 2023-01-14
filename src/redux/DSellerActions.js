@@ -8,7 +8,8 @@ import {
   addFavoritos,
   replaceFavoritos,
   getUserBDLS,
-  postCreateUserS
+  postCreateUserS,
+  modificarUserS
 } from "./DSellerSlice";
 
 export const setFavoritos = (props) => (dispatch) => {
@@ -86,6 +87,19 @@ export const postCreateProduct = (product) => async (dispatch) => {
     .catch((error) => console.log(error));
 };
 
+export const modificarUser = (user) => async (dispatch) => {
+  await fetch("/api/user/"+user.email, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+    .then((response) => response.json())
+    .then((myJson) =>dispatch(modificarUserS(myJson)))
+    .catch((error) => console.log(error));
+};
 export const postCreateUser = (user) => async (dispatch) => {
   await fetch("/api/user/", {
     method: "POST",

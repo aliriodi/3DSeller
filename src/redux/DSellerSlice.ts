@@ -77,6 +77,10 @@ export const DSellerSlice = createSlice({
     replaceFavoritos: (state, action) => {
       state.favorites = action.payload;
     },
+    modificarUserS:(state,action) => {
+      state.userL = action.payload;
+      state.user = action.payload;
+    }
    
   },
 });
@@ -91,7 +95,8 @@ export const {
   resetRqstS,
   getUserS,
   getUserBDLS,
-  postCreateUserS
+  postCreateUserS,
+  modificarUserS
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;

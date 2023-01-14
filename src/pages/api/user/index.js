@@ -25,6 +25,16 @@ export default async function handler(req, res) {
         console.log("🚀 ~ file: index.js:25 ~ handler ~ error", error)
       }
 
+      case "PUT":
+      try {
+        //console.log(body)
+        const dataPut = await User.findOneAndReplace({ email: email }, body,{})
+         return res.status(201).json(dataPut)
+      } catch (error) {
+        console.log("🚀 ~ file: [email].js:34 ~ error", error)
+      }
+
+
     case "POST":
       try {        
                    const user = await User.find({email: body.email})
