@@ -8,14 +8,7 @@ import LogButton from "../LogButton/LogButton";
 import { useRouter } from "next/router";
 
 function Nav() {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.products);
-  
-  //useEffect(() => {
-  //   if(!user.name){dispatch(getUser());}
-  //    // eslint-disable-next-line
-  //  }, [dispatch]);
-
+    const { user } = useSelector((state) => state.products);
   const { push } = useRouter();
   const handleLogin = () => push("/api/auth/login");
 

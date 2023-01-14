@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, GetUserBDL, postCreateUser} from "../../redux/DSellerActions";
+import { getUser } from "../../redux/DSellerActions";
 import perfilIcon from "./perfil-icon_default.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,14 +9,11 @@ export default function LogButton({ handleLogin }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.products);
   useEffect(() => {
-    if(!user.name){
-    dispatch(getUser());}
+      dispatch(getUser())
     // eslint-disable-next-line
   }, [false]);
   
-  
-
-  return (
+   return (
     <>
       <div onClick={handleLogin} className="nav-icons nav-icons_logIn">
         <Image
