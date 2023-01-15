@@ -25,14 +25,30 @@ export default async function handler(req, res) {
         console.log("🚀 ~ file: index.js:25 ~ handler ~ error", error)
       }
 
-    case "POST":
+      case "PUT":
       try {
-        console.log(body);
-        const data = await User.create(body)
-        return res.status(201).json(data)
+        //console.log(body)
+        const dataPut = await User.findOneAndReplace({ email: email }, body,{})
+         return res.status(201).json(dataPut)
       } catch (error) {
-        console.log("🚀 ~ file: index.js:33 ~ handler ~ error", error)
+        console.log("🚀 ~ file: [email].js:34 ~ error", error)
+      }
 
+
+    case "POST":
+      try {        
+                   const user = await User.find({email: body.email})
+                   console.log(user);
+                   if(user.length!==0){
+                     console.log('usuario existe no se crea');
+                     return res.status(201).json('Usuario existe no se crea') }
+                   else{
+                    console.log('usuario creado') 
+                    const data =  User.create(body)
+                    return res.status(201).json(data)
+               }} catch (error) {
+                 console.log("🚀 ~ file: index.js:41 ~ handler ~ error", error)
+           
       }
     default:
       return res.status(400).json({

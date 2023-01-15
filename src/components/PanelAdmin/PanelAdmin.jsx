@@ -1,58 +1,36 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts , getUser} from "../../redux/DSellerActions";
+import { getProducts , getUser, GetUserBDL, getAllUser} from "../../redux/DSellerActions";
 import ListPrducts from './ListProducts';
 import ListUsers from './ListUsers';
 import img from "../LogButton/perfil-icon_default.png"
+import productsImg from "./products-icon.png"
+import cartImg from "./cart-icon.png"
+import Link from "next/link";
 
 function PanelAdmin(){
+    const [currentPurchases, setCurrentPurchases] = useState(0)
 
-    // se trae los usuarios de api/user
     const dispatch = useDispatch();
-
-    useEffect(()=>{
-        // dispatch(getUser())
-        dispatch(getProducts())
-    })
 
     const { 
         products,
         count,
-        user
+        user,
+        userL,
+        allUsers
     } = useSelector(state => state.products);
 
-    //#region Etadisticas Totales
-    const [currentCantProducts, setCurrentCantProducts] = useState(0)
-    const [currentCantUsers, setCurrentCantUsers] = useState(0)
-    const [currentPurchases, setCurrentPurchases] = useState(0)
-
-    //Se Asignan valores
     useEffect(()=>{
-        setCurrentCantProducts(count)
-    },[
-        count,
-        user
-    ])
-
-    //#endregion
-
-
-    //#region Estadistica Recientes
-    const [currentProducts, setCurrentProducts] = useState([]);
-    const [currentUsers, setCurrentUsers] = useState([]);
-
-    //Se Asignan valores
-    // useEffect(()=>{
-    //     setRecentPurchases(products)
-    // },[
-    //     products
-    // ])
-    //#endregion
+        if(allUsers.length === 0)dispatch(getAllUser())
+        if(products.length === 0)dispatch(getProducts())
+        if(user.email != undefined)dispatch(GetUserBDL(user.email))
+    })
 
     return(
         <>
-        <div>
+        {userL.rol == "admin"?<div>
             {/* Tablero */}
             <div className='dashboard-container'>
 
@@ -64,7 +42,7 @@ function PanelAdmin(){
 
                         {/* Cantidad */}
                         <div className='stats-total_text'>
-                            <h3>{currentCantUsers}</h3>
+                            <h3>{allUsers.length}</h3>
                             <p>Usuarios</p>
                         </div>
 
@@ -80,13 +58,13 @@ function PanelAdmin(){
 
                         {/* Cantidad */}
                         <div className='stats-total_text'>
-                            <h3>{currentCantProducts}</h3>
+                            <h3>{products.length}</h3>
                             <p>Productos</p>
                         </div>
 
                         {/* Icono */}
                         <div className='stats-total_icon'>
-                            <Image src={img} alt="img"/>
+                            <Image src={productsImg} alt="img"/>
                         </div>
 
                     </div>
@@ -102,7 +80,7 @@ function PanelAdmin(){
 
                         {/* Icono */}
                         <div className='stats-total_icon'>
-                            <Image src={img} alt="img"/>
+                            <Image src={cartImg} alt="img"/>
                         </div>
 
                     </div>
@@ -111,7 +89,7 @@ function PanelAdmin(){
                 {/* Estadisticas Recientes */}
                 <div className='dashboard-container_stats'>
 
-                    {/* Compras Recientes */}
+                    {/* Productos */}
                     <div className='stats-recent'>
                         <div className="stats-recent_text">
                             <h3>Productos</h3>
@@ -126,12 +104,13 @@ function PanelAdmin(){
                             <li className="stats-recent_list-item text-left">
                                 <span>Nombre</span>
                             </li>
-                            <li className="stats-recent_list-item">
+                            <li className="stats-recent_list-item text-right">
                                 <span>Precio</span>
                             </li>
                             <li className="stats-recent_list-item">
                                 <span>Stock</span>
                             </li>
+                            <span className="space"></span>
                         </ul>
 
                         {/* Listado de Productos */}
@@ -151,7 +130,7 @@ function PanelAdmin(){
                         ):<p className="notFound-text">No se encontraron productos</p>}
                     </div>
 
-                    {/* Usuarios recientes */}
+                    {/* Usuarios */}
                     <div className='stats-recent'>
                         <div className="stats-recent_text">
                             <h3>Usuarios</h3>
@@ -172,28 +151,40 @@ function PanelAdmin(){
                             <li className="stats-recent_list-item">
                                 <span>Rol</span>
                             </li>
+                            <span className="space"></span>
                         </ul>
 
                         {/* Listado de Usuarios */}
                         {
-                        currentUsers && currentUsers.length > 0 ? (
-                        currentUsers.map((user) => {
+                        allUsers && allUsers.length > 0 ? (
+                        allUsers.map((user) => {
                             //Productos
                             return (
                             <ListUsers
                             key = {user._id}
                             name = {user.name}
-                            img = {user.img}
+                            favorites = {user.favorites}
+                            img = {user.picture}
                             email = {user.email}
                             rol = {user.rol}
                             id = {user._id}
+                            user={user}
                             />)
                         })
                         ):<p className="notFound-text">No se encontraron Usuarios</p>}
                     </div>
                 </div>
             </div>
+        </div>:
+        <div className="permissions-denied">
+            <div className="permissions-denied-text">
+            <h1>No Tiene Autorización Para Acceder a Esta Página</h1>
+            <div className="btn-container">
+                <Link className="btn" href={"/"} >Pagina Pricipal</Link>
+            </div>
+            </div>
         </div>
+        }
         </>
     )
 }

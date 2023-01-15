@@ -1,15 +1,9 @@
 import React, { useEffect } from "react";
 import FavButton from "../FavButton/FavButton";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "redux/DSellerActions";
-import imghc from "../../public/model3d.png";
 
 export default function Vcard(props) {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUser());
-    // eslint-disable-next-line
-  }, [dispatch]);
+  
   const { user } = useSelector((state) => state.products);
   return (
     /// Anterior version de la Card ///

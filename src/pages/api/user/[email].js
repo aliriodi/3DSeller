@@ -13,9 +13,6 @@ export default async (req, res) => {
     optionsSuccessStatus: 201, // some legacy browsers (IE11, various SmartTVs) choke on 204
  });
   const { method, body, query: { email } } = req
-console.log('email')
-console.log(method)
-console.log(req)
   switch (method) {
     case "GET":
       try {

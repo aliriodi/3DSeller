@@ -1,26 +1,37 @@
-import { getProducts, getUser} from "../../redux/DSellerActions";
-import { useDispatch } from "react-redux"
+import { getProducts, getAllUser,modificarUser, getUser} from "../../redux/DSellerActions";
+import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react";
-import Image from "next/image";
-import menuImg from './menu.png'
 
 const ListUsers = (props)=>{
     const [dropdownActive, setDropdownActive] = useState(false)
 
     const dispatch = useDispatch();
     
+    const bannedUser = ()=>{
+        if(props.rol != "banned")dispatch(modificarUser({...props.user,rol:"banned"}));
+        else dispatch(modificarUser({...props.user,rol:"client"}));
+        dispatch(getAllUser())
+        .then(()=>dispatch(getUser()))
+    }
+    
+    const adminUser = ()=>{
+        if(props.rol == "client")dispatch(modificarUser({...props.user,rol:"admin"}))
+        if(props.rol == "admin")dispatch(modificarUser({...props.user,rol:"client"}))
+        dispatch(getAllUser())
+        .then(()=>dispatch(getUser()))
+    }
+
+    //#region Dropdown
+    window.addEventListener('click', function(event){
+        if(event.target.id != `dropdown-${props.id}`)setDropdownActive(false)
+        else return
+    })
+    
     const handleDropdown = ()=>{
         if(dropdownActive == false)setDropdownActive(true);
         if(dropdownActive == true)setDropdownActive(false);
     }
-    
-    const changeRolUser = ()=>{
-        alert(`${props.name}`)
-    }
-
-    const banUser = ()=>{
-        alert(`${props.name}`)
-    }
+    //#endregion
     
     return(
          <ul className="stats-recent_list">
@@ -32,24 +43,29 @@ const ListUsers = (props)=>{
                 <span>{props.name}</span>
             </li>
 
-            <li className="stats-recent_list-item">
-                <span>{props.rol}</span>
+            <li className={`stats-recent_list-item`}>
+                <span className={props.rol == "banned"?"error":null}>{props.rol}</span>
             </li>
             <li className={`dropdown-container`}>
-                <span className="dropdown-icon" onClick={handleDropdown}>
-                    .
-                    {/* <Image src={menuImg}/> */}
+                <span className="dropdown-icon" onClick={handleDropdown} id={`dropdown-${props.id}`}>
+                    ...
                 </span>
+
+            {/* Opciones */}
             <li className={`dropdown ${dropdownActive == true?"":"desactive"}`}>
+                
                 <a  href={`/user/${props.id}`} className="dropdown-option">
                     Ver Perfil
                 </a>
-                <div onClick={changeRolUser} className="dropdown-option">
-                    Hacer Admin
+                
+                <div onClick={adminUser} className={`dropdown-option ${props.rol == "banned"?"desactive":null}`}>
+                    {props.rol=="admin"?"Quitar Admin":"Hacer Admin"}
                 </div>
-                <div onClick={banUser} className="dropdown-option">
-                    Bannear
-                </div>
+
+                {/* Banear Usuario */}
+                {/* <div onClick={bannedUser} className="dropdown-option">
+                    {props.rol=="banned"?"Quitar Baneo":"Bannear"}
+                </div> */}
             </li>
             </li>
          </ul> 

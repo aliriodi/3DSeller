@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../redux/DSellerActions";
+import { getUser, GetUserBDL } from "../../redux/DSellerActions";
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import Link from "next/link";
@@ -8,15 +8,11 @@ import LogButton from "../LogButton/LogButton";
 import { useRouter } from "next/router";
 
 function Nav() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUser());
-    // eslint-disable-next-line
-  }, [dispatch]);
-  const { user } = useSelector((state) => state.products);
-
+  const { user, userL } = useSelector((state) => state.products);
   const { push } = useRouter();
   const handleLogin = () => push("/api/auth/login");
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -32,6 +28,13 @@ function Nav() {
           </Link>
           {/* <!-- Nav Icons --> */}
 
+          <div className={`nav-icons ${userL.rol!=="admin"?"desactive":null}`}>
+            <Link href={"/admin"} legacyBehavior>
+              <a className="btn" id="bell-icon">
+                Panel de Administrador
+              </a>
+            </Link>
+          </div>
           <div className="nav-icons">
             <Link href={"/productos"} legacyBehavior>
               <a className="btn" id="bell-icon">

@@ -4,6 +4,7 @@ import { withApiAuthRequired } from "@auth0/nextjs-auth0";
 const CONTACT_MESSAGE_FIELDS = {
     nombre: "Nombre",
     email: "Email",
+    tel: "Numero Telefonico",
     asunto: "Asunto",
     mensaje: "Mensaje"
 }
@@ -141,7 +142,7 @@ const generateEmailContent = (data) => {
                                     "
                                     class="padding message-content"
                                   >
-                                    <h2>New Contact Message</h2>
+                                    <h2>Nuevo Mensaje de Contacto</h2>
                                     <div class="form-container">${htmlData}</div>
                                   </td>
                                 </tr>
@@ -186,4 +187,4 @@ const handler = async (req, res) => {
     })
 }
 
-export default withApiAuthRequired(handler)
+export default handler

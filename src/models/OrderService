@@ -1,9 +1,9 @@
 // const mongoose = require('mongoose')
 import { Schema, model, models } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator'
-const UserScheme = new Schema(
+const orderServiceScheme = new Schema(
     {
-      name: {
+      idorder: {
         type: String,
         // requires: [true, 'Title is required'],
         // unique: true,
@@ -16,16 +16,12 @@ const UserScheme = new Schema(
         dropDups: true,
         required: true
       },
-      favorites:{
-        type: Array,
+      totalamount:{
+        type: Number,
       },
-      rol:{
-        type: String,
-        default:'client'
-      },
-      picture:{
-        type: String,
-       },
+      status:{
+        type:String
+      }
       
 },
     {
@@ -33,5 +29,5 @@ const UserScheme = new Schema(
       versionKey: false
     }
   )
-  UserScheme.plugin(uniqueValidator)
-  export default models.User || model('User', UserScheme)
+  orderServiceScheme.plugin(uniqueValidator)
+  export default models.orderService || model('orderService', orderServiceScheme)

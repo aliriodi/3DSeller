@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ObjectType } from "typescript";
 
-//import type { PayloadAction } from '@reduxjs/toolkit'
-
 interface UserL {
   name: string;
   rol: string;
@@ -22,6 +20,7 @@ export interface DSellerStateProducts {
   user: object;
   favorites: Array<ObjectType>;
   userL: UserL;
+  allUsers: Array<ObjectType>;
 }
 
 const initialState: DSellerStateProducts = {
@@ -34,6 +33,7 @@ const initialState: DSellerStateProducts = {
   cFO: 0,
   filtersAord: [],
   user: {},
+  allUsers: [],
   favorites: [],
   userL: {
     name: "Invitado",
@@ -53,7 +53,12 @@ export const DSellerSlice = createSlice({
     },
 
     getUserS: (state, action) => {
+      state.userL = action.payload;
       state.user = action.payload;
+    },
+
+    getAllUserS: (state, action) => {
+      state.allUsers = action.payload;
     },
 
     getUserBDLS: (state, action) => {
@@ -73,6 +78,10 @@ export const DSellerSlice = createSlice({
         (state.count = action.payload._id ? 1 : 0);
     },
 
+    postCreateUserS: (state, action) => {
+      state.userL = action.payload;
+    },
+
     postCreateProductS: (state, action) => {
       state.newProduct = action.payload;
     },
@@ -86,6 +95,10 @@ export const DSellerSlice = createSlice({
       state.favorites = action.payload;
       localStorage.setItem("favorites", JSON.stringify(action.payload));
     },
+    modificarUserS: (state, action) => {
+      state.userL = action.payload;
+      state.user = action.payload;
+    },
   },
 });
 
@@ -98,7 +111,10 @@ export const {
   getRenderS,
   resetRqstS,
   getUserS,
+  getAllUserS,
   getUserBDLS,
+  postCreateUserS,
+  modificarUserS,
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;
