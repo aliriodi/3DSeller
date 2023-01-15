@@ -63,9 +63,9 @@ const ListUsers = (props)=>{
                 </div>
 
                 {/* Banear Usuario */}
-                {/* <div onClick={bannedUser} className="dropdown-option">
+                <div onClick={bannedUser} className="dropdown-option">
                     {props.rol=="banned"?"Quitar Baneo":"Bannear"}
-                </div> */}
+                </div>
             </li>
             </li>
          </ul> 
