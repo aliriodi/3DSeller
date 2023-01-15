@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, GetUserBDL } from "../../redux/DSellerActions";
 import Image from "next/image";
@@ -8,11 +8,19 @@ import LogButton from "../LogButton/LogButton";
 import { useRouter } from "next/router";
 
 function Nav() {
+  const [currentUser, setCurrentUser] = useState({rol:"invitado"})
   const { user, userL } = useSelector((state) => state.products);
   const { push } = useRouter();
   const handleLogin = () => push("/api/auth/login");
 
   const dispatch = useDispatch();
+  
+  if(userL.rol !== "invitado"
+    && userL.rol !== undefined
+    && currentUser.rol == "invitado"){
+      console.log("CHANGE")
+    setCurrentUser(userL)
+  }
 
   return (
     <>
@@ -28,7 +36,7 @@ function Nav() {
           </Link>
           {/* <!-- Nav Icons --> */}
 
-          <div className={`nav-icons ${userL.rol!=="admin"?"desactive":null}`}>
+          <div className={`nav-icons ${currentUser.rol!=="admin"?"desactive":null}`}>
             <Link href={"/admin"} legacyBehavior>
               <a className="btn" id="bell-icon">
                 Panel de Administrador
