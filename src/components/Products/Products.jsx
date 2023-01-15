@@ -5,7 +5,6 @@ import {
   getProducts,
   getRender,
   resetState,
-  getUser,
   chngFavoritos,
   PutFavorite,
 } from "../../redux/DSellerActions";
@@ -22,7 +21,6 @@ function Products() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    //dispatch(getUser());
     dispatch(getProducts());
     //la siguiente linea busca informacion del Local Storage y si la encuentra carga el arreglo favoritos con ella
     const storedFavorites = localStorage.getItem("favorites");
