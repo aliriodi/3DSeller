@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ObjectType } from "typescript";
 
+interface UserL {
+  name: string;
+  rol: string;
+  email: string;
+  favorites: Array<ObjectType>;
+}
+
 export interface DSellerStateProducts {
   products: Array<ObjectType>;
   productsR: Array<ObjectType>;
@@ -12,9 +19,9 @@ export interface DSellerStateProducts {
   searchS: Array<ObjectType>;
   user: object;
   favorites: Array<ObjectType>;
-  userL:object;
+  userL: UserL;
   allUsers: Array<ObjectType>;
-  }
+}
 
 const initialState: DSellerStateProducts = {
   products: [],
@@ -28,9 +35,13 @@ const initialState: DSellerStateProducts = {
   user: {},
   allUsers: [],
   favorites: [],
-  userL:{name:'Invitado', rol:'invitado', email:'invitado'}
-
-  };
+  userL: {
+    name: "Invitado",
+    rol: "invitado",
+    email: "invitado",
+    favorites: [],
+  },
+};
 
 export const DSellerSlice = createSlice({
   name: "products",
@@ -50,7 +61,7 @@ export const DSellerSlice = createSlice({
       state.allUsers = action.payload;
     },
 
-    getUserBDLS:(state,action)=>{
+    getUserBDLS: (state, action) => {
       state.userL = action.payload;
     },
 
@@ -64,11 +75,11 @@ export const DSellerSlice = createSlice({
 
     getProductById: (state, action) => {
       (state.detail = action.payload),
-      (state.count = action.payload._id ? 1 : 0);
+        (state.count = action.payload._id ? 1 : 0);
     },
 
     postCreateUserS: (state, action) => {
-      state.userL = action.payload
+      state.userL = action.payload;
     },
 
     postCreateProductS: (state, action) => {
@@ -77,16 +88,17 @@ export const DSellerSlice = createSlice({
 
     addFavoritos: (state, action) => {
       state.favorites = [...state.favorites, action.payload];
+      localStorage.setItem("favorites", JSON.stringify(state.favorites));
     },
 
     replaceFavoritos: (state, action) => {
       state.favorites = action.payload;
+      localStorage.setItem("favorites", JSON.stringify(action.payload));
     },
-    modificarUserS:(state,action) => {
+    modificarUserS: (state, action) => {
       state.userL = action.payload;
       state.user = action.payload;
-    }
-   
+    },
   },
 });
 
@@ -102,7 +114,7 @@ export const {
   getAllUserS,
   getUserBDLS,
   postCreateUserS,
-  modificarUserS
+  modificarUserS,
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;
