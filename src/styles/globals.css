@@ -870,6 +870,67 @@ cursor: pointer;
 .card:hover .card_text{
 top: 150px;
 }
+
+/* Boton de Favoritos */
+.fav-icon-container{
+  position:absolute;
+  background-color: var(--light-color);
+  border-radius: 10px;
+  padding: 450px 10px 7px 10px;
+  bottom: 80%;
+  right: 14px;
+  width: 50px;
+}
+.fav-icon_on{
+  color: var(--main-color);
+  width: 100%;
+}
+
+.fav-icon_off{
+  color: var(--main-color);
+  width: 100%;
+}
+
+/* Botones de Paginado*/
+.btn-paginated{
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  margin: auto;
+}
+.btn-paginated .btn{
+  background-color: transparent;
+  color: var(--main-color);
+  padding: 15px;
+  font-weight: 600;
+  font-size: 1em;
+  border-radius: 3em;
+  cursor: pointer;
+  border: var(--main-color) 2px solid;
+  transition: .2s;
+}
+.btn-paginated .btn img{
+  width: 20px;
+  height: 20px;
+}
+
+.btn-paginated .btn:hover{
+  background-color: var(--main-color);
+  color: var(--dark-color);
+}
+.btn-paginated .btn:hover img{
+  filter: brightness(0);
+}
+
+.btn-paginated .btn-desabled{
+  border-color: var(--light-color);
+  pointer-events: none;
+}
+.btn-paginated .btn-desabled img{
+  filter: brightness(0.2);
+}
+
+
 /*////////// End Products //////////*/
 
 

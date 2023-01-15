@@ -17,7 +17,9 @@ export default function Vcard(props) {
     // </div>
 
     <div>
-      {user.given_name || user.nickname ? (
+      
+        <div className="card" key={props.id}>
+        {user.given_name || user.nickname ? (
         <FavButton
           id={props.id}
           key={props.id}
@@ -27,17 +29,15 @@ export default function Vcard(props) {
           category={props.category}
         />
       ) : null}
-
-      <a href={`/productos/${props.id}`}>
-        <div className="card" key={props.id}>
-          <img src={!props.image ? null : props.image} />
-          <div className="card_text">
-            <h3>{props.name}</h3>
-            <b>Rating: {props.rating}</b>
-            <b>Categoria: {props.category}</b>
-          </div>
+          <a href={`/productos/${props.id}`}>
+            <img src={!props.image ? null : props.image} />
+            <div className="card_text">
+              <h3>{props.name}</h3>
+              <b>Rating: {props.rating}</b>
+              <b>Categoria: {props.category}</b>
+            </div>
+          </a>
         </div>
-      </a>
     </div>
   );
 }

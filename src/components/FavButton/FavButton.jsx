@@ -5,6 +5,9 @@ import {
   chngFavoritos,
   PutFavorite,
   } from "../../redux/DSellerActions";
+import Image from "next/image";
+import iconOff from "../../public/fav-icon_off.png"
+import iconOn from "../../public/fav-icon_on.png"
 
 export default function FavButton(props) {
  
@@ -41,12 +44,16 @@ export default function FavButton(props) {
   };
   //#endregion
   return active === false ? (
-    <div>
-      <button onClick={agregarFAv}> ♥ </button>
+    <div className="fav-icon-container">
+      <span className="fav-icon_off" onClick={agregarFAv}>
+        <Image alt="fav-icon_off" src={iconOff}/>
+      </span>
     </div>
   ) : (
-    <div>
-      <button onClick={quitarFav}> | | | | | | | | | | |</button>
+    <div className="fav-icon-container">
+      <span className="fav-icon_on"onClick={quitarFav}>
+        <Image alt="fav-icon_on" src={iconOn}/>
+        </span>
     </div>
   );
 }

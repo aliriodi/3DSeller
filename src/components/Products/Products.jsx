@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { getProducts , getRender, resetState,} from "../../redux/DSellerActions";
 import Vcard from "../Vcard/Vcard";
+import Image from "next/dist/client/image";
+import paginationRightImg from "../../public/pagination-icon_right.png"
+import paginationLeftImg from "../../public/pagination-icon_left.png"
 
 function Products() {
 
@@ -167,7 +170,11 @@ const [current, setCurrent] = useState(0);
 
 const nextPage = () => {
   if (productsR.length > current + 8) setCurrent(current + 8);
+  console.log(Math.ceil(productsR.length / 8))
 };
+const changePage = (num)=>{
+  setCurrent(num-1)
+}
 
 const prevPage = () => {
   if (current > 0) setCurrent(current - 8);
@@ -289,18 +296,21 @@ const objetos2 = function(arr){
           />
 
           {/* btn-reset */}
-          <div className="btn-reset">
+          {/* <div className="btn-reset">
             <button onClick={resetRqst}>Reset</button>
-          </div>
+          </div> */}
         </div>
 
         {/* btn-paginado */}
-        <div id="contenedor_botones">
-          <button className="anterior" onClick={prevPage}>
-            Pagina Anterior
+        <div className="btn-paginated">
+          {/* btn-paginado previa */}
+          <button className={`btn ${current > 0?null:"btn-desabled"}`} onClick={prevPage}>
+            <Image src={paginationLeftImg} alt="Pagina Anterior"/>
           </button>
-          <button className="siguiente" onClick={nextPage}>
-            Pagina Siguiente
+          
+          {/* btn-paginado siguiente */}
+          <button className={`btn ${productsR.length > current + 8?null:"btn-desabled"}`} onClick={nextPage}> 
+            <Image src={paginationRightImg} alt="Pagina Siguiente"/>
           </button>
         </div>
 
@@ -332,12 +342,15 @@ const objetos2 = function(arr){
         </div>
 
         {/* btn-paginado */}
-        <div id="contenedor_botones">
-          <button className="anterior" onClick={prevPage}>
-            Pagina Anterior
+        <div className="btn-paginated">
+          {/* btn-paginado previa */}
+          <button className={`btn ${current > 0?null:"btn-desabled"}`} onClick={prevPage}>
+            <Image src={paginationLeftImg} alt="Pagina Anterior"/>
           </button>
-          <button className="siguiente" onClick={nextPage}>
-            Pagina Siguiente
+          
+          {/* btn-paginado siguiente */}
+          <button className={`btn ${productsR.length > current + 8?null:"btn-desabled"}`} onClick={nextPage}> 
+            <Image src={paginationRightImg} alt="Pagina Siguiente"/>
           </button>
         </div>
     </div>
