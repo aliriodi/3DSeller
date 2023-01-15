@@ -11,6 +11,7 @@ import Link from "next/link";
 
 function PanelAdmin(){
     const [currentPurchases, setCurrentPurchases] = useState(0)
+    const [currentUser, setCurrentUser] = useState({rol:"invitado"})
 
     const dispatch = useDispatch();
 
@@ -26,11 +27,20 @@ function PanelAdmin(){
         if(allUsers.length === 0)dispatch(getAllUser())
         if(products.length === 0)dispatch(getProducts())
         if(user.email != undefined)dispatch(GetUserBDL(user.email))
+        if(userL.rol !== "invitado"
+           && userL.rol !== undefined
+           && currentUser.rol == "invitado"){
+            setCurrentUser(userL)
+        }
     })
 
     return(
         <>
-        {userL.rol == "admin"?<div>
+        {currentUser.rol !== "invitado"?
+
+        // COMPRUEBA SI TIENE PERMISOS
+        currentUser.rol == "admin"?
+        <div>
             {/* Tablero */}
             <div className='dashboard-container'>
 
@@ -119,7 +129,7 @@ function PanelAdmin(){
                         products.map((product) => {
                             //Productos
                             return (
-                            <ListPrducts
+                            <ListPrducts 
                             key = {product._id}
                             name = {product.name}
                             price = {product.price}
@@ -176,12 +186,25 @@ function PanelAdmin(){
                 </div>
             </div>
         </div>:
+
+        // Si no tiene perisos
         <div className="permissions-denied">
             <div className="permissions-denied-text">
             <h1>No Tiene Autorización Para Acceder a Esta Página</h1>
             <div className="btn-container">
                 <Link className="btn" href={"/"} >Pagina Pricipal</Link>
             </div>
+            </div>
+        </div>:
+        
+        // Loader
+        <div className="permissions-denied">
+            <div className="permissions-denied-text">
+         <img
+              className="imagendecarga"
+              src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-18-223_512.gif"
+              alt="imagen de carga"
+            />
             </div>
         </div>
         }
