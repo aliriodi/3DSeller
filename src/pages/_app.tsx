@@ -10,10 +10,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <UserProvider>
-       <PayPalScriptProvider
-        clientId={'ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs'}
-        onError={(error) => console.log(error)}
-      >
+       
     <Provider store={store}>
        <Head><title>3DSeller </title>
        
@@ -25,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Component>
         
     </Provider>
-    </PayPalScriptProvider>
+    
     </UserProvider>
     )
 }
