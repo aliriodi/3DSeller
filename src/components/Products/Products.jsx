@@ -94,10 +94,10 @@ function Products() {
     let newRender = products.filter((product) => {
       let result = false;
       for (let option of options) {
-        if (product.material[0].indexOf(option) == -1) {
+        if (product.material[0]?.indexOf(option) == -1) {
           result = false;
           break;
-        } else if (product.material[0].indexOf(option) !== -1) {
+        } else if (product.material[0]?.indexOf(option) !== -1) {
           result = true;
         }
       }
@@ -183,7 +183,8 @@ function Products() {
     // dispatch(resetState(1,[]))
     dispatch(getRender(resultProducts));
   }, [currentFilterMaterial, currentFilterCategory, currentFilterOrder]);
-
+  //#endregion
+  
   //#region Scroll infinito code
 
   const [current, setCurrent] = useState(0);
@@ -298,7 +299,7 @@ function Products() {
         </div>
 
         {/* btn-paginado */}
-        <div className="btn-paginated">
+        <div className={`btn-paginated ${tarjetasXPag().length<0?"desactive":null}`}>
           {/* btn-paginado previa */}
           <button
             className={`btn ${current > 0 ? null : "btn-desabled"}`}
@@ -345,7 +346,7 @@ function Products() {
         </div>
 
         {/* btn-paginado */}
-        <div className="btn-paginated">
+        <div className={`btn-paginated ${tarjetasXPag().length<0?"desactive":null}`}>
           {/* btn-paginado previa */}
           <button
             className={`btn ${current > 0 ? null : "btn-desabled"}`}
