@@ -1,60 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDet, chngFavoritos, setFavoritos } from "../../redux/DSellerActions";
+import { getProductDet } from "../../redux/DSellerActions";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import FavButton from "components/FavButton/FavButton";
+import axios from 'axios'
 //import { useParams  } from 'react-router-dom';
 import { useRouter } from 'next/router'
+
 
 function CardDetail() {
   const dispatch = useDispatch();
   const router = useRouter();
   const {id} = router.query;
-
-  const { favorites } = useSelector((state) => state.products);
   const  productsDetail  =  useSelector(state => state.products.detail);  
-
-  const [favState, setFavState] = useState(false);
-
   useEffect(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    if (storedFavorites) {
-      const favorites = JSON.parse(storedFavorites);
-      dispatch(chngFavoritos(favorites));
-    }
-  }, []);
-
-  useEffect(() => {
-    const favIsActive = favorites.find((r) => r.id === id);
-
-    // Declaracion de ID
     if(router.isReady){ 
       dispatch(getProductDet(id))
     };
+    // eslint-disable-next-line
+  }, [id]);
 
-    // Declaracion de Favoritos
-    if (favIsActive) {
-      setFavState(true);
-    } else {
-      setFavState(false);
-    }
-  }, [favorites, id]);
-
-  //#region Favoritos
-  const agregarFAv = () => {
-    dispatch(setFavoritos({
-      id:productsDetail._id,
-      image:productsDetail.image,
-      name:productsDetail.name,
-      rating:productsDetail.rating
-    }));
-  };
-
-  const quitarFav = () => {
-    const filtrados = favorites.filter((e) => e.id !== id);
-    dispatch(chngFavoritos(filtrados));
-  };
-  //#endregion
+  
+  
+  
 
   return (
     <>
@@ -86,17 +53,8 @@ function CardDetail() {
                                 <h3>Price:</h3>
                                 <h3 className="detail-item_item-text">${productsDetail.price}</h3>
                               </div>
-                              {/* Fav button */}
-                              <div className="btn-container">
-                                <span className="btn" onClick={favState?quitarFav:agregarFAv}>
-                                  {favState?"Quitar de  Favoritos":"Favoritos"}
-                                </span>
-                              </div>
+
                             </div>
-                            <div></div>
-                            {/* <PayPalScriptProvider className="btn-container" options={{ "client-id": "ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs" }}>
-                              <PayPalButtons className="btn"/>
-                            </PayPalScriptProvider> */}
                               </div>
                               
                               {/* Descripcion */}
@@ -113,9 +71,16 @@ function CardDetail() {
                                 <div className="summary diets-container">
                                   {productsDetail.category}
                                 </div>
+                                {/*boton pago*/ }
+                                <div className="Pay-button"> 
+                                <PayPalScriptProvider options={{ "client-id": "ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs" }}>
+                               <PayPalButtons style={{ layout: "vertical", color: 'gold' }} />
+                                </PayPalScriptProvider>
+                                </div>
                                </div>
                   </>
   )
 }
+
 
 export default CardDetail
