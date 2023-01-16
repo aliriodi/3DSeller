@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDet } from "../../redux/DSellerActions";
 import { PayPalScriptProvider, PayPalButtons ,  usePayPalScriptReducer} from "@paypal/react-paypal-js";
 import axios from "axios";
 
+
 function CardDetail() {
   const dispatch = useDispatch();
   const router = useRouter();
+
   const { id } = router.query;
   const productsDetail = useSelector((state) => state.products.detail);
   const [orderId, setOrderId] = useState(null);
@@ -18,10 +20,28 @@ function CardDetail() {
     
   };
   // console.log(productsDetail)
+//RARO
+  
+  const { favorites } = useSelector((state) => state.products);
+  const  productsDetail  =  useSelector(state => state.products.detail);  
+  const [favState, setFavState] = useState(false);
+
   useEffect(() => {
+    const storedFavorites = localStorage.getItem("favorites");
+    if (storedFavorites) {
+      const favorites = JSON.parse(storedFavorites);
+      dispatch(chngFavoritos(favorites));
+    }
+  }, []);
+
+  useEffect(() => {
+    const favIsActive = favorites.find((r) => r.id === id);
+
+    // Declaracion de ID
     if(router.isReady){ 
       dispatch(getProductDet(id))
     };
+
     // eslint-disable-next-line
   }, [id]);
 
@@ -168,6 +188,12 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
             <h3>Price:</h3>
             <h3 className="detail-item_item-text">${productsDetail.price}</h3>
           </div>
+          {/* Fav button */}
+                              <div className="btn-container">
+                                <span className="btn" onClick={favState?quitarFav:agregarFAv}>
+                                  {favState?"Quitar de  Favoritos":"Favoritos"}
+                                </span>
+                              </div>
         </div>
       </div>
 
@@ -206,6 +232,7 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
       </PayPalScriptProvider> */}
     </>
   );
+
 }
 
 
