@@ -87,11 +87,11 @@ export const getUser = (username) => async (dispatch) => {
                                 .then((response) => response.json())
                                 .then(user=> dispatch(getUserS(user)))
                               })
-                              // .then(()=>fetch(" https://threed.us.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A3000&client_id=J3fAsBH2xLotpS7rYIdyPQAGCs38mojc", {
-                              //   mode: "cors",
-                              //   method: "POST",
-                              //   headers: { "Access-Control-Allow-Origin": "*" },
-                              // }))
+                              .then(()=>fetch(" https://threed.us.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A3000&client_id=J3fAsBH2xLotpS7rYIdyPQAGCs38mojc", {
+                                mode: "cors",
+                                method: "POST",
+                                headers: { "Access-Control-Allow-Origin": "*" },
+                              }))
                            }                                          
       })
     .catch((error) => console.log(error));
