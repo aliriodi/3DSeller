@@ -13,7 +13,7 @@ export default function Favoritos() {
   useEffect(() => {
     //la siguiente linea busca informacion del Local Storage y si la encuentra carga el arreglo favoritos con ella
     const storedFavorites = localStorage.getItem("favorites");
-    if (user.given_name || user.nickname) {
+    if (user.name) {
       if (storedFavorites) {
         const favorites = JSON.parse(storedFavorites);
         dispatch(chngFavoritos(favorites));
