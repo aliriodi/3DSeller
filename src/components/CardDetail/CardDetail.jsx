@@ -20,7 +20,7 @@ function CardDetail() {
   }, [id]);
 
   useEffect(() => {
-    //return dispatch(getRender(products));
+    //return ;
   }, [dispatch]);
 
   return (

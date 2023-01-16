@@ -39,13 +39,12 @@ function Products() {
   }, []);
 
   useEffect(() => {
+    dispatch(getRender(products));
+  }, [products]);
+
+  useEffect(() => {
     dispatch(PutFavorite(sendDB));
   }, [favorites]);
-
-  // if (cFO === 0 && count !== 0) {
-  //   dispatch(getRender(products));
-  //   dispatch(resetState(1, []));
-  // }
 
   //#region SearchBar y Filtros
   const [currentSearchBar, setCurrentSearchBar] = useState("");
