@@ -10,11 +10,11 @@ import {
 } from "../../redux/DSellerActions";
 import Vcard from "../Vcard/Vcard";
 import Image from "next/dist/client/image";
-import paginationRightImg from "../../public/pagination-icon_right.png"
-import paginationLeftImg from "../../public/pagination-icon_left.png"
+import paginationRightImg from "../../public/pagination-icon_right.png";
+import paginationLeftImg from "../../public/pagination-icon_left.png";
 
 function Products() {
-  const { products, count, cFO, filtersAord, productsR } = useSelector(
+  const { products, count, cFO, productsR } = useSelector(
     (state) => state.products
   );
 
@@ -22,54 +22,49 @@ function Products() {
   const { favorites } = useSelector((state) => state.products);
   const sendDB = { favorites: favorites, user: user };
 
+  console.log("user", user.favorites);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
     //la siguiente linea busca informacion del Local Storage y si la encuentra carga el arreglo favoritos con ella
     const storedFavorites = localStorage.getItem("favorites");
-    if (storedFavorites) {
-      const favorites = JSON.parse(storedFavorites);
-      dispatch(chngFavoritos(favorites));
+    if (user.given_name || user.nickname) {
+      if (storedFavorites) {
+        const favorites = JSON.parse(storedFavorites);
+        dispatch(chngFavoritos(favorites));
+      }
     }
   }, []);
 
-  console;
   useEffect(() => {
     dispatch(PutFavorite(sendDB));
   }, [favorites]);
-
-  //console.log(products)
-  const { searchS } = useSelector((state) => state.products);
-  //console.log("Estado SEarch",searchS)
 
   if (cFO === 0 && count !== 0) {
     dispatch(getRender(products));
     dispatch(resetState(1, []));
   }
-  //console.log(objetos(set))
 
   //#region SearchBar y Filtros
+  const [currentSearchBar, setCurrentSearchBar] = useState("");
   const [currentFilterCategory, setCurrentFilterCategory] = useState("");
   const [currentFilterMaterial, setCurrentFilterMaterial] = useState([]);
   const [currentFilterOrder, setCurrentFilterOrder] = useState("");
-
-  //Boton para recetar Filtros y SearchBar
-  function resetRqst() {
-    handleMaterialChange([]);
-    dispatch(resetState(0, []));
-    dispatch(getRender(products));
-  }
+  const [current, setCurrent] = useState(0);
 
   //SearchBar
   const onSearchChange = () => {
     const sItem = document.getElementById("sBar").value;
-    const busqueda = productsR.filter((item) =>
-      item.name.toLowerCase().includes(sItem.toLocaleLowerCase())
-    );
-    //console.log("busqueda ", busqueda);
-    dispatch(resetState(1, []));
-    dispatch(getRender(busqueda));
+    setCurrentSearchBar(sItem)
   };
+  const searchBar = (products, value)=>{
+    const busqueda = products.filter((item) =>
+      item.name?.toLowerCase().includes(value.toLocaleLowerCase())
+    );
+    // dispatch(resetState(1, []));
+    return busqueda
+  }
 
   //Filtro por Categoria
   const handleSelectChanges = ({ value }) => {
@@ -103,10 +98,10 @@ function Products() {
     let newRender = products.filter((product) => {
       let result = false;
       for (let option of options) {
-        if (product.material[0].indexOf(option) == -1) {
+        if (product.material[0]?.indexOf(option) == -1) {
           result = false;
           break;
-        } else if (product.material[0].indexOf(option) !== -1) {
+        } else if (product.material[0]?.indexOf(option) !== -1) {
           result = true;
         }
       }
@@ -179,31 +174,23 @@ function Products() {
   useEffect(() => {
     //Se declara la variable que va a ser el resultado final
     let resultProducts = products;
+    setCurrent(0);
 
     //Se le aplican los filtros
+    resultProducts = searchBar(resultProducts, currentSearchBar)
     resultProducts = filterCategory(resultProducts, currentFilterCategory);
     resultProducts = filterMaterial(resultProducts, currentFilterMaterial);
     resultProducts = filterOrder(resultProducts, currentFilterOrder);
 
-    // console.log(
-    //   "FILTRO DE ORDER",
-    //   filterOrder(resultProducts, currentFilterOrder)
-    // );
-    // dispatch(resetState(1,[]))
     dispatch(getRender(resultProducts));
-  }, [currentFilterMaterial, currentFilterCategory, currentFilterOrder]);
-
+  }, [currentFilterMaterial, currentFilterCategory, currentFilterOrder, currentSearchBar]);
+  //#endregion
+  
   //#region Scroll infinito code
-
-  const [current, setCurrent] = useState(0);
-
-const nextPage = () => {
-  if (productsR.length > current + 8) setCurrent(current + 8);
-  console.log(Math.ceil(productsR.length / 8))
-};
-const changePage = (num)=>{
-  setCurrent(num-1)
-}
+  const nextPage = () => {
+    if (productsR.length > current + 8) setCurrent(current + 8);
+    console.log(Math.ceil(productsR.length / 8));
+  };
 
   const prevPage = () => {
     if (current > 0) setCurrent(current - 8);
@@ -256,70 +243,6 @@ const changePage = (num)=>{
   };
   //#endregion
 
-  //#region Ordenamiento con cb
-  function order1(typeorder) {
-    if (productsR && productsR.length > 1) {
-      let a = [];
-      productsR.map((b) => a.push(b));
-      if (typeorder === "asc0") {
-        dispatch(
-          getRender(
-            a.sort(function (a, b) {
-              return a.name.localeCompare(b.name, "en", { numeric: true });
-            })
-          )
-        );
-      }
-      if (typeorder === "desc0") {
-        dispatch(
-          getRender(
-            a.sort(function (b, a) {
-              return a.name.localeCompare(b.name, "en", { numeric: true });
-            })
-          )
-        );
-      }
-      if (typeorder === "asc1") {
-        dispatch(
-          getRender(
-            a.sort(function (b, a) {
-              return a.rating - b.rating;
-            })
-          )
-        );
-      }
-      if (typeorder === "desc1") {
-        dispatch(
-          getRender(
-            a.sort(function (a, b) {
-              return a.rating - b.rating;
-            })
-          )
-        );
-      }
-      if (typeorder === "asc2") {
-        dispatch(
-          getRender(
-            a.sort(function (b, a) {
-              return a.price - b.price;
-            })
-          )
-        );
-      }
-      if (typeorder === "desc2") {
-        dispatch(
-          getRender(
-            a.sort(function (a, b) {
-              return a.price - b.price;
-            })
-          )
-        );
-      }
-    } else {
-      return alert("No se requiere ordenar");
-    }
-  }
-  //#endregion
   return (
     <>
       <div className={"products-container"}>
@@ -371,23 +294,26 @@ const changePage = (num)=>{
             onChange={handleMaterialChange}
             isMulti
           />
-
-          {/* btn-reset */}
-          {/* <div className="btn-reset">
-            <button onClick={resetRqst}>Reset</button>
-          </div> */}
         </div>
 
         {/* btn-paginado */}
-        <div className="btn-paginated">
+        <div className={`btn-paginated ${tarjetasXPag().length<0?"desactive":null}`}>
           {/* btn-paginado previa */}
-          <button className={`btn ${current > 0?null:"btn-desabled"}`} onClick={prevPage}>
-            <Image src={paginationLeftImg} alt="Pagina Anterior"/>
+          <button
+            className={`btn ${current > 0 ? null : "btn-desabled"}`}
+            onClick={prevPage}
+          >
+            <Image src={paginationLeftImg} alt="Pagina Anterior" />
           </button>
-          
+
           {/* btn-paginado siguiente */}
-          <button className={`btn ${productsR.length > current + 8?null:"btn-desabled"}`} onClick={nextPage}> 
-            <Image src={paginationRightImg} alt="Pagina Siguiente"/>
+          <button
+            className={`btn ${
+              productsR.length > current + 8 ? null : "btn-desabled"
+            }`}
+            onClick={nextPage}
+          >
+            <Image src={paginationRightImg} alt="Pagina Siguiente" />
           </button>
         </div>
 
@@ -399,7 +325,7 @@ const changePage = (num)=>{
               return (
                 <Vcard
                   className="productoclass"
-                  key={product3d.name}
+                  key={product3d._id}
                   id={product3d._id}
                   name={product3d.name}
                   image={product3d.image}
@@ -418,15 +344,23 @@ const changePage = (num)=>{
         </div>
 
         {/* btn-paginado */}
-        <div className="btn-paginated">
+        <div className={`btn-paginated ${tarjetasXPag().length<0?"desactive":null}`}>
           {/* btn-paginado previa */}
-          <button className={`btn ${current > 0?null:"btn-desabled"}`} onClick={prevPage}>
-            <Image src={paginationLeftImg} alt="Pagina Anterior"/>
+          <button
+            className={`btn ${current > 0 ? null : "btn-desabled"}`}
+            onClick={prevPage}
+          >
+            <Image src={paginationLeftImg} alt="Pagina Anterior" />
           </button>
-          
+
           {/* btn-paginado siguiente */}
-          <button className={`btn ${productsR.length > current + 8?null:"btn-desabled"}`} onClick={nextPage}> 
-            <Image src={paginationRightImg} alt="Pagina Siguiente"/>
+          <button
+            className={`btn ${
+              productsR.length > current + 8 ? null : "btn-desabled"
+            }`}
+            onClick={nextPage}
+          >
+            <Image src={paginationRightImg} alt="Pagina Siguiente" />
           </button>
         </div>
       </div>

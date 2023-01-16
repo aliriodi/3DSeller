@@ -180,7 +180,7 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
       <div style={{ maxWidth: "750px", minHeight: "200px" }}>
             <PayPalScriptProvider
             clientId={'ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs'}
-            onError={(error) => console.log(error)}
+        onError={(error) => console.log(error)}
                 options={{
                     "client-id": "test",
                     components: "buttons",

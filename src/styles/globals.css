@@ -592,6 +592,13 @@ header{
 .detail-item_text{
   padding-left: 30px;
 }
+.detail-item_text .btn-container{
+  width: 100%;
+}
+.detail-item_text .btn-container .btn{
+  font-size: 1.3em;
+  width: 100%;
+}
 
 .detail-item img{
   max-width: 475px;

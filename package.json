@@ -11,6 +11,7 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.0.1",
     "@next/font": "13.1.1",
+
     "@paypal/checkout-server-sdk": "^1.0.3",
     "@paypal/react-paypal-js": "^7.8.2",
     "@reduxjs/toolkit": "^1.9.1",
