@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUser, GetUserBDL } from "../../redux/DSellerActions";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import Link from "next/link";
@@ -12,8 +11,6 @@ function Nav() {
   const { user, userL } = useSelector((state) => state.products);
   const { push } = useRouter();
   const handleLogin = () => push("/api/auth/login");
-
-  const dispatch = useDispatch();
 
   if (
     userL.rol !== "invitado" &&

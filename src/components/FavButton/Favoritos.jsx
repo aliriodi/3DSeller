@@ -6,14 +6,18 @@ import NoFavsYet from "../FavButton/NoFavsYet";
 
 export default function Favoritos() {
   const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.products);
   const { favorites } = useSelector((state) => state.products);
 
   useEffect(() => {
-    //La siguiente linea busca informacion del Local Storage y si la encuentra carga el arreglo favoritos con ella
+    //la siguiente linea busca informacion del Local Storage y si la encuentra carga el arreglo favoritos con ella
     const storedFavorites = localStorage.getItem("favorites");
-    if (storedFavorites) {
-      const favorites = JSON.parse(storedFavorites);
-      dispatch(chngFavoritos(favorites));
+    if (user.given_name || user.nickname) {
+      if (storedFavorites) {
+        const favorites = JSON.parse(storedFavorites);
+        dispatch(chngFavoritos(favorites));
+      }
     }
   }, []);
 
