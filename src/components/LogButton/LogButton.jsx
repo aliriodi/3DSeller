@@ -23,11 +23,9 @@ export default function LogButton({ handleLogin }) {
           id="bell-icon"
         />
         <h6>
-          {user.given_name
-            ? user.given_name
-            : user.nickname
-            ? user.nickname
-            : "Invitado"}
+          {user.name
+            ? user.name
+             : "Invitado"}
         </h6>
         {user.given_name || user.nickname ? (
           <Link
