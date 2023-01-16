@@ -291,11 +291,6 @@ function Products() {
             onChange={handleMaterialChange}
             isMulti
           />
-
-          {/* btn-reset */}
-          {/* <div className="btn-reset">
-            <button onClick={resetRqst}>Reset</button>
-          </div> */}
         </div>
 
         {/* btn-paginado */}
