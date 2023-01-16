@@ -47,6 +47,7 @@ function Products() {
   }
 
   //#region SearchBar y Filtros
+  const [currentSearchBar, setCurrentSearchBar] = useState("");
   const [currentFilterCategory, setCurrentFilterCategory] = useState("");
   const [currentFilterMaterial, setCurrentFilterMaterial] = useState([]);
   const [currentFilterOrder, setCurrentFilterOrder] = useState("");
@@ -55,13 +56,15 @@ function Products() {
   //SearchBar
   const onSearchChange = () => {
     const sItem = document.getElementById("sBar").value;
-    const busqueda = productsR.filter((item) =>
-      item.name?.toLowerCase().includes(sItem.toLocaleLowerCase())
-    );
-    //console.log("busqueda ", busqueda);
-    dispatch(resetState(1, []));
-    dispatch(getRender(busqueda));
+    setCurrentSearchBar(sItem)
   };
+  const searchBar = (products, value)=>{
+    const busqueda = products.filter((item) =>
+      item.name?.toLowerCase().includes(value.toLocaleLowerCase())
+    );
+    // dispatch(resetState(1, []));
+    return busqueda
+  }
 
   //Filtro por Categoria
   const handleSelectChanges = ({ value }) => {
@@ -174,12 +177,13 @@ function Products() {
     setCurrent(0);
 
     //Se le aplican los filtros
+    resultProducts = searchBar(resultProducts, currentSearchBar)
     resultProducts = filterCategory(resultProducts, currentFilterCategory);
     resultProducts = filterMaterial(resultProducts, currentFilterMaterial);
     resultProducts = filterOrder(resultProducts, currentFilterOrder);
 
     dispatch(getRender(resultProducts));
-  }, [currentFilterMaterial, currentFilterCategory, currentFilterOrder]);
+  }, [currentFilterMaterial, currentFilterCategory, currentFilterOrder, currentSearchBar]);
   //#endregion
   
   //#region Scroll infinito code
