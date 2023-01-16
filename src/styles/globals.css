@@ -1313,3 +1313,7 @@ body{
   font-size: 3em;
   margin-bottom: 30px;
 }
+
+.Pay-button{
+  justify-items: auto;
+}
