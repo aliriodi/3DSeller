@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDet } from "../../redux/DSellerActions";
 import { PayPalScriptProvider, PayPalButtons ,  usePayPalScriptReducer} from "@paypal/react-paypal-js";
+import { useRouter } from 'next/router';
 import axios from "axios";
 
 function CardDetail() {
