@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { getProductDet } from "../../redux/DSellerActions";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider, PayPalButtons ,  usePayPalScriptReducer} from "@paypal/react-paypal-js";
 import axios from "axios";
 
 function CardDetail() {
@@ -14,6 +14,10 @@ function CardDetail() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("idle");
+  const createOrder = async (data, actions) => {
+    setLoading(true);
+    
+  };
   // console.log(productsDetail)
   useEffect(() => {
     if (router.isReady) {
@@ -22,56 +26,107 @@ function CardDetail() {
     // eslint-disable-next-line
   }, [id]);
 
-  useEffect(() => {
-    if (!loading) {
-      return;
-    }
-    setStatus("loading");
-    axios({
-      // url: 'http://localhost:3000/api/indice',
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-        
-        intent: "CAPTURE",       
-        purchase_units: [
-          {
-            amount: {
-              currency_code: "USD",
-              value: productsDetail.price/2,
-            },
-          },
-        ],
-    })
-      .then((response) => {
-        console.log(response,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-        setOrderId(response.data.id);
-        setLoading(false);
-        setStatus("success");
-      })
-      .catch((error) => {
-        setStatus("error");
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-          setError(error.response.result);
-        } else if (error.request) {
-          console.log(error.request);
-          setError(error.request);
-        } else {
-          console.log("Error", error.message);
-          setError(error.message);
-        }
-        setLoading(false);
-      });
-  }, [loading]);
+const currency = 'USD';
+// Custom component to wrap the PayPalButtons and handle currency changes
+const ButtonWrapper = ({ currency='USD', showSpinner }) => {
+  // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
+  // This is the main reason to wrap the PayPalButtons in a new component
+  const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
 
-  const createOrder = async (data, actions) => {
-    setLoading(true);
-    
-  };
+  useEffect(() => {
+      dispatch({
+          type: "resetOptions",
+          value: {
+              ...options,
+              currency: currency,
+          },
+      });
+  }, [currency, showSpinner]);
+
+
+  return (<>
+          { (showSpinner && isPending) && <div className="spinner" /> }
+          <PayPalButtons
+             // style={style}
+              disabled={false}
+              forceReRender={[Math.ceil(productsDetail.price/300), currency, null]}
+              fundingSource={undefined}
+              createOrder={(data, actions) => {
+                  return actions.order
+                      .create({
+                          purchase_units: [
+                              {
+                                  amount: {
+                                      currency_code: currency,
+                                      value:Math.ceil( productsDetail.price/300),
+                                  },
+                              },
+                          ],
+                      })
+                      .then((orderId) => {
+                          // Your code here after create the order
+                          return orderId;
+                      });
+              }}
+              onApprove={function (data, actions) {
+                  return actions.order.capture().then(function () {
+                      // Your code here after capture the order
+                  });
+              }}
+          />
+      </>
+  );
+}
+
+
+  // useEffect(() => {
+  //   if (!loading) {
+  //     return;
+  //   }
+  //   setStatus("loading");
+  //  async ()=> await  axios({
+  //      url: 'http://localhost:3000/api/indice',
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+        
+  //       intent: "CAPTURE",       
+  //       purchase_units: [
+  //         {
+  //           amount: {
+  //             currency_code: "USD",
+  //             value: productsDetail.price/2,
+  //           },
+  //         },
+  //       ],
+  //   })
+  //     .then((response) => {
+  //        console.log('value')
+  //       console.log(response);
+  //       setOrderId(response);
+  //       setLoading(false);
+  //       setStatus("success");
+  //     })
+  //     .catch((error) => {
+  //       setStatus("error");
+  //       if (error.response) {
+  //         console.log(error.response.data);
+  //         console.log(error.response.status);
+  //         console.log(error.response.headers);
+  //         setError(error.response.result);
+  //       } else if (error.request) {
+  //         console.log(error.request);
+  //         setError(error.request);
+  //       } else {
+  //         console.log("Error", error.message);
+  //         setError(error.message);
+  //       }
+  //       setLoading(false);
+  //     });
+  // }, [createOrder, false]);
+
+
 
   const onCancel = (data) => {
     console.log("compra cancelada");
@@ -122,17 +177,34 @@ function CardDetail() {
         <p>{productsDetail.description}</p>
       </div>
 
-      <PayPalScriptProvider
-        clientId={'ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs'}
-        onError={(error) => console.log(error)}
-      >
-        <PayPalButtons                                      
+      <div style={{ maxWidth: "750px", minHeight: "200px" }}>
+            <PayPalScriptProvider
+                options={{
+                    "client-id": "test",
+                    components: "buttons",
+                    currency: "USD"
+                }}
+            >
+				<ButtonWrapper
+                    currency={currency}
+                    showSpinner={false}
+                />
+			</PayPalScriptProvider>
+		</div>
+
+
+      {/* <PayPalButtons                                      
           createOrder={createOrder}
           onApprove={onApprove}
           onCancel={onCancel}
-        />
+        /> */}
+      {/* <PayPalScriptProvider
+        clientId={'ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs'}
+        onError={(error) => console.log(error)}
+      >
+       
         
-      </PayPalScriptProvider>
+      </PayPalScriptProvider> */}
     </>
   );
 }

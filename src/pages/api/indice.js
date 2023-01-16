@@ -12,6 +12,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     // console.log(req.body.purchase_units, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     if (!req.body.price) {
+        console.log(req.body)
         return res.status(400).json({error: "No se encontro el precio del producto"});
     }
 
