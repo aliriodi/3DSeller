@@ -39,7 +39,7 @@ function PanelAdmin(){
         {currentUser.rol !== "invitado"?
 
         // COMPRUEBA SI TIENE PERMISOS
-        currentUser.rol == "admin"?
+        true?
         <div>
             {/* Tablero */}
             <div className='dashboard-container'>
@@ -103,11 +103,11 @@ function PanelAdmin(){
                     <div className='stats-recent'>
                         <div className="stats-recent_text">
                             <h3>Productos</h3>
-                            {/* <div className="btn-container">
-                                <a href={""} className="btn">
-                                    Ver Todas
+                            <div className="btn-container">
+                                <a href={"/createP"} className="btn">
+                                    Crear Producto
                                 </a>
-                            </div> */}
+                            </div>
                         </div>
 
                         <ul className="stats-recent_list title">
