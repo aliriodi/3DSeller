@@ -1,121 +1,215 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect , useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDet, chngFavoritos, setFavoritos } from "../../redux/DSellerActions";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import FavButton from "components/FavButton/FavButton";
-//import { useParams  } from 'react-router-dom';
-import { useRouter } from 'next/router'
+import { getProductDet } from "../../redux/DSellerActions";
+import { PayPalScriptProvider, PayPalButtons ,  usePayPalScriptReducer} from "@paypal/react-paypal-js";
+import { useRouter } from 'next/router';
+import axios from "axios";
 
 function CardDetail() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const {id} = router.query;
-
-  const { favorites } = useSelector((state) => state.products);
-  const  productsDetail  =  useSelector(state => state.products.detail);  
-
-  const [favState, setFavState] = useState(false);
-
+  const { id } = router.query;
+  const productsDetail = useSelector((state) => state.products.detail);
+  const [orderId, setOrderId] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("idle");
+  const createOrder = async (data, actions) => {
+    setLoading(true);
+    
+  };
+  // console.log(productsDetail)
   useEffect(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    if (storedFavorites) {
-      const favorites = JSON.parse(storedFavorites);
-      dispatch(chngFavoritos(favorites));
-    }
-  }, []);
-
-  useEffect(() => {
-    const favIsActive = favorites.find((r) => r.id === id);
-
-    // Declaracion de ID
     if(router.isReady){ 
       dispatch(getProductDet(id))
     };
+    // eslint-disable-next-line
+  }, [id]);
 
-    // Declaracion de Favoritos
-    if (favIsActive) {
-      setFavState(true);
-    } else {
-      setFavState(false);
+const currency = 'USD';
+// Custom component to wrap the PayPalButtons and handle currency changes
+const ButtonWrapper = ({ currency='USD', showSpinner }) => {
+  // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
+  // This is the main reason to wrap the PayPalButtons in a new component
+  const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
+
+  useEffect(() => {
+      dispatch({
+          type: "resetOptions",
+          value: {
+              ...options,
+              currency: currency,
+          },
+      });
+  }, [currency, showSpinner]);
+
+
+  return (<>
+          { (showSpinner && isPending) && <div className="spinner" /> }
+          <PayPalButtons
+             // style={style}
+              disabled={false}
+              forceReRender={[Math.ceil(productsDetail.price/300), currency, null]}
+              fundingSource={undefined}
+              createOrder={(data, actions) => {
+                  return actions.order
+                      .create({
+                          purchase_units: [
+                              {
+                                  amount: {
+                                      currency_code: currency,
+                                      value:Math.ceil( productsDetail.price/300),
+                                  },
+                              },
+                          ],
+                      })
+                      .then((orderId) => {
+                          // Your code here after create the order
+                          return orderId;
+                      });
+              }}
+              onApprove={function (data, actions) {
+                  return actions.order.capture().then(function () {
+                      // Your code here after capture the order
+                  });
+              }}
+          />
+      </>
+  );
+}
+
+
+  // useEffect(() => {
+  //   if (!loading) {
+  //     return;
+  //   }
+  //   setStatus("loading");
+  //  async ()=> await  axios({
+  //      url: 'http://localhost:3000/api/indice',
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+        
+  //       intent: "CAPTURE",       
+  //       purchase_units: [
+  //         {
+  //           amount: {
+  //             currency_code: "USD",
+  //             value: productsDetail.price/2,
+  //           },
+  //         },
+  //       ],
+  //   })
+  //     .then((response) => {
+  //        console.log('value')
+  //       console.log(response);
+  //       setOrderId(response);
+  //       setLoading(false);
+  //       setStatus("success");
+  //     })
+  //     .catch((error) => {
+  //       setStatus("error");
+  //       if (error.response) {
+  //         console.log(error.response.data);
+  //         console.log(error.response.status);
+  //         console.log(error.response.headers);
+  //         setError(error.response.result);
+  //       } else if (error.request) {
+  //         console.log(error.request);
+  //         setError(error.request);
+  //       } else {
+  //         console.log("Error", error.message);
+  //         setError(error.message);
+  //       }
+  //       setLoading(false);
+  //     });
+  // }, [createOrder, false]);
+
+
+
+  const onCancel = (data) => {
+    console.log("compra cancelada");
+  };
+
+  const onApprove = async (data, actions) => {
+    console.log(data);
+    try {
+      await actions.order.capture();
+    } catch (error) {
+      console.log(error);
     }
-  }, [favorites, id]);
-
-  //#region Favoritos
-  const agregarFAv = () => {
-    dispatch(setFavoritos({
-      id:productsDetail._id,
-      image:productsDetail.image,
-      name:productsDetail.name,
-      rating:productsDetail.rating
-    }));
   };
-
-  const quitarFav = () => {
-    const filtrados = favorites.filter((e) => e.id !== id);
-    dispatch(chngFavoritos(filtrados));
-  };
-  //#endregion
 
   return (
     <>
-                       <div className={`detail-content`}>
+      <div className={"detail-content"}>
+        {/* IMG */}
+        <div className="detail-item">
+          <img src={productsDetail.image} />
+        </div>
+        {/* TEXT */}
+        <div className="detail-item detail-item_text">
+          {/* Name */}
+          <div className="detail-item_item">
+            <h1>{productsDetail.name}</h1>
+          </div>
+          {/* Rating */}
+          <div className="detail-item_item detail_id">
+            <h3>Rating:</h3>
+            <h3>{productsDetail.rating}</h3>
+          </div>
+          {/* Stock */}
+          <div className="detail-item_item detail_id">
+            <h3>Stock:</h3>
+            <h3>{productsDetail.stock}</h3>
+          </div>
+          {/* Price */}
+          <div className="detail-item_item detail_id">
+            <h3>Price:</h3>
+            <h3 className="detail-item_item-text">${productsDetail.price}</h3>
+          </div>
+        </div>
+      </div>
 
-                            {/* IMG */}
-                            <div className="detail-item">
-                               <img src={productsDetail.image}/>
-                            </div>
+      {/* Descripcion */}
+      <div className="data-descripcion">
+        <p>{productsDetail.description}</p>
+      </div>
 
-                            {/* TEXT */}
-                            <div className="detail-item detail-item_text">
-                              {/* Name */}
-                              <div className="detail-item_item">
-                                <h1>{productsDetail.name}</h1>
-                              </div>
-                              {/* Rating */}
-                              <div className="detail-item_item detail_id">
-                                <h3>Rating:</h3>
-                                <h3>{productsDetail.rating}</h3>
-                              </div>
-                              {/* Stock */}
-                              <div className="detail-item_item detail_id">
-                                <h3>Stock:</h3>
-                                <h3>{productsDetail.stock}</h3>
-                              </div>
-                              {/* Price */}
-                              <div className="detail-item_item detail_id">
-                                <h3>Price:</h3>
-                                <h3 className="detail-item_item-text">${productsDetail.price}</h3>
-                              </div>
-                              {/* Fav button */}
-                              <div className="btn-container">
-                                <span className="btn" onClick={favState?quitarFav:agregarFAv}>
-                                  {favState?"Quitar de  Favoritos":"Favoritos"}
-                                </span>
-                              </div>
-                            </div>
-                            <div></div>
-                            {/* <PayPalScriptProvider className="btn-container" options={{ "client-id": "ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs" }}>
-                              <PayPalButtons className="btn"/>
-                            </PayPalScriptProvider> */}
-                              </div>
-                              
-                              {/* Descripcion */}
-                              <div className="data-container detail-item_item">
-                                <h3>Descripcion</h3>
-                                <div className="summary">
-                                 {productsDetail.description}
-                                  </div>
-                               </div>
+      <div style={{ maxWidth: "750px", minHeight: "200px" }}>
+            <PayPalScriptProvider
+            clientId={'ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs'}
+        onError={(error) => console.log(error)}
+                options={{
+                    "client-id": "test",
+                    components: "buttons",
+                    currency: "USD"
+                }}
+            >
+				<ButtonWrapper
+                    currency={currency}
+                    showSpinner={false}
+                />
+			</PayPalScriptProvider>
+		</div>
 
-                               {/* Categorias */}
-                               <div className="data-container detail-item_item">
-                                <h3>Categorias:</h3>
-                                <div className="summary diets-container">
-                                  {productsDetail.category}
-                                </div>
-                               </div>
-                  </>
-  )
+
+      {/* <PayPalButtons                                      
+          createOrder={createOrder}
+          onApprove={onApprove}
+          onCancel={onCancel}
+        /> */}
+      {/* <PayPalScriptProvider
+        clientId={'ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs'}
+        onError={(error) => console.log(error)}
+      >
+       
+        
+      </PayPalScriptProvider> */}
+    </>
+  );
 }
+
 
 export default CardDetail
