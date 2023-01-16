@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/router";
 import { getProductDet } from "../../redux/DSellerActions";
 import { PayPalScriptProvider, PayPalButtons ,  usePayPalScriptReducer} from "@paypal/react-paypal-js";
 import axios from "axios";
@@ -20,9 +19,9 @@ function CardDetail() {
   };
   // console.log(productsDetail)
   useEffect(() => {
-    if (router.isReady) {
-      dispatch(getProductDet(id));
-    }
+    if(router.isReady){ 
+      dispatch(getProductDet(id))
+    };
     // eslint-disable-next-line
   }, [id]);
 
@@ -208,4 +207,6 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
     </>
   );
 }
-export default CardDetail;
+
+
+export default CardDetail
