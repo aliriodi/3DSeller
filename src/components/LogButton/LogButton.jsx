@@ -27,7 +27,7 @@ export default function LogButton({ handleLogin }) {
             ? user.name
              : "Invitado"}
         </h6>
-        {user.given_name || user.nickname ? (
+        {user.name ? (
           <Link
             href={"/api/auth/logout"}
             legacyBehavior
