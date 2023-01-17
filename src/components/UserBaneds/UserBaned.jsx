@@ -1,15 +1,19 @@
 import React from "react";
+import Link from "next/link";
 
 export default function UserBaned() {
   return (
     <div className="permissions-denied">
       <div className="permissions-denied-text">
-        <h1> zrry panna estas baneado crack joya :C </h1>
+        <h1> Parece que ha ocurrido algo </h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, unde
-          alias? Doloremque repellat reprehenderit blanditiis, exercitationem
-          quidem dolores autem dolorum harum quos, cupiditate fugit quod
-          adipisci tempore eligendi est consectetur.
+          Al parecer su usuario fue bloqueado debido a algún incumplimiento con
+          nuestras <b> Normas de convivencia </b> Si lo desea puede ponerse en
+          contacto con
+          <Link href={"/contacto"}>
+            <b> nuestro equipo de soporte </b>
+          </Link>
+          para intentar solucionar la situación.
         </p>
       </div>
     </div>
