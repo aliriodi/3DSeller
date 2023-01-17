@@ -22,14 +22,16 @@ function Products() {
   const { favorites } = useSelector((state) => state.products);
   const sendDB = { favorites: favorites, user: user };
 
-  console.log("user", user.favorites);
+  //console.log("user", user);
+
+  //console.log("user ", user);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
     //la siguiente linea busca informacion del Local Storage y si la encuentra carga el arreglo favoritos con ella
     const storedFavorites = localStorage.getItem("favorites");
-    if (user.given_name || user.nickname) {
+    if (user.name) {
       if (storedFavorites) {
         const favorites = JSON.parse(storedFavorites);
         dispatch(chngFavoritos(favorites));
@@ -41,10 +43,9 @@ function Products() {
     dispatch(PutFavorite(sendDB));
   }, [favorites]);
 
-  if (cFO === 0 && count !== 0) {
+  useEffect(() => {
     dispatch(getRender(products));
-    dispatch(resetState(1, []));
-  }
+  }, [products]);
 
   //#region SearchBar y Filtros
   const [currentSearchBar, setCurrentSearchBar] = useState("");
@@ -56,15 +57,15 @@ function Products() {
   //SearchBar
   const onSearchChange = () => {
     const sItem = document.getElementById("sBar").value;
-    setCurrentSearchBar(sItem)
+    setCurrentSearchBar(sItem);
   };
-  const searchBar = (products, value)=>{
+  const searchBar = (products, value) => {
     const busqueda = products.filter((item) =>
       item.name?.toLowerCase().includes(value.toLocaleLowerCase())
     );
     // dispatch(resetState(1, []));
-    return busqueda
-  }
+    return busqueda;
+  };
 
   //Filtro por Categoria
   const handleSelectChanges = ({ value }) => {
@@ -177,15 +178,20 @@ function Products() {
     setCurrent(0);
 
     //Se le aplican los filtros
-    resultProducts = searchBar(resultProducts, currentSearchBar)
+    resultProducts = searchBar(resultProducts, currentSearchBar);
     resultProducts = filterCategory(resultProducts, currentFilterCategory);
     resultProducts = filterMaterial(resultProducts, currentFilterMaterial);
     resultProducts = filterOrder(resultProducts, currentFilterOrder);
 
     dispatch(getRender(resultProducts));
-  }, [currentFilterMaterial, currentFilterCategory, currentFilterOrder, currentSearchBar]);
+  }, [
+    currentFilterMaterial,
+    currentFilterCategory,
+    currentFilterOrder,
+    currentSearchBar,
+  ]);
   //#endregion
-  
+
   //#region Scroll infinito code
   const nextPage = () => {
     if (productsR.length > current + 8) setCurrent(current + 8);
@@ -297,7 +303,11 @@ function Products() {
         </div>
 
         {/* btn-paginado */}
-        <div className={`btn-paginated ${tarjetasXPag().length<0?"desactive":null}`}>
+        <div
+          className={`btn-paginated ${
+            tarjetasXPag().length < 0 ? "desactive" : null
+          }`}
+        >
           {/* btn-paginado previa */}
           <button
             className={`btn ${current > 0 ? null : "btn-desabled"}`}
@@ -344,7 +354,11 @@ function Products() {
         </div>
 
         {/* btn-paginado */}
-        <div className={`btn-paginated ${tarjetasXPag().length<0?"desactive":null}`}>
+        <div
+          className={`btn-paginated ${
+            tarjetasXPag().length < 0 ? "desactive" : null
+          }`}
+        >
           {/* btn-paginado previa */}
           <button
             className={`btn ${current > 0 ? null : "btn-desabled"}`}

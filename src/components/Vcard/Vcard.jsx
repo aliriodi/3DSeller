@@ -7,7 +7,7 @@ export default function Vcard(props) {
   return (
     <div>
       <div className="card" key={props.id}>
-        {user.given_name || user.nickname ? (
+        {user.name ? (
           <FavButton
             id={props.id}
             key={props.id}
