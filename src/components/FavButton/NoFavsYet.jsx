@@ -13,7 +13,7 @@ export default function NoFavsYet() {
         parece que aún no tiene productos favoritos, visite nuestra pagina
         <Link href={"/productos"}>
           <b>
-            <h5> productos </h5>
+            <h3> productos </h3>
           </b>
         </Link>
         para añadir algunos diseños a su lista de favoritos.
