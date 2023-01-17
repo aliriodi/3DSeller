@@ -99,6 +99,9 @@ export const DSellerSlice = createSlice({
       state.userL = action.payload;
       state.user = action.payload;
     },
+    PUT_PRODUCT: (state, action) => {
+      state.detail = action.payload;
+    }
   },
 });
 

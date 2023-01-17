@@ -10,7 +10,8 @@ import {
   replaceFavoritos,
   getUserBDLS,
   postCreateUserS,
-  modificarUserS
+  modificarUserS,
+  PUT_PRODUCT
 } from "./DSellerSlice";
 
 export const getLOGOUT = () => async (dispatch) => {
@@ -55,6 +56,16 @@ export const getRender = (state) => async (dispatch) => {
   dispatch(getRenderS(state));
 };
 
+export const putProduct = (props) => async () =>{await  fetch('/api/products/'+props._id, {
+  method: "PUT",
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({props}),
+ })
+  .then((response) => response.json())
+  .then((myJson) =>dispatch(PUT_PRODUCT(myJson)))
+  .catch((error) => console.log(error));
+};
+
 export const resetState = (cFO, filtersAord) => async (dispatch) => {
   dispatch(resetRqstS([cFO, filtersAord]));
 };
@@ -87,11 +98,12 @@ export const getUser = (username) => async (dispatch) => {
                                 .then((response) => response.json())
                                 .then(user=> dispatch(getUserS(user)))
                               })
-                              .then(()=>fetch(" https://threed.us.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A3000&client_id=J3fAsBH2xLotpS7rYIdyPQAGCs38mojc", {
-                                mode: "cors",
-                                method: "POST",
-                                headers: { "Access-Control-Allow-Origin": "*" },
-                              }))
+                              // SOLUCIONAR
+                              // .then(()=>fetch(" https://threed.us.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A3000&client_id=J3fAsBH2xLotpS7rYIdyPQAGCs38mojc", {
+                              //   mode: "cors",
+                              //   method: "POST",
+                              //   headers: { "Access-Control-Allow-Origin": "*" },
+                              // }))
                            }                                          
       })
     .catch((error) => console.log(error));

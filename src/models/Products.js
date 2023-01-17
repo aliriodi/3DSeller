@@ -41,6 +41,9 @@ const ProductsScheme = new Schema(
     material: {
       type: [],
     },
+    review:{
+      type: [],
+    }
   },
   {
     timestamps: true,
