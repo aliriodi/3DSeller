@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { chngFavoritos } from "redux/DSellerActions";
 import Vcard from "../Vcard/Vcard";
 import NoFavsYet from "../FavButton/NoFavsYet";
+import UserBaned from "components/UserBaneds/UserBaned";
 
 export default function Favoritos() {
   const dispatch = useDispatch();
@@ -21,7 +22,9 @@ export default function Favoritos() {
     }
   }, []);
 
-  return (
+  return user.rol === "banned" ? (
+    <UserBaned />
+  ) : (
     <div className="products-container">
       <div>
         <div className="container-cards">
