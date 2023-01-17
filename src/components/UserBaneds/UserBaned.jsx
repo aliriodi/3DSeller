@@ -1,8 +1,14 @@
 import React from "react";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import Home from "components/Home/Home";
 
 export default function UserBaned() {
-  return (
+  const { user } = useSelector((state) => state.products);
+
+  return user.rol !== "banned" ? (
+    <Home />
+  ) : (
     <div className="permissions-denied">
       <div className="permissions-denied-text">
         <h1> Parece que ha ocurrido algo </h1>
