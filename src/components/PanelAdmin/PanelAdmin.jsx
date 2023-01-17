@@ -11,7 +11,6 @@ import Link from "next/link";
 
 function PanelAdmin(){
     const [currentPurchases, setCurrentPurchases] = useState(0)
-    const [currentUser, setCurrentUser] = useState({rol:"invitado"})
 
     const dispatch = useDispatch();
 
@@ -26,20 +25,14 @@ function PanelAdmin(){
     useEffect(()=>{
         if(allUsers.length === 0)dispatch(getAllUser())
         if(products.length === 0)dispatch(getProducts())
-        if(user.email != undefined)dispatch(GetUserBDL(user.email))
-        if(userL.rol !== "invitado"
-           && userL.rol !== undefined
-           && currentUser.rol == "invitado"){
-            setCurrentUser(userL)
-        }
-    })
+    },[userL])
 
     return(
         <>
-        {currentUser.rol !== "invitado"?
+        {user.email !== undefined?
 
         // COMPRUEBA SI TIENE PERMISOS
-        true?
+        userL.rol == "admin"?
         <div>
             {/* Tablero */}
             <div className='dashboard-container'>
