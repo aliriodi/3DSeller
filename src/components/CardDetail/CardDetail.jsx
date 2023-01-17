@@ -1,9 +1,9 @@
 import React, { useEffect , useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDet } from "../../redux/DSellerActions";
+import { getProductDet, putProduct } from "../../redux/DSellerActions";
 import { PayPalScriptProvider, PayPalButtons ,  usePayPalScriptReducer} from "@paypal/react-paypal-js";
 import { useRouter } from 'next/router';
-import axios from "axios";
+// import axios from "axios";
 
 function CardDetail() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function CardDetail() {
     setLoading(true);
     
   };
-  // console.log(productsDetail)
+  
   useEffect(() => {
     if(router.isReady){ 
       dispatch(getProductDet(id))
@@ -42,7 +42,6 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
           },
       });
   }, [currency, showSpinner]);
-
 
   return (<>
           { (showSpinner && isPending) && <div className="spinner" /> }
@@ -140,7 +139,58 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
       console.log(error);
     }
   };
+  
+  const [currentDetail, setCurrentDetail] = useState({...productsDetail})
+  const [currentRating, setCurrentRating] = useState(1)
 
+  const addReview = ()=>{
+    let newReview = productsDetail.review;
+    let newRating = 0;
+    let newDetail;
+    // Calcula El Nuevo Rating
+    // newReview?.forEach(rev => {
+    //   newRating += rev.rating;
+    // })
+    // newRating = (newRating + currentRating)/newReview?.length 
+    // console.log("Rating", newRating.toFixed(2))
+
+    // if(newReview.length > 0){
+    //   newDetail = {
+    //     ...currentDetail,
+    //     review:[
+    //       ...newReview,
+    //       {
+    //         user_email:"nahuelescujuri@gmail.com.",
+    //         rating: currentRating,
+    //         commentary:"Fear The Old Blood"
+    //       }
+    //   ]} 
+    // }
+    // else{
+    //   newDetail = {
+    //     ...currentDetail,
+    //     review:[
+    //       {
+    //         user_email:"nahuelescujuri@gmail.com.",
+    //         rating: currentRating,
+    //         commentary:"Fear The Old Blood"
+    //       }
+    //     ]}
+    // }
+    let prueba = {};
+    dispatch(putProduct({
+      ...productsDetail,
+      review:[
+        productsDetail.review,
+        {
+          user_email:"nahuelescujuri@gmail.com.",
+          rating: currentRating,
+          commentary:"Fear The Old Blood"
+        }
+    ]} ))
+    console.log(newReview)
+    setCurrentDetail(newDetail)
+  }
   return (
     <>
       <div className={"detail-content"}>
@@ -193,7 +243,11 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
                 />
 			</PayPalScriptProvider>
 		</div>
-
+    <div className="btn-container" onClick={addReview}>
+      <span className="btn">
+        add Review
+      </span>
+    </div>
 
       {/* <PayPalButtons                                      
           createOrder={createOrder}

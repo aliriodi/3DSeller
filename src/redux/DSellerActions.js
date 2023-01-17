@@ -56,9 +56,14 @@ export const getRender = (state) => async (dispatch) => {
   dispatch(getRenderS(state));
 };
 
-export const putProduct = (props) => async () =>{await  fetch('/api/products/'+props._id, {
+export const putProduct = (props) => async (dispatch) =>{
+  console.log("ID",props._id)
+  await  fetch('/api/products/'+props._id, {
   method: "PUT",
-  headers: { 'Content-Type': 'application/json' },
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
   body: JSON.stringify({props}),
  })
   .then((response) => response.json())

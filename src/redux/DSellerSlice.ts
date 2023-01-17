@@ -118,6 +118,7 @@ export const {
   getUserBDLS,
   postCreateUserS,
   modificarUserS,
+  PUT_PRODUCT,
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;
