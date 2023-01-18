@@ -45,10 +45,7 @@ export const PutFavorite = (sendDb) => async () => {
 };
 
 export const GetUserBDL = (email) => async (dispatch) => {
-  console.log('Action GetUserBDL')
-  console.log(email)
- // email='aliriodi@gmail.com'
-  if(email){ null}else{ email="invitado"}
+   if(email){ null}else{ email="invitado"}
   await fetch("/api/user/" + email)
     .then((response) => response.json())
     .then((json) => { dispatch(getUserBDLS(json)) })
