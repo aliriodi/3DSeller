@@ -96,7 +96,6 @@ export const DSellerSlice = createSlice({
       localStorage.setItem("favorites", JSON.stringify(action.payload));
     },
     modificarUserS: (state, action) => {
-      state.userL = action.payload;
       state.user = action.payload;
     },
     PUT_PRODUCT: (state, action) => {

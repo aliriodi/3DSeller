@@ -674,6 +674,21 @@ header{
   margin-left: 8px;
   border-radius: 10px;
 }
+
+/* Rating */
+.rating{
+  display: flex;
+}
+.rating input{
+  
+}
+.rating label{
+  display: block;
+  cursor: pointer;
+  width: 50px;
+  background: var(--text-color);
+}
+
 /*////////// End Detail //////////*/
 
 

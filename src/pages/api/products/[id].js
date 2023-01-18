@@ -25,9 +25,9 @@ const handler = async (req, res) => {
 
     case "PUT":
       try {
-        cosole.log("Mongo",id)
         const dataPut = await Product.findByIdAndUpdate(id, body, { new: true })
-        return res.status(201).json(dataPut)
+        if(!dataPut) return res.status(404).json({msg: "Product not found"});
+        return res.status(201).json(dataPut);
       } catch (error) {
         console.log("🚀 ~ file: [id].js:34 ~ error", error)
       }

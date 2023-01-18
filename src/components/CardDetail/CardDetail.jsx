@@ -1,82 +1,86 @@
-import React, { useEffect , useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDet, putProduct } from "../../redux/DSellerActions";
-import { PayPalScriptProvider, PayPalButtons ,  usePayPalScriptReducer} from "@paypal/react-paypal-js";
-import { useRouter } from 'next/router';
-// import axios from "axios";
+import {
+  PayPalScriptProvider,
+  PayPalButtons,
+  usePayPalScriptReducer,
+} from "@paypal/react-paypal-js";
+import { useRouter } from "next/router";
+import axios from "axios";
+import Image from "next/image";
+import imgIcon from "../LogButton/perfil-icon_default.png"
 
 function CardDetail() {
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
   const productsDetail = useSelector((state) => state.products.detail);
+  const {userL} = useSelector((state) => state.products);
   const [orderId, setOrderId] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("idle");
   const createOrder = async (data, actions) => {
     setLoading(true);
-    
   };
   
   useEffect(() => {
-    if(router.isReady){ 
-      dispatch(getProductDet(id))
-    };
+    if (router.isReady) {
+      dispatch(getProductDet(id));
+    }
     // eslint-disable-next-line
   }, [id]);
 
-const currency = 'USD';
-// Custom component to wrap the PayPalButtons and handle currency changes
-const ButtonWrapper = ({ currency='USD', showSpinner }) => {
-  // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
-  // This is the main reason to wrap the PayPalButtons in a new component
-  const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
+  const currency = "USD";
+  // Custom component to wrap the PayPalButtons and handle currency changes
+  const ButtonWrapper = ({ currency = "USD", showSpinner }) => {
+    // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
+    // This is the main reason to wrap the PayPalButtons in a new component
+    const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
 
-  useEffect(() => {
+    useEffect(() => {
       dispatch({
-          type: "resetOptions",
-          value: {
-              ...options,
-              currency: currency,
-          },
+        type: "resetOptions",
+        value: {
+          ...options,
+          currency: currency,
+        },
       });
-  }, [currency, showSpinner]);
+    }, [currency, showSpinner]);
 
-  return (<>
-          { (showSpinner && isPending) && <div className="spinner" /> }
-          <PayPalButtons
-             // style={style}
-              disabled={false}
-              forceReRender={[Math.ceil(productsDetail.price/300), currency, null]}
-              fundingSource={undefined}
-              createOrder={(data, actions) => {
-                  return actions.order
-                      .create({
-                          purchase_units: [
-                              {
-                                  amount: {
-                                      currency_code: currency,
-                                      value:Math.ceil( productsDetail.price/300),
-                                  },
-                              },
-                          ],
-                      })
-                      .then((orderId) => {
-                          // Your code here after create the order
-                          return orderId;
-                      });
-              }}
-              onApprove={function (data, actions) {
-                  return actions.order.capture().then(function () {
-                      // Your code here after capture the order
-                  });
-              }}
-          />
+    return (
+      <>
+        {showSpinner && isPending && <div className="spinner" />}
+        <PayPalButtons
+          // style={style}
+          disabled={false}
+          forceReRender={[
+            Math.ceil(productsDetail.price / 300),
+            currency,
+            null,
+          ]}
+          fundingSource={undefined}
+          createOrder={async (data, actions) => {
+            const orderId = await actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    currency_code: currency,
+                    value: Math.ceil(productsDetail.price / 300),
+                  },
+                },
+              ],
+            });
+            return orderId;
+          }}
+          onApprove={async function (data, actions) {
+            await actions.order.capture();
+          }}
+        />
       </>
-  );
-}
-
+    );
+  };
 
   // useEffect(() => {
   //   if (!loading) {
@@ -89,8 +93,8 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
   //     headers: {
   //       "Content-Type": "application/json",
   //     },
-        
-  //       intent: "CAPTURE",       
+
+  //       intent: "CAPTURE",
   //       purchase_units: [
   //         {
   //           amount: {
@@ -125,8 +129,6 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
   //     });
   // }, [createOrder, false]);
 
-
-
   const onCancel = (data) => {
     console.log("compra cancelada");
   };
@@ -140,57 +142,47 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
     }
   };
   
-  const [currentDetail, setCurrentDetail] = useState({...productsDetail})
-  const [currentRating, setCurrentRating] = useState(1)
+  //#region Agregar Reseña
+  const [prueveRating, setPrueveRating] = useState(3)
+  const [currentReview, setCurrentReview] = useState({
+    user_email:userL.email,
+    rating: 0,
+    commentary:""
+  })
+
+  const handleReviewChange = (e)=>{
+    setCurrentReview({...currentReview,[e.target.name]:e.target.value})
+    console.log(currentReview)
+  }
 
   const addReview = ()=>{
     let newReview = productsDetail.review;
     let newRating = 0;
-    let newDetail;
-    // Calcula El Nuevo Rating
-    // newReview?.forEach(rev => {
-    //   newRating += rev.rating;
-    // })
-    // newRating = (newRating + currentRating)/newReview?.length 
-    // console.log("Rating", newRating.toFixed(2))
 
-    // if(newReview.length > 0){
-    //   newDetail = {
-    //     ...currentDetail,
-    //     review:[
-    //       ...newReview,
-    //       {
-    //         user_email:"nahuelescujuri@gmail.com.",
-    //         rating: currentRating,
-    //         commentary:"Fear The Old Blood"
-    //       }
-    //   ]} 
-    // }
-    // else{
-    //   newDetail = {
-    //     ...currentDetail,
-    //     review:[
-    //       {
-    //         user_email:"nahuelescujuri@gmail.com.",
-    //         rating: currentRating,
-    //         commentary:"Fear The Old Blood"
-    //       }
-    //     ]}
-    // }
-    let prueba = {};
+    // Calcula el Nuevo Rating
+    newReview?.forEach(rev => {
+      newRating += rev.rating;
+
+    })
+    newRating = ((newRating + currentReview.rating)/newReview?.length);
+    console.log("Rating",newRating)
+    
+    //Se Actualiza el Producto
     dispatch(putProduct({
-      ...productsDetail,
+      _id:productsDetail._id,
+      rating:newRating.toFixed(2),
       review:[
-        productsDetail.review,
+        ...productsDetail.review,
         {
-          user_email:"nahuelescujuri@gmail.com.",
-          rating: currentRating,
+          user_email:"nahuelescujuri@gmail.com",
+          rating: 1,
           commentary:"Fear The Old Blood"
         }
     ]} ))
     console.log(newReview)
-    setCurrentDetail(newDetail)
   }
+  //#endregion
+
   return (
     <>
       <div className={"detail-content"}>
@@ -228,27 +220,24 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
       </div>
 
       <div style={{ maxWidth: "750px", minHeight: "200px" }}>
-            <PayPalScriptProvider
-            clientId={'ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs'}
-        onError={(error) => console.log(error)}
-                options={{
-                    "client-id": "test",
-                    components: "buttons",
-                    currency: "USD"
-                }}
-            >
-				<ButtonWrapper
-                    currency={currency}
-                    showSpinner={false}
-                />
-			</PayPalScriptProvider>
-		</div>
-    <div className="btn-container" onClick={addReview}>
-      <span className="btn">
-        add Review
-      </span>
-    </div>
+        <PayPalScriptProvider
+          clientId={
+            "ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs"
+          }
+          onError={(error) => console.log(error)}
+          options={{
+            "client-id": "test",
+            components: "buttons",
+            currency: "USD",
+          }}
+        >
+          <ButtonWrapper currency={currency} showSpinner={false} />
+        </PayPalScriptProvider>
+      </div>
 
+      <div className="btn-container">
+        <span className="btn" onClick={addReview}>Agregar Review</span>
+      </div>
       {/* <PayPalButtons                                      
           createOrder={createOrder}
           onApprove={onApprove}
@@ -261,9 +250,93 @@ const ButtonWrapper = ({ currency='USD', showSpinner }) => {
        
         
       </PayPalScriptProvider> */}
+
+      {/* Formulario de Reseñas */}
+      <form>
+        {/* Rating */}
+        <div className="rating">
+          <input 
+          type={"radio"}
+          name="rating"
+          value={1}
+          onChange={handleReviewChange}
+          id="start1 "/><label
+          for="start1">
+
+          </label>
+          <input 
+          type={"radio"}
+          name="rating"
+          value={2}
+          onChange={handleReviewChange}
+          id="start2 "/><label
+          for="start2">
+
+          </label>
+          <input 
+          type={"radio"}
+          name="rating"
+          value={3}
+          onChange={handleReviewChange}
+          id="start3 "/><label
+          for="start3">
+
+          </label>
+          <input 
+          type={"radio"}
+          name="rating"
+          value={4}
+          onChange={handleReviewChange}
+          id="start4 "/><label
+          for="start4">
+
+          </label>
+          <input 
+          type={"radio"}
+          name="rating"
+          value={5}
+          onChange={handleReviewChange}
+          id="start5 "/><label
+          for="start5">
+          </label>
+        </div>
+
+        {/* Commentary */}
+        <textarea
+        type="text"
+        name="commentary"
+        onChange={handleReviewChange}
+        />
+      </form>
+
+      {/* Reseñas */}
+      <div className="user-review">
+        {/* Datos De Usuario */}
+        <div className="user-container">
+        <div className="user-dates">
+          <div className="user-container_icon">
+          <Image src={imgIcon} alt="user"/>
+          </div>
+          <p>userxxxxx@gmail.com</p>
+        </div>
+        <div className="user-star">
+          <span>{prueveRating >= 1?"★":"☆"}</span>
+          <span>{prueveRating >= 2?"★":"☆"}</span>
+          <span>{prueveRating >= 3?"★":"☆"}</span>
+          <span>{prueveRating >= 4?"★":"☆"}</span>
+          <span>{prueveRating >= 5?"★":"☆"}</span>
+        </div>
+        </div>
+
+        {/* Comentrio De Usuario*/}
+        <div className="user-commentary">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius corporis nostrum fuga quas eum inventore ea, eaque facere natus cum libero commodi architecto id? Repellendus quo eum labore possimus delectus?
+          </p>
+        </div>
+      </div>
     </>
   );
 }
 
-
-export default CardDetail
+export default CardDetail;
