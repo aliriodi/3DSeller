@@ -60,7 +60,7 @@ function CardDetail() {
               <PayPalButtons createOrder={async () => {
                 try {
                   const response = await axios({
-                    url: `/api/payment/${productsDetail.price}`,
+                    url: `/api/payment/ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs`,
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json"
