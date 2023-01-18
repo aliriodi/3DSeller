@@ -105,7 +105,43 @@ body {
     color-scheme: dark;
   }
 }
-/*Imagenes Materiales*/
+/*Materiales*/
+
+.btn-container2 {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+}
+
+.btn-container2 .btn {
+  width: 100px;
+  text-align: center;
+  padding: 15px 8px;
+  border-radius: 23px;
+  background-color: var(--main-color);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  transition: 0.3s;
+}
+
+.btn-container2 .btn:hover {
+  background-color: var(--text-color);
+  color: var(--main-color);
+}
+
+.wrapper2 {
+  display: flex;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.wrapper2 h2 {
+  font-weight: 950;
+}
 .pla2{
   width: 250px;
   height: auto;
@@ -114,6 +150,11 @@ body {
   width: 150px;
   height: auto;
 }
+.triang{
+  width: 250px;
+  height: auto;
+}
+
 .container0 {
   display: flex;
   padding-top: 200px;
