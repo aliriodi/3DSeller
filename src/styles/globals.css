@@ -647,7 +647,7 @@ header {
   max-height: 475px;
 }
 .detail-item_item {
-  margin: 25px 0;
+  margin: 25px 0; 
 }
 .detail-item_item h1 {
   font-weight: 600;
@@ -712,7 +712,7 @@ header {
 /* Review Formulario */
 
 .review-form{
-  margin-bottom: 50px;
+  margin: 50px 0;
   padding: 0 20px;
   z-index: 1400;
   width: 50%;
@@ -805,6 +805,9 @@ header {
   margin: auto;
   margin-bottom: 20px;
   border-bottom: #adadad55 2px solid;
+}
+.reviews-container .user-review:last-child{
+  border: none;
 }
 .reviews-container .user-review .user-container{
   display: flex;
