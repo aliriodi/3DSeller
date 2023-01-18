@@ -54,7 +54,7 @@ export const DSellerSlice = createSlice({
 
     getUserS: (state, action) => {
       state.user = action.payload;
-      state.userL = action.payload;
+      
     },
 
     getAllUserS: (state, action) => {

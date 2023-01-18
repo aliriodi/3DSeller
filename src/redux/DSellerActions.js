@@ -46,11 +46,12 @@ export const PutFavorite = (sendDb) => async () => {
 };
 
 export const GetUserBDL = (email) => async (dispatch) => {
+   if(email){ null}else{ email="invitado"}
   await fetch("/api/user/" + email)
     .then((response) => response.json())
-    .then((json) => dispatch(getUserBDLS(json)))
+    .then((json) => { dispatch(getUserBDLS(json)) })
     .catch((error) => console.log(error));
-};
+   };
 
 export const getRender = (state) => async (dispatch) => {
   dispatch(getRenderS(state));
@@ -61,41 +62,14 @@ export const resetState = (cFO, filtersAord) => async (dispatch) => {
 };
 
 export const getUser = () => async (dispatch) => {
-     await fetch("/api/auth/me", {
-      mode: "cors",
-      headers: { "Access-Control-Allow-Origin": "*" },
-    })
-      .then((response) => {
-        console.log(response);
-        if (response.status === 204) {
-          //usuario no logeado
-          dispatch(getUserS({ name: "Invitado", rol: "invitado" }));
-        }
-        if (response.status === 200) {
-          //usuario logueado en auth0
-          console.log("status 200");
-          console.log(response);
-          fetch("/api/auth/me", {
-            mode: "cors",
-            headers: { "Access-Control-Allow-Origin": "*" },
-          })
-            .then((response) => response.json())
-            .then((json) => {
-              console.log(json);
-              //aca lo mando contra la BDL y sus propiedades
-              fetch("/api/user/" + json.email)
-                .then((response) => response.json())
-                .then((user) => dispatch(getUserS(user)));
-            });
-          // .then(() => fetch(" https://threed.us.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A3000&client_id=J3fAsBH2xLotpS7rYIdyPQAGCs38mojc", {
-          //   mode: "cors",
-          //   method: "POST",
-          //   headers: { "Access-Control-Allow-Origin": "*" },
-          // }))
-        }
-      })
-      .catch((error) => console.log(error));
-  
+  await fetch("/api/auth/me", {
+    mode: "cors",
+    headers: { "Access-Control-Allow-Origin": "*" },
+  })
+      .then((response) => response.json())
+    .then((myJson) => {dispatch(getUserS(myJson)); return myJson })
+    .then((myJson)=> dispatch(GetUserBDL(myJson.email)))
+    .catch((error) => console.log(error));
 };
 
 export const getAllUser = () => async (dispatch) => {
