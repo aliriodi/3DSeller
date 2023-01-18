@@ -25,7 +25,7 @@ export default function Home() {
           <ul className="steps">
             <li>
               <h3>Acido Poliláctico o Acido Láctico (PLA)</h3>
-              <Image src={pla1} alt="16" className='' />
+              <Image src={pla1} alt="16" className='pla1' />
               <Image src={pla2} alt="15" className='pla2' />
                El filamneto PLA fue inventado en 1930 por el químico Wallace Carothers y se inicio 
                su uso en productos de la empresa alimentaria como bandejas, tapas y otros.
@@ -98,8 +98,30 @@ export default function Home() {
               
             </li>
             <li>
-              <h3>Nylon</h3>
-              
+              <h3>Acrilonitrilo Butadieno Estireno (ABS)</h3>
+              El filamento de ABS, es un polímero termoplástico bastante común 
+              en la industria, conocido principalmente por su buena resistencia a las bajas temperaturas y
+               su peso liviano.
+
+               El plástico ABS también es muy popular en el mercado de la impresión FDM o de deposición 
+               fundida, seguramente uno de los plásticos más utilizados en la impresión 3D.
+
+               Principalmente utilizado en el sector de electrodomésticos, 
+               también se encuentra en cascos de barcos, decoración o juguetes, 
+               especialmente en los famosos ladrillos desarrollados por LEGO
+
+               Caracteristicas
+                 Inodoro, permanente, claro y brillante.
+                 Debe mantenerse seco porque absorbe la humedad del aire.
+                 En cuanto al soporte de impresión, ten en cuenta que el ABS es fácil de imprimir con HIPS. 
+                 Suficientemente extensible y elástico.
+                 Su nivel de inflamabilidad es muy bajo lo que lo hace estable a la luz UV.
+                 Puede copolimerizarse con otros materiales.
+                 El rango de temperatura de impresión está entre 230º - 260º C
+                 Despues de impreso la pieza es endeble a temperaturas entre 70º - 80º C 
+ 
+               
+
             </li>
           </ul>
 
