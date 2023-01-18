@@ -4,7 +4,6 @@ import Select from "react-select";
 import {
   getProducts,
   getRender,
-  resetState,
   chngFavoritos,
   PutFavorite,
 } from "../../redux/DSellerActions";
@@ -12,19 +11,16 @@ import Vcard from "../Vcard/Vcard";
 import Image from "next/dist/client/image";
 import paginationRightImg from "../../public/pagination-icon_right.png";
 import paginationLeftImg from "../../public/pagination-icon_left.png";
+import UserBaned from "components/UserBaneds/UserBaned";
 
 function Products() {
-  const { products, count, cFO, productsR } = useSelector(
-    (state) => state.products
-  );
+  const { products, productsR } = useSelector((state) => state.products);
 
   const { user } = useSelector((state) => state.products);
   const { favorites } = useSelector((state) => state.products);
   const sendDB = { favorites: favorites, user: user };
 
-  //console.log("user", user);
-
-  //console.log("user ", user);
+  console.log("user", user.rol);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -249,7 +245,9 @@ function Products() {
   };
   //#endregion
 
-  return (
+  return user.rol === "banned" ? (
+    <UserBaned />
+  ) : (
     <>
       <div className={"products-container"}>
         {/* Search bar */}

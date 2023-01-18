@@ -32,7 +32,7 @@ export default function LogButton({ handleLogin }) {
             href={"/api/auth/logout"}
             legacyBehavior
           >
-            <div className="container-logout">
+            <div  className="container-logout">
               <div className="logout-item"> x</div>
             </div>
           </Link>

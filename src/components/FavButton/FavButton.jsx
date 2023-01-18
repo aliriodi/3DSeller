@@ -15,7 +15,7 @@ export default function FavButton(props) {
 
   useEffect(() => {
     const resultado = favorites.find((r) => r.id === props.id);
-    console.log(favorites)
+    //console.log(favorites)
     if (resultado) {
       setActive(true);
     } else {

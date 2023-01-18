@@ -60,11 +60,8 @@ export const resetState = (cFO, filtersAord) => async (dispatch) => {
   dispatch(resetRqstS([cFO, filtersAord]));
 };
 
-export const getUser = (username) => async (dispatch) => {
-  if (username === "invitado") {
-    dispatch(getUserS({ name: "Invitado", rol: "invitado" }));
-  } else {
-    await fetch("/api/auth/me", {
+export const getUser = () => async (dispatch) => {
+     await fetch("/api/auth/me", {
       mode: "cors",
       headers: { "Access-Control-Allow-Origin": "*" },
     })
@@ -98,7 +95,7 @@ export const getUser = (username) => async (dispatch) => {
         }
       })
       .catch((error) => console.log(error));
-  }
+  
 };
 
 export const getAllUser = () => async (dispatch) => {
