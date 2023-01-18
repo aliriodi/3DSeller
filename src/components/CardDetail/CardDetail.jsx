@@ -59,13 +59,8 @@ function CardDetail() {
             <PayPalScriptProvider options={{ "client-id": 'ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs' }}>
               <PayPalButtons createOrder={async () => {
                 try {
-                  const response = await axios({
-                    url: `/api/payment/${products.Detail.price}`,
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json"
-                    }
-                  })
+                  const payload = { productID: id }
+                  const response = await axios.post(`http://localhost:3000/api/payment/paypal/`, payload)
                   return response.data.id
                 } catch(error) {
                   console.log(error)
@@ -73,7 +68,6 @@ function CardDetail() {
               }} 
               onCancel={(data)=> console.log("Compra Cancelada")} 
               onApprove={(data, actions) => {
-                console.log(data)
                 actions.order.capture
               }}
               style={{ layout: "horizontal", color: "black" }} />
