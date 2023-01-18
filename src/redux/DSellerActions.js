@@ -46,10 +46,10 @@ export const PutFavorite = (sendDb) => async () => {
 };
 
 export const GetUserBDL = (email) => async (dispatch) => {
-   if(email){ null}else{ email="invitado"}
+   if(email){ email=email}else{ email="invitado"}
   await fetch("/api/user/" + email)
     .then((response) => response.json())
-    .then((json) => { dispatch(getUserBDLS(json)) })
+    .then((json) => { dispatch(getUserBDLS(json)); console.log(json) })
     .catch((error) => console.log(error));
    };
 
@@ -66,7 +66,7 @@ export const getUser = () => async (dispatch) => {
     mode: "cors",
     headers: { "Access-Control-Allow-Origin": "*" },
   })
-      .then((response) => response.json())
+      .then((response) => {if(response.status===204){return {email:'invitado'}} else {return response.json()}})
     .then((myJson) => {dispatch(getUserS(myJson)); return myJson })
     .then((myJson)=> dispatch(GetUserBDL(myJson.email)))
     .catch((error) => console.log(error));
