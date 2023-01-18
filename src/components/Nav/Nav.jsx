@@ -4,6 +4,7 @@ import Image from "next/image";
 import logo from "../../public/logo.png";
 import Link from "next/link";
 import LogButton from "../LogButton/LogButton";
+import LogoutButton from "../LogButton/Logout";
 import { useRouter } from "next/router";
 
 function Nav() {
@@ -81,13 +82,16 @@ function Nav() {
               </a>
             </Link>
           </div> */}
-          <LogButton
+          {/* <LogButton
             handleLogin={
               user.given_name ? null : user.nickname ? null : handleLogin
             }
             className="btn-logIn"
             id="bell-icon"
-          />
+          /> */}
+
+          
+          {userL.name==='Invitado'? <LogButton  /> :  <LogoutButton />}
         </div>
       </header>
     </>
