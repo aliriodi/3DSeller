@@ -68,9 +68,9 @@ function Nav() {
             </Link>
           </div>
           <div className="nav-icons">
-            <Link href={"/recursos"} legacyBehavior>
+            <Link href={"/materiales"} legacyBehavior>
               <a className="btn" id="bell-icon">
-                Recursos
+                Materiales
               </a>
             </Link>
           </div>
