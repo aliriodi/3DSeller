@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Image from "next/image";
 import imgIcon from "../LogButton/perfil-icon_default.png"
+import ReviewList from "./ReviewList"
 
 function CardDetail() {
   const dispatch = useDispatch();
@@ -143,29 +144,50 @@ function CardDetail() {
   };
   
   //#region Agregar Reseña
-  const [prueveRating, setPrueveRating] = useState(3)
+  const [commentaryError, setCommentaryError] = useState(false)
+  const [ratingError, setRatingError] =useState(false)
   const [currentReview, setCurrentReview] = useState({
     user_email:userL.email,
     rating: 0,
     commentary:""
   })
 
+  useEffect(()=>{
+    setCurrentReview({...currentReview,user_email:userL.email})
+  },[userL])
+
   const handleReviewChange = (e)=>{
+    if(userL.email != currentReview.user_email)setCurrentReview({...currentReview,user_email:userL.email})
     setCurrentReview({...currentReview,[e.target.name]:e.target.value})
-    console.log(currentReview)
   }
 
   const addReview = ()=>{
-    let newReview = productsDetail.review;
     let newRating = 0;
 
     // Calcula el Nuevo Rating
-    newReview?.forEach(rev => {
-      newRating += rev.rating;
-
+    productsDetail.review?.forEach(rev => {
+      let rating = +rev.rating
+      newRating += rating;
     })
-    newRating = ((newRating + currentReview.rating)/newReview?.length);
-    console.log("Rating",newRating)
+    newRating += +currentReview.rating;
+    newRating = (newRating/productsDetail.review?.length);
+
+    //Ver que no haya Errores
+    if(currentReview.rating <= 0){
+      console.log(currentReview.rating)
+      setRatingError(true)
+    }
+    else setRatingError(false)
+
+    if(currentReview.commentary.length <= 0){
+      setCommentaryError(true)
+    }
+    else setCommentaryError(false)
+
+    if(ratingError || commentaryError){
+      return
+    }
+
     
     //Se Actualiza el Producto
     dispatch(putProduct({
@@ -173,13 +195,14 @@ function CardDetail() {
       rating:newRating.toFixed(2),
       review:[
         ...productsDetail.review,
-        {
-          user_email:"nahuelescujuri@gmail.com",
-          rating: 1,
-          commentary:"Fear The Old Blood"
-        }
+        currentReview
     ]} ))
-    console.log(newReview)
+
+    setCurrentReview({
+      user_email:userL.email,
+      rating: 0,
+      commentary:""
+    })
   }
   //#endregion
 
@@ -235,9 +258,6 @@ function CardDetail() {
         </PayPalScriptProvider>
       </div>
 
-      <div className="btn-container">
-        <span className="btn" onClick={addReview}>Agregar Review</span>
-      </div>
       {/* <PayPalButtons                                      
           createOrder={createOrder}
           onApprove={onApprove}
@@ -252,88 +272,110 @@ function CardDetail() {
       </PayPalScriptProvider> */}
 
       {/* Formulario de Reseñas */}
-      <form>
+      <form className={`review-form`}>
+        <div className="review-form_data">
+          <h3>{userL.email}</h3>
+
         {/* Rating */}
-        <div className="rating">
-          <input 
-          type={"radio"}
-          name="rating"
-          value={1}
-          onChange={handleReviewChange}
-          id="start1 "/><label
-          for="start1">
-
-          </label>
-          <input 
-          type={"radio"}
-          name="rating"
-          value={2}
-          onChange={handleReviewChange}
-          id="start2 "/><label
-          for="start2">
-
-          </label>
-          <input 
-          type={"radio"}
-          name="rating"
-          value={3}
-          onChange={handleReviewChange}
-          id="start3 "/><label
-          for="start3">
-
-          </label>
-          <input 
-          type={"radio"}
-          name="rating"
-          value={4}
-          onChange={handleReviewChange}
-          id="start4 "/><label
-          for="start4">
-
-          </label>
-          <input 
-          type={"radio"}
-          name="rating"
-          value={5}
-          onChange={handleReviewChange}
-          id="start5 "/><label
-          for="start5">
-          </label>
+        <div className="rating-container">
+          
+          <div className="rating-star">
+            <label className={`${currentReview.rating >= 1?"star-on":"star-off"}`}
+            for="start1">
+              {currentReview.rating >= 1?"★":"☆"}
+            </label>
+            <input
+            type={"radio"}
+            name="rating"
+            value={1}
+            onChange={handleReviewChange}
+            id="start1 "/>
+          </div>
+          
+          <div className="rating-star">
+            <label className={`${currentReview.rating >= 2?"star-on":"star-off"}`}
+            for="start1">
+              {currentReview.rating >= 2?"★":"☆"}
+            </label>
+            <input
+            type={"radio"}
+            name="rating"
+            value={2}
+            onChange={handleReviewChange}
+            id="start1 "/>
+          </div>
+          
+          <div className="rating-star">
+            <label className={`${currentReview.rating >= 3?"star-on":"star-off"}`}
+            for="start1">
+              {currentReview.rating >= 3?"★":"☆"}
+            </label>
+            <input
+            type={"radio"}
+            name="rating"
+            value={3}
+            onChange={handleReviewChange}
+            id="start1 "/>
+          </div>
+          
+          <div className="rating-star">
+            <label className={`${currentReview.rating >= 4?"star-on":"star-off"}`}
+            for="start1">
+              {currentReview.rating >= 4?"★":"☆"}
+            </label>
+            <input
+            type={"radio"}
+            name="rating"
+            value={4}
+            onChange={handleReviewChange}
+            id="start1 "/>
+          </div>
+          
+          <div className="rating-star">
+            <label className={`${currentReview.rating >= 5?"star-on":"star-off"}`}
+            for="start1">
+              {currentReview.rating >= 5?"★":"☆"}
+            </label>
+            <input
+            type={"radio"}
+            name="rating"
+            value={5}
+            onChange={handleReviewChange}
+            id="start1 "/>
+          </div>
+          
         </div>
+
+        </div>
+        <p className={`error-rating ${ratingError?null:"desactive"}`}>Es Necesario Poner un Puntaje</p>
 
         {/* Commentary */}
         <textarea
         type="text"
         name="commentary"
+        placeholder="Escribe una Reseña"
         onChange={handleReviewChange}
         />
+        <p className={`error-commentary ${commentaryError?null:"desactive"}`}>Es Necesario Escribir una Reseña</p>
+        <div className="btn-container">
+          <span className="btn" onClick={addReview}>Agregar Reseña</span>
+        </div>
       </form>
 
       {/* Reseñas */}
-      <div className="user-review">
-        {/* Datos De Usuario */}
-        <div className="user-container">
-        <div className="user-dates">
-          <div className="user-container_icon">
-          <Image src={imgIcon} alt="user"/>
-          </div>
-          <p>userxxxxx@gmail.com</p>
-        </div>
-        <div className="user-star">
-          <span>{prueveRating >= 1?"★":"☆"}</span>
-          <span>{prueveRating >= 2?"★":"☆"}</span>
-          <span>{prueveRating >= 3?"★":"☆"}</span>
-          <span>{prueveRating >= 4?"★":"☆"}</span>
-          <span>{prueveRating >= 5?"★":"☆"}</span>
-        </div>
-        </div>
-
-        {/* Comentrio De Usuario*/}
-        <div className="user-commentary">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius corporis nostrum fuga quas eum inventore ea, eaque facere natus cum libero commodi architecto id? Repellendus quo eum labore possimus delectus?
-          </p>
-        </div>
+      <div className="reviews-container">
+        {productsDetail.review &&
+        productsDetail.review.length > 0?
+        productsDetail.review.map((review)=>{
+          return(
+            <ReviewList
+            key = {productsDetail.review.indexOf(review)}
+            email ={review.user_email}
+            rating ={review.rating}
+            commentary ={review.commentary}
+            />
+          )
+        }):<p>No Se Encontraron Reseñas</p>}
       </div>
     </>
   );
