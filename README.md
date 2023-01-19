@@ -21,6 +21,9 @@ Esta es una aplicacion para administracion y ventas de articulos impresos en 3D,
       6. Deployment con vercel
       7. Nodemailer 
       8. Auth0 + AuthLocal con BD
+      9. Plataforma de pago Paypal
+      10. Gestor de arhivos cloudinary
+      
       
  ## https://3dseller.vercel.app
       
@@ -33,7 +36,7 @@ __1.  En la ruta Home /Home__:
 - [ ] Mostrar Vision - Mision 
     
 ___2. En la ruta productos /productos___:
-- [ ] Mostrar 10 productos por pagina con las siguientes caracteristicas:
+- [ ] Mostrar 8 productos por pagina con las siguientes caracteristicas:
 - Nombre
 - Imagen al pulsar la imagen debe ir a al ruta productos/id (Ruta de detalles del producto)
 - Rating 

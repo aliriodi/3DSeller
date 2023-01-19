@@ -75,13 +75,13 @@ function Nav() {
               </a>
             </Link>
           </div>
-          {/* <div className="nav-icons">
+          <div className="nav-icons">
             <Link href={"/createP"} legacyBehavior>
               <a className="btn" id="bell-icon">
                 Crear Producto
               </a>
             </Link>
-          </div> */}
+          </div>
           {/* <LogButton
             handleLogin={
               user.given_name ? null : user.nickname ? null : handleLogin
@@ -90,8 +90,10 @@ function Nav() {
             id="bell-icon"
           /> */}
 
+
           
           {userL.rol==='invitado'||userL.name==='Invitado'||userL.email==='invitado'? <LogButton  /> :  <LogoutButton />}
+
         </div>
       </header>
     </>

@@ -1,10 +1,13 @@
 //import e from 'express';
+import UserBaned from "components/UserBaneds/UserBaned";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import {  useHistory } from 'react-router-dom';
 import { postCreateProduct, getProducts } from "../../redux/DSellerActions";
 
 export default function CreateP() {
+  const { userL } = useSelector((state) => state.products);
+
   const dispatch = useDispatch();
   //const history = useHistory()
   const [input, setInput] = useState({
@@ -155,85 +158,10 @@ export default function CreateP() {
     // history.push('/productos')
   }
 
-  return (
+  return userL.rol === "banned" ? (
+    <UserBaned />
+  ) : (
     <>
-      {/* VERSION ANTERIOR
-
-        <div  className="container0">
-        <h1 className="addProduct">Agrega Nuevo Producto 3DSeller</h1>
-            <form className="{stl.formarea}" onSubmit={handleSubmit}>
-         <div className="Form">
-            <div className="NombreF">
-                    <label>Nombre:</label>
-                    <input className="NombreF" onChange={handleOnChange} onBlur={handleOnChange} 
-                        type='text' name='name' value={input.name}/>
-                    {errors.name && ( <p className="{stl.error}"> {errors.name} </p> )}
-            </div>  
-            
-            <div className="ImageF">
-                    <label>Imagen:</label>
-                    <input className="ImagenF" onChange={handleOnChangeI} onBlur={handleOnChangeI} 
-                        type='text' name='image' value={input.image}/>
-                    {errors.image && ( <p className="{stl.error}"> {errors.image} </p> )}
-            </div>  
-            
-                <div className="{stl.msgarea}">
-                    <label>Descripcion:</label>
-                    <textarea  className="DescriptionF" onChange={handleOnChange} onBlur={handleOnChange} onFocus={handleOnChange}
-                    type='text' name='description' value={input.description} />
-                    {errors.description && ( <p className="{stl.error}"> {errors.description} </p> )}
-                </div>
-        
-                    <label>Indice de Rating:</label>
-                    <input  className="RatingF" onChange={handleOnChange} onBlur={handleOnChange} onFocus={handleOnChange}
-                        type='number'  min="0" max="5" step="0.1" name='rating' value={input.rating} placeholder='ex 4.3'/>
-                    {errors.rating && ( <p className="{stl.error}"> {errors.rating} </p> )}    
-                    
-                    <label>Stock:</label>
-                    <input  className="StockF" onChange={handleOnChange} onBlur={handleOnChange} onFocus={handleOnChange}
-                        type='number'  min="1" max="10" step="1" name='stock' value={input.stock} placeholder='ex 1'/>
-                    {errors.stock && ( <p className="{stl.error}"> {errors.stock} </p> )}  
-
-                    <label>Precio en $Arg:</label>
-                    <input  className="PrecioF" onChange={handleOnChange} onBlur={handleOnChange} onFocus={handleOnChange}
-                        type='number'  min="100" step="100" name='price' value={input.price} placeholder='ex 3100'/>
-                    {errors.price && ( <p className="{stl.error}"> {errors.price} </p> )}   
-
-                    <label>Materiales Posibles:</label>   
-                    <select onChange={handleMaterial}  className="MaterialF" onBlur={handleOnChange} onFocus={handleOnChange}>
-                         <option key='Materials'  className="MaterialF" value={0}>==Material== </option>
-                        {materials.sort().map(p => {
-                           return  <option key={p} className="MaterialF" value={p}>{p}</option>
-                        })}
-                    </select >
-                    <label>Categoria:</label>   
-                    <select onChange={handleCategory}  className="CategoryF" onBlur={handleOnChange} onFocus={handleOnChange}>
-                         <option key='Category'  className="CategoryF" value={0}>==Categoria== </option>
-                        {category.sort().map(p => {
-                           return  <option key={p} className="CategoryF" value={p}>{p}</option>
-                        })}
-                    </select >
-                    <ul  className="ul"><li >{input.category}</li></ul>
-                    {errors.category && ( <p className="MaterialF1"> {errors.category} </p> )}
-                    {console.log('input')}
-                    {console.log(input)}
-                    {console.log('error')}
-                    {console.log(errors)}
-                     <button     disabled={errors.name?true:false ||
-                                       errors.platforms?true:false ||
-                                       errors.description?true:false ||
-                                       errors.rating?true:false||
-                                       errors.material?true:false||
-                                       errors.category?true:false||
-                                       errors.image?true:false||
-                                       errors.stock?true:false ||
-                                       errors.precio?true:false
-                                       } className="ButtonF" type='submit'>Agregar Producto</button> 
-                    </div>
-            </form>
-        </div>
-        <div/> */}
-
       <div className="marginTop">
         <div className="center">
           <h1>Agrega Nuevo Producto</h1>
