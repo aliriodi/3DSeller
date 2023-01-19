@@ -90,13 +90,10 @@ function Nav() {
             id="bell-icon"
           /> */}
 
-          {userL.rol === "invitado" ||
-          userL.name === "Invitado" ||
-          user.email === "invitado" ? (
-            <LogButton />
-          ) : (
-            <LogoutButton />
-          )}
+
+          
+          {userL.rol==='invitado'||userL.name==='Invitado'||userL.email==='invitado'? <LogButton  /> :  <LogoutButton />}
+
         </div>
       </header>
     </>
