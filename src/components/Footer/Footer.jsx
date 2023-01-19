@@ -1,33 +1,61 @@
 import React from "react";
+import Image from "next/image";
+import emailImg from "../../public/email-icon.png"
+import locationImg from "../../public/location-icon.png"
+import movileImg from "../../public/movile-icon.png"
 
 export default function Footer() {
   return (
-    <footer className="row-1" id="row-1">
-      <div className="">
-        <h2> Nosotros </h2>
+    <footer id="row-1">
+      {/* Nosotros */}
+      <div className="footer-data">
+        <h3> Nosotros </h3>
+        <div className="footer-data_item">
         <p>
-          Es su centro de producción de fabricación aditiva de piezas impresas
-          en 3D. Con más de 30 materiales para cualquier aplicación, obtendrá
-          las piezas que necesita con solo contratarnos.
+            3DSeller es una empresa con alto compromiso con los clientes y con
+            la capacidad tecnica necesaria para poder hacer sus necesidades
+            realidad sin importar la complejidad de su diseño
         </p>
+        </div>
       </div>
-      <br></br>
-      <div className="">
-        <h2> Coontacto </h2>
-        <p>seller3d@gmail.com</p>
-        <p>+xx xxx xxxxx xxxx</p>
-        <p>calle xxxxxxx xxxxxx</p>
+
+      {/* Contacto */}
+      <div className="footer-data">
+        <h3> Contacto </h3>
+        <div className="footer-data_item">
+          <Image src={emailImg} alt="Email"/>
+          <a href="mailto: threedseller@gmail.com">threedseller@gmail.com</a>
+        </div>
+        <div className="footer-data_item">
+          <Image src={movileImg} alt="Movil"/>
+          <a href="tel:+543516132710">+543516132710</a>
+        </div>
+        <div className="footer-data_item">
+          <Image src={locationImg} alt="Ubicacion"/>
+          <p>Argentina - Cordoba Capital Barrio Pueyrredon CP X5004<br/>Calle Fray
+              Mamerto Esquiu 1431</p>
+        </div>
       </div>
-      <br />
-      <div className="">
-        <h2> Redes sociales </h2>
-        <ul>
-          <li> Facebook </li>
-          <li> Instagram </li>
-          <li> Linkedin </li>
-          <li> Twitter </li>
-        </ul>
+      
+      {/* Redes Sociales */}
+      <div className="footer-data">
+        <h3> Redes sociales </h3>
+        <div className="footer-data_item">
+          <a href="/t" className="social"> Facebook </a>
+        </div>
+        <div className="footer-data_item">
+          <a href="/t" className="social"> Instagram </a>
+        </div>
+        <div className="footer-data_item">
+          <a href="/t" className="social"> Linkedin </a>
+        </div>
+        <div className="footer-data_item">
+          <a href="/t" className="social"> Twitter </a>
+        </div>
       </div>
+
+      {/* Copyright */}
+      <span className="copyright"> © Copyright - 3DSeller | All Right Reserverd</span>
     </footer>
   );
 }
