@@ -21,6 +21,9 @@ Esta es una aplicacion para administracion y ventas de articulos impresos en 3D,
       6. Deployment con vercel
       7. Nodemailer 
       8. Auth0 + AuthLocal con BD
+      9. Plataforma de pago Paypal
+      10. Gestor de arhivos cloudinary
+      
       
  ## https://3dseller.vercel.app
       
