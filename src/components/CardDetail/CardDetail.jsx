@@ -7,9 +7,11 @@ import {
 } from "@paypal/react-paypal-js";
 import { useRouter } from "next/router";
 import axios from "axios";
+import {useUser} from '@auth0/nextjs-auth0/client'
 
 
 function CardDetail() {
+  const { user, isLoading } = useUser()
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
@@ -26,6 +28,14 @@ function CardDetail() {
     // eslint-disable-next-line
   }, [id]);
 
+  const handleSentMail = async (orderLink, email = user.email, nickname = user.nickname) => {
+    let response = await axios.post('/api/payment/mail-customer', {
+      link: orderLink,
+      email,
+      nickname
+    })
+    return response.data
+  }
 
   return (
     <>
@@ -56,11 +66,14 @@ function CardDetail() {
             <h3 className="detail-item_item-text">${productsDetail.price}</h3>
           </div>
           <div style={{ width: "260px", height: "80px", background: "transparent" }}>
+          {isLoading ? (<h3>Loading...</h3>) : !user ? (<button className="btn-submit" disabled>Sign in to buy</button>) :
             <PayPalScriptProvider options={{ "client-id": 'ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs' }}>
               <PayPalButtons createOrder={async () => {
                 try {
                   const payload = { productID: id }
-                  const response = await axios.post(`http://localhost:3000/api/payment/paypal/`, payload)
+                  const response = await axios.post('/api/payment/paypal/', payload)
+                  // console.log(response.data)
+                  await handleSentMail(response.data.links)
                   return response.data.id
                 } catch(error) {
                   console.log(error)
@@ -68,10 +81,12 @@ function CardDetail() {
               }} 
               onCancel={(data)=> console.log("Compra Cancelada")} 
               onApprove={(data, actions) => {
+                
                 actions.order.capture
               }}
               style={{ layout: "horizontal", color: "black" }} />
             </PayPalScriptProvider>
+          }
           </div>
         </div>
       </div>
