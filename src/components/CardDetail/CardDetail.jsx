@@ -137,7 +137,7 @@ function CardDetail() {
             <h3 className="detail-item_item-text">${productsDetail.price}</h3>
           </div>
           <div style={{ width: "260px", height: "80px", background: "transparent" }}>
-            {isLoading ? (<h3>Loading...</h3>) : !user ? (<button className="btn-submit" disabled>Sign in to buy</button>) :
+            {isLoading ? (<h3>Loading...</h3>) : !user ? (<button onClick={() => router.push('/api/auth/login')} className="btn-submit" disabled>Sign in to buy</button>) :
               <PayPalScriptProvider options={{ "client-id": 'ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs' }}>
                 <PayPalButtons createOrder={async () => {
                   try {
