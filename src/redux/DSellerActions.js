@@ -11,6 +11,7 @@ import {
   getUserBDLS,
   postCreateUserS,
   modificarUserS,
+  PUT_PRODUCT,
 } from "./DSellerSlice";
 
 export const getLOGOUT = () => async (dispatch) => {
@@ -130,5 +131,18 @@ export const postCreateUser = (user) => async (dispatch) => {
   })
     .then((response) => response.json())
     .then((myJson) => postCreateUserS(myJson))
+    .catch((error) => console.log(error));
+};
+
+export const putProduct = (props) => async (dispatch) => {
+  await fetch("/api/products/" + props._id, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(props),
+  })
+    .then((response) => response.json())
+    .then((myJson) => dispatch(PUT_PRODUCT(myJson)))
     .catch((error) => console.log(error));
 };
