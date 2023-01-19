@@ -19,9 +19,9 @@ function Products() {
   const { user } = useSelector((state) => state.products);
   const { favorites } = useSelector((state) => state.products);
   const sendDB = { favorites: favorites, user: user };
-  const { userL } = useSelector((state) => state.product);
+  const { userL } = useSelector((state) => state.products);
 
-  //console.log("user", user.rol);
+  console.log("user", userL.rol);
 
   const dispatch = useDispatch();
   useEffect(() => {

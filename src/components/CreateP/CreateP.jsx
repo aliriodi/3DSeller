@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { postCreateProduct, getProducts } from "../../redux/DSellerActions";
 
 export default function CreateP() {
+  const { userL } = useSelector((state) => state.products);
+
   const dispatch = useDispatch();
   //const history = useHistory()
   const [input, setInput] = useState({
