@@ -97,6 +97,7 @@ html,
 body {
   background-color: var(--dark-color);
   max-width: 100vw;
+  height: 100%;
   overflow-x: hidden;
 }
 
@@ -1472,6 +1473,63 @@ header {
 .desactive {
   display: none;
 }
+/*////////// End Panel Admin //////////*/
+
+
+/*////////// Start Footer //////////*/
+footer{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--light-color);
+  position: relative;
+  margin-top: 50px;
+  padding: 70px 0;
+}
+footer .footer-data{
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+.footer-data h3{
+  /* color: var(--main-color); */
+  font-size: 1.4em;
+  margin-bottom: 15px;
+}
+.footer-data_item{
+  display: flex;
+  margin-bottom: 15px;
+}
+.footer-data_item p{
+  font-weight: 100;
+  display: flex;
+  align-items: center;
+}
+.footer-data_item .social{
+  color: var(--main-color);
+}
+.footer-data_item img{
+  /* object-fit: cover; */
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  display: flex;
+}
+
+.copyright{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  background-color: var(--text-color);
+  color: var(--light-color);
+  bottom: 0;
+  width: 100%;
+  padding: 8px;
+}
+/*////////// End Footer //////////*/
+
+
+
+
 
 /* Not Found Text */
 .notFound-text {

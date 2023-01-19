@@ -1,57 +1,79 @@
 import React from "react";
+import Image from "next/image";
+import emailImg from "../../public/email-icon.png"
+import locationImg from "../../public/location-icon.png"
+import movileImg from "../../public/movile-icon.png"
 import {
   AiFillTwitterCircle,
   AiFillInstagram,
   AiFillLinkedin,
   AiFillFacebook,
 } from "react-icons/ai";
+
 export default function Footer() {
   return (
-    <footer className="row-1" id="">
-      <div className="row2">
-        <div className="">
-          <h2 className=""> Nosotros </h2>
-          <p>
+    <footer id="row-1">
+      {/* Nosotros */}
+      <div className="footer-data">
+        <h3> Nosotros </h3>
+        <div className="footer-data_item">
+        <p>
             3DSeller es una empresa con alto compromiso con los clientes y con
             la capacidad tecnica necesaria para poder hacer sus necesidades
             realidad sin importar la complejidad de su diseño
-          </p>
-        </div>
-        <br></br>
-        <div className="">
-          <h2> Contacto </h2>
-          <ul>
-            <li> +543516132710 </li>
-            <li> threedseller@gmail.com </li>
-            <li>
-              Argentina - Cordoba Capital Barrio Pueyrredon CP X5004 Calle Fray
-              Mamerto Esquiu 1431
-            </li>
-          </ul>
-        </div>
-        <br />
-        <div className="">
-          <h2> Redes sociales </h2>
-          <ul>
-            <div>
-              <AiFillFacebook />
-              <li> Facebook </li>
-            </div>
-            <div>
-              <AiFillInstagram />
-              <li> Instagram </li>
-            </div>
-            <div>
-              <AiFillLinkedin />
-              <li> Linkedin </li>
-            </div>
-            <div>
-              <AiFillTwitterCircle />
-              <li> Twitter </li>
-            </div>
-          </ul>
+        </p>
         </div>
       </div>
+
+      {/* Contacto */}
+      <div className="footer-data">
+        <h3> Contacto </h3>
+        <div className="footer-data_item">
+          <Image src={emailImg} alt="Email"/>
+          <a href="mailto: threedseller@gmail.com">threedseller@gmail.com</a>
+        </div>
+        <div className="footer-data_item">
+          <Image src={movileImg} alt="Movil"/>
+          <a href="tel:+543516132710">+543516132710</a>
+        </div>
+        <div className="footer-data_item">
+          <Image src={locationImg} alt="Ubicacion"/>
+          <p>Argentina - Cordoba Capital Barrio Pueyrredon CP X5004<br/>Calle Fray
+              Mamerto Esquiu 1431</p>
+        </div>
+      </div>
+      
+      {/* Redes Sociales */}
+      <div className="footer-data">
+        <h3> Redes sociales </h3>
+        <div className="footer-data_item">
+          <a href="/t" className="social">
+              <AiFillFacebook />
+              Facebook
+              </a>
+        </div>
+        <div className="footer-data_item">
+          <a href="/t" className="social">
+              <AiFillInstagram />
+              Instagram
+              </a>
+        </div>
+        <div className="footer-data_item">
+          <a href="/t" className="social"> 
+              <AiFillLinkedin />
+              Linkedin
+              </a>
+        </div>
+        <div className="footer-data_item">
+          <a href="/t" className="social">
+              <AiFillTwitterCircle />
+              Twitter </a>
+
+        </div>
+      </div>
+
+      {/* Copyright */}
+      <span className="copyright"> © Copyright - 3DSeller | All Right Reserverd</span>
     </footer>
   );
 }
