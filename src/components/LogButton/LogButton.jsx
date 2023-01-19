@@ -1,43 +1,40 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../redux/DSellerActions";
+import { getUser, getProducts } from "../../redux/DSellerActions";
 import perfilIcon from "./perfil-icon_default.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-export default function LogButton({ handleLogin }) {
+export default function LogButton() {
+  const { push } = useRouter();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.products);
+  const {  userL  } = useSelector((state) => state.products);
+  
   useEffect(() => {
-      dispatch(getUser())
-    // eslint-disable-next-line
+          dispatch(getUser())
+           // eslint-disable-next-line
   }, [false]);
+  
+  useEffect(() => {
+    dispatch(getProducts());
+      }, []);
+   
+  function handleLogin (){ push("/api/auth/login")};
   
    return (
     <>
-      <div onClick={handleLogin} className="nav-icons nav-icons_logIn">
+      <div onClick={()=>handleLogin()} className="nav-icons nav-icons_logIn">
         <Image
           src={perfilIcon}
           alt="perfil"
           className="btn-logIn"
           id="bell-icon"
         />
-        <h6>
-          {user.name
-            ? user.name
-             : "Invitado"}
-        </h6>
-        {user.name !=='Invitado'? (
-          <Link
-            href={"/api/auth/logout"}
-            legacyBehavior
-          >
-            <div className="container-logout">
-              <div className="logout-item"> x</div>
-            </div>
-          </Link>
-        ) : null}
-      </div>
+            <h6>
+               {userL.name?userL.name:'Invitado'}
+            </h6>
+        </div>
     </>
   );
 }

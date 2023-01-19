@@ -13,7 +13,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Provider store={store}>
         <Head>
           <title>3DSeller </title>
-
           <link rel="shortcut icon" type="image/png" href="/logo.png" />
         </Head>
         <Nav />

@@ -19,18 +19,18 @@ export default function EmailVerified() {
     }, [updateSession])
 
     const boxStyle = {
-        width: '100px', 
+        width: '280px', 
         height: '50px',
         fontWeight: '900',
         fontSize: '16px',
         marginTop: '8px', 
-        borderRadius: '16px',
-        backgroundColor: 'transparent',
-        borderColor: '#F6C90E',
-        borderWidth: '4px',
-        color: '#F6C90E',
+        // borderRadius: '16px',
+        // backgroundColor: 'transparent',
+        // borderColor: '#F6C90E',
+        // borderWidth: '4px',
+        // color: '#F6C90E',
         cursor: 'pointer',
-        opacity: isHover ? '0.7' : '1'
+        opacity: isHover ? '0.8' : '1',
     }
 
     const handleMouseEnter = () => {
@@ -42,15 +42,16 @@ export default function EmailVerified() {
 
     return (
         <div style={{ height: '360px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            <h1 style={{ color: '#EEE' }}>Email Verified!</h1>
+            <h1 style={{ color: '#EEE' }}>Correo Electronico Verificado!</h1>
             {refreshed &&
                 <button 
+                    className='btn-submit'
                     onClick={() => push('/')}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                     style={boxStyle}   
                 >
-                    Home
+                    Ir a pagina principal
                 </button>}
         </div>
     )
