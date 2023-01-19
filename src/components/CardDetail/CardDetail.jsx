@@ -240,7 +240,7 @@ function CardDetail() {
             commentary ={review.commentary}
             />
           )
-        }):<p>No Se Encontraron Reseñas</p>}
+        }):<p className={`notFound-text`}>No Se Encontraron Reseñas</p>}
       </div>
     </>
   );
