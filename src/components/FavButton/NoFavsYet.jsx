@@ -25,7 +25,7 @@ export default function NoFavsYet() {
       <br></br>
       <p>
         Parece que aún no se encuentra registrado, para poder añadir productos
-        como favoritos por favor.
+        como favoritos por favor
         <Link href={"/api/auth/login"}>
           <b>
             <h3> registrese en nuestra sitio. </h3>

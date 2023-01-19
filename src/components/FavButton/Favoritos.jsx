@@ -10,7 +10,6 @@ export default function Favoritos() {
 
   const { user } = useSelector((state) => state.products);
   const { favorites } = useSelector((state) => state.products);
-  const { userL } = useSelector((state) => state.products);
 
   useEffect(() => {
     //la siguiente linea busca informacion del Local Storage y si la encuentra carga el arreglo favoritos con ella
@@ -23,7 +22,7 @@ export default function Favoritos() {
     }
   }, []);
 
-  return userL.rol === "banned" ? (
+  return user.rol === "banned" ? (
     <UserBaned />
   ) : (
     <div className="products-container">

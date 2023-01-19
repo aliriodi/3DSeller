@@ -14,8 +14,8 @@ function Nav() {
   const handleLogin = () => push("/api/auth/login");
 
   if (
-    userL.rol !== "invitado" &&
-    userL.rol !== undefined &&
+    user.rol !== "invitado" &&
+    user.rol !== undefined &&
     currentUser.rol == "invitado"
   ) {
     console.log("CHANGE");
@@ -90,10 +90,13 @@ function Nav() {
             id="bell-icon"
           /> */}
 
-
-          
-          {userL.rol==='invitado'||userL.name==='Invitado'||userL.email==='invitado'? <LogButton  /> :  <LogoutButton />}
-
+          {user.rol === "invitado" ||
+          user.name === "Invitado" ||
+          user.email === "invitado" ? (
+            <LogButton />
+          ) : (
+            <LogoutButton />
+          )}
         </div>
       </header>
     </>

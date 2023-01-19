@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postCreateProduct, getProducts } from "../../redux/DSellerActions";
 
 export default function CreateP() {
-  const { userL } = useSelector((state) => state.products);
+  const { user } = useSelector((state) => state.products);
 
   const dispatch = useDispatch();
   //const history = useHistory()
@@ -158,7 +158,7 @@ export default function CreateP() {
     // history.push('/productos')
   }
 
-  return userL.rol === "banned" ? (
+  return user.rol === "banned" ? (
     <UserBaned />
   ) : (
     <>

@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import emailImg from "../../public/email-icon.png"
-import locationImg from "../../public/location-icon.png"
-import movileImg from "../../public/movile-icon.png"
+import emailImg from "../../public/email-icon.png";
+import locationImg from "../../public/location-icon.png";
+import movileImg from "../../public/movile-icon.png";
 import {
   AiFillTwitterCircle,
   AiFillInstagram,
@@ -17,11 +17,11 @@ export default function Footer() {
       <div className="footer-data">
         <h3> Nosotros </h3>
         <div className="footer-data_item">
-        <p>
+          <p>
             3DSeller es una empresa con alto compromiso con los clientes y con
             la capacidad tecnica necesaria para poder hacer sus necesidades
             realidad sin importar la complejidad de su diseño
-        </p>
+          </p>
         </div>
       </div>
 
@@ -29,51 +29,57 @@ export default function Footer() {
       <div className="footer-data">
         <h3> Contacto </h3>
         <div className="footer-data_item">
-          <Image src={emailImg} alt="Email"/>
+          <Image src={emailImg} alt="Email" />
           <a href="mailto: threedseller@gmail.com">threedseller@gmail.com</a>
         </div>
         <div className="footer-data_item">
-          <Image src={movileImg} alt="Movil"/>
+          <Image src={movileImg} alt="Movil" />
           <a href="tel:+543516132710">+543516132710</a>
         </div>
         <div className="footer-data_item">
-          <Image src={locationImg} alt="Ubicacion"/>
-          <p>Argentina - Cordoba Capital Barrio Pueyrredon CP X5004<br/>Calle Fray
-              Mamerto Esquiu 1431</p>
+          <Image src={locationImg} alt="Ubicacion" />
+          <p>
+            Argentina - Cordoba Capital Barrio Pueyrredon CP X5004
+            <br />
+            Calle Fray Mamerto Esquiu 1431
+          </p>
         </div>
       </div>
-      
+
       {/* Redes Sociales */}
       <div className="footer-data">
         <h3> Redes sociales </h3>
         <div className="footer-data_item">
           <a href="/t" className="social">
-              <AiFillFacebook />
-              Facebook
-              </a>
+            <AiFillFacebook />
+            Facebook
+          </a>
         </div>
         <div className="footer-data_item">
           <a href="/t" className="social">
-              <AiFillInstagram />
-              Instagram
-              </a>
-        </div>
-        <div className="footer-data_item">
-          <a href="/t" className="social"> 
-              <AiFillLinkedin />
-              Linkedin
-              </a>
+            <AiFillInstagram />
+            Instagram
+          </a>
         </div>
         <div className="footer-data_item">
           <a href="/t" className="social">
-              <AiFillTwitterCircle />
-              Twitter </a>
-
+            <AiFillLinkedin />
+            Linkedin
+          </a>
+        </div>
+        <div className="footer-data_item">
+          <a href="/t" className="social">
+            <AiFillTwitterCircle />
+            Twitter{" "}
+          </a>
         </div>
       </div>
 
       {/* Copyright */}
-      <span className="copyright"> © Copyright - 3DSeller | All Right Reserverd</span>
+      <span className="copyright">
+        {" "}
+        © Copyright - 3DSeller | All Right Reserverd
+      </span>
     </footer>
   );
 }
