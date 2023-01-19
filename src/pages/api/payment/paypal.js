@@ -26,6 +26,6 @@ export default async(req, res) => {
 
         })
         const response = await client.execute(request)
-        return res.json({ id: response.result.id})
+        return res.json({ id: response.result.id, link: response.result.links[0] })
     }
 }
