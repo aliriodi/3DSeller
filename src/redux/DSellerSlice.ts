@@ -98,9 +98,6 @@ export const DSellerSlice = createSlice({
     modificarUserS: (state, action) => {
       state.user = action.payload;
     },
-    PUT_PRODUCT: (state, action) => {
-      state.detail = action.payload;
-    }
   },
 });
 
@@ -117,7 +114,6 @@ export const {
   getUserBDLS,
   postCreateUserS,
   modificarUserS,
-  PUT_PRODUCT,
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;
