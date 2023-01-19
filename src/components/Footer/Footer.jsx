@@ -3,6 +3,7 @@ import Image from "next/image";
 import emailImg from "../../public/email-icon.png";
 import locationImg from "../../public/location-icon.png";
 import movileImg from "../../public/movile-icon.png";
+import Link from "next/link";
 import {
   AiFillTwitterCircle,
   AiFillInstagram,
@@ -30,7 +31,9 @@ export default function Footer() {
         <h3> Contacto </h3>
         <div className="footer-data_item">
           <Image src={emailImg} alt="Email" />
-          <a href="mailto: threedseller@gmail.com">threedseller@gmail.com</a>
+          <Link href={"mailto: threedseller@gmail.com"} legacyBehavior> 
+          <a >threedseller@gmail.com</a>
+          </Link>
         </div>
         <div className="footer-data_item">
           <Image src={movileImg} alt="Movil" />
@@ -50,27 +53,35 @@ export default function Footer() {
       <div className="footer-data">
         <h3> Redes sociales </h3>
         <div className="footer-data_item">
-          <a href="/" className="social">
+          <a  className="social">
+          <Link href={"/"} legacyBehavior> 
             <AiFillFacebook />
             Facebook
+            </Link>
           </a>
         </div>
         <div className="footer-data_item">
-          <a href="/" className="social">
+          <a  className="social">
+          <Link href={"/"} legacyBehavior> 
             <AiFillInstagram />
             Instagram
+            </Link>
           </a>
         </div>
         <div className="footer-data_item">
-          <a href="/" className="social">
+          <a  className="social">
+          <Link href={"/"} legacyBehavior> 
             <AiFillLinkedin />
             Linkedin
+            </Link>
           </a>
         </div>
         <div className="footer-data_item">
-          <a href="/" className="social">
+          <a  className="social">
+          <Link href={"/"} legacyBehavior> 
             <AiFillTwitterCircle />
             Twitter{" "}
+            </Link>
           </a>
         </div>
       </div>
