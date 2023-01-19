@@ -65,7 +65,7 @@ export const getUser = () => async (dispatch) => {
     mode: "cors",
     headers: { "Access-Control-Allow-Origin": "*" },
   })
-      .then((response) => {if(response.status===204){return {email:'invitado'}} else {return response.json()}})
+      .then((response) => {if(response.status===204){return {name:'Invitado',email:'invitado',rol:'invitado'}} else {return response.json()}})
     .then((myJson) => {dispatch(getUserS(myJson)); return myJson })
     .then((myJson)=> dispatch(GetUserBDL(myJson.email)))
     .catch((error) => console.log(error));

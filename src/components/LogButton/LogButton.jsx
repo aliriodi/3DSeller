@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, GetUserBDL } from "../../redux/DSellerActions";
+import { getUser, getProducts } from "../../redux/DSellerActions";
 import perfilIcon from "./perfil-icon_default.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,6 +15,10 @@ export default function LogButton() {
           dispatch(getUser())
            // eslint-disable-next-line
   }, [false]);
+  
+  useEffect(() => {
+    dispatch(getProducts());
+      }, []);
    
   function handleLogin (){ push("/api/auth/login")};
   
@@ -28,7 +32,7 @@ export default function LogButton() {
           id="bell-icon"
         />
             <h6>
-               {userL.name}
+               {userL.name?userL.name:'Invitado'}
             </h6>
         </div>
     </>

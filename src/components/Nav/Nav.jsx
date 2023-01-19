@@ -91,7 +91,7 @@ function Nav() {
           /> */}
 
           
-          {userL.name==='Invitado'? <LogButton  /> :  <LogoutButton />}
+          {userL.rol==='invitado'||userL.name==='Invitado'||user.email==='invitado'? <LogButton  /> :  <LogoutButton />}
         </div>
       </header>
     </>
