@@ -137,7 +137,7 @@ function CardDetail() {
       </div>
 
       {/* Formulario de Reseñas */}
-      <form className={`review-form`}>
+      <form className={`review-form ${userL.email == "invitado"?"desactive":null}`}>
         <div className="review-form_data">
           <h3>{userL.email}</h3>
 
