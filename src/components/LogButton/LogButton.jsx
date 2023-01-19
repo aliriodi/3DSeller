@@ -27,12 +27,10 @@ export default function LogButton() {
           className="btn-logIn"
           id="bell-icon"
         />
-        <h6>
-          {userL.name
-            ? userL.name
-             : "Invitado"}
-        </h6>
-              </div>
+            <h6>
+               {userL.name}
+            </h6>
+        </div>
     </>
   );
 }
