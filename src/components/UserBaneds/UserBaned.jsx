@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import Home from "components/Home/Home";
 
 export default function UserBaned() {
-  const { userL } = useSelector((state) => state.products);
+  const { user } = useSelector((state) => state.products);
 
-  return userL.rol !== "banned" ? (
+  return user.rol !== "banned" ? (
     <Home />
   ) : (
     <div className="permissions-denied">

@@ -21,7 +21,7 @@ function Products() {
   const sendDB = { favorites: favorites, user: user };
   const { userL } = useSelector((state) => state.products);
 
-  console.log("user", userL.rol);
+  //console.log("user", userL.rol);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -246,7 +246,7 @@ function Products() {
   };
   //#endregion
 
-  return userL.rol === "banned" ? (
+  return user.rol === "banned" ? (
     <UserBaned />
   ) : (
     <>
