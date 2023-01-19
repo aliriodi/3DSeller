@@ -34,7 +34,7 @@ export default function Footer() {
         </div>
         <div className="footer-data_item">
           <Image src={movileImg} alt="Movil" />
-          <a href="tel:+543516132710">+543516132710</a>
+          <a >+543516132710</a>
         </div>
         <div className="footer-data_item">
           <Image src={locationImg} alt="Ubicacion" />
@@ -50,25 +50,25 @@ export default function Footer() {
       <div className="footer-data">
         <h3> Redes sociales </h3>
         <div className="footer-data_item">
-          <a href="/t" className="social">
+          <a href="/" className="social">
             <AiFillFacebook />
             Facebook
           </a>
         </div>
         <div className="footer-data_item">
-          <a href="/t" className="social">
+          <a href="/" className="social">
             <AiFillInstagram />
             Instagram
           </a>
         </div>
         <div className="footer-data_item">
-          <a href="/t" className="social">
+          <a href="/" className="social">
             <AiFillLinkedin />
             Linkedin
           </a>
         </div>
         <div className="footer-data_item">
-          <a href="/t" className="social">
+          <a href="/" className="social">
             <AiFillTwitterCircle />
             Twitter{" "}
           </a>

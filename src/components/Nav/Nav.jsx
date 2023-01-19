@@ -10,13 +10,12 @@ import { useRouter } from "next/router";
 function Nav() {
   const [currentUser, setCurrentUser] = useState({ rol: "invitado" });
   const { user, userL } = useSelector((state) => state.products);
-  const { push } = useRouter();
-  const handleLogin = () => push("/api/auth/login");
+    
 
   if (
     user.rol !== "invitado" &&
     user.rol !== undefined &&
-    currentUser.rol == "invitado"
+    currentUser.rol === "invitado"
   ) {
     console.log("CHANGE");
     setCurrentUser(userL);
@@ -90,9 +89,9 @@ function Nav() {
             id="bell-icon"
           /> */}
 
-          {user.rol === "invitado" ||
-          user.name === "Invitado" ||
-          user.email === "invitado" ? (
+          {userL.rol === "invitado" ||
+          userL.name === "Invitado" ||
+          userL.email === "invitado" ? (
             <LogButton />
           ) : (
             <LogoutButton />

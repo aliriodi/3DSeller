@@ -54,7 +54,7 @@ export const DSellerSlice = createSlice({
 
     getUserS: (state, action) => {
       state.user = action.payload;
-      
+      state.userL = action.payload;
     },
 
     getAllUserS: (state, action) => {
@@ -96,10 +96,8 @@ export const DSellerSlice = createSlice({
       localStorage.setItem("favorites", JSON.stringify(action.payload));
     },
     modificarUserS: (state, action) => {
+      state.userL = action.payload;
       state.user = action.payload;
-    },
-    PUT_PRODUCT: (state, action) => {
-      state.detail = action.payload;
     },
   },
 });
@@ -117,7 +115,6 @@ export const {
   getUserBDLS,
   postCreateUserS,
   modificarUserS,
-  PUT_PRODUCT,
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;
