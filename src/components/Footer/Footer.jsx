@@ -54,34 +54,34 @@ export default function Footer() {
         <h3> Redes sociales </h3>
         <div className="footer-data_item">
           <a  className="social">
-          <Link href={"/"} legacyBehavior> 
+         
             <AiFillFacebook />
             Facebook
-            </Link>
+         
           </a>
         </div>
         <div className="footer-data_item">
           <a  className="social">
-          <Link href={"/"} legacyBehavior> 
+         
             <AiFillInstagram />
             Instagram
-            </Link>
+         
           </a>
         </div>
         <div className="footer-data_item">
           <a  className="social">
-          <Link href={"/"} legacyBehavior> 
+         
             <AiFillLinkedin />
             Linkedin
-            </Link>
+         
           </a>
         </div>
         <div className="footer-data_item">
           <a  className="social">
-          <Link href={"/"} legacyBehavior> 
+         
             <AiFillTwitterCircle />
             Twitter{" "}
-            </Link>
+         
           </a>
         </div>
       </div>
