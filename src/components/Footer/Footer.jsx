@@ -3,6 +3,12 @@ import Image from "next/image";
 import emailImg from "../../public/email-icon.png"
 import locationImg from "../../public/location-icon.png"
 import movileImg from "../../public/movile-icon.png"
+import {
+  AiFillTwitterCircle,
+  AiFillInstagram,
+  AiFillLinkedin,
+  AiFillFacebook,
+} from "react-icons/ai";
 
 export default function Footer() {
   return (
@@ -41,16 +47,28 @@ export default function Footer() {
       <div className="footer-data">
         <h3> Redes sociales </h3>
         <div className="footer-data_item">
-          <a href="/t" className="social"> Facebook </a>
+          <a href="/t" className="social">
+              <AiFillFacebook />
+              Facebook
+              </a>
         </div>
         <div className="footer-data_item">
-          <a href="/t" className="social"> Instagram </a>
+          <a href="/t" className="social">
+              <AiFillInstagram />
+              Instagram
+              </a>
         </div>
         <div className="footer-data_item">
-          <a href="/t" className="social"> Linkedin </a>
+          <a href="/t" className="social"> 
+              <AiFillLinkedin />
+              Linkedin
+              </a>
         </div>
         <div className="footer-data_item">
-          <a href="/t" className="social"> Twitter </a>
+          <a href="/t" className="social">
+              <AiFillTwitterCircle />
+              Twitter </a>
+
         </div>
       </div>
 

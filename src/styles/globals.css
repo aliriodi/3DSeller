@@ -611,7 +611,8 @@ header {
 }
 .nav-icons h6 {
   bottom: 0;
-  /* position: absolute; */
+  text-align: center;
+  min-width: 200px;
 }
 
 /*////////// End NavBar //////////*/
@@ -699,6 +700,10 @@ header {
   font-size: 20px;
 }
 
+.data-descripcion{
+  padding: 0 80px;
+  margin-bottom: 100px;
+}
 .diets-container {
   display: flex;
 }

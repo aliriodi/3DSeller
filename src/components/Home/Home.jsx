@@ -7,9 +7,9 @@ import { useSelector } from "react-redux";
 import UserBaned from "components/UserBaneds/UserBaned";
 
 export default function Home() {
-  const { user } = useSelector((state) => state.products);
+  const { userL } = useSelector((state) => state.products);
 
-  return user.rol === "banned" ? (
+  return userL.rol === "banned" ? (
     <UserBaned />
   ) : (
     <>
