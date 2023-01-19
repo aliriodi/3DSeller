@@ -36,7 +36,7 @@ __1.  En la ruta Home /Home__:
 - [ ] Mostrar Vision - Mision 
     
 ___2. En la ruta productos /productos___:
-- [ ] Mostrar 10 productos por pagina con las siguientes caracteristicas:
+- [ ] Mostrar 8 productos por pagina con las siguientes caracteristicas:
 - Nombre
 - Imagen al pulsar la imagen debe ir a al ruta productos/id (Ruta de detalles del producto)
 - Rating 
