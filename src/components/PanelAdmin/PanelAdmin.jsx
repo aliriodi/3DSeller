@@ -5,10 +5,9 @@ import { getProducts , getUser, GetUserBDL, getAllUser} from "../../redux/DSelle
 import ListPrducts from './ListProducts';
 import ListUsers from './ListUsers';
 import img from "../LogButton/perfil-icon_default.png"
-import productsImg from "./img/products-icon.png"
-import cartImg from "./img/cart-icon.png"
+import productsImg from "./products-icon.png"
+import cartImg from "./cart-icon.png"
 import Link from "next/link";
-import AdminProductsReviews from "./AdminProductsReviews"
 
 function PanelAdmin(){
     const [currentPurchases, setCurrentPurchases] = useState(0)

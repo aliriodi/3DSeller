@@ -1,41 +1,7 @@
 import Image from "next/image";
-import { useState } from "react";
 import imgIcon from "../LogButton/perfil-icon_default.png"
-import { getProducts, getAllUser,modificarUser, getUser} from "../../redux/DSellerActions";
-import { useDispatch, useSelector } from "react-redux"
-
 
 const ReviewList = (props)=>{
-  const [dropdownActive, setDropdownActive] = useState(false);
-  
-  const dispatch = useDispatch();
-    
-  const bannedUser = ()=>{
-      if(props.rol != "banned")dispatch(modificarUser({...props.user,rol:"banned"}));
-      else dispatch(modificarUser({...props.user,rol:"client"}));
-      dispatch(getAllUser())
-      .then(()=>dispatch(getUser()))
-  }
-  
-  const adminUser = ()=>{
-      if(props.rol == "client")dispatch(modificarUser({...props.user,rol:"admin"}))
-      if(props.rol == "admin")dispatch(modificarUser({...props.user,rol:"client"}))
-      dispatch(getAllUser())
-      .then(()=>dispatch(getUser()))
-  }
-
-  //#region Dropdown
-  window.addEventListener('click', function(event){
-      if(event.target.id != `dropdown-${props.id}`)setDropdownActive(false)
-      else return
-  })
-  
-  const handleDropdown = ()=>{
-      if(dropdownActive == false)setDropdownActive(true);
-      if(dropdownActive == true)setDropdownActive(false);
-  }
-  //#endregion
-
     return(
         <>{/* Reseñas */}
         <div className="user-review">
@@ -59,9 +25,6 @@ const ReviewList = (props)=>{
           {/* Comentrio De Usuario*/}
           <div className="user-commentary">
             <p>{props.commentary}</p>
-            
-            {/* Menu */}
-            
           </div>
         </div>
         </>
