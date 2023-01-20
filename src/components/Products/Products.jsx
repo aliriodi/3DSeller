@@ -19,7 +19,6 @@ function Products() {
   const { user } = useSelector((state) => state.products);
   const { favorites } = useSelector((state) => state.products);
   const sendDB = { favorites: favorites, user: user };
-  const { userL } = useSelector((state) => state.products);
 
   //console.log("user", userL.rol);
 
@@ -190,13 +189,53 @@ function Products() {
   //#endregion
 
   //#region Scroll infinito code
+
+  const [pagina, setPagina] = useState(1);
+
+  const paginas = productsR.length / 8;
+
+  const handlePageChange = (valor) => {
+    switch (valor) {
+      case 0:
+        setCurrent(0);
+        setPagina(1);
+        break;
+      case 1:
+        setCurrent(8);
+        setPagina(2);
+        break;
+
+      case 2:
+        setCurrent(16);
+        setPagina(3);
+        break;
+
+      case 3:
+        setCurrent(24);
+        setPagina(4);
+        break;
+
+      case 4:
+        setCurrent(32);
+        setPagina(5);
+        break;
+
+      default:
+        setCurrent(8);
+        setPagina(1);
+        break;
+    }
+  };
+
   const nextPage = () => {
     if (productsR.length > current + 8) setCurrent(current + 8);
-    console.log(Math.ceil(productsR.length / 8));
+    //console.log(Math.ceil(productsR.length / 8));
+    if (productsR.length > current + 8) setPagina(pagina + 1);
   };
 
   const prevPage = () => {
     if (current > 0) setCurrent(current - 8);
+    if (current > 0) setPagina(pagina - 1);
   };
 
   // Esta funcion va a controlar el numero de elementos que se ven al cargar la pagina por primera vez
@@ -314,7 +353,22 @@ function Products() {
           >
             <Image src={paginationLeftImg} alt="Pagina Anterior" />
           </button>
-
+          {/*Botones de las pag*/}
+          <div className="">
+            <span className="fav-icon_on">{pagina}</span>
+          </div>
+          <div className="contenedor-numeros">
+            {Array.from({ length: paginas }, (_, i) => (
+              <li key={i + 1}>
+                <button
+                  className="numeros-pag"
+                  onClick={() => handlePageChange(i)}
+                >
+                  {i + 1}
+                </button>
+              </li>
+            ))}
+          </div>
           {/* btn-paginado siguiente */}
           <button
             className={`btn ${
