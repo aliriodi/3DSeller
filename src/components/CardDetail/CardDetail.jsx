@@ -4,6 +4,7 @@ import { getProductDet, putProduct } from "../../redux/DSellerActions";
 import {
   PayPalScriptProvider,
   PayPalButtons,
+  usePayPalScriptReducer
 } from "@paypal/react-paypal-js";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -107,6 +108,8 @@ function CardDetail() {
     })
     return response.data
   }
+
+  
 
   return (
     <>
