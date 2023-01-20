@@ -4,9 +4,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import {  useHistory } from 'react-router-dom';
 import { postCreateProduct, getProducts } from "../../redux/DSellerActions";
+import { FormGroup, Input } from "reactstrap";
+
 
 export default function CreateP() {
-  const { user } = useSelector((state) => state.products);
+  const { userL } = useSelector((state) => state.products);
+  const [image, setImage] = useState();
+  const [loading, setLoading] = useState(false)
 
   const dispatch = useDispatch();
   //const history = useHistory()
@@ -30,6 +34,8 @@ export default function CreateP() {
     stock: true,
     price: true,
   });
+
+
 
   useEffect(() => {
     dispatch(getProducts());
@@ -129,6 +135,7 @@ export default function CreateP() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const form = e.currentTarget
     if (input.name.length < 4) {
       return alert("Nombre requiere mas de 4 caracetres");
     }
@@ -154,11 +161,30 @@ export default function CreateP() {
         "http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FLogo.1c0eb044.jpeg&w=1080&q=75",
       price: 200,
     });
-
     // history.push('/productos')
   }
+  
 
-  return user.rol === "banned" ? (
+    const uploadImage = async (e) => {
+      const files = e.target.files;
+      const data = new FormData();
+      data.append("file", files[0]);
+      data.append("upload_preset", "images")
+      setLoading(true);
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dfr7j1fhj/image/upload",
+        {
+          method: "POST",
+          body: data
+        }
+      )
+      const file = await res.json()
+      setImage(file.secure_url)
+      console.log(file.secure_url)
+      setLoading(false)
+  }
+
+  return userL.rol === "banned" ? (
     <UserBaned />
   ) : (
     <>
@@ -183,13 +209,16 @@ export default function CreateP() {
 
             {/* Imagen */}
             <div className="txt_field">
-              <input
-                onChange={handleOnChangeI}
-                onBlur={handleOnChangeI}
-                type="text"
+              <FormGroup>
+              <Input
+                // onBlur={handleOnChangeI}
+                type="file"
                 name="image"
-                value={input.image}
+                placeholder="Sube tu imagen aqui!"
+                onChange={uploadImage}
+                // value={input.image}
               />
+              </FormGroup>
               <span></span>
               <label>Imagen</label>
               {errors.image && <p className="error-text"> {errors.image} </p>}
