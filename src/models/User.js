@@ -26,6 +26,9 @@ const UserScheme = new Schema(
       picture:{
         type: String,
        },
+       compras:{
+        type:Array,
+       },
       
 },
     {
