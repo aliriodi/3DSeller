@@ -4,7 +4,7 @@
 
 Esta es una aplicacion para administracion y ventas de articulos impresos en 3D, con base de datos de productos y administracion de equipos 3D con materiales y control de ventas, desarrollado por:
 
-1. Jose Valbuena    ( https://github.com/JoseVal25 )
+1. Jose Valencia    ( https://github.com/JoseVal25 )
 2. Mateo Cava       ( https://github.com/Matecava )
 3. Nahuel Escujuri  ( https://github.com/NahuelEscujuri )
 4. Hugo Reyes       ( https://github.com/Proteinovich )
