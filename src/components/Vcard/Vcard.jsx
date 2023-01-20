@@ -4,10 +4,12 @@ import { useSelector } from "react-redux";
 
 export default function Vcard(props) {
   const { user } = useSelector((state) => state.products);
+
+  //console.log("user", user.rol);
   return (
     <div>
       <div className="card" key={props.id}>
-        {user.name ? (
+        {user.rol === "invitado" || user.rol === "banned" ? null : (
           <FavButton
             id={props.id}
             key={props.id}
@@ -16,7 +18,7 @@ export default function Vcard(props) {
             rating={props.rating}
             category={props.category}
           />
-        ) : null}
+        )}
         <a href={`/productos/${props.id}`}>
           <img src={!props.image ? null : props.image} />
           <div className="card_text">
