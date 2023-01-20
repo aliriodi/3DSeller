@@ -1473,6 +1473,106 @@ header {
 .desactive {
   display: none;
 }
+
+/*// Reviews de Productos //*/
+.rating-stats{
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: 150px auto 40px auto;
+}
+.rating-stats .dashboard-container_stats {
+  width: 100%;
+  margin: none;
+}
+.rating-percentage{
+  display: flex;
+  width: 300px;
+  align-items: center;
+  justify-content: space-between;
+}
+.rating-percentage p{
+  font-size: 1.3em;
+  font-weight: 500;
+  color: var(--main-color);
+}
+
+.rating-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rating-icon h3{
+  font-size: 6em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.star-container span{
+  font-size: 1.7em;
+  font-weight: 500;
+  margin: 0 2px;
+}
+
+.review-container_list{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 35px -10px #111;
+  border-radius: 30px;
+  width: 90%;
+  margin: auto;
+  justify-content: center;
+  padding: 20px 40px;
+
+}
+.review-container_list h3{
+  font-size: 1.6em;
+  font-weight: 600;
+  color: var(--main-color);
+  margin: 15px 0;
+}
+
+.review-container_list  .user-review{
+  margin-top: 20px;
+  padding: 10px 0;
+  border-bottom: #adadad55 2px solid;
+}
+.review-container_list .user-review:last-child{
+  border: none;
+}
+
+.review-container_list .user-container{
+  justify-content: space-between;
+  display: flex;
+}
+.filter-raiting{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.filter-raiting p{
+  margin-right: 6px;
+  font-weight: 400;
+  color: var(--main-color);
+}
+.select-rating{
+  /* margin: 20px auto; */
+  width: 300px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 5px 35px -10px #111;
+  background-color: var(--dark-color);
+  text-align: center;
+  outline: none;
+}
+.select-rating option{
+  border: none;
+  padding: 8px 0;
+}
+
 /*////////// End Panel Admin //////////*/
 
 
