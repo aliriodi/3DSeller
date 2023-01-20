@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 export default function NoFavsYet() {
   const { user } = useSelector((state) => state.products);
 
-  return user.name ? (
+  return user.name === "invitado" ? (
     <div>
       <h1>Lo sentimos</h1>
       <br></br>
