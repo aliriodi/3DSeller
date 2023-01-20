@@ -74,7 +74,12 @@ function Nav() {
               </a>
             </Link>
           </div>
-          <div className="nav-icons">
+          
+          <div
+            className={`nav-icons ${
+              currentUser.rol !== "admin" ? "desactive" : null
+            }`}
+          >
             <Link href={"/createP"} legacyBehavior>
               <a className="btn" id="bell-icon">
                 Crear Producto
