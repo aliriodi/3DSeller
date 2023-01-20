@@ -75,7 +75,7 @@ function Nav() {
             </Link>
           </div>
           
-          <div
+          {/* <div
             className={`nav-icons ${
               currentUser.rol !== "admin" ? "desactive" : null
             }`}
@@ -85,7 +85,7 @@ function Nav() {
                 Crear Producto
               </a>
             </Link>
-          </div>
+          </div> */}
           {/* <LogButton
             handleLogin={
               user.given_name ? null : user.nickname ? null : handleLogin
