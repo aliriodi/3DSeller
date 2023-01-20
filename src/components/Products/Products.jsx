@@ -354,19 +354,17 @@ function Products() {
             <Image src={paginationLeftImg} alt="Pagina Anterior" />
           </button>
           {/*Botones de las pag*/}
-          <div className="">
+          <div className="actual-page">
             <span className="fav-icon_on">{pagina}</span>
           </div>
-          <div className="contenedor-numeros">
+          <div>
             {Array.from({ length: paginas }, (_, i) => (
-              <li key={i + 1}>
-                <button
-                  className="numeros-pag"
-                  onClick={() => handlePageChange(i)}
-                >
-                  {i + 1}
-                </button>
-              </li>
+              <button
+                className="numeros-pag"
+                onClick={() => handlePageChange(i)}
+              >
+                {i + 1}
+              </button>
             ))}
           </div>
           {/* btn-paginado siguiente */}

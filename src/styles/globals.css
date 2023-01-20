@@ -1571,10 +1571,16 @@ body {
 /*Botones de las pag*/
 
 .contenedor-numeros {
-  list-style: none;
+}
+
+.actual-page {
+  background-color: black;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
 }
 
 .numeros-pag {
-  display: inline;
+  margin: 0.5rem;
   color: black;
 }
