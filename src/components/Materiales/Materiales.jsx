@@ -17,12 +17,8 @@ export default function Home() {
     <>
       
       {/* <!-- Row 1 --> */}
-      <div className="row-1" id="row-1">
-        <div className="wrapper2">
-        
-          {/* <!-- Steps --> */}
-          <ul className="steps">
-            <li>
+      <div className="blog-container" id="row-1">
+      <div>
             En 3DSeller deseamos brindarle un asesoramiento y guia completa de materiales que podemos 
             usar actualmente sin limitarnos a estos, si desea un asesoramiento particular de otro 
             material por favor le solicitamos que nos contace a traves de nuestro enlace 
@@ -114,8 +110,8 @@ export default function Home() {
 
 
           A continuacion damos detalle de cada material con sus caracteristicas particulares.
-            </li>
-            <li>
+            </div>
+            <div>
               <h3>Acido Poliláctico o Acido Láctico (PLA)</h3>
               
                El filamneto PLA fue inventado en 1930 por el químico Wallace Carothers y se inicio 
@@ -149,9 +145,9 @@ export default function Home() {
 
                Es usado para piezas de acabdos vehiculares, carcazas de electrodomesticos, industria medica, 
                textil y otros.
-            </li>
+            </div>
 
-            <li>
+            <div>
               <h3>Poliestireno de Alto Impacto o High Impact Polystyrene (HIPS)</h3>
              
                 Es un polímero termoplástico basado en una mezcla de poliestireno y caucho de polibutadieno
@@ -179,8 +175,8 @@ export default function Home() {
                   union con otros filamentos (soporte para otras impresiones)
 
 
-            </li>
-            <li>
+            </div>
+            <div>
               <h3>Elastómero Termoplástico (TPE)</h3>
               El filamento TPE es un materail diseñado para un mejor acabado sin embargo 
               requiere un control de velocidad de impresion lenta y controlada por la 
@@ -210,9 +206,9 @@ export default function Home() {
                  El rango de temperatura de impresión está entre 220º - 250º C
                  Despues de impreso la pieza es endeble a temperaturas entre 55º - 65º C 
                  
-            </li>
+            </div>
 
-            <li>
+            <div>
               <h3>Tereftalato de Polietileno Glycol-modificado (PETG)</h3>
               El PETG es un material menos rígido (más elástico) que el PLA
               En general el PETG resiste mejor los golpes, los esfuerzos y 
@@ -237,8 +233,8 @@ export default function Home() {
                   Elígelo para tus piezas más resistentes o cuando necesites soportar 
                   el ataque de productos químicos.
  
-            </li>
-            <li>
+            </div>
+            <div>
               <h3>Acrilonitrilo Butadieno Estireno (ABS)</h3>
               El filamento de ABS, es un polímero termoplástico bastante común 
               en la industria, conocido principalmente por su buena resistencia a las bajas temperaturas y
@@ -261,8 +257,8 @@ export default function Home() {
                  El rango de temperatura de impresión está entre 230º - 260º C
                  Despues de impreso la pieza es endeble a temperaturas entre 70º - 105º C 
 
-            </li>
-            <li>
+            </div>
+            <div>
               <h3>Filamento Fibra de carbono (PEEK, PEK, PEI)</h3>
               
               El filamento Fibra de carbono es un material especial por su alta resistencia mecanica,
@@ -284,12 +280,7 @@ export default function Home() {
                Despues de impreso la pieza es endeble a temperaturas entre 200º - 250º C 
 
  
-            </li>
-            
-          </ul>
-
-       
-        </div>
+            </div>
       </div>
 
     </>

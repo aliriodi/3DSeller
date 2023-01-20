@@ -1528,6 +1528,14 @@ footer .footer-data{
 /*////////// End Footer //////////*/
 
 
+/*////////// Start Blog //////////*/
+.blog-container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 200px;
+  padding: 0 100px;
+}
+/*////////// End Blog //////////*/
 
 
 
