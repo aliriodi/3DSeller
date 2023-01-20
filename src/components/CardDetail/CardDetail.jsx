@@ -233,7 +233,7 @@ function CardDetail() {
 
             <div className="rating-star">
               <label className={`${currentReview.rating >= 1 ? "star-on" : "star-off"}`}
-                for="start1">
+                htmlFor="start1">
                 {currentReview.rating >= 1 ? "★" : "☆"}
               </label>
               <input
@@ -246,7 +246,7 @@ function CardDetail() {
 
             <div className="rating-star">
               <label className={`${currentReview.rating >= 2 ? "star-on" : "star-off"}`}
-                for="start1">
+                htmlFor="start1">
                 {currentReview.rating >= 2 ? "★" : "☆"}
               </label>
               <input
@@ -259,7 +259,7 @@ function CardDetail() {
 
             <div className="rating-star">
               <label className={`${currentReview.rating >= 3 ? "star-on" : "star-off"}`}
-                for="start1">
+                htmlFor="start1">
                 {currentReview.rating >= 3 ? "★" : "☆"}
               </label>
               <input
@@ -272,7 +272,7 @@ function CardDetail() {
 
             <div className="rating-star">
               <label className={`${currentReview.rating >= 4 ? "star-on" : "star-off"}`}
-                for="start1">
+                htmlFor="start1">
                 {currentReview.rating >= 4 ? "★" : "☆"}
               </label>
               <input
@@ -285,7 +285,7 @@ function CardDetail() {
 
             <div className="rating-star">
               <label className={`${currentReview.rating >= 5 ? "star-on" : "star-off"}`}
-                for="start1">
+                htmlFor="start1">
                 {currentReview.rating >= 5 ? "★" : "☆"}
               </label>
               <input
