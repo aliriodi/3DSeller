@@ -109,7 +109,7 @@ export default function CreateP() {
   function handleOnChangeI(e) {
     setInput({
       ...input,
-      image: e.target.value,
+      image: e,
     });
   }
 
@@ -178,10 +178,13 @@ export default function CreateP() {
           body: data
         }
       )
+      
       const file = await res.json()
       setImage(file.secure_url)
+
       console.log(file.secure_url)
       setLoading(false)
+      handleOnChangeI(file.secure_url)
   }
 
   return userL.rol === "banned" ? (
@@ -390,9 +393,11 @@ export default function CreateP() {
                   ? true
                   : false || errors.category
                   ? true
-                  : false || errors.image
+                  : false ||
+                   errors.image
                   ? true
-                  : false || errors.stock
+                  : false ||
+                   errors.stock
                   ? true
                   : false || errors.precio
                   ? true
