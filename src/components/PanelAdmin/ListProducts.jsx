@@ -1,6 +1,8 @@
 import { getProducts, GetUserBDL} from "../../redux/DSellerActions";
 import { useDispatch } from "react-redux"
 import { useState } from "react";
+import Image from "next/image";
+import menuImg from './menu.png'
 
 const ListProducts = (props)=>{
     const [dropdownActive, setDropdownActive] = useState(false)
@@ -46,9 +48,6 @@ const ListProducts = (props)=>{
             <li className={`dropdown ${dropdownActive == true?"":"desactive"}`}>
                 <a  href={`/productos/${props.id}`} className="dropdown-option">
                     Ver Producto
-                </a>
-                <a  href={`/admin/products/${props.id}`} className="dropdown-option">
-                    Reseñas Del Producto
                 </a>
                 <div onClick={deleteProducts} className="dropdown-option">
                     Eliminar Producto
