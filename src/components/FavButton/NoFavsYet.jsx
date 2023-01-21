@@ -3,9 +3,9 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 
 export default function NoFavsYet() {
-  const { user } = useSelector((state) => state.products);
+  const { userL } = useSelector((state) => state.products);
 
-  return user.name === "invitado" ? (
+  return userL.rol === "admin" || userL.rol === "cliente" ? (
     <div>
       <h1>Lo sentimos</h1>
       <br></br>
