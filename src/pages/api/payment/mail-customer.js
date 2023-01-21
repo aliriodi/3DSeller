@@ -1,8 +1,9 @@
 import { mailOptions, transporter } from "../../../utils/nodemailer"
 
 const htmlMsg = (data) => {
-    
-    return { html:`<!DOCTYPE html>
+
+    return {
+        html: `<!DOCTYPE html>
 <html>
   <head>
     <title></title>
@@ -123,7 +124,7 @@ const htmlMsg = (data) => {
                           >
                             <h2></h2>
                             <div class="form-container">
-                                <h2 class="form-headin" align="left">Gracias por tu compra<h2>
+                                <h2 class="form-headin" align="left">Gracias por tu compra!<h2>
                                 <p class="form-answer" align="left" >Puedes ver la informacion de tu compra en el siguiente link</p><br />
                                 <span>👉🏽 <span><a href="http://localhost:3000/purchases/${data}" target="_blank" >Orden de compra</a>
                             </div>
@@ -141,10 +142,10 @@ const htmlMsg = (data) => {
     </table>
   </body>
 </html>`
-} }
-export default async(req, res) => {
-    if(req.method === "POST") {
-        console.log(req.body.purchase)
+    }
+}
+export default async (req, res) => {
+    if (req.method === "POST") {
         try {
             await transporter.sendMail({
                 from: mailOptions.from,
@@ -155,7 +156,7 @@ export default async(req, res) => {
             })
             return res.status(200).json({ msg: "Email enviado correctamente" })
         } catch (error) {
-            return res.status(400).json({status: 'error', ERROR: "no se mando el correo"})
+            return res.status(400).json({ status: 'error', ERROR: "no se mando el correo" })
         }
     }
 }

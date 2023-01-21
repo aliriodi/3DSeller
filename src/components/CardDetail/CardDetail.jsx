@@ -143,7 +143,10 @@ function CardDetail() {
                       let purchaseData = await actions.order.get()
                       return purchaseData
                   }).then(async function(data){
-                    let response = await handleSentMail(data, user)
+                    let response = await handlePurchaseStoring(data, user)
+                    if(response.status === 'success') {
+                      await handleSentMail(data, user)
+                    }
                     return response
                   })
               }}
@@ -162,7 +165,13 @@ function CardDetail() {
     })
     return response.data
   }
-
+  const handlePurchaseStoring = async (purchase, user) => {
+    let response = await axios.post("/api/purchase", {
+      purchase,
+      user
+    })
+    return response.data
+  }
   
 
   return (
