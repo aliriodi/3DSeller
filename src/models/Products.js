@@ -22,6 +22,9 @@ const ProductsScheme = new Schema(
     image: {
       type: String,
     },
+    file:{
+      type: String,
+    },
     stock: {
       type: Number,
     },

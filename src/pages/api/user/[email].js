@@ -21,11 +21,12 @@ export default async (req, res) => {
       } catch (error) {
         console.log("🚀 ~ file: [email].js:26 ~ error", error)
       }
+      
 
     case "PUT":
       try {
         //console.log(body)
-        const dataPut = await User.findOneAndReplace({ email: email }, body,{})
+        const dataPut = await User.findOneAndUpdate({ email: email }, body,{})
          return res.status(201).json(dataPut)
       } catch (error) {
         console.log("🚀 ~ file: [email].js:34 ~ error", error)
