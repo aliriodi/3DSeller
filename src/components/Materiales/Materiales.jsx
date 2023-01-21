@@ -15,28 +15,46 @@ export default function Home() {
     <UserBaned />
   ) : (
     <>
-      
-      {/* <!-- Row 1 --> */}
+      {/* Materiales Blog */}
       <div className="blog-container" id="row-1">
-      <div>
+        
+        {/* Seccion 1 */}
+        <div className="blog-container_section">
+          {/* Contacto */}
+          <div className="blog-container_section-contact">
+          <h3>
             En 3DSeller deseamos brindarle un asesoramiento y guia completa de materiales que podemos 
             usar actualmente sin limitarnos a estos, si desea un asesoramiento particular de otro 
             material por favor le solicitamos que nos contace a traves de nuestro enlace 
-            <div className="btn-container2"><Link href={"/contacto"} className="btn">Contacto</Link></div>
-            
+          </h3>
+          <div className="btn-container">
+              <Link href={"/contacto"} className="btn">Contacto</Link>
+           </div>
+          </div>
+
           <Image src={pla1} alt="16" className='pla1' />
-          
+           
+          <p>
           Aunque todos los filamentos a simple vista parecen iguales, a la hora de emplearlos
           cada uno tiene características (resistencia, moldeabilidad a temperatura, fatiga, velocidad de impresion) 
-          fisicas diferentes y metodos de impresion distintos    
+          fisicas diferentes y metodos de impresion distintos 
+          </p>
+
           <Image src={pla2} alt="15" className='pla2' />
+
+          <p>
           Por eso le mostramos a continuacion una imagen resumen donde rapidamente podra darse una idea 
           de la aplicacion de cada material de acuerdo a su necesidad. 
+          </p>
+
           <Image src={trian} alt="16" className='triang' />
-          
-          A continuacion presentamos una tabla comparativa resumen para posteriormente ir al detalle de cada 
-          material tarbajado en 3DSeller.
-          
+
+          <p>
+            A continuacion presentamos una tabla comparativa resumen para posteriormente ir al detalle de cada 
+            material tarbajado en 3DSeller.
+          </p>
+
+          {/* Tabla */}
           <table>
           <thead>
 <tr>
@@ -110,27 +128,35 @@ export default function Home() {
 
 
           A continuacion damos detalle de cada material con sus caracteristicas particulares.
-            </div>
-            <div>
+        </div>
+
+        {/* Seccion 2 */}
+        <div className="blog-container_section">
               <h3>Acido Poliláctico o Acido Láctico (PLA)</h3>
-              
+              <p>
                El filamneto PLA fue inventado en 1930 por el químico Wallace Carothers y se inicio 
                su uso en productos de la empresa alimentaria como bandejas, tapas y otros.
-
+              </p>
+              
+              <p>
                El filamento PLA es uno de los más utilizados tanto en la impresión 3D industrial
                como en las impresoras domésticas. Lejos de ser un material plástico de producción
                tradicional o altamente contaminante, el PLA es un filamento más respetuoso con el 
                medio ambiente ya que no requiere de recursos finitos como el petróleo. 
                Te explicamos algunas claves para que lo incorpores a tus procesos de fabricación
                aditiva.
-
+              </p>
+              
+              <p>
                El filamento PLA ofrece buenas prestaciones al combinar una alta velocidad de 
                impresión con unos bordes muy definidos siempre y cuando el material se enfríe 
                correctamente. Además, los modelos que imprime tienen una deformabilidad muy baja. 
                Este tipo de filamento posee una vida útil de al menos 12 meses si se conserva
                entre 15º y 25º C, por lo que es apto para almacenamiento.
-
-               Caracteristicas
+              </p>
+              
+              <h4>Caracteristicas</h4> 
+              <p>
                  Inodoro, permanente, claro y brillante.
                  Altamente resistente ante la humedad y la grasa.
                  Similar al polietileno en cuanto a desarrollar barreras para sabores y olores.
@@ -141,43 +167,61 @@ export default function Home() {
                  Su proceso de fabricación puede variarse a fin de adoptar características mecánicas.
                  El rango de temperatura de impresión está entre 190º - 220º C
                  Despues de impreso la pieza es endeble a temperaturas entre 60º - 70º C 
- 
+              </p>
 
+              <p>
                Es usado para piezas de acabdos vehiculares, carcazas de electrodomesticos, industria medica, 
                textil y otros.
-            </div>
-
-            <div>
+              </p>
+        </div>
+        
+        {/* Seccion 3 */}
+        <div className="blog-container_section">
               <h3>Poliestireno de Alto Impacto o High Impact Polystyrene (HIPS)</h3>
-             
+              
+              <p>
                 Es un polímero termoplástico basado en una mezcla de poliestireno y caucho de polibutadieno
-                
+              </p>
+              
+              <p>
                 Por su alta resistencia a impactos y poca deformabilidad a latas temperaturas el filamento
                 HIPS ha sido usado para impresion de elementos que estan sometidos a posibles cambios de temperaturas bruscos, 
                 altas temperaturas y presion, tambien es usado como base para otras estructuras cuando la impresion
                 es modular o requiere bases y/o partes de union de alta resistencia.
+              </p>
 
+              <p>
                 El acabado de HIPS es una superficie lisa y resistente a los arañazos, su resistencia al calor y el color 
                 translúcido a blanco, lo que simplifica la coloración y permite el uso de HIPS además de usarse 
                 como estructura de soporte para otras áreas de aplicación. 
+              </p>
 
-                Caracteristicas
+              <h4>Caracteristicas</h4>
+
+              <p>
                  Puede copolimerizarse con otros materiales.
                  Se puede cromar, pintar, pegar y lijar.
                  Por sus propiedades suele usarse en instalaciones de alta frecuencia Electromagnetica.
                  Es resistente a los lubricantes, grasas y álcalis pero no al combustible.
                  El rango de temperatura de impresión está entre 230º - 245º C
                  Despues de impreso la pieza es endeble a temperaturas entre 90º - 110º C 
+              </p>
 
+              <p>
                  El HIPS es muy empleado en: disfraces o partes (máscaras, elementos de vestuario, cascos),
                  modelado  (maquetas, figuras), prototipos (componentes resistentes y ligeros), 
                  elementos decorativod (ornamentos, elementos colgantes, lámparas), 
                   union con otros filamentos (soporte para otras impresiones)
+              </p>
 
 
-            </div>
-            <div>
+        </div>
+        
+        {/* Seccion 4 */}
+        <div className="blog-container_section">
               <h3>Elastómero Termoplástico (TPE)</h3>
+
+              <p>  
               El filamento TPE es un materail diseñado para un mejor acabado sin embargo 
               requiere un control de velocidad de impresion lenta y controlada por la 
               elasticidad del material, Es extremadamente resistente a la fatiga cuando se 
@@ -190,26 +234,37 @@ export default function Home() {
                 Para las empresas que buscan mejorar la forma en que trabajan y mejorar el 
                 impacto en el medio ambiente, el TPE es un material específicamente bueno ya
                 que es reciclable.
-
+              </p>
+              
+              <p>
                 El TPE es más difícil de imprimir en comparación con otros materiales de filamentos, 
                 principalmente debido a su flexibilidad, sin embargo en 3DSeller estamos en la capacidad
                 con nuestro equipo especialziado poder brindar un servicio de impresin de calidad en 
                 cuaqluiera de sus materiales.
+              </p>
 
+              <p>
                 Entre las multiples aplicaciones encontramos la empresa de alimentacion, medicina y 
                 atencion sanitaria, la industria de los sellos, alambres, cables y fibra optica.
+              </p>
                  
-                Caracteristicas
+              <h4>Caracteristicas</h4>  
+
+              <p>
                  El mas flexible en lo que refiere a materiales de impresion.
                  Alatamente resistente a la fatiga por su flexibildiad.
                  Resistente a la abrasion quimica.
                  El rango de temperatura de impresión está entre 220º - 250º C
                  Despues de impreso la pieza es endeble a temperaturas entre 55º - 65º C 
+              </p>
                  
-            </div>
-
-            <div>
+        </div>
+        
+        {/* Seccion 5 */}
+        <div className="blog-container_section">
               <h3>Tereftalato de Polietileno Glycol-modificado (PETG)</h3>
+
+              <p>
               El PETG es un material menos rígido (más elástico) que el PLA
               En general el PETG resiste mejor los golpes, los esfuerzos y 
               “es más difícil de romper” tanto que el PLA como que el ABS
@@ -218,69 +273,97 @@ export default function Home() {
               que el ABS 105Cº. También, como hemos podido comprobar a través de la 
               experiencia de nuestros clientes con PETG, este material puede resistir
                también las bajas temperaturas durante periodos de tiempo prolongados.
+              </p>
 
-               Caracteristicas
+               <h4>Caracteristicas</h4>
+
+               <p>
                  Inoloro, 
                  Debe mantenerse seco porque absorbe la humedad del aire.
                  Especial para trabajar a temperaturas bajo cero.
                  El rango de temperatura de impresión está entre 220º - 250º C
                  Despues de impreso la pieza es endeble a temperaturas entre 70º - 80º C 
+               </p>
 
+               <p>
                  El PETG es uno de los materiales más interesantes para impresión 3D. 
                  Combina las mejores características de los dos plásticos más populares:
                   propiedades mecánicas superiores a las del ABS y 
                   la facilidad de impresión y acabado del PLA. 
                   Elígelo para tus piezas más resistentes o cuando necesites soportar 
                   el ataque de productos químicos.
+               </p>
  
-            </div>
-            <div>
-              <h3>Acrilonitrilo Butadieno Estireno (ABS)</h3>
+        </div>
+        
+        {/* Seccion 6 */}
+        <div className="blog-container_section">
+            <h3>Acrilonitrilo Butadieno Estireno (ABS)</h3>
+
+            <p>
               El filamento de ABS, es un polímero termoplástico bastante común 
               en la industria, conocido principalmente por su buena resistencia a las bajas temperaturas y
                su peso liviano.
+            </p>
 
+            <p>
                El plástico ABS también es muy popular en el mercado de la impresión FDM o de deposición 
                fundida, seguramente uno de los plásticos más utilizados en la impresión 3D.
+            </p>
 
+            <p>
                Principalmente utilizado en el sector de electrodomésticos, 
                también se encuentra en cascos de barcos, decoración o juguetes, 
                especialmente en los famosos ladrillos desarrollados por LEGO
+            </p>
 
-               Caracteristicas
+               <h4>Caracteristicas</h4>
+               <p>
                  Emite olores en el proceso de impresion.
                  Debe mantenerse seco porque absorbe la humedad del aire.
                  En cuanto al soporte de impresión, ten en cuenta que el ABS es fácil de imprimir con HIPS. 
                  Suficientemente extensible y elástico.
+               </p>
+
+               <p>
                  Su nivel de inflamabilidad es muy bajo lo que lo hace estable a la luz UV.
                  Puede copolimerizarse con otros materiales.
                  El rango de temperatura de impresión está entre 230º - 260º C
                  Despues de impreso la pieza es endeble a temperaturas entre 70º - 105º C 
+               </p>
 
-            </div>
-            <div>
+        </div>
+        
+        {/* Seccion 7 */}
+        <div className="blog-container_section">
               <h3>Filamento Fibra de carbono (PEEK, PEK, PEI)</h3>
               
+              <p>
               El filamento Fibra de carbono es un material especial por su alta resistencia mecanica,
               5 veces mas fuerte que el acero y mas liviano, en la impresion 3D se emplea para
               piezas mecanicas de alta exigencia, como lo son carcasas para las computadoras 
                engranajes y poleas de vehiculos  (carros, autobuses, tractores), en el sector aeroespacial.
               El uso de este material es especifico para aplicacinoes especiales de alta exigencia 
               tanto en rigidez mecanica como en temperatura.
+              </p>
 
+              <p>
               Otros materiales como los que proporcionamos contienen desde un 4% hasta un 10% de 
               aprticulas de carbono, sin embargo este filamento contiene un 80% de particulas de 
               carbono haciendolo el mas resistente en la gama de filamentos de impresion.
+              </p>
 
-               Caracteristicas
+              <h4>Caracteristicas</h4>
+              <p>
                Es el mas resistente de los materiales.
                Material especial  para altas exigencias mecanicas.
+              </p>
 
+              <p>
                El rango de temperatura de impresión está entre 300º - 400º C
                Despues de impreso la pieza es endeble a temperaturas entre 200º - 250º C 
-
- 
-            </div>
+              </p> 
+        </div>
       </div>
 
     </>
