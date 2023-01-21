@@ -138,9 +138,14 @@ function CardDetail() {
               }}
               onApprove={function (data, actions) {
                   console.log('compra aprovada')
-                  return actions.order.capture().then(function () {
+                  return actions.order.capture().then(async function () {
                       // Your code here after capture the order
-                  });
+                      let purchaseData = await actions.order.get()
+                      return purchaseData
+                  }).then(async function(data){
+                    let response = await handleSentMail(data, user)
+                    return response
+                  })
               }}
               onCancel={(data) => console.log("Compra Cancelada")}
 
@@ -150,11 +155,10 @@ function CardDetail() {
 }
 
 
-  const handleSentMail = async (orderLink, email = user.email, nickname = user.nickname) => {
+  const handleSentMail = async (purchase, user) => {
     let response = await axios.post('/api/payment/mail-customer', {
-      link: orderLink,
-      email,
-      nickname
+      purchase, 
+      user
     })
     return response.data
   }
@@ -190,7 +194,7 @@ function CardDetail() {
             <h3 className="detail-item_item-text">${productsDetail.price}</h3>
           </div>
           <div style={{ width: "260px", height: "80px", background: "transparent" }}>
-            {isLoading ? (<h3>Loading...</h3>) : !user ? (<button onClick={() => router.push('/api/auth/login')} className="btn-submit" disabled>Sign in to buy</button>) :
+            {isLoading ? (<h3>Loading...</h3>) : !user ? (<button onClick={() => router.push('/api/auth/login')} className="btn-submit" >Sign in to buy</button>) :
               <PayPalScriptProvider options={{ "client-id": 'ATkacPNlx1rEm20wznSCEFxJN9DoXoURPhNGwkz1F8UPdxwcz5fGrtPmtc9OVjyQrp09liKLtK4xntHs' , components:"buttons", currency:"USD"} }>
                   <ButtonWrapper currency={"USD"}  showSpinner={false} />
                         
