@@ -11,6 +11,7 @@ export default function CreateP() {
   const { userL } = useSelector((state) => state.products);
   const [image, setImage] = useState();
   const [loading, setLoading] = useState(false)
+  const [file,setFile]= useState();
 
   const dispatch = useDispatch();
   //const history = useHistory()
@@ -23,6 +24,7 @@ export default function CreateP() {
     category: "",
     stock: "",
     price: 200,
+    file:''
   });
   let [errors, setErrors] = useState({
     name: true,
@@ -33,6 +35,7 @@ export default function CreateP() {
     image: true,
     stock: true,
     price: true,
+    file:true,
   });
 
 
@@ -160,6 +163,7 @@ export default function CreateP() {
       image:
         "",
       price: 200,
+      file:""
     });
     // history.push('/productos')
   }
@@ -196,10 +200,39 @@ export default function CreateP() {
       fetch('https://script.google.com/macros/s/AKfycbxT4lv4JQTJAE21dcTfhLDJOty8rloqaG5BQp_sibR55UE625yKqwHj0wnObfq25oU-3A/exec', //your AppsScript URL
         { method: "POST", body: JSON.stringify(dataSend) }) //send to Api
         .then(res => res.json()).then((a) => {
-          console.log(a) //See response
+          console.log(a);
+          setFile(input.file=a.url) //See response
         }).catch(e => console.log(e)) // Or Error in console
     }
   }
+
+  function fileValidation(e) {
+    var fileInput =e.target.files[0];
+        
+     
+    var filePath = fileInput.name;
+ 
+    // Allowing file type
+    var allowedExtensions =
+/(\.stl)$/i;
+     
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }else{ console.log('else')
+    guardarArchivo(e)
+    //Image preview
+    // if (fileInput.files && fileInput.files[0]) {
+    //     // var reader = new FileReader();
+    //     // reader.onload = function(e) {
+    //     //     document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'"/>';
+    //     // };
+    //     // reader.readAsDataURL(fileInput.files[0]);
+    // }
+}
+}
+
 
   return userL.rol === "banned" ? (
     <UserBaned />
@@ -375,7 +408,7 @@ export default function CreateP() {
             {/* Subir Acrhivo */}
             <div className="txt_field">
             <label>Subir archivo STL</label>
-              <input type="file" accept="application/stl" id="customFile" onChange={(e) => guardarArchivo(e)} />
+              <input type="file" accept="application/stl" id="customFile" onChange={(e) => fileValidation(e)} />
             </div>
             
               
