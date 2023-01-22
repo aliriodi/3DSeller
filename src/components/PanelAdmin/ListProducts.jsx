@@ -46,9 +46,15 @@ const ListProducts = (props)=>{
                     {/* <Image src={menuImg}/> */}
                 </span>
             <li className={`dropdown ${dropdownActive == true?"":"desactive"}`}>
+                
                 <a  href={`/productos/${props.id}`} className="dropdown-option">
                     Ver Producto
                 </a>
+
+                <a  href={`/admin/products/${props.id}`} className="dropdown-option">
+                    Ver Reseñas
+                </a>
+
                 <div onClick={deleteProducts} className="dropdown-option">
                     Eliminar Producto
                 </div>
