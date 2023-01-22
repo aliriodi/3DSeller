@@ -2,14 +2,13 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 //import {  useHistory } from 'react-router-dom';
-import {postCreateProduct,getProducts } from '../../redux/DSellerActions';
+import {modificarUser,getProducts } from '../../redux/DSellerActions';
 import { useRouter } from 'next/router';
 
 
 export default function Validacion() {
-   
-
-
+    const router = useRouter()
+    const {userL} =  useSelector((state) => state.products)
     const dispatch = useDispatch()
     //const history = useHistory()
     const [input,setInput] = useState({
@@ -29,7 +28,7 @@ function validate(input) {
      errors.validacion = 'Validacion debe ser un numero entre 0000-9999':errors.validacion=false;
      return errors 
 }
- const {userL} =  useSelector((state) => state.products.products)
+
       function handleOnChange(e) {
         setInput({
           ...input,
@@ -44,19 +43,19 @@ function validate(input) {
     
       function  handleSubmit(e) {
          e.preventDefault()
-         if (input.name.length<4) {return alert('Nombre requiere mas de 4 caracetres')}
-         if (!input.rating) {return alert('Rating is required')}
-         if (!/^(?:[1-9]\d{0,2}(?:,\d{3})*|0)(?:\.\d+)?$/.test(input.rating)) 
-            {return alert('Wrong format for Rating. Should be a number between 0-5')
+         if(input.validacion == userL.magiknumber){
+            dispatch(modificarUser({...userL,validate:true}))
+            router.push('/')
          }
-       
-         dispatch(getValidate(userL,input))
-       
+         else{
+            errors.validacion='El numero intoducido es incorrecto'
+         }
+          
           setInput({
-           validate:""
+           validacion:""
                  })
                   
-        // history.push('/productos')
+    
         
       }
 
