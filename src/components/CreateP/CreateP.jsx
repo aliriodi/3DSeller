@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import {  useHistory } from 'react-router-dom';
 import { postCreateProduct, getProducts } from "../../redux/DSellerActions";
 import { FormGroup, Input } from "reactstrap";
+import Image from "next/dist/client/image";
 
 
 export default function CreateP() {
@@ -168,6 +169,7 @@ export default function CreateP() {
     // history.push('/productos')
   }
   
+  const [URLImage,setURLImage] = useState("")
 
     const uploadImage = async (e) => {
       const files = e.target.files;
@@ -189,6 +191,9 @@ export default function CreateP() {
       console.log(file.secure_url)
       setLoading(false)
       handleOnChangeI(file.secure_url)
+
+      // Renderizar Imagen
+      setURLImage(file.secure_url)
   }
   function guardarArchivo(e) {
     var file = e.target.files[0] //the file
@@ -259,6 +264,7 @@ export default function CreateP() {
 
             {/* Imagen */}
             <div className="txt_field">
+              <div className="form-img_btn">
               <FormGroup>
               <Input
                 // onBlur={handleOnChangeI}
@@ -269,6 +275,17 @@ export default function CreateP() {
                 // value={input.image}
               />
               </FormGroup>
+              </div>
+
+              <div className={`form-img`}>
+              <Image
+              src={URLImage}
+              alt={URLImage}
+              width={100}
+              height={100}
+              className={URLImage==""?"desactive":""}/>
+              </div>
+              
               <span></span>
               <label>Imagen</label>
               {errors.image && <p className="error-text"> {errors.image} </p>}
@@ -408,8 +425,14 @@ export default function CreateP() {
             {/* Subir Acrhivo */}
             <div className="txt_field">
             <label>Subir archivo STL</label>
-              <input type="file" accept="application/stl" id="customFile" onChange={(e) => fileValidation(e)} />
+              <div className="form-img_btn">
+              <input
+              type="file"
+              accept="application/stl"
+              id="customFile"
+              onChange={(e) => fileValidation(e)}/>
             </div>
+              </div>
             
               
             <button
