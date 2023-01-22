@@ -11,21 +11,21 @@ export default async (req, res) => {
         methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
         origin: '*',
         optionsSuccessStatus: 200 || 201,
-      });
+    });
     const { purchase } = req.query
-    if(req.method === "GET" && req.query.purchase.length > 1) {
-        try {
-            let purchaseById = await Purchase.findOne({ "order_id": purchase[1]})
+    if (req.method === "GET" && req.query.purchase.length > 1) {
+        Purchase.findOne({ "order_id": purchase[1] }, (err, purchaseFound) => {
+            if (err || !purchaseFound) {
+                return res.status(404).json({
+                    status: 'error',
+                    msg: `ERROR: ${err.message}`
+                })
+            }
             return res.status(200).json({
                 status: 'success',
-                purchase: purchaseById
+                purchase: purchaseFound
             })
-        } catch (error) {
-            return res.status(404).json({
-                status: 'error',
-                msg: `ERROR: ${error.message}`
-            })
-        }
+        })
     }
     if (req.method === "GET" && req.query.purchase.length <= 1) {
         try {
@@ -47,6 +47,9 @@ export default async (req, res) => {
             user: {
                 id: req.body.user.data._id
             },
+            // purchase: {
+            //     id: req.body.product._id
+            // },
             order_id: req.body.purchase.id,
             created_at: req.body.purchase.purchase_units[0].payments.captures[0].create_time,
             purchase: {
@@ -67,9 +70,9 @@ export default async (req, res) => {
                 }
             }
         })
-        return res.status(200).json({ 
-            status: "success", 
-            msg: "Purchase stored successfully!", 
+        return res.status(200).json({
+            status: "success",
+            msg: "Purchase stored successfully!",
             purchaseStored
         })
     }

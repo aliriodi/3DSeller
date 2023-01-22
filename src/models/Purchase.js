@@ -3,7 +3,10 @@ import { Schema, model, models } from 'mongoose';
 const PurchaseScheme = new Schema(
     {
         user: {
-            id: {type: Schema.ObjectId, ref: "User"}
+            id: { type: Schema.ObjectId, ref: "User" }
+        },
+        products: {
+            id: { type: Schema.ObjectId, ref: "Products"}
         },
         order_id: String,
         created_at: String,
