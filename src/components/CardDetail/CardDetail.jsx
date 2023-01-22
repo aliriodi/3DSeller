@@ -143,7 +143,7 @@ function CardDetail() {
                       let purchaseData = await actions.order.get()
                       return purchaseData
                   }).then(async function(data){
-                    let response = await handlePurchaseStoring(data, user)
+                    let response = await handlePurchaseStoring(data, user.email)
                     if(response.status === 'success') {
                       await handleSentMail(data, user)
                     }
@@ -165,10 +165,11 @@ function CardDetail() {
     })
     return response.data
   }
-  const handlePurchaseStoring = async (purchase, user) => {
+  const handlePurchaseStoring = async (purchase, email) => {
+    let userQuery = await axios.get(`/api/user/${email}`)
     let response = await axios.post("/api/purchase", {
       purchase,
-      user
+      user: userQuery
     })
     return response.data
   }
