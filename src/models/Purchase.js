@@ -4,7 +4,6 @@ const PurchaseScheme = new Schema(
     {
         user: {
             id: {type: Schema.ObjectId, ref: "User"}
-
         },
         order_id: String,
         created_at: String,
