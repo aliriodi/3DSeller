@@ -11,9 +11,10 @@ import {
   getUserBDLS,
   postCreateUserS,
   modificarUserS,
-  PUT_PRODUCT
-} from "./DSellerSlice";
- 
+  PUT_PRODUCT,
+ } from "./DSellerSlice";
+
+
 export const getLOGOUT = () => async (dispatch) => {
   await fetch("/api/user")
     .then((response) => response.json())
