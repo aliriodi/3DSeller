@@ -19,7 +19,6 @@ function Products() {
   const { user } = useSelector((state) => state.products);
   const { favorites } = useSelector((state) => state.products);
   const sendDB = { favorites: favorites, user: user };
-  const { userL } = useSelector((state) => state.products);
 
   //console.log("user", userL.rol);
 
@@ -189,14 +188,26 @@ function Products() {
   ]);
   //#endregion
 
-  //#region Scroll infinito code
+  //#region Paginado
+
+  const [pagina, setPagina] = useState(1);
+
+  const paginas = productsR.length / 8;
+
+  const handlePageChange = (valor) => {
+    setCurrent(valor * 8);
+    setPagina(valor + 1);
+  };
+
   const nextPage = () => {
     if (productsR.length > current + 8) setCurrent(current + 8);
-    console.log(Math.ceil(productsR.length / 8));
+    //console.log(Math.ceil(productsR.length / 8));
+    if (productsR.length > current + 8) setPagina(pagina + 1);
   };
 
   const prevPage = () => {
     if (current > 0) setCurrent(current - 8);
+    if (current > 0) setPagina(pagina - 1);
   };
 
   // Esta funcion va a controlar el numero de elementos que se ven al cargar la pagina por primera vez
@@ -314,7 +325,21 @@ function Products() {
           >
             <Image src={paginationLeftImg} alt="Pagina Anterior" />
           </button>
-
+          {/*Botones de las pag*/}
+          <div className="actual-page">
+            <span className="fav-icon_on">{pagina}</span>
+          </div>
+          <div>
+            {Array.from({ length: paginas }, (_, i) => (
+              <button
+                key={i}
+                className="numeros-pag"
+                onClick={() => handlePageChange(i)}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
           {/* btn-paginado siguiente */}
           <button
             className={`btn ${
