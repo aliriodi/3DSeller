@@ -390,6 +390,21 @@ function Products() {
           >
             <Image src={paginationLeftImg} alt="Pagina Anterior" />
           </button>
+          {/*Btones nav pags */}
+          <div className="actual-page">
+            <span className="fav-icon_on">{pagina}</span>
+          </div>
+          <div>
+            {Array.from({ length: paginas }, (_, i) => (
+              <button
+                key={i}
+                className="numeros-pag"
+                onClick={() => handlePageChange(i)}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
 
           {/* btn-paginado siguiente */}
           <button
