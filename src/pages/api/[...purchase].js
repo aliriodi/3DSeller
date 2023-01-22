@@ -43,10 +43,10 @@ export default async (req, res) => {
         }
     }
     if (req.method === "POST") {
-        let { email } = req.body.user
-        let userFoundInDB = await User.findOne({ "email": email }, '_id')
         let purchaseStored = await Purchase.create({
-            user: userFoundInDB,
+            user: {
+                id: req.body.user.data._id
+            },
             order_id: req.body.purchase.id,
             created_at: req.body.purchase.purchase_units[0].payments.captures[0].create_time,
             purchase: {
