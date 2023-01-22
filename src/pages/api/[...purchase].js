@@ -1,7 +1,7 @@
 import NextCors from 'nextjs-cors';
 import { dbConect } from 'utils/mongoose'
-import Purchase from '../../../models/Purchase';
-import User from '../../../models/User'
+import Purchase from '../../models/Purchase';
+import User from '../../models/User'
 
 dbConect();
 
@@ -12,6 +12,36 @@ export default async (req, res) => {
         origin: '*',
         optionsSuccessStatus: 200 || 201,
       });
+    const { purchase } = req.query
+    if(req.method === "GET" && req.query.purchase.length > 1) {
+        try {
+            let purchaseById = await Purchase.findOne({ "order_id": purchase[1]})
+            return res.status(200).json({
+                status: 'success',
+                purchase: purchaseById
+            })
+        } catch (error) {
+            return res.status(404).json({
+                status: 'error',
+                msg: `ERROR: ${error.message}`
+            })
+        }
+    }
+    if (req.method === "GET" && req.query.purchase.length <= 1) {
+        try {
+            let response = await Purchase.find({}, 'user order_id')
+            return res.status(200).json({
+                status: 'success',
+                msg: "Estas son la compras en tu base de datos",
+                allPurchases: response
+            })
+        } catch (error) {
+            return res.status(400).json({
+                status: 'error',
+                msg: 'No se encontro ninguna compra'
+            })
+        }
+    }
     if (req.method === "POST") {
         let { email } = req.body.user
         let userFoundInDB = await User.findOne({ "email": email }, '_id')

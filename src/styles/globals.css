@@ -1624,3 +1624,24 @@ body {
 .Pay-button {
   justify-items: auto;
 }
+
+/* /////// Purchase Page //////// */
+.container__purchase {
+  width: 100vw;
+  min-height: 300px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+}
+.purchase-header p {
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+  opacity: 0.8;
+}
+.order-id {
+  font-size: 16px;
+  font-weight: 100;
+  color: var(--main-color);
+}
