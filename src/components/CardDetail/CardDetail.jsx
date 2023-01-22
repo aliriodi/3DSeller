@@ -56,7 +56,7 @@ function CardDetail() {
       newRating += rating;
     })
     newRating += +currentReview.rating;
-    newRating = (newRating / productsDetail.review?.length);
+    newRating = (newRating / (productsDetail.review?.length+1));
 
     //Ver que no haya Errores
     let ratingLocalError = false
