@@ -1146,8 +1146,31 @@ header {
 /*////////// Start CreateP //////////*/
 .marginTop {
   position: relative;
-  margin: 250px 0 0 0;
+  margin: 490px 0 0 0;
   top: 300px;
+}
+
+.form-img_btn{
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-img_btn input{
+  cursor: pointer;
+}
+
+.form-img{
+  z-index: 40;
+  width:420px;
+  max-height: 420px;
+  margin-top: 20px;
+}
+.form-img img{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 /*Body Form*/
