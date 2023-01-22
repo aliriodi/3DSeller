@@ -77,9 +77,11 @@ function CardDetail() {
     productsDetail.review?.forEach((rev) => {
       let rating = +rev.rating;
       newRating += rating;
-    });
-    newRating += +currentReview.rating;
-    newRating = newRating / (productsDetail.review?.length + 1);
+
+    })
+    newRating += currentReview.rating;
+    newRating = (newRating / (productsDetail.review?.length+1));
+
 
     //Ver que no haya Errores
     let ratingLocalError = false;

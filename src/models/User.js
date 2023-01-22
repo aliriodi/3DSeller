@@ -10,6 +10,12 @@ const UserScheme = new Schema(
         // trim: true,
         // maxLength: [40, 'Title must be less than 40 characters']
       },
+      magiknumber:{
+        type:Number,
+      },
+      validate:{
+        type:Boolean,
+      },
       email:{
         type: String,
         unique: true,
