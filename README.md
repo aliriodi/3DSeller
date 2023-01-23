@@ -12,6 +12,10 @@ Como Administrador podra, ver un panel Administracion de usuarios, poder cambiar
 
 Tambien cuenta con reseñas (reviews) donde el usuario una vez comprado y recibido el producto  podra dar su apreciacion del producto evaluando el producto con un valor de 0 -5 y escribir su apreciacion de que le parecio el producto.
 
+Todo esto y mas en ...
+
+ ## https://3dseller.vercel.app
+
 Esta aplicacion fue desarrollada por:
 
 1. Jose Valencia    ( https://github.com/JoseVal25 )
@@ -34,8 +38,6 @@ Esta aplicacion fue desarrollada por:
       9. Plataforma de pago Paypal
       10. Gestor de archivos cloudinary + Google Drive
       
-      
- ## https://3dseller.vercel.app
       
 ## Boilerplate
 
