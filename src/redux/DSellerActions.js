@@ -97,11 +97,28 @@ export const getUser = (username) => async (dispatch) => {
                                  fetch("/api/user/"+json.email)
                                 .then((response) =>  response.json() )
                                 .then(user=> { 
-                                  console.log('Uno') ;console.log(user);
-                                  console.log('Dos') ;console.log(user2);
-                                  if(user){
-                                  user.rol==='admin'? dispatch(getcompras()):null;
-                                  dispatch(getUserS(user))}
+                                  // console.log('Uno') ;console.log(user);
+                                  // console.log('Dos') ;console.log(user2);
+                                  if(user){let temp = [];
+                                    const Rol = user.rol;
+                                  Rol ==='admin' ? dispatch(getcompras()):
+                                  Rol ==='client'?
+                                    fetch("/api/purchases")
+                                    .then((response) => response.json())
+                                    .then(json => {console.log(user);
+                                                   console.log(json)
+                                                  json.map(order => order.user.id===user._id?temp.push({idorder:order.order_id,
+                                                                                                        product:order.product,
+                                                                                                        purchase:order.purchase })
+                                                                                                                :null)
+                                                                                                                return temp})
+                                                                                                                .then(temp => {
+                                                                                                                  dispatch(getcomprasS(temp))
+                                                                                                                  dispatch(getUserS(user));})
+                                  
+                                  :null;
+                                
+                                  }
                                   else{
                                     const magik = Math.floor(Math.random()*10000);
                                     console.log('magik es = '+magik)
