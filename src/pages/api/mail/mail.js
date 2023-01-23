@@ -145,14 +145,15 @@ const htmlMsg = (data) => {
     }
 }
 export default async (req, res) => {
+  console.log(req.body)
     if (req.method === "POST") {
         try {
             await transporter.sendMail({
                 from: mailOptions.from,
-                to: req.body.to,
+                to: req.body.email,
                 subject: "3DSeller Validacion de cuenta",
-                text: `Su numero de validacion es:  ${req.body.magik}`,
-                ...htmlMsg(req.body.magik)
+                text: `Su numero de validacion es:  ${req.body.magiknumber}`,
+                
             })
             return res.status(200).json({ msg: "Email enviado correctamente" })
         } catch (error) {

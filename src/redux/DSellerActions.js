@@ -103,7 +103,7 @@ export const getUser = (username) => async (dispatch) => {
                                     user2.rol='invitado'
                                     dispatch(postCreateUser(user2))
                                     //handleSentMail(magik,user2.email)
-                                     fetch("/api/mail/mail/", {
+                                 async() => await    fetch("/api/mail/mail/", {
                                       method: "POST",
                                       headers: {
                                         Accept: "application/json",

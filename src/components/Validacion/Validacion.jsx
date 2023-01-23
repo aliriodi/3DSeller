@@ -16,8 +16,9 @@ export default function Validacion() {
        validacion:''
          })
     let [errors,setErrors] =  useState({validacion:true})
+
     const handleSentMail = async (magik, user) => {
-        let response = await axios.post("/api/mail/mail", {
+          let response = await axios.post("/api/mail/mail", {
           magik,
           user,
         });
@@ -70,8 +71,8 @@ function validate(input) {
 
 <div className="marginTopValidate">
         <div className="center">
-       {/* <h1></h1>
-        <button onClick={()=>handleSentMail('3453',userL.email)}>enviar correo</button> */}
+       <h1></h1>
+        {/* <button onClick={()=>handleSentMail('3453',userL.email)}>enviar correo</button> */}
           
             <h1>Validar usuario</h1>
 

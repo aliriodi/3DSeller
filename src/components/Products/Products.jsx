@@ -192,7 +192,7 @@ function Products() {
 
   const [pagina, setPagina] = useState(1);
 
-  const paginas = productsR.length / 8;
+  const paginas = Math.ceil(productsR.length / 8);
 
   const handlePageChange = (valor) => {
     setCurrent(valor * 8);
