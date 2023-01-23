@@ -47,9 +47,11 @@ export default async (req, res) => {
             user: {
                 id: req.body.user.data._id
             },
-            // purchase: {
-            //     id: req.body.product._id
-            // },
+            product: {
+                id: req.body.product.data._id,
+                name: req.body.product.data.name,
+                price: req.body.product.data.price
+            },
             order_id: req.body.purchase.id,
             created_at: req.body.purchase.purchase_units[0].payments.captures[0].create_time,
             purchase: {

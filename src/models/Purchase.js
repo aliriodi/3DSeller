@@ -5,8 +5,10 @@ const PurchaseScheme = new Schema(
         user: {
             id: { type: Schema.ObjectId, ref: "User" }
         },
-        products: {
-            id: { type: Schema.ObjectId, ref: "Products"}
+        product: {
+            id: { type: Schema.ObjectId, ref: "Products"},
+            name: String,
+            price: Number,
         },
         order_id: String,
         created_at: String,
