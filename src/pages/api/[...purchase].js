@@ -45,12 +45,12 @@ export default async (req, res) => {
     if (req.method === "POST") {
         let purchaseStored = await Purchase.create({
             user: {
-                id: req.body.user.data._id
+                id: req.body.user._id
             },
             product: {
-                id: req.body.product.data._id,
-                name: req.body.product.data.name,
-                price: req.body.product.data.price
+                id: req.body.product._id,
+                name: req.body.product.name,
+                price: req.body.product.price
             },
             order_id: req.body.purchase.id,
             created_at: req.body.purchase.purchase_units[0].payments.captures[0].create_time,

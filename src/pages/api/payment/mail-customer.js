@@ -126,7 +126,7 @@ const htmlMsg = (data) => {
                             <div class="form-container">
                                 <h2 class="form-headin" align="left">Gracias por tu compra!<h2>
                                 <p class="form-answer" align="left" >Puedes ver la informacion de tu compra en el siguiente link</p><br />
-                                <span>👉🏽 <span><a href="http://localhost:3000/purchases/${data}" target="_blank" >Orden de compra</a>
+                                <span>👉🏽 <span><a href="https://3dseller.vercel.app/purchases/${data}" target="_blank" >Orden de compra</a>
                             </div>
                           </td>
                         </tr>
