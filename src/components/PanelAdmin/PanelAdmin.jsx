@@ -13,6 +13,7 @@ import img from "../LogButton/perfil-icon_default.png";
 import productsImg from "./products-icon.png";
 import cartImg from "./cart-icon.png";
 import Link from "next/link";
+import axios from "axios";
 
 function PanelAdmin() {
   const [currentPurchases, setCurrentPurchases] = useState(0);
@@ -26,7 +27,13 @@ function PanelAdmin() {
   useEffect(() => {
     if (allUsers.length === 0) dispatch(getAllUser());
     if (products.length === 0) dispatch(getProducts());
-  }, [userL]);
+    getAllPurchases()
+  }, [userL, currentPurchases]);
+
+  const getAllPurchases = async () => {
+    let response = await axios('/api/count/purchases');
+    setCurrentPurchases(response.data.purchasesCount);
+  }
 
   return (
     <>
