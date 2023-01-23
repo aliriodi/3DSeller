@@ -24,6 +24,21 @@ function CardDetail() {
   const { userL , file} = useSelector((state) => state.products);
   const [show, setShow] = useState(0);
 
+  const calculateRating = ()=>{
+    let newRating = 0;
+
+    productsDetail.review?.forEach(rev => {
+      let rating = +rev.rating
+      newRating += rating;
+    })
+    newRating = isNaN(newRating / productsDetail.review?.length)?
+    0: (newRating / productsDetail.review?.length);
+
+    console.log("RATING",newRating.toFixed(2))
+    
+    return +newRating.toFixed(2)
+  }
+
   useEffect(() => {
     if (router.isReady) {
       dispatch(getProductDet(id));
@@ -50,6 +65,18 @@ function CardDetail() {
     } else {
       console.log("no hay nada :C ");
     }
+
+    if(calculateRating() != productsDetail.rating&&
+       productsDetail.rating != undefined){
+      dispatch(
+        putProduct({
+          _id: productsDetail._id,
+          rating: calculateRating()
+        })
+      );
+    }
+    console.log("RATING USE",calculateRating());
+    console.log("RATING CURRENT",productsDetail.rating);
   }, [productsDetail]);
 
   //#region Agregar Reseña
@@ -72,18 +99,6 @@ function CardDetail() {
   };
 
   const addReview = () => {
-    let newRating = 0;
-
-    // Calcula el Nuevo Rating
-    productsDetail.review?.forEach((rev) => {
-      let rating = rev.rating;
-      newRating += rating;
-
-    })
-    newRating += currentReview.rating;
-    newRating = (newRating / (productsDetail.review?.length+1));
-
-
     //Ver que no haya Errores
     let ratingLocalError = false;
     let commentLocalError = false;
@@ -108,7 +123,6 @@ function CardDetail() {
     dispatch(
       putProduct({
         _id: productsDetail._id,
-        rating: newRating.toFixed(2),
         review: [...productsDetail.review, currentReview],
       })
     );
@@ -226,10 +240,15 @@ function CardDetail() {
             <h3 className="detail-item_item-text">${productsDetail.price}</h3>
           </div>
          
-         {  userL.rol==='admin'? <div className="detail-item_item detail_id">
-            <h3>File:</h3>
-            <a href={productsDetail.file} legacybehavior>{productsDetail.file?'Archivo STL':'No posee archivo STL'}
+         {/* Boton de Descarga */}
+         {userL.rol==='admin'? <div className="detail-item_item detail_id">
+            <div className="btn-container">
+            <a
+            href={productsDetail.file}
+            legacyBehavior
+            className={`${productsDetail.file?"btn":"notFound-text"}`}>{productsDetail.file?'Descargar':'No posee archivo STL'}
             </a>
+            </div>
          
           </div>
           :null}
@@ -243,14 +262,14 @@ function CardDetail() {
           >
             {isLoading ? (
               <h3>Loading...</h3>
-            ) : !user || userL.rol =='invitado'? (
+            ) : !user || userL.rol =='invitdo'? (
               <button
                 onClick={() => router.push("/api/auth/login")}
                 className="btn-submit"
               >
                 Sign in to buy
               </button>
-            ) : userL.rol === "admin" ? ("") : (
+            ) : (
               <PayPalScriptProvider
                 options={{
                   "client-id":
