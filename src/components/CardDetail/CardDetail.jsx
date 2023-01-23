@@ -270,6 +270,8 @@ function CardDetail() {
                 Sign in to buy
               </button>
             ) : (
+              userL.rol=='admin'?
+              (""):
               <PayPalScriptProvider
                 options={{
                   "client-id":
