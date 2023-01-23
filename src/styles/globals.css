@@ -680,6 +680,9 @@ header {
   color: var(--main-color);
   font-size: 2em;
 }
+.paypal-button{
+  background-color: #f00 !important;
+}
 
 /* Text */
 .data-container {

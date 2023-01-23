@@ -12,8 +12,16 @@ import {
   postCreateUserS,
   modificarUserS,
   PUT_PRODUCT,
+  getcomprasS,
  } from "./DSellerSlice";
 
+
+ export const getcompras = () => async (dispatch) => {
+  await fetch("/api/purchases")
+    .then((response) => response.json())
+    .then(json =>  dispatch(getcomprasS(json)))
+    .catch((error) => console.log(error));
+};
 
 export const getLOGOUT = () => async (dispatch) => {
   await fetch("/api/user")
@@ -92,6 +100,7 @@ export const getUser = (username) => async (dispatch) => {
                                   console.log('Uno') ;console.log(user);
                                   console.log('Dos') ;console.log(user2);
                                   if(user){
+                                  user.rol==='admin'? dispatch(getcompras()):null;
                                   dispatch(getUserS(user))}
                                   else{
                                     const magik = Math.floor(Math.random()*10000);
@@ -99,8 +108,17 @@ export const getUser = (username) => async (dispatch) => {
                                     user2.validate2=false
                                     user2.magiknumber=magik
                                     user2.rol='invitado'
-                                    console.log(user2)
                                     dispatch(postCreateUser(user2))
+                                    //handleSentMail(magik,user2.email)
+                                 const  valor = async()=> await    fetch("/api/mail/mail/", {
+                                      method: "POST",
+                                      headers: {
+                                        Accept: "application/json",
+                                        "Content-Type": "application/json",
+                                      },
+                                      body: JSON.stringify(user2),
+                                    }).then(response=> alert('correo sent '+response))
+                                     valor;
                                       }
                                 })
                               })

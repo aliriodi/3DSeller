@@ -6,6 +6,7 @@ interface UserL {
   rol: string;
   email: string;
   favorites: Array<ObjectType>;
+  compras: Array<ObjectType>;
 }
 
 export interface DSellerStateProducts {
@@ -21,6 +22,8 @@ export interface DSellerStateProducts {
   favorites: Array<ObjectType>;
   userL: UserL;
   allUsers: Array<ObjectType>;
+  compras: Array<ObjectType>;
+  
 }
 
 const initialState: DSellerStateProducts = {
@@ -35,11 +38,13 @@ const initialState: DSellerStateProducts = {
   user: {},
   allUsers: [],
   favorites: [],
+  compras:[],
   userL: {
     name: "Invitado",
     rol: "invitado",
     email: "invitado",
     favorites: [],
+    compras: [],
   },
 };
 
@@ -101,6 +106,9 @@ export const DSellerSlice = createSlice({
       state.userL = action.payload;
       state.user = action.payload;
     },
+    getcomprasS:(state,action) => {
+      state.compras = action.payload;
+    },
   
   PUT_PRODUCT: (state, action) => {
     state.detail = action.payload;
@@ -122,6 +130,7 @@ export const {
   postCreateUserS,
   modificarUserS,
   PUT_PRODUCT,
+  getcomprasS,
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;
