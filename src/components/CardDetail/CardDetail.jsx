@@ -167,7 +167,7 @@ function CardDetail() {
             // Your code here after capture the order
             let purchaseData = await actions.order.get();
             const data_1 = purchaseData;
-            let response = await handlePurchaseStoring(data_1, user.email);
+            let response = await handlePurchaseStoring(data_1, user.email, id);
             if (response.status === "success") {
               await handleSentMail(data_1, user);
             }
@@ -186,11 +186,13 @@ function CardDetail() {
     });
     return response.data;
   };
-  const handlePurchaseStoring = async (purchase, email) => {
+  const handlePurchaseStoring = async (purchase, email, productId) => {
     let userQuery = await axios.get(`/api/user/${email}`);
+    let productQuery = await axios.get(`/api/products/${productId}`)
     let response = await axios.post("/api/purchase", {
       purchase,
-      user: userQuery,
+      user: userQuery.data,
+      product: productQuery.data
     });
     return response.data;
   };
@@ -226,7 +228,7 @@ function CardDetail() {
          
          {  userL.rol==='admin'? <div className="detail-item_item detail_id">
             <h3>File:</h3>
-            <a href={productsDetail.file} legacyBehavior>{productsDetail.file?'Archivo STL':'No posee archivo STL'}
+            <a href={productsDetail.file} legacybehavior>{productsDetail.file?'Archivo STL':'No posee archivo STL'}
             </a>
          
           </div>
@@ -241,14 +243,14 @@ function CardDetail() {
           >
             {isLoading ? (
               <h3>Loading...</h3>
-            ) : !user || userL.rol =='invitdo'? (
+            ) : !user || userL.rol =='invitado'? (
               <button
                 onClick={() => router.push("/api/auth/login")}
                 className="btn-submit"
               >
                 Sign in to buy
               </button>
-            ) : (
+            ) : userL.rol === "admin" ? ("") : (
               <PayPalScriptProvider
                 options={{
                   "client-id":

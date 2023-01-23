@@ -71,9 +71,7 @@ function validate(input) {
 
 <div className="marginTopValidate">
         <div className="center">
-       <h1></h1>
-        {/* <button onClick={()=>handleSentMail('3453',userL.email)}>enviar correo</button> */}
-          
+
             <h1>Validar usuario</h1>
 
             <form onSubmit={e=>handleSubmit(e)}>

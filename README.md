@@ -2,7 +2,21 @@
 
 # 3DSeller 
 
-Esta es una aplicacion para administracion y ventas de articulos impresos en 3D, con base de datos de productos y administracion de equipos 3D con materiales y control de ventas, desarrollado por:
+Esta es una aplicacion para administracion y ventas de articulos impresos en 3D, con base de datos de productos, control de ventas, pudiendo cargar archivos 3d en formato STL para que el Administrador (es)  puedan descargar sus archivos donde esten sin tener que portarlos en un pendrive o sistema de almacenamiento externo, manejando un panel de Administracion, para gestionar funciones de acuerdo a roles (Invitado, Cliente o Administrador y baneado de ser necesario)
+
+Como Invitado solo podra ver productos, acceder a contacto y poder hacer Login o crear cuenta para ser validada con token de 4 digitos.
+
+Como Cliente podra tener favoritos en su usuario y poderlos ver en su login, de igual forma podrar compara con pasalera de pago Paypal y ver su orden de compra.
+
+Como Administrador podra, ver un panel Administracion de usuarios, poder cambiar privilegios al usuario, incluso banearlo de ser necesario, crear productos y cargar archivos STL a la plataforma si desea.
+
+Tambien cuenta con reseñas (reviews) donde el usuario una vez comprado y recibido el producto  podra dar su apreciacion del producto evaluando el producto con un valor de 0 -5 y escribir su apreciacion de que le parecio el producto.
+
+Todo esto y mas en ...
+
+ ## https://3dseller.vercel.app
+
+Esta aplicacion fue desarrollada por:
 
 1. Jose Valencia    ( https://github.com/JoseVal25 )
 2. Mateo Cava       ( https://github.com/Matecava )
@@ -22,10 +36,8 @@ Esta es una aplicacion para administracion y ventas de articulos impresos en 3D,
       7. Nodemailer 
       8. Auth0 + AuthLocal con BD
       9. Plataforma de pago Paypal
-      10. Gestor de archivos cloudinary
+      10. Gestor de archivos cloudinary + Google Drive
       
-      
- ## https://3dseller.vercel.app
       
 ## Boilerplate
 

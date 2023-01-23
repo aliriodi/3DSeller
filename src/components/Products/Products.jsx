@@ -192,7 +192,7 @@ function Products() {
 
   const [pagina, setPagina] = useState(1);
 
-  const paginas = Math.ceil(productsR.length / 8);
+  const paginas = (productsR.length + 1) / 8;
 
   const handlePageChange = (valor) => {
     setCurrent(valor * 8);
@@ -325,21 +325,18 @@ function Products() {
           >
             <Image src={paginationLeftImg} alt="Pagina Anterior" />
           </button>
+
           {/*Botones de las pag*/}
-          <div className="actual-page">
-            <span className="fav-icon_on">{pagina}</span>
-          </div>
-          <div>
+
             {Array.from({ length: paginas }, (_, i) => (
               <button
                 key={i}
-                className="numeros-pag"
+                className={`btn ${pagina == i + 1?"btn-on":null }`}
                 onClick={() => handlePageChange(i)}
               >
                 {i + 1}
               </button>
             ))}
-          </div>
           {/* btn-paginado siguiente */}
           <button
             className={`btn ${
@@ -391,21 +388,18 @@ function Products() {
           >
             <Image src={paginationLeftImg} alt="Pagina Anterior" />
           </button>
-          {/*Btones nav pags */}
-          <div className="actual-page">
-            <span className="fav-icon_on">{pagina}</span>
-          </div>
-          <div>
+          
+          {/*Botones de las pag*/}
+
             {Array.from({ length: paginas }, (_, i) => (
               <button
                 key={i}
-                className="numeros-pag"
+                className={`btn ${pagina == i + 1?"btn-on":null }`}
                 onClick={() => handlePageChange(i)}
               >
                 {i + 1}
               </button>
             ))}
-          </div>
 
           {/* btn-paginado siguiente */}
           <button

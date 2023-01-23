@@ -3,12 +3,13 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { BsCheckCircle } from 'react-icons/bs'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
 
 function OrderId() {
   const { user, error, isLoading } = useUser()
   const router = useRouter()
   const [order, setOrder] = useState({})
-  console.log(order)
+
   useEffect(() => {
     if (router.isReady && router.query) {
       getPurchaseById(router.query.orderid)
@@ -53,9 +54,9 @@ function OrderId() {
       <div className='orderPage__detail-container'>
         <h2 className='orderPage__header-title'>Detail</h2>
         <div className='orderPage__detail-product'>
-          <p>Producto Name</p>
+          <p>{order.purchase.product.name}</p>
           <p className='right'>
-            <span className='money'>$ </span>
+            <span className='money'>$ {order.purchase.product.price}</span>
             <span className='currency'>AR</span>
           </p>
 
@@ -77,7 +78,7 @@ function OrderId() {
               <span className='exchange'>
                 (with an exchange rate of 300)
               </span>
-              <span className='money'>$ 3000</span>
+              <span className='money'>$ {order.purchase.product.price}</span>
 
               <span className='currency'>AR</span>
             </p>
@@ -98,4 +99,4 @@ function OrderId() {
   )
 }
 
-export default OrderId
+export default withPageAuthRequired(OrderId)

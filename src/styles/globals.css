@@ -1132,6 +1132,10 @@ header {
   background-color: var(--main-color);
   color: var(--dark-color);
 }
+.btn-paginated .btn-on{
+  background-color: var(--main-color);
+  color: var(--dark-color);
+}
 .btn-paginated .btn:hover img {
   filter: brightness(0);
 }
@@ -1751,22 +1755,97 @@ body {
 }
 
 /* /////// Purchase Page //////// */
-.container__purchase {
+.orderPage__container-purchase {
   width: 100vw;
   min-height: 300px;
   margin-top: 100px;
   display: flex;
-  justify-content: space-between;
-  padding-left: 20px;
+  flex-direction: column;
+  padding-left: 80px;
+  padding-right: 100px;
 }
-.purchase-header p {
-  display: flex;
-  flex-direction: row;
-  font-size: 18px;
-  opacity: 0.8;
+.orderPage__container-purchase h1 {
+  margin-bottom: 20px;
+
 }
-.order-id {
+.orderPage__purchase-header {
+  width: 400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
+.orderPage__purchase-header p {
   font-size: 16px;
+  opacity: 0.6;
+}
+.orderPage__purchase-header span {
+  width: 200px;
+  display: block;
+  font-size: 14px;
   font-weight: 100;
   color: var(--main-color);
+}
+.orderPage__header-title {
+  text-transform: uppercase;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+.orderPage__billedTo-container p {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+.orderPage__detail-product {
+  border-bottom: 1px solid #eeeeee8e;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.orderPage__detail-product .money {
+  display: inline-block;
+  width: 80px;
+  text-align: right;
+}
+.orderPage__detail-product .currency {
+  display: inline-block;
+  width: 60px;
+  text-align: right;
+}
+.orderPage__detail-product_total_left {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 6px;
+}
+.orderPage__detail-product_total_right {
+  width: 400px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+.orderPage__detail-product_total_right .money {
+  display: inline-block;
+  width: 80px;
+  font-weight: 700;
+}
+.orderPage__detail-product_total_right .currency{
+  font-weight: 700;
+  display: inline-block;
+  width: 60px;
+}
+.orderPage__detail-product_total_right .exchange {
+  font-size: 13px;
+  opacity: 0.7;
+}
+.orderPage__status-container .text{
+  display: flex;
+  align-items: center;
+}
+.orderPage__status-container .text .icon  {
+  width: 26px;
+  height: 26px;
+  margin-right: 8px;
+  color: #8DE600 !important;
+}
+.orderPage__status-container .text span {
+  color: #8DE600;
 }
