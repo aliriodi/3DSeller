@@ -10,6 +10,8 @@ Como Cliente podra tener favoritos en su usuario y poderlos ver en su login, de 
 
 Como Administrador podra, ver un panel Administracion de usuarios, poder cambiar privilegios al usuario, incluso banearlo de ser necesario, crear productos y cargar archivos STL a la plataforma si desea.
 
+Tambien cuenta con reseñas (reviews) donde el usuario una vez comprado y recibido el producto  podra dar su apreciacion del producto evaluando el producto con un valor de 0 -5 y escribir su apreciacion de que le parecio el producto.
+
 Esta aplicacion fue desarrollada por:
 
 1. Jose Valencia    ( https://github.com/JoseVal25 )
