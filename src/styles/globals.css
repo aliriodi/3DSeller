@@ -1129,6 +1129,10 @@ header {
   background-color: var(--main-color);
   color: var(--dark-color);
 }
+.btn-paginated .btn-on{
+  background-color: var(--main-color);
+  color: var(--dark-color);
+}
 .btn-paginated .btn:hover img {
   filter: brightness(0);
 }
