@@ -80,6 +80,7 @@ export const DSellerSlice = createSlice({
 
     postCreateUserS: (state, action) => {
       state.userL = action.payload;
+      state.user = action.payload;
     },
 
     postCreateProductS: (state, action) => {

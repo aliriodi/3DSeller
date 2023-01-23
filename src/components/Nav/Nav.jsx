@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 function Nav() {
   const [currentUser, setCurrentUser] = useState({ rol: "invitado" });
   const { user, userL } = useSelector((state) => state.products);
-    
+  const {push} = useRouter();  
 
   if (
     user.rol !== "invitado" &&
@@ -20,6 +20,7 @@ function Nav() {
     console.log("CHANGE");
     setCurrentUser(userL);
   }
+
 
   return (
     <>
@@ -61,11 +62,20 @@ function Nav() {
             </Link>
           </div>
           <div className="nav-icons">
+           { userL.rol==='invitado' && userL.name !=='Invitado'?
+          <Link href={"/validacion"} legacyBehavior>
+              <a className="btn" id="bell-icon">
+                Validacion
+              </a>
+            </Link>
+            :
+            userL.rol!=='invitado'?
             <Link href={"/favoritos"} legacyBehavior>
               <a className="btn" id="bell-icon">
                 Favoritos
               </a>
-            </Link>
+            </Link>:null
+           }
           </div>
           <div className="nav-icons">
             <Link href={"/materiales"} legacyBehavior>
@@ -100,7 +110,9 @@ function Nav() {
             <LogButton />
           ) : (
             <LogoutButton />
+           
           )}
+                    
         </div>
       </header>
     </>
