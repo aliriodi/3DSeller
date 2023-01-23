@@ -231,7 +231,7 @@ function CardDetail() {
           >
             {isLoading ? (
               <h3>Loading...</h3>
-            ) : !user ? (
+            ) : !user || userL.rol =='invitdo'? (
               <button
                 onClick={() => router.push("/api/auth/login")}
                 className="btn-submit"

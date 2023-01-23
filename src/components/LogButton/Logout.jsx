@@ -1,13 +1,20 @@
-import React from 'react';
-import {  useSelector } from "react-redux";
+import React, { useEffect }  from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import perfilIcon from "./perfil-icon_default.png";
 import Image from "next/image";
 import Link from "next/link";
+import { getUser, getProducts } from "../../redux/DSellerActions";
 
 export default function Logout() {
+  const dispatch = useDispatch();
     const { push } = useRouter();
     function handleLogout (){ push("/api/auth/logout")};
+    useEffect(() => {
+      dispatch(getUser())
+      if(userL.rol==='invitado'){push("/validacion")}
+       // eslint-disable-next-line
+}, [false]);
     const {  userL  } = useSelector((state) => state.products);
     return (
         <>

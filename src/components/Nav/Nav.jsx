@@ -94,7 +94,7 @@ function Nav() {
             id="bell-icon"
           /> */}
 
-          {userL.rol === "invitado" ||
+          {
           userL.name === "Invitado" ||
           userL.email === "invitado" ? (
             <LogButton />
