@@ -30,7 +30,7 @@ Esta aplicacion fue desarrollada por:
       7. Nodemailer 
       8. Auth0 + AuthLocal con BD
       9. Plataforma de pago Paypal
-      10. Gestor de archivos cloudinary
+      10. Gestor de archivos cloudinary + Google Drive
       
       
  ## https://3dseller.vercel.app
