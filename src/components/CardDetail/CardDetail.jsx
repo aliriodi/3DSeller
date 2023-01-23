@@ -21,7 +21,7 @@ function CardDetail() {
   const router = useRouter();
   const { id } = router.query;
   const productsDetail = useSelector((state) => state.products.detail);
-  const { userL , file} = useSelector((state) => state.products);
+  const { userL, file } = useSelector((state) => state.products);
   const [show, setShow] = useState(0);
 
   useEffect(() => {
@@ -32,13 +32,11 @@ function CardDetail() {
   }, [id]);
 
   useEffect(() => {
-    console.log("reviews", productsDetail.review);
-    console.log("usuario", userL.email);
-    if (productsDetail.review) {
-      const exist = productsDetail.review.find(
-        (r) => r.user_email === userL.email
-      );
-      if (exist) {
+    //console.log("productos", productsDetail._id);
+    //console.log("compras", userL.compras);
+    if (userL.compras) {
+      const exist = userL.compras.find((r) => r._id === productsDetail._id);
+      if (exist === undefined) {
         setShow(false);
         console.log("exist", exist);
         console.log("show primero", show);
@@ -78,11 +76,9 @@ function CardDetail() {
     productsDetail.review?.forEach((rev) => {
       let rating = rev.rating;
       newRating += rating;
-
-    })
+    });
     newRating += currentReview.rating;
-    newRating = (newRating / (productsDetail.review?.length+1));
-
+    newRating = newRating / (productsDetail.review?.length + 1);
 
     //Ver que no haya Errores
     let ratingLocalError = false;
@@ -188,11 +184,11 @@ function CardDetail() {
   };
   const handlePurchaseStoring = async (purchase, email, productId) => {
     let userQuery = await axios.get(`/api/user/${email}`);
-    let productQuery = await axios.get(`/api/products/${productId}`)
+    let productQuery = await axios.get(`/api/products/${productId}`);
     let response = await axios.post("/api/purchase", {
       purchase,
       user: userQuery.data,
-      product: productQuery.data
+      product: productQuery.data,
     });
     return response.data;
   };
@@ -225,15 +221,16 @@ function CardDetail() {
             <h3>Price:</h3>
             <h3 className="detail-item_item-text">${productsDetail.price}</h3>
           </div>
-         
-         {  userL.rol==='admin'? <div className="detail-item_item detail_id">
-            <h3>File:</h3>
-            <a href={productsDetail.file} legacyBehavior>{productsDetail.file?'Archivo STL':'No posee archivo STL'}
-            </a>
-         
-          </div>
-          :null}
-          
+
+          {userL.rol === "admin" ? (
+            <div className="detail-item_item detail_id">
+              <h3>File:</h3>
+              <a href={productsDetail.file} legacyBehavior>
+                {productsDetail.file ? "Archivo STL" : "No posee archivo STL"}
+              </a>
+            </div>
+          ) : null}
+
           <div
             style={{
               width: "260px",
@@ -243,7 +240,7 @@ function CardDetail() {
           >
             {isLoading ? (
               <h3>Loading...</h3>
-            ) : !user || userL.rol =='invitdo'? (
+            ) : !user || userL.rol == "invitdo" ? (
               <button
                 onClick={() => router.push("/api/auth/login")}
                 className="btn-submit"
