@@ -85,15 +85,26 @@ export const getUser = (username) => async (dispatch) => {
                             .then(json=>
                               { console.log(json)
                               //aca lo mando contra la BDL y sus propiedades
+                              let user2=json;
                                  fetch("/api/user/"+json.email)
-                                .then((response) => response.json())
-                                .then(user=> dispatch(getUserS(user)))
+                                .then((response) =>  response.json() )
+                                .then(user=> { 
+                                  console.log('Uno') ;console.log(user);
+                                  console.log('Dos') ;console.log(user2);
+                                  if(user){
+                                  dispatch(getUserS(user))}
+                                  else{
+                                    const magik = Math.floor(Math.random()*10000);
+                                    console.log('magik es = '+magik)
+                                    user2.validate=false
+                                    user2.magiknumber=magik
+                                    user2.rol='invitado'
+                                    console.log(user2)
+                                    dispatch(postCreateUser(user2))
+                                      }
+                                })
                               })
-                              // .then(()=>fetch(" https://threed.us.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A3000&client_id=J3fAsBH2xLotpS7rYIdyPQAGCs38mojc", {
-                              //   mode: "cors",
-                              //   method: "POST",
-                              //   headers: { "Access-Control-Allow-Origin": "*" },
-                              // }))
+                              
                            }                                          
       })
     .catch((error) => console.log(error));
@@ -158,7 +169,7 @@ export const postCreateUser = (user) => async (dispatch) => {
     body: JSON.stringify(user),
   })
     .then((response) => response.json())
-    .then((myJson) =>postCreateUserS(myJson))
+    .then((myJson) =>dispatch(postCreateUserS(myJson)))
     .catch((error) => console.log(error));
 };
 export const putProduct = (props) => async (dispatch) => {

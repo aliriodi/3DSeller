@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 //import {  useHistory } from 'react-router-dom';
-import {modificarUser,getProducts } from '../../redux/DSellerActions';
+import {modificarUser,getProducts, getUser } from '../../redux/DSellerActions';
 import { useRouter } from 'next/router';
 
 
@@ -16,11 +16,7 @@ export default function Validacion() {
          })
     let [errors,setErrors] =  useState({validacion:true})
                             
-    useEffect (() => { 
-        dispatch(getProducts()); 
-       // eslint-disable-next-line react-hooks/exhaustive-deps
-        },[dispatch]);    
-
+   
       
 function validate(input) {
       
@@ -44,7 +40,8 @@ function validate(input) {
       function  handleSubmit(e) {
          e.preventDefault()
          if(input.validacion == userL.magiknumber){
-            dispatch(modificarUser({...userL,validate:true}))
+            dispatch(modificarUser({...userL,validate:true,rol:'client'}))
+            dispatch(getUser())
             router.push('/')
          }
          else{
