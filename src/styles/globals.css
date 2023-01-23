@@ -257,7 +257,10 @@ body::-webkit-scrollbar-thumb{
   background-image: radial-gradient(closest-corner at 50% 50%, white, yellow, white);
   background-color: rgba(250, 255, 100, 0.995); 
 } */
-
+/**VALIDACION*/
+.marginTopValidate{
+  padding-top: 150px;
+}
 .cardTitle {
   text-align: center;
 }
