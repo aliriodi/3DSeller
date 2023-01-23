@@ -140,7 +140,7 @@ export const getUser = (username) => async (dispatch) => {
                                       // setTimeout(() => {
                                       //   alert('correo enviado '+response)
                                       // }, 500)
-                                      alert(response)
+                                      alert('Se ha enviado un correo de Validacion')
                                       )
                                  
                                       }

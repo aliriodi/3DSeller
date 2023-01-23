@@ -17,13 +17,6 @@ export default function Validacion() {
          })
     let [errors,setErrors] =  useState({validacion:true})
 
-    const handleSentMail = async (magik, user) => {
-          let response = await axios.post("/api/mail/mail", {
-          magik,
-          user,
-        });
-        return response.data;
-      };
       
 function validate(input) {
       
@@ -48,6 +41,7 @@ function validate(input) {
          e.preventDefault()
          if(input.validacion == userL.magiknumber){
             dispatch(modificarUser({...userL,validate2:true,rol:'client'}))
+            alert('Felicitaciones su correo ha sido validado!!!')
             dispatch(getUser())
             router.push('/')
          }
