@@ -54,9 +54,9 @@ const ListUsers = (props)=>{
             {/* Opciones */}
             <li className={`dropdown ${dropdownActive == true?"":"desactive"}`}>
                 
-                <a  href={`/user/${props.id}`} className="dropdown-option">
+                {/* <a  href={`/user/${props.id}`} className="dropdown-option">
                     Ver Perfil
-                </a>
+                </a> */}
                 
                 <div onClick={adminUser} className={`dropdown-option ${props.rol == "banned"?"desactive":null}`}>
                     {props.rol=="admin"?"Quitar Admin":"Hacer Admin"}
