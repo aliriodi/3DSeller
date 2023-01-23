@@ -228,7 +228,7 @@ function CardDetail() {
          
          {  userL.rol==='admin'? <div className="detail-item_item detail_id">
             <h3>File:</h3>
-            <a href={productsDetail.file} legacyBehavior>{productsDetail.file?'Archivo STL':'No posee archivo STL'}
+            <a href={productsDetail.file} legacybehavior>{productsDetail.file?'Archivo STL':'No posee archivo STL'}
             </a>
          
           </div>
@@ -243,14 +243,14 @@ function CardDetail() {
           >
             {isLoading ? (
               <h3>Loading...</h3>
-            ) : !user || userL.rol =='invitdo'? (
+            ) : !user || userL.rol =='invitado'? (
               <button
                 onClick={() => router.push("/api/auth/login")}
                 className="btn-submit"
               >
                 Sign in to buy
               </button>
-            ) : (
+            ) : userL.rol === "admin" ? ("") : (
               <PayPalScriptProvider
                 options={{
                   "client-id":
