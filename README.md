@@ -2,7 +2,15 @@
 
 # 3DSeller 
 
-Esta es una aplicacion para administracion y ventas de articulos impresos en 3D, con base de datos de productos y administracion de equipos 3D con materiales y control de ventas, desarrollado por:
+Esta es una aplicacion para administracion y ventas de articulos impresos en 3D, con base de datos de productos, control de ventas, pudiendo cargar archivos 3d en formato STL  manejando un panel Admin, para gestionar funciones de acuerdo a roles (Invitado, Cliente o Administrador)
+
+Como Invitado solo podra ver productos, acceder a contacto y poder hacer Login o crear cuenta para ser validada con token de 4 digitos.
+
+Como Cliente podra tener favoritos en su usuario y poderlos ver en su login, de igual forma podrar compara con pasalera de pago Paypal y ver su orden de compra.
+
+Como Administrador podra, ver un panel Administracion de usuarios, poder cambiar privilegios al usuario, incluso banearlo de ser necesario, crear productos y cargar archivos STL a la plataforma si desea.
+
+Esta aplicacion fue desarrollada por:
 
 1. Jose Valencia    ( https://github.com/JoseVal25 )
 2. Mateo Cava       ( https://github.com/Matecava )
