@@ -7,7 +7,7 @@ export  function Pagination({pagination,videogames,movepage}) {
     const pageNumbers = [];
     let maxPage = Math.ceil(videogames.count/15);
     if(maxPage>1){
-    for(let i = 1; i <= maxPage ; i++) {
+    for(let i = 1; i < maxPage ; i++) {
         pageNumbers.push(i);
         };}
   
