@@ -55,6 +55,7 @@ export const DSellerSlice = createSlice({
     getUserS: (state, action) => {
       state.user = action.payload;
       state.userL = action.payload;
+      state.favorites= action.payload.favorites;
     },
 
     getAllUserS: (state, action) => {

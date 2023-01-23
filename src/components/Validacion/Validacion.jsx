@@ -70,7 +70,7 @@ function validate(input) {
 
 <div className="marginTopValidate">
         <div className="center">
-    
+
           
             <h1>Validar usuario</h1>
 
