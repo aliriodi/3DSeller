@@ -362,6 +362,7 @@ function Products() {
                   image={product3d.image}
                   category={product3d.category}
                   rating={product3d.rating}
+                  
                 />
               );
             })
