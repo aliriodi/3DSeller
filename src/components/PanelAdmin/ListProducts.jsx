@@ -55,9 +55,9 @@ const ListProducts = (props)=>{
                     Ver Reseñas
                 </a>
 
-                <div onClick={deleteProducts} className="dropdown-option">
+                {/* <div onClick={deleteProducts} className="dropdown-option">
                     Eliminar Producto
-                </div>
+                </div> */}
             </li>
             </li>
          </ul> 
