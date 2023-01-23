@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import perfilIcon from "./perfil-icon_default.png";
 import Image from "next/image";
 import Link from "next/link";
-import { getUser } from "../../redux/DSellerActions";
+import { getUser , getcompras} from "../../redux/DSellerActions";
 
 export default function Logout() {
   const dispatch = useDispatch();
@@ -12,9 +12,9 @@ export default function Logout() {
     const {  userL  } = useSelector((state) => state.products);
     function handleLogout (){ push("/api/auth/logout")};
     useEffect(() => {
-      dispatch(getUser())      
+      dispatch(getUser());
        // eslint-disable-next-line
-   // if(userL.rol=='invitado'&&userL.name=='Invitado'){push('/validacion')}
+ 
     }, [false]);
 
     function redirecion(){ if(userL.rol==='invitado'&&userL.name!=='Invitado'){push('/validacion')} }
