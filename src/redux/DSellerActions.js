@@ -133,6 +133,7 @@ export const getProductDet = (id) => async (dispatch) => {
 
 
 export const postCreateProduct = (product) => async (dispatch) => {
+  console.log(product)
   await fetch("/api/products/", {
     method: "POST",
     headers: {

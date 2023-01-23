@@ -149,7 +149,7 @@ export default function CreateP() {
     if (!/^(?:[1-9]\d{0,2}(?:,\d{3})*|0)(?:\.\d+)?$/.test(input.rating)) {
       return alert("Wrong format for Rating. Should be a number between 0-5");
     }
-
+   console.log(input)
     dispatch(postCreateProduct(input));
 
     alert(`Product 3DSeller ${input.name} has been added`);
@@ -261,7 +261,18 @@ export default function CreateP() {
               <label>Nombre</label>
               {errors.name && <p className="error-text"> {errors.name} </p>}
             </div>
-
+                {/* Subir Acrhivo */}
+            <div className="txt_field">
+            <label>Subir archivo STL</label>
+              <div className="form-img_btn">
+              <input
+              name="file"
+              type="file"
+              accept="application/stl"
+              id="customFile"
+              onChange={(e) => fileValidation(e)}/>
+            </div>
+              </div>
             {/* Imagen */}
             <div className="txt_field">
               <div className="form-img_btn">
@@ -422,17 +433,7 @@ export default function CreateP() {
             {console.log(input)}
             {console.log("error")}
             {console.log(errors)}
-            {/* Subir Acrhivo */}
-            <div className="txt_field">
-            <label>Subir archivo STL</label>
-              <div className="form-img_btn">
-              <input
-              type="file"
-              accept="application/stl"
-              id="customFile"
-              onChange={(e) => fileValidation(e)}/>
-            </div>
-              </div>
+          
             
               
             <button
@@ -486,9 +487,10 @@ export default function CreateP() {
             >
               Agregar Producto
             </button>
-
+            
             {/* <input type="submit" value="CREATE" className="btn-submit"/> */}
           </form>
+          {console.log(input)}
         </div>
       </div>
     </>

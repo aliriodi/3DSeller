@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDet, putProduct } from "../../redux/DSellerActions";
+import Link from "next/link";
 import {
   PayPalScriptProvider,
   PayPalButtons,
@@ -20,7 +21,7 @@ function CardDetail() {
   const router = useRouter();
   const { id } = router.query;
   const productsDetail = useSelector((state) => state.products.detail);
-  const { userL } = useSelector((state) => state.products);
+  const { userL , file} = useSelector((state) => state.products);
   const [show, setShow] = useState(0);
 
   useEffect(() => {
@@ -222,6 +223,15 @@ function CardDetail() {
             <h3>Price:</h3>
             <h3 className="detail-item_item-text">${productsDetail.price}</h3>
           </div>
+         
+         {  userL.rol==='admin'? <div className="detail-item_item detail_id">
+            <h3>File:</h3>
+            <a href={productsDetail.file} legacyBehavior>{productsDetail.file?'Archivo STL':'No posee archivo STL'}
+            </a>
+         
+          </div>
+          :null}
+          
           <div
             style={{
               width: "260px",
