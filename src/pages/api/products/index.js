@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     case "GET":
       try {
         const product = await Product.find({})
-        return res.status(200).json(product.reverse())
+        return res.status(200).json(product)
       } catch (error) {
         console.log("🚀 ~ file: index.js:25 ~ handler ~ error", error)
       }
