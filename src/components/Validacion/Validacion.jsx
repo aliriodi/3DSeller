@@ -51,7 +51,7 @@ function validate(input) {
             router.push('/')
          }
          else{
-            errors.validacion='El numero intoducido es incorrecto'
+            errors.validacion='El numero introducido es incorrecto'
          }
           
           setInput({
