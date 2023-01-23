@@ -113,11 +113,13 @@ export const getUser = (username) => async (dispatch) => {
                                                                                                                 :null)
                                                                                                                 return temp})
                                                                                                                 .then(temp => {
+                                                                                                                  console.log('now')
+                                                                                                                  console.log(user)
                                                                                                                   dispatch(getcomprasS(temp))
-                                                                                                                  dispatch(getUserS(user));})
+                                                                                                                  })
                                   
                                   :null;
-                                
+                                  dispatch(getUserS(user));
                                   }
                                   else{
                                     const magik = Math.floor(Math.random()*10000);
