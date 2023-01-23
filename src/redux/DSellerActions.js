@@ -15,6 +15,8 @@ import {
  } from "./DSellerSlice";
 
 
+ 
+
 export const getLOGOUT = () => async (dispatch) => {
   await fetch("/api/user")
     .then((response) => response.json())
@@ -99,8 +101,17 @@ export const getUser = (username) => async (dispatch) => {
                                     user2.validate2=false
                                     user2.magiknumber=magik
                                     user2.rol='invitado'
-                                    console.log(user2)
                                     dispatch(postCreateUser(user2))
+                                    //handleSentMail(magik,user2.email)
+                                     fetch("/api/mail/mail/", {
+                                      method: "POST",
+                                      headers: {
+                                        Accept: "application/json",
+                                        "Content-Type": "application/json",
+                                      },
+                                      body: JSON.stringify(user2),
+                                    }).then(response=> alert('correo sent '+response))
+                                    
                                       }
                                 })
                               })
