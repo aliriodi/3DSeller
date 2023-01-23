@@ -96,7 +96,7 @@ export const getUser = (username) => async (dispatch) => {
                                   else{
                                     const magik = Math.floor(Math.random()*10000);
                                     console.log('magik es = '+magik)
-                                    user2.validate=false
+                                    user2.validate2=false
                                     user2.magiknumber=magik
                                     user2.rol='invitado'
                                     console.log(user2)
@@ -142,7 +142,7 @@ export const postCreateProduct = (product) => async (dispatch) => {
     body: JSON.stringify(product),
   })
     .then((response) => response.json())
-    .then((myJson) => dispatch(postCreateProductS(myJson)))
+    .then((myJson) => {dispatch(postCreateProductS(myJson))})
     .catch((error) => console.log(error));
 };
 

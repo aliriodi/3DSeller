@@ -4,18 +4,21 @@ import { useRouter } from "next/router";
 import perfilIcon from "./perfil-icon_default.png";
 import Image from "next/image";
 import Link from "next/link";
-import { getUser, getProducts } from "../../redux/DSellerActions";
+import { getUser } from "../../redux/DSellerActions";
 
 export default function Logout() {
   const dispatch = useDispatch();
     const { push } = useRouter();
+    const {  userL  } = useSelector((state) => state.products);
     function handleLogout (){ push("/api/auth/logout")};
     useEffect(() => {
-      dispatch(getUser())
-      if(userL.rol==='invitado'){push("/validacion")}
+      dispatch(getUser())      
        // eslint-disable-next-line
-}, [false]);
-    const {  userL  } = useSelector((state) => state.products);
+   // if(userL.rol=='invitado'&&userL.name=='Invitado'){push('/validacion')}
+    }, [false]);
+
+    function redirecion(){ if(userL.rol==='invitado'&&userL.name!=='Invitado'){push('/validacion')} }
+   
     return (
         <>
            
@@ -33,6 +36,7 @@ export default function Logout() {
             href={"/api/auth/logout"}
             legacyBehavior >
             <div  onClick={()=>handleLogout()} className="container-logout">
+              
               <div className="logout-item"> x</div>
             </div>
           </Link>

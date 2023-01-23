@@ -75,7 +75,7 @@ function CardDetail() {
 
     // Calcula el Nuevo Rating
     productsDetail.review?.forEach((rev) => {
-      let rating = +rev.rating;
+      let rating = rev.rating;
       newRating += rating;
 
     })

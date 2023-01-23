@@ -4,6 +4,7 @@ import { useDispatch, useSelector  } from 'react-redux';
 //import {  useHistory } from 'react-router-dom';
 import {modificarUser,getProducts, getUser } from '../../redux/DSellerActions';
 import { useRouter } from 'next/router';
+import axios from "axios";
 
 
 export default function Validacion() {
@@ -15,8 +16,13 @@ export default function Validacion() {
        validacion:''
          })
     let [errors,setErrors] =  useState({validacion:true})
-                            
-   
+    const handleSentMail = async (magik, user) => {
+        let response = await axios.post("/api/mail/mail", {
+          magik,
+          user,
+        });
+        return response.data;
+      };
       
 function validate(input) {
       
@@ -40,7 +46,7 @@ function validate(input) {
       function  handleSubmit(e) {
          e.preventDefault()
          if(input.validacion == userL.magiknumber){
-            dispatch(modificarUser({...userL,validate:true,rol:'client'}))
+            dispatch(modificarUser({...userL,validate2:true,rol:'client'}))
             dispatch(getUser())
             router.push('/')
          }
@@ -60,9 +66,13 @@ function validate(input) {
         <>
     
 
+
+
 <div className="marginTopValidate">
         <div className="center">
-
+       <h1></h1>
+        <button onClick={()=>handleSentMail('3453',userL.email)}>enviar correo</button>
+          
             <h1>Validar usuario</h1>
 
             <form onSubmit={e=>handleSubmit(e)}>
@@ -98,6 +108,7 @@ function validate(input) {
 
               
             </form>
+
         </div>
         </div>
         

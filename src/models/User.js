@@ -13,7 +13,7 @@ const UserScheme = new Schema(
       magiknumber:{
         type:Number,
       },
-      validate:{
+      validate2:{
         type:Boolean,
       },
       email:{
