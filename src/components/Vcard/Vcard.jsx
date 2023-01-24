@@ -11,6 +11,9 @@ export default function Vcard(props) {
   //console.log("user", user.rol);
   return (
     <div>
+      {
+        props.id===123?
+        <h1 className="notFound-text">{props.name}</h1>:
       <div className="card" key={props.id}>
         {user.rol === "invitado" || user.rol === "banned" || props.id===123? null : (
           <FavButton
@@ -22,14 +25,6 @@ export default function Vcard(props) {
             category={props.category}
           />
         )}
-         {props.id===123?
-         <a>
-         <Image src={logo} alt="13"/>
-         <div className="card_text">
-           <h3>{props.name}</h3>
-          
-           </div>
-        </a>:
         <Link href={`/productos/${props.id}`} legacyBehavior>
         <a>
           <img src={!props.image ? null : props.image} />
@@ -39,9 +34,10 @@ export default function Vcard(props) {
             <b>Categoria: {props.category}</b>
           </div>
         </a>
-      </Link>}
+      </Link>
         
       </div>
+      }
     </div>
   );
 }
