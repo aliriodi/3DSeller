@@ -12,7 +12,7 @@ export default function Vcard(props) {
   return (
     <div>
       <div className="card" key={props.id}>
-        {user.rol === "invitado" || user.rol === "banned" ? null : (
+        {user.rol === "invitado" || user.rol === "banned" || props.id===123? null : (
           <FavButton
             id={props.id}
             key={props.id}
@@ -22,7 +22,7 @@ export default function Vcard(props) {
             category={props.category}
           />
         )}
-        {props.id===123?
+         {props.id===123?
          <a>
          <Image src={logo} alt="13"/>
          <div className="card_text">

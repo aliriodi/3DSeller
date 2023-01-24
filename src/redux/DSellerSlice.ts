@@ -23,7 +23,6 @@ export interface DSellerStateProducts {
   userL: UserL;
   allUsers: Array<ObjectType>;
   compras: Array<ObjectType>;
-  
 }
 
 const initialState: DSellerStateProducts = {
@@ -38,7 +37,7 @@ const initialState: DSellerStateProducts = {
   user: {},
   allUsers: [],
   favorites: [],
-  compras:[],
+  compras: [],
   userL: {
     name: "Invitado",
     rol: "invitado",
@@ -52,6 +51,10 @@ export const DSellerSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
+    cleanDeatils: (state, action) => {
+      state.detail = action.payload;
+    },
+
     resetRqstS: (state, action) => {
       (state.cFO = action.payload[0]), (state.filtersAord = action.payload[1]);
       state.searchS = [];
@@ -60,7 +63,7 @@ export const DSellerSlice = createSlice({
     getUserS: (state, action) => {
       state.user = action.payload;
       state.userL = action.payload;
-      state.favorites= action.payload.favorites;
+      state.favorites = action.payload.favorites;
     },
 
     getAllUserS: (state, action) => {
@@ -106,13 +109,13 @@ export const DSellerSlice = createSlice({
       state.userL = action.payload;
       state.user = action.payload;
     },
-    getcomprasS:(state,action) => {
+    getcomprasS: (state, action) => {
       state.compras = action.payload;
     },
-  
-  PUT_PRODUCT: (state, action) => {
-    state.detail = action.payload;
-  },
+
+    PUT_PRODUCT: (state, action) => {
+      state.detail = action.payload;
+    },
   },
 });
 
@@ -131,6 +134,7 @@ export const {
   modificarUserS,
   PUT_PRODUCT,
   getcomprasS,
+  cleanDeatils,
 } = DSellerSlice.actions;
 
 export default DSellerSlice.reducer;
