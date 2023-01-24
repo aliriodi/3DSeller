@@ -12,11 +12,12 @@ import Image from "next/dist/client/image";
 import paginationRightImg from "../../public/pagination-icon_right.png";
 import paginationLeftImg from "../../public/pagination-icon_left.png";
 import UserBaned from "components/UserBaneds/UserBaned";
+import { useRouteLoaderData } from "react-router-dom";
 
 function Products() {
   const { products, productsR } = useSelector((state) => state.products);
 
-  const { user } = useSelector((state) => state.products);
+  const { user, userL } = useSelector((state) => state.products);
   const { favorites } = useSelector((state) => state.products);
   const sendDB = { favorites: favorites, user: user };
 
@@ -27,12 +28,17 @@ function Products() {
     dispatch(getProducts());
     //la siguiente linea busca informacion del Local Storage y si la encuentra carga el arreglo favoritos con ella
     const storedFavorites = localStorage.getItem("favorites");
-    if (user.name) {
-      if (storedFavorites) {
-        const favorites = JSON.parse(storedFavorites);
-        dispatch(chngFavoritos(favorites));
+    if (userL.favorites) {
+      if (userL.favorites.length > 0) {
+        return dispatch(chngFavoritos(userL.favorites));
       }
     }
+    // if (user.name) {
+    //   if (storedFavorites) {
+    //     const favorites = JSON.parse(storedFavorites);
+    //     dispatch(chngFavoritos(favorites));
+    //   }
+    // }
   }, []);
 
   useEffect(() => {
@@ -328,15 +334,15 @@ function Products() {
 
           {/*Botones de las pag*/}
 
-            {Array.from({ length: paginas }, (_, i) => (
-              <button
-                key={i}
-                className={`btn ${pagina == i + 1?"btn-on":null }`}
-                onClick={() => handlePageChange(i)}
-              >
-                {i + 1}
-              </button>
-            ))}
+          {Array.from({ length: paginas }, (_, i) => (
+            <button
+              key={i}
+              className={`btn ${pagina == i + 1 ? "btn-on" : null}`}
+              onClick={() => handlePageChange(i)}
+            >
+              {i + 1}
+            </button>
+          ))}
           {/* btn-paginado siguiente */}
           <button
             className={`btn ${
@@ -362,7 +368,6 @@ function Products() {
                   image={product3d.image}
                   category={product3d.category}
                   rating={product3d.rating}
-                  
                 />
               );
             })
@@ -388,18 +393,18 @@ function Products() {
           >
             <Image src={paginationLeftImg} alt="Pagina Anterior" />
           </button>
-          
+
           {/*Botones de las pag*/}
 
-            {Array.from({ length: paginas }, (_, i) => (
-              <button
-                key={i}
-                className={`btn ${pagina == i + 1?"btn-on":null }`}
-                onClick={() => handlePageChange(i)}
-              >
-                {i + 1}
-              </button>
-            ))}
+          {Array.from({ length: paginas }, (_, i) => (
+            <button
+              key={i}
+              className={`btn ${pagina == i + 1 ? "btn-on" : null}`}
+              onClick={() => handlePageChange(i)}
+            >
+              {i + 1}
+            </button>
+          ))}
 
           {/* btn-paginado siguiente */}
           <button
