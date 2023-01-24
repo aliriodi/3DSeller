@@ -103,7 +103,8 @@ export const DSellerSlice = createSlice({
 
     replaceFavoritos: (state, action) => {
       state.favorites = action.payload;
-      localStorage.setItem("favorites", JSON.stringify(action.payload));
+      state.userL.favorites = action.payload;
+     // localStorage.setItem("favorites", JSON.stringify(action.payload));
     },
     modificarUserS: (state, action) => {
       state.userL = action.payload;
