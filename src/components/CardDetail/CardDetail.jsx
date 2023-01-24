@@ -74,9 +74,9 @@ function CardDetail() {
         })
       );
     }
-    console.log("RATING USE", calculateRating());
-    console.log("RATING CURRENT", productsDetail.rating);
-  }, [productsDetail]);
+    //console.log("RATING USE", calculateRating());
+    //console.log("RATING CURRENT", productsDetail.rating);
+  }, [productsDetail, compras]);
 
   useEffect(() => {
     const limpio = [];
