@@ -19,7 +19,7 @@ export default function CreateP() {
   const [input, setInput] = useState({
     name: "",
     description: "",
-    rating: "",
+    rating: "0",
     material: "",
     image: "",
     category: "",
@@ -143,12 +143,8 @@ export default function CreateP() {
     if (input.name.length < 4) {
       return alert("Nombre requiere mas de 4 caracetres");
     }
-    if (!input.rating) {
-      return alert("Rating is required");
-    }
-    if (!/^(?:[1-9]\d{0,2}(?:,\d{3})*|0)(?:\.\d+)?$/.test(input.rating)) {
-      return alert("Wrong format for Rating. Should be a number between 0-5");
-    }
+    
+   
    console.log(input)
     dispatch(postCreateProduct(input));
 
@@ -157,7 +153,7 @@ export default function CreateP() {
       name: "",
       description: "",
       //releaseDate: '',
-      rating: "",
+      rating: "0",
       stock: "",
       category: "",
       material: "",
@@ -222,7 +218,7 @@ export default function CreateP() {
 /(\.stl)$/i;
      
     if (!allowedExtensions.exec(filePath)) {
-        alert('Invalid file type');
+        alert('Archivo no es formato STL');
         fileInput.value = '';
         return false;
     }else{ console.log('else')
@@ -235,8 +231,27 @@ export default function CreateP() {
     //     // };
     //     // reader.readAsDataURL(fileInput.files[0]);
     // }
+}}
+
+//VALIDACION DE IMAGEN
+
+function fileValidationI(e) {
+  var fileInput =e.target.files[0];
+  var filePath = fileInput.name;
+
+  // Allowing file type
+  var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+   
+  if (!allowedExtensions.exec(filePath)) {
+      alert('Archivo no es imagen');
+      fileInput.value = '';
+      return false;
+  }else{ console.log('else')
+  uploadImage(e)
+
 }
 }
+
 
 
   return userL.rol === "banned" ? (
@@ -282,7 +297,7 @@ export default function CreateP() {
                 type="file"
                 name="image"
                 placeholder="Sube tu imagen aqui!"
-                onChange={uploadImage}
+                onChange={(e) => fileValidationI(e)}
                 // value={input.image}
               />
               </FormGroup>
@@ -321,7 +336,7 @@ export default function CreateP() {
             </div>
 
             {/* Indice de Rating */}
-            <div className="txt_field">
+            {/* <div className="txt_field">
               <input
                 onChange={handleOnChange}
                 onBlur={handleOnChange}
@@ -337,7 +352,7 @@ export default function CreateP() {
               <span></span>
               <label>Indice de Rating</label>
               {errors.rating && <p className="error-text"> {errors.rating} </p>}
-            </div>
+            </div> */}
 
             {/* Stock */}
             <div className="txt_field">
@@ -444,8 +459,6 @@ export default function CreateP() {
                   ? true
                   : false || errors.description
                   ? true
-                  : false || errors.rating
-                  ? true
                   : false || errors.material
                   ? true
                   : false || errors.category
@@ -464,8 +477,6 @@ export default function CreateP() {
                   : false || errors.platforms
                   ? true
                   : false || errors.description
-                  ? true
-                  : false || errors.rating
                   ? true
                   : false || errors.material
                   ? true
