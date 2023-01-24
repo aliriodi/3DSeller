@@ -11,16 +11,16 @@ export default function Favoritos() {
   const { user } = useSelector((state) => state.products);
   const { favorites } = useSelector((state) => state.products);
 
-  useEffect(() => {
-    //la siguiente linea busca informacion del Local Storage y si la encuentra carga el arreglo favoritos con ella
-    const storedFavorites = localStorage.getItem("favorites");
-    if (user.rol === "admin" || user.rol === "client") {
-      if (storedFavorites) {
-        const favorites = JSON.parse(storedFavorites);
-        dispatch(chngFavoritos(favorites));
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   //la siguiente linea busca informacion del Local Storage y si la encuentra carga el arreglo favoritos con ella
+  //  // const storedFavorites = localStorage.getItem("favorites");
+  //   if (user.rol === "admin" || user.rol === "client") {
+     
+  //     //  const favorites = JSON.parse(storedFavorites);
+  //       dispatch(chngFavoritos(favorites));
+     
+  //   }
+  // }, []);
 
   return user.rol === "banned" ? (
     <UserBaned />
