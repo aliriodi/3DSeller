@@ -17,10 +17,19 @@ import axios from "axios";
 
 function PanelAdmin() {
   const [currentPurchases, setCurrentPurchases] = useState(0);
+  const [currentProducts, setCurrentProducts] = useState([])
+  const [currentUsers, setCurrentUsers] = useState([])
 
   const dispatch = useDispatch();
 
-  const { products, count, user, userL, allUsers } = useSelector(
+  const {
+    productsR,
+    products,
+    count,
+    user,
+    userL,
+    allUsers
+  } = useSelector(
     (state) => state.products
   );
 
@@ -30,11 +39,26 @@ function PanelAdmin() {
     getAllPurchases()
   }, [userL, currentPurchases]);
 
+  useEffect(()=>setCurrentProducts(products),[products])
+  useEffect(()=>setCurrentUsers(allUsers),[allUsers])
+
   const getAllPurchases = async () => {
     let response = await axios('/api/count/purchases');
     setCurrentPurchases(response.data.purchasesCount);
   }
 
+  const onSearchBarProducts = (e)=>{
+    const result = products.filter((item) =>
+      item.name?.toLowerCase().includes(e.target.value.toLocaleLowerCase())
+    );
+    setCurrentProducts(result)
+  }
+  const onSearchBarUsers = (e)=>{
+    const result = allUsers.filter((item) =>
+      item.name?.toLowerCase().includes(e.target.value.toLocaleLowerCase())
+    );
+    setCurrentUsers(result)
+  }
   return (
     <>
       {user.email !== undefined ? (
@@ -101,6 +125,14 @@ function PanelAdmin() {
                     </div>
                   </div>
 
+                  {/* SearchBar */}
+                  <div className="search-container">
+                    <input type={"text"}
+                    onChange={onSearchBarProducts}
+                    placeholder="Escribe Nombre del Producto"></input>
+                    {/* <button>Buscar</button> */}
+                  </div>
+                  
                   <ul className="stats-recent_list title">
                     <li className="stats-recent_list-item text-left">
                       <span>Nombre</span>
@@ -115,8 +147,9 @@ function PanelAdmin() {
                   </ul>
 
                   {/* Listado de Productos */}
-                  {products && products.length > 0 ? (
-                    products.map((product) => {
+                  {products && products.length > 0 ? 
+                  currentProducts.length > 0?(
+                    currentProducts.map((product) => {
                       //Productos
                       return (
                         <ListPrducts
@@ -126,9 +159,13 @@ function PanelAdmin() {
                           stock={product.stock}
                           id={product._id}
                         />
-                      );
+                      )
                     })
-                  ) : (
+                  ):
+                  (<p className="notFound-text">
+                    No se encontraron productos
+                  </p>)
+                  : (
                     <div className="permissions-denied">
                       <div className="">
                         <img
@@ -155,6 +192,14 @@ function PanelAdmin() {
                             </div> */}
                   </div>
 
+                  {/* Search Bar */}
+                  <div className="search-container">
+                    <input type={"text"}
+                    onChange={onSearchBarUsers}
+                    placeholder="Escribe Email del Usuario"></input>
+                    {/* <button>Buscar</button> */}
+                  </div>
+
                   <ul className="stats-recent_list title">
                     <li className="stats-recent_list-item text-left">
                       <span>Email</span>
@@ -170,7 +215,8 @@ function PanelAdmin() {
 
                   {/* Listado de Usuarios */}
                   {allUsers && allUsers.length > 0 ? (
-                    allUsers.map((user) => {
+                    currentUsers.length > 0?
+                    currentUsers.map((user) => {
                       //Productos
                       return (
                         <ListUsers
@@ -184,8 +230,12 @@ function PanelAdmin() {
                           user={user}
                         />
                       );
-                    })
-                  ) : (
+                    }):
+                    <p className="notFound-text">
+                      No se Encontraron Usuarios
+                    </p>
+                  )
+                   : (
                     <div className="permissions-denied">
                       <div className="">
                         <img
