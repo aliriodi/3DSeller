@@ -6,9 +6,13 @@ import Link from "next/link";
 import LogButton from "../LogButton/LogButton";
 import LogoutButton from "../LogButton/Logout";
 import { useRouter } from "next/router";
+import {
+  AiOutlineMenu
+} from "react-icons/ai";
 
 function Nav() {
   const [currentUser, setCurrentUser] = useState({ rol: "invitado" });
+  const [currentDropmenu, setCurrentDropmenu] = useState(false)
   const { user, userL } = useSelector((state) => state.products);
   const {push} = useRouter();  
 
@@ -21,6 +25,18 @@ function Nav() {
     setCurrentUser(userL);
   }
 
+  //#region Menu
+  function dropdownMenu(){
+    if(currentDropmenu)setCurrentDropmenu(false);
+    else setCurrentDropmenu(true);
+  }
+
+  // window.addEventListener('click', function(event){
+  //   // console.log("ID",event.target.id)
+  //   if(event.target.id != `nav-menu`)setCurrentDropmenu(false)
+  //   else return
+  // }) 
+  //#endregion
 
   return (
     <>
@@ -34,7 +50,9 @@ function Nav() {
               3D<span className="span1">SELLER</span>
             </a>
           </Link>
+
           {/* <!-- Nav Icons --> */}
+          <div className={`nav-icons-container ${currentDropmenu?"menu-active":""}`}>
 
           <div
             className={`nav-icons ${
@@ -84,7 +102,6 @@ function Nav() {
               </a>
             </Link>
           </div>
-          
           {/* <div
             className={`nav-icons ${
               currentUser.rol !== "admin" ? "desactive" : null
@@ -112,7 +129,15 @@ function Nav() {
             <LogoutButton />
            
           )}
-                    
+          </div>
+          
+          <span
+          className="nav-icons_menu"
+          id="nav-menu"
+          onClick={dropdownMenu}>
+            <AiOutlineMenu/>
+          </span>
+
         </div>
       </header>
     </>
