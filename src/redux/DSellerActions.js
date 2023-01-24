@@ -66,7 +66,15 @@ export const GetUserBDL = (email) => async (dispatch) => {
 };
 
 export const getRender = (state) => async (dispatch) => {
-  dispatch(getRenderS(state));
+  if(state.length===0){
+    state = [{
+      _id:123,
+      name: 'No hay resultados',
+      }]
+    dispatch(getRenderS(state))
+  }
+  else{dispatch(getRenderS(state));}
+    
 };
 
 export const resetState = (cFO, filtersAord) => async (dispatch) => {
