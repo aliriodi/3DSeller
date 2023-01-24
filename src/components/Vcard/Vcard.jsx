@@ -13,7 +13,7 @@ export default function Vcard(props) {
     <div>
       {
         props.id===123?
-        <h1 className="notFound-text">No Se Encontraron Productos</h1>:
+        <h1 className="notFound-text">{props.name}</h1>:
       <div className="card" key={props.id}>
         {user.rol === "invitado" || user.rol === "banned" || props.id===123? null : (
           <FavButton
