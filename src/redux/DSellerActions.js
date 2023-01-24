@@ -62,7 +62,16 @@ export const GetUserBDL = (email) => async (dispatch) => {
 
 
 export const getRender = (state) => async (dispatch) => {
-  dispatch(getRenderS(state));
+  if(state.length===0){
+    state = [{
+      _id:123,
+      name: 'No hay resultados',
+      image:null,
+       }]
+    dispatch(getRenderS(state))
+  }
+  else{dispatch(getRenderS(state));}
+  
 };
 
 export const resetState = (cFO, filtersAord) => async (dispatch) => {
@@ -142,8 +151,7 @@ export const getUser = (username) => async (dispatch) => {
                                       // }, 500)
                                       alert('Se ha enviado un correo de Validacion')
                                       )
-                                 
-                                      }
+                                 }
                                 })
                               })
                               
