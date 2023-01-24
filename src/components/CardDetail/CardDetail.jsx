@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDet, putProduct } from "../../redux/DSellerActions";
-import Link from "next/link";
+import { getProductDet, putProduct, Limpiar } from "../../redux/DSellerActions";
+import { useRouter } from "next/router";
+import axios from "axios";
+import ReviewList from "./ReviewList";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import {
   PayPalScriptProvider,
   PayPalButtons,
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
-import { useRouter } from "next/router";
-import axios from "axios";
-import Image from "next/image";
-import imgIcon from "../LogButton/perfil-icon_default.png";
-import ReviewList from "./ReviewList";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { components } from "react-select";
+//////////////////////////////////////////////////////////////////////////
 
 function CardDetail() {
   const { user, isLoading } = useUser();
@@ -21,7 +18,7 @@ function CardDetail() {
   const router = useRouter();
   const { id } = router.query;
   const productsDetail = useSelector((state) => state.products.detail);
-  const { userL, file } = useSelector((state) => state.products);
+  const { userL, compras } = useSelector((state) => state.products);
   const [show, setShow] = useState(0);
 
   const calculateRating = () => {
@@ -35,7 +32,7 @@ function CardDetail() {
       ? 0
       : newRating / productsDetail.review?.length;
 
-    console.log("RATING", newRating.toFixed(2));
+    // console.log("RATING", newRating.toFixed(2));
 
     return +newRating.toFixed(2);
   };
@@ -48,16 +45,17 @@ function CardDetail() {
   }, [id]);
 
   useEffect(() => {
-    //console.log("productos", productsDetail._id);
-    //console.log("compras", userL.compras);
-    if (userL.compras) {
-      const exist = userL.compras.find((r) => r._id === productsDetail._id);
-      if (exist === undefined) {
-        setShow(false);
-        console.log("exist", exist);
+    if (compras) {
+      //console.log("productos", productsDetail._id);
+      //console.log("compras", compras[0].product.id);
+      const exist = compras.find((r) => r.product.id === productsDetail._id);
+      console.log("exist", exist);
+      if (exist) {
+        setShow(true);
+        //console.log("exist", exist);
         console.log("show primero", show);
       } else {
-        setShow(true);
+        setShow(false);
         console.log("exist", exist);
         console.log("show", show);
       }
@@ -79,6 +77,11 @@ function CardDetail() {
     console.log("RATING USE", calculateRating());
     console.log("RATING CURRENT", productsDetail.rating);
   }, [productsDetail]);
+
+  useEffect(() => {
+    const limpio = [];
+    return dispatch(Limpiar(limpio));
+  }, [dispatch]);
 
   //#region Agregar Reseña
   const [commentaryError, setCommentaryError] = useState(false);
