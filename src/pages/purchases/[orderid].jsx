@@ -57,7 +57,7 @@ function OrderId() {
           <p>{order.purchase.product.name}</p>
           <p className='right'>
             <span className='money'>$ {order.purchase.product.price}</span>
-            <span className='currency'>AR</span>
+            <span className='currency'>ARS</span>
           </p>
 
         </div>
@@ -80,7 +80,7 @@ function OrderId() {
               </span>
               <span className='money'>$ {order.purchase.product.price}</span>
 
-              <span className='currency'>AR</span>
+              <span className='currency'>ARS</span>
             </p>
           </div>
         </div>
