@@ -276,7 +276,7 @@ function CardDetail() {
           >
             {isLoading ? (
               <h3>Loading...</h3>
-            ) : userL.rol == "invitado" ? (
+            ) : userL.rol == "invitado" && userL.rol!=="admin"? (
                   userL.name==='Invitado'?
                    <button onClick={() => router.push("/api/auth/login")}
                    className="btn-submit"> Accede </button>
