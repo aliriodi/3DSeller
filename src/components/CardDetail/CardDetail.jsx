@@ -276,12 +276,12 @@ function CardDetail() {
           >
             {isLoading ? (
               <h3>Loading...</h3>
-            ) : !user || userL.rol == "invitdo" ? (
+            ) : !user || userL.rol == "invitado" ? (
               <button
                 onClick={() => router.push("/api/auth/login")}
                 className="btn-submit"
               >
-                Sign in to buy
+                Accede o Validacion
               </button>
             ) : userL.rol == "admin" ? (
               ""
