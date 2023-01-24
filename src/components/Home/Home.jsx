@@ -78,7 +78,7 @@ export default function Home() {
             <Link href={"/productos"} className="btn">
               VER NUESTROS MODELOS 3D
             </Link>
-            <span className="btn">SUBIR MODELO 3D</span>
+            {/* <span className="btn">SUBIR MODELO 3D</span> */}
           </div>
         </div>
       </div>

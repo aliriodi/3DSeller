@@ -146,16 +146,19 @@ export const getUser = (username) => async (dispatch) => {
                     user2.rol = "invitado";
                     dispatch(postCreateUser(user2));
                     //handleSentMail(magik,user2.email)
-                    const valor = async () =>
-                      await fetch("/api/mail/mail/", {
-                        method: "POST",
-                        headers: {
-                          Accept: "application/json",
-                          "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(user2),
-                      }).then((response) => alert("correo sent " + response));
-                    valor;
+                    fetch("/api/mail/mail/", {
+                      method: "POST",
+                      headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(user2),
+                    }).then((response) =>
+                      // setTimeout(() => {
+                      //   alert('correo enviado '+response)
+                      // }, 500)
+                      alert("Se ha enviado un correo de Validacion")
+                    );
                   }
                 });
             });
