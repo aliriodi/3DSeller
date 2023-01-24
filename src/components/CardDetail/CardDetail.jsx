@@ -121,13 +121,19 @@ function CardDetail() {
     if (ratingLocalError || commentLocalError) {
       return;
     }
-
+    let changeREVIEWS = []
+    //Si usuario modifica reviews se borra el de el y se manda los otros 
+    //para agregar el review modificado, elimina los existentes por el usuario primero
+    if(productsDetail.review.length!==0){
+      productsDetail.review.map(review => review.user_email===userL.email?null:changeREVIEWS.push(review))
+    }
+    
     console.log("no tubo error", currentReview);
     //Se Actualiza el Producto
     dispatch(
       putProduct({
-        _id: productsDetail._id,
-        review: [...productsDetail.review, currentReview],
+         _id: productsDetail._id,
+        review:  [currentReview].concat(changeREVIEWS),
       })
     );
 
@@ -428,6 +434,7 @@ function CardDetail() {
       ) : null}
 
       {/* Reseñas */}
+      
       <div className="reviews-container">
         {productsDetail.review && productsDetail.review.length > 0 ? (
           productsDetail.review.map((review) => {
