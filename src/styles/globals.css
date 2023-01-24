@@ -257,6 +257,7 @@ body::-webkit-scrollbar-thumb{
   background-image: radial-gradient(closest-corner at 50% 50%, white, yellow, white);
   background-color: rgba(250, 255, 100, 0.995); 
 } */
+
 /**VALIDACION*/
 .marginTopValidate{
   padding-top: 150px;
@@ -681,7 +682,8 @@ header {
   font-size: 2em;
 }
 .paypal-button{
-  background-color: #f00 !important;
+  position:relative;
+  z-index: -0;
 }
 
 /* Text */

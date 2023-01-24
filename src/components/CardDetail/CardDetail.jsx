@@ -163,8 +163,9 @@ function CardDetail() {
     return (
       <>
         {showSpinner && isPending && <div className="spinner" />}
+       <div className="paypal-button">
         <PayPalButtons
-          style={{ color: "black", layout: "horizontal" }}
+          style={{  color: "black", layout: "horizontal" }}
           disabled={false}
           forceReRender={[
             productsDetail.price,
@@ -199,6 +200,7 @@ function CardDetail() {
           }}
           onCancel={(data) => console.log("Compra Cancelada")}
         />
+        </div>
       </>
     );
   };
