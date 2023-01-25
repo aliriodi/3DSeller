@@ -45,7 +45,7 @@
   --card-border-rgb: 131, 134, 135;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
@@ -76,7 +76,7 @@
     --card-rgb: 100, 100, 100;
     --card-border-rgb: 200, 200, 200;
   }
-}
+} */
 
 * {
   font-family: "Poppins", sans-serif;
@@ -111,11 +111,11 @@ body::-webkit-scrollbar-thumb{
   width: 50%;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
 /*Materiales*/
 
 .btn-container2 {
@@ -321,7 +321,7 @@ body::-webkit-scrollbar-thumb{
   background: rgba(249, 183, 2, 0.15);
 }
 
-@media all and (max-width: 800px) {
+/* @media all and (max-width: 800px) {
   .container {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -345,7 +345,7 @@ body::-webkit-scrollbar-thumb{
     text-align: center;
     border-bottom: 1px solid #111;
   }
-}
+} */
 
 /*///////// Start Home ///////////*/
 
@@ -580,6 +580,13 @@ header {
 }
 
 /* Nav Icons */
+.nav-icons-container{
+  display: flex;
+}
+.nav-icons_menu{
+  display: none;
+  z-index: 250;
+}
 .nav-icons {
   display: flex;
   align-items: center;
@@ -628,6 +635,51 @@ header {
   text-align: center;
   min-width: 200px;
 }
+
+/*// Responsive NavBar //*/
+@media (max-width: 800px){
+  header{
+    /* background-color: #f00; */
+  }
+
+  .nav{
+    padding: 25px 0;
+  }
+  .nav-icons_menu{
+    font-size: 2em;
+    margin-right: 20px;
+    display: flex;
+  }
+  .nav-icons-container{
+    flex-direction: column-reverse;
+    position: absolute;
+    background-color: var(--dark-color);
+    align-items: center;
+    right: 0;
+    border-radius: 0 0 0 30px;
+    width: 50%;
+    padding: 40px 40px 20px 20px;
+    overflow: hidden;
+    /* opacity: 0; */
+    top: -25em;
+    transition: .3s;
+  }
+  .nav-icons-container.menu-active{
+    top: 0;
+    /* opacity: 1; */
+  }
+
+  .nav-icons_menu{
+    cursor: pointer;
+  }
+  .nav-icons{
+    margin-bottom: 15px;
+  }
+  .nav-icons_logIn{
+    margin-bottom: 20px;
+  }
+}
+
 
 /*////////// End NavBar //////////*/
 
@@ -1403,7 +1455,7 @@ header {
   border-radius: 30px;
   width: 70%;
   font-size: .98em;
-  background-color: var(--dark-color);
+  background-color: var(--light-color);
   color: var(--main-color);
   box-shadow: 0 5px 35px -10px #111;
 }
