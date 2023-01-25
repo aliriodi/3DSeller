@@ -9,6 +9,7 @@ export default async (req, res) => {
       const ret = await fetch(
         `https://api.telegram.org/bot${tgbot}/sendMessage?chat_id=${req.body.message.chat.id}&text=${message}&parse_mode=HTML`
       );
+        console.log(req.body.message.chat.id);
     }
     if (req.body.message.text === '/help') {
       const message =
