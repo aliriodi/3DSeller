@@ -4,12 +4,12 @@ export default async (req, res) => {
     if (req.body.message.text === '/start') {
       const message =
         'Bienvenido al Bot 3DSeller ' +
-        req.body.message.from.first_name ;
+        req.body.message.from.first_name +'+'req.body.message.chat.id;
       //  '</b>.%0ATo get a list of commands sends /help';
       const ret = await fetch(
         `https://api.telegram.org/bot${tgbot}/sendMessage?chat_id=${req.body.message.chat.id}&text=${message}&parse_mode=HTML`
       );
-        console.log(req.body.message.chat.id);
+       
     }
     if (req.body.message.text === '/help') {
       const message =
