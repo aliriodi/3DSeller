@@ -1,7 +1,8 @@
 export default async (req, res) => {
     const tgbot = process.env.NEXT_TELEGRAM_TOKEN;
   
-    if (req.body.message.text === '/start') {
+    if (req.body.message.text ) {
+        alert(req.body.message.text)
       const message =
         'Bienvenido al Bot 3DSeller ' +
         req.body.message.from.first_name +'+'+req.body.message.chat.id;
