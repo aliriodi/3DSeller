@@ -45,7 +45,7 @@ export default function Home() {
       </section>
 
       {/* <!-- Row 1 --> */}
-      <div className="row-1" id="row-1">
+      <section className="row-1" id="row-1">
         <div className="wrapper">
           <h2>PASOS PARA COMENZAR</h2>
 
@@ -81,10 +81,10 @@ export default function Home() {
             {/* <span className="btn">SUBIR MODELO 3D</span> */}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* <!-- Row 2 --> */}
-      <div className="row-2">
+      <section className="row-2">
         <div className="wrapper">
           <h2>¿POR QUE NOSOTROS?</h2>
 
@@ -133,7 +133,7 @@ export default function Home() {
             </ul>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }
