@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import logo from "../../public/logo.png";
@@ -14,7 +14,7 @@ function Nav() {
   const [currentUser, setCurrentUser] = useState({ rol: "invitado" });
   const [currentDropmenu, setCurrentDropmenu] = useState(false)
   const { user, userL } = useSelector((state) => state.products);
-  const {push} = useRouter();  
+  const {push} = useRouter(); 
 
   if (
     user.rol !== "invitado" &&
@@ -31,11 +31,21 @@ function Nav() {
     else setCurrentDropmenu(true);
   }
 
-  // window.addEventListener('click', function(event){
-  //   // console.log("ID",event.target.id)
-  //   if(event.target.id != `nav-menu`)setCurrentDropmenu(false)
-  //   else return
-  // }) 
+  useEffect(()=>{
+    window.addEventListener('click', function(event){
+      console.log("ID",event.target.id)
+      if(event.target.id != `nav-menu`)setCurrentDropmenu(false)
+      else return
+    }) 
+  },[])
+  // if (typeof window !== "undefined") {
+  //   // browser code
+  //   window.addEventListener('click', function(event){
+  //     console.log("ID",event.target.id)
+  //     if(event.target.id != `nav-menu`)setCurrentDropmenu(false)
+  //     else return
+  //   }) 
+  // }
   //#endregion
 
   return (
@@ -133,9 +143,8 @@ function Nav() {
           
           <span
           className="nav-icons_menu"
-          id="nav-menu"
           onClick={dropdownMenu}>
-            <AiOutlineMenu/>
+            <AiOutlineMenu id="nav-menu"/>
           </span>
 
         </div>
