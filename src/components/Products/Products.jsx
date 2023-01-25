@@ -27,7 +27,7 @@ function Products() {
   useEffect(() => {
     dispatch(getProducts());
     //la siguiente linea busca informacion del Local Storage y si la encuentra carga el arreglo favoritos con ella
-    const storedFavorites = localStorage.getItem("favorites");
+    // const storedFavorites = localStorage.getItem("favorites");
     if (userL.favorites) {
       if (userL.favorites.length > 0) {
         return dispatch(chngFavoritos(userL.favorites));
@@ -198,7 +198,9 @@ function Products() {
 
   const [pagina, setPagina] = useState(1);
 
-  const paginas = (productsR.length + 1) / 8;
+  const paginas = Math.ceil(productsR.length / 8);
+
+  console.log(paginas);
 
   const handlePageChange = (valor) => {
     setCurrent(valor * 8);
