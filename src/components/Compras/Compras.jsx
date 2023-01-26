@@ -17,7 +17,7 @@ export default function Compras() {
   return (
     <div className="compras">
         
-    <div className="p-3 mb-2 bg-secondary text-white">
+    <div className="p-3 mb-2 text-white">
     <div className="row">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" ></link>
         <div className="col-md-12">
@@ -25,8 +25,8 @@ export default function Compras() {
           
 
     <h4>Lista de Compras</h4>
-    <table className="table table-bordered table-dark">
-            <thead className="thead-dark">
+    <table className="table">
+            <thead >
               <tr>
                 <th scope="col">Nombre Usuario</th>
                 <th scope="col">Nombre Producto</th>

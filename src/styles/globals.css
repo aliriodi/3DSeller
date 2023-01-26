@@ -1687,6 +1687,24 @@ header {
   border: none;
   padding: 8px 0;
 }
+
+/*// Secion Compras //*/
+.compras h4{
+  color: var(--main-color);
+  font-size: 1.6em;
+  font-weight: 700;
+  padding-top: 30px;
+  margin-bottom: 20px;
+}
+.table th{
+  color: var(--main-color)!important;
+}
+.mb-2{
+  background-color: var(--dark-color)!important;
+}
+tbody, td, tfoot, th, thead, tr{
+  border-color: #adadad55!important;
+}
 /*////////// End Panel Admin //////////*/
 
 
