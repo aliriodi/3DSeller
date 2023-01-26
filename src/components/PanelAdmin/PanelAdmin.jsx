@@ -107,8 +107,11 @@ function PanelAdmin() {
 
                   {/* Icono */}
                   <div className="stats-total_icon">
-                    <Image src={cartImg} alt="img" />
+                  <Link href={"/compras"} legacyBehavior>
+                    <Image src={cartImg}  alt="img" />
+                    </Link>
                   </div>
+                  
                 </div>
               </div>
 
