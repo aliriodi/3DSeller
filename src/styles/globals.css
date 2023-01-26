@@ -1813,13 +1813,13 @@ body {
   display: flex;
   justify-content: center;
   margin: auto;
+  padding-top:155px ;
 }
 .permissions-denied-text {
   top: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: absolute;
 }
 .permissions-denied-text h1 {
   text-align: center;
