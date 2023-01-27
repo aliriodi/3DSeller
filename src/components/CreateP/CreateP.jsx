@@ -291,7 +291,7 @@ function fileValidationI(e) {
             {/* Imagen */}
             <div className="txt_field">
               <div className="form-img_btn">
-              <FormGroup>
+             
               <Input
                 // onBlur={handleOnChangeI}
                 type="file"
@@ -300,7 +300,7 @@ function fileValidationI(e) {
                 onChange={(e) => fileValidationI(e)}
                 // value={input.image}
               />
-              </FormGroup>
+            
               </div>
 
               <div className={`form-img`}>
