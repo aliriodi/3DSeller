@@ -1214,7 +1214,11 @@ header {
   top: 300px;
 }
 .buttonForm{
-border-radius: 5px;
+border-radius: 15px;
+border: 3px solid #f6c90e;
+}
+.buttonform{
+border-radius: 15px;
 border: 3px solid #f6c90e;
 }
 .form-img_btn{
