@@ -4,7 +4,7 @@ export default async (req, res) => {
     if (req.body.message.text ) {
        
           const message =
-        'Bienvenido al Bot 3DSeller ' +
+        'Bienvenido al Bot 3DSeller Angel es el mejor' +
         req.body.message.from.first_name +'+'+req.body.message.chat.id;
       //  '</b>.%0ATo get a list of commands sends /help';
       const ret = await fetch(
