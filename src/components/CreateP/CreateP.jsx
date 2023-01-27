@@ -273,21 +273,25 @@ function fileValidationI(e) {
                 {/* Subir Acrhivo */}
             <div className="txt_field">
             <label>Subir archivo STL</label>
+            <div className="form-img_btn0">
+                <label style={{color:'black'}} className='dos'>Adjuntar STL </label>
               <div className="form-img_btn">
-              <input
-               className="buttonForm"
+                <input
               name="file"
               type="file"
               accept="application/stl"
               id="customFile"
-              onChange={(e) => fileValidation(e)}/>
+              onChange={(e) => fileValidation(e)} />
+              
+            </div>
             </div>
               </div>
             {/* Imagen */}
             <div className="txt_field">
-              <div className="form-img_btn">
-             
-              <Input
+            <div className="form-img_btn0">
+            <label style={{color:'black'}} className='uno'>Adjuntar Imagen</label>
+               <div className="form-img_btn">
+                    <input
                 // onBlur={handleOnChangeI}
                 className="buttonForm"
                 type="file"
@@ -297,7 +301,8 @@ function fileValidationI(e) {
                 // value={input.image}
               />
             
-              </div>
+            </div>  </div>  
+           
 
               <div className={`form-img`}>
               <Image
@@ -440,10 +445,10 @@ function fileValidationI(e) {
             {errors.category && (
               <p className="error-text"> {errors.category} </p>
             )}
-            {console.log("input")}
+            {/* {console.log("input")}
             {console.log(input)}
             {console.log("error")}
-            {console.log(errors)}
+            {console.log(errors)} */}
           
             
               
@@ -497,7 +502,7 @@ function fileValidationI(e) {
             
             {/* <input type="submit" value="CREATE" className="btn-submit"/> */}
           </form>
-          {console.log(input)}
+          {/* {console.log(input)} */}
         </div>
       </div>
     </>
