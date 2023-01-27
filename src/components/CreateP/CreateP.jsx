@@ -274,7 +274,7 @@ function fileValidationI(e) {
             <div className="txt_field">
             <label>Subir archivo STL</label>
             <div className="form-img_btn0">
-                <label style={{color:'black'}} className='dos'>Adjuntar STL </label>
+                <label style={{color:'white'}} className='dos'>Adjuntar STL </label>
               <div className="form-img_btn">
                 <input
               name="file"
