@@ -81,6 +81,9 @@ ul {
     background-color:rgb(190, 190, 64);
     color: black; 
 }
+.buttonForm {
+ border-radius: 5px;
+}
 .bot2 {
     background-color:rgb(185, 135, 28);
     color: whitesmoke;
