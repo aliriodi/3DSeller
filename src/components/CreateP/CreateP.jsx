@@ -289,7 +289,7 @@ function fileValidationI(e) {
             {/* Imagen */}
             <div className="txt_field">
             <div className="form-img_btn0">
-            <label style={{color:'black'}} className='uno'>Adjuntar Imagen</label>
+            <label style={{color:'white'}} className='uno'>Adjuntar Imagen</label>
                <div className="form-img_btn">
                     <input
                 // onBlur={handleOnChangeI}
