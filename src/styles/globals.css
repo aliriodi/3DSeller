@@ -1213,23 +1213,24 @@ header {
   margin: 490px 0 0 0;
   top: 300px;
 }
-.buttonForm{
-border-radius: 15px;
-border: 3px solid #f6c90e;
+input[type="file"] {
+  opacity:00.0;
+  cursor:pointer;
 }
-.buttonform{
-border-radius: 15px;
-border: 3px solid #f6c90e;
-}
+
+
 .form-img_btn{
-  padding-top: 20px;
-  display: flex;
+  display:flex;
+  padding-top: 13px;
+  border-radius: 25px;
   align-items: center;
   justify-content: center;
+  background-color: var(--main-color);
+  border: 1px solid #f6c90e;
+  width:135px;
+  height: 32px;
 }
-.form-img_btn input{
-  cursor: pointer;
-}
+
 
 .form-img{
   z-index: 40;
@@ -1357,6 +1358,21 @@ border: 3px solid #f6c90e;
   background-color: var(--light-color);
 }
 
+.form-img_btn0   {
+  padding-top: 10px;
+  
+}
+
+.form-img_btn0 label.uno  {
+  padding-top: 62px;
+  padding-left: 4px; 
+ 
+  }
+  .form-img_btn0 label.dos  {
+    padding-top: 62px;
+    padding-left: 14px; 
+   
+    }
 .typesSelect {
   background-color: var(--dark-color);
 }
