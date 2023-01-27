@@ -1213,7 +1213,10 @@ header {
   margin: 490px 0 0 0;
   top: 300px;
 }
-
+.buttonForm{
+border-radius: 5px;
+border: 1px solid #39c;
+}
 .form-img_btn{
   padding-top: 20px;
   display: flex;
