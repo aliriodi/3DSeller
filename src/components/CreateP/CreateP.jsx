@@ -145,7 +145,7 @@ export default function CreateP() {
     }
     
    
-   console.log(input)
+ //  console.log(input)
     dispatch(postCreateProduct(input));
 
     alert(`Product 3DSeller ${input.name} has been added`);
@@ -184,7 +184,7 @@ export default function CreateP() {
       const file = await res.json()
       setImage(file.secure_url)
 
-      console.log(file.secure_url)
+   //   console.log(file.secure_url)
       setLoading(false)
       handleOnChangeI(file.secure_url)
 
@@ -201,7 +201,7 @@ export default function CreateP() {
       fetch('https://script.google.com/macros/s/AKfycbxT4lv4JQTJAE21dcTfhLDJOty8rloqaG5BQp_sibR55UE625yKqwHj0wnObfq25oU-3A/exec', //your AppsScript URL
         { method: "POST", body: JSON.stringify(dataSend) }) //send to Api
         .then(res => res.json()).then((a) => {
-          console.log(a);
+     //     console.log(a);
           setFile(input.file=a.url) //See response
         }).catch(e => console.log(e)) // Or Error in console
     }
@@ -221,16 +221,10 @@ export default function CreateP() {
         alert('Archivo no es formato STL');
         fileInput.value = '';
         return false;
-    }else{ console.log('else')
+    }else{
+      // console.log('else')
     guardarArchivo(e)
-    //Image preview
-    // if (fileInput.files && fileInput.files[0]) {
-    //     // var reader = new FileReader();
-    //     // reader.onload = function(e) {
-    //     //     document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'"/>';
-    //     // };
-    //     // reader.readAsDataURL(fileInput.files[0]);
-    // }
+   
 }}
 
 //VALIDACION DE IMAGEN
@@ -281,6 +275,7 @@ function fileValidationI(e) {
             <label>Subir archivo STL</label>
               <div className="form-img_btn">
               <input
+               className="buttonForm"
               name="file"
               type="file"
               accept="application/stl"
@@ -294,6 +289,7 @@ function fileValidationI(e) {
              
               <Input
                 // onBlur={handleOnChangeI}
+                className="buttonForm"
                 type="file"
                 name="image"
                 placeholder="Sube tu imagen aqui!"
