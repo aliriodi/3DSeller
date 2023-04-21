@@ -21,7 +21,7 @@ Esta aplicacion fue desarrollada por:
 1. Jose Valencia    ( https://github.com/JoseVal25 )
 2. Mateo Cava       ( https://github.com/Matecava )
 3. Nahuel Escujuri  ( https://github.com/NahuelEscujuri )
-4. Hugo Reyes       ( https://github.com/Proteinovich )
+4. Hugo Reyes       ( https://github.com/HPabloReyes )
 5. Hans Trauwitz    ( https://github.com/Vontrauwitz ) 
 6. Alirio Diaz      ( https://github.com/aliriodi )
 
