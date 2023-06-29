@@ -1,5 +1,5 @@
-![LogoICO](https://cdn-icons-png.flaticon.com/128/38/38401.png)
-https://user-images.githubusercontent.com/16067675/209176194-1853262c-dacd-46e9-aa32-db310e7a2d66.jpg
+![LogoICO](https://user-images.githubusercontent.com/16067675/209176194-1853262c-dacd-46e9-aa32-db310e7a2d66.jpg)
+
 # 3DSeller 
 
 Esta es una aplicacion para administracion y ventas de articulos impresos en 3D, con base de datos de productos, control de ventas, pudiendo cargar archivos 3d en formato STL para que el Administrador (es)  puedan descargar sus archivos donde esten sin tener que portarlos en un pendrive o sistema de almacenamiento externo, manejando un panel de Administracion, para gestionar funciones de acuerdo a roles (Invitado, Cliente o Administrador y baneado de ser necesario)
